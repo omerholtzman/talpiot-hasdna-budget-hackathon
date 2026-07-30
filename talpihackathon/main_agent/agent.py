@@ -40,18 +40,12 @@ def print_llm(text: str):
 
 def print_error(text: str):
     print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {text}", file=sys.stderr)
-def get_default_output_path(subject: Optional[str], prompt: Optional[str]) -> str:
-    """Generates a default output path under /tmp with subject-timestamp or prompt-timestamp."""
+def get_default_output_path(subject: Optional[str]) -> str:
+    """Generates a default output path under output_examples with subject-timestamp."""
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     if subject:
         # Normalize/clean subject slug
         slug = re.sub(r'[^\w\-_]', '_', subject)
-        run_name = f"{slug}-{timestamp}"
-        filename = f"{slug}.md"
-    elif prompt:
-        # Use first 3 words of prompt or 'prompt'
-        words = [w for w in re.sub(r'[^\w\s]', '', prompt).split() if w][:3]
-        slug = "_".join(words) if words else "prompt"
         run_name = f"{slug}-{timestamp}"
         filename = f"{slug}.md"
     else:
@@ -62,24 +56,6 @@ def get_default_output_path(subject: Optional[str], prompt: Optional[str]) -> st
     output_dir = os.path.join(base_dir, run_name)
     os.makedirs(output_dir, exist_ok=True)
     return os.path.join(output_dir, filename)
-
-
-
-def load_system_instruction(file_path: str) -> str:
-    """Reads system instructions from the text file. Falls back to a default if missing."""
-    default_instruction = (
-        "You are an expert data researcher, helping to find information on issues related "
-        "to the State Budget of Israel. You communicate efficiently in Hebrew. "
-        "Use ONLY the tools provided to query database schemas and execute SQL queries."
-    )
-    if not os.path.exists(file_path):
-        return default_instruction
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            return f.read().strip()
-    except Exception as e:
-        print_error(f"Warning: Failed to load system instruction from {file_path}: {e}")
-        return default_instruction
 
 def load_skill_file(filename: str, today_str: str, model_name: str) -> str:
     """Reads a phase-specific skill instruction file and injects placeholders."""
@@ -303,8 +279,6 @@ def run_agent_loop(
 
 def main():
     parser = argparse.ArgumentParser(description="BudgetKey MCP Autonomous Agent")
-    parser.add_argument("--prompt", type=str, default=None,
-                        help="The prompt/question to ask the budget database")
     parser.add_argument("--subject", type=str, default=None,
                         help="The subject to query budget information for")
     parser.add_argument("--provider", type=str, default="gemini", choices=["gemini", "anthropic", "vertex", "cli-claude"],
@@ -321,19 +295,15 @@ def main():
                         help="Run in test mode (limits execution to 1 loop turn)")
     args = parser.parse_args()
 
-    if not args.list_tools and not args.prompt and not args.subject:
-        parser.error("either --prompt, --subject, or --list-tools flag must be set")
-    if args.prompt and args.subject:
-        parser.error("cannot specify both --prompt and --subject")
+    if not args.list_tools and not args.subject:
+        parser.error("either --subject or --list-tools flag must be set")
 
     # Inject today's date and model name into instruction variables later
     today_str = datetime.now().strftime("%Y-%m-%d")
 
     # Determine prompt text
     prompt_text = ""
-    if args.prompt:
-        prompt_text = args.prompt
-    elif args.subject:
+    if args.subject:
         subject_prompt_path = os.path.join(os.path.dirname(__file__), "instructions", "subject_prompt.txt")
         try:
             with open(subject_prompt_path, "r", encoding="utf-8") as f:
@@ -346,7 +316,7 @@ def main():
     # Determine output path
     output_path = args.output
     if not output_path and not args.list_tools:
-        output_path = get_default_output_path(args.subject, args.prompt)
+        output_path = get_default_output_path(args.subject)
 
     # Initialize MCP Client
     try:
@@ -381,111 +351,98 @@ def main():
             if parent_dir:
                 trace_path = os.path.join(parent_dir, "trace.json")
 
-        # Run autonomous loop or structured pipeline
-        if args.prompt:
-            # General generic query: single 10-turn ReAct loop
-            instruction_path = os.path.join(os.path.dirname(__file__), "instructions", "system_instruction.txt")
-            system_instruction = load_system_instruction(instruction_path)
-            system_instruction = system_instruction.replace("{TODAY}", today_str).replace("{MODEL}", model_name)
-            
-            max_turns = 1 if args.test else 10
+        # Run structured pipeline
+        if args.test:
+            print_agent("Running in test mode (Phase 1 budget lookup only, 1 turn)...")
+            skill_p1 = load_skill_file("skill_phase1_budget.md", today_str, model_name)
             final_ans, combined_trace = run_agent_loop(
-                provider, mcp_client, tools, prompt_text, system_instruction, 
-                max_turns=max_turns, trace_path=trace_path
+                provider, mcp_client, tools,
+                f"Gather budget items data for the subject: {args.subject}",
+                skill_p1, max_turns=1, trace_path=trace_path
             )
         else:
-            # Subject-specific dashboard: Run 4-step pipeline using specialized skill files
-            if args.test:
-                print_agent("Running in test mode (Phase 1 budget lookup only, 1 turn)...")
-                skill_p1 = load_skill_file("skill_phase1_budget.md", today_str, model_name)
-                final_ans, combined_trace = run_agent_loop(
-                    provider, mcp_client, tools,
-                    f"Gather budget items data for the subject: {args.subject}",
-                    skill_p1, max_turns=1, trace_path=trace_path
+            print_agent("Starting Parallel Multi-Step Research Pipeline...")
+            combined_trace = []
+            subject = args.subject
+
+            # Step 1: Budget Analysis (Sequential, runs in main thread first)
+            print_agent("=== Step 1: Budget items analysis ===")
+            skill_p1 = load_skill_file("skill_phase1_budget.md", today_str, model_name)
+            phase1_prompt = f"Please collect aggregate budget data for the subject: '{subject}'."
+            phase1_ans, trace_p1 = run_agent_loop(
+                provider, mcp_client, tools, phase1_prompt, skill_p1,
+                max_turns=6, trace_path=trace_path, silent=False
+            )
+            combined_trace.extend(trace_p1)
+            _flush_trace(trace_path, combined_trace)
+
+            if len(trace_p1) >= 6:
+                print_error("Warning: Step 1 (Budget) reached the maximum turn limit of 6!")
+
+            # Step 2 & 3: Contracts & Decisions in Parallel
+            def run_contracts():
+                print_agent("  - Initiating Contracts and Suppliers Analysis (Thread 1)")
+                local_provider = setup_llm_provider(args.provider, args.model)
+                skill_p2 = load_skill_file("skill_phase2_contracts.md", today_str, model_name)
+                # Pass Step 1 output to Step 2 so it has the budget codes
+                phase2_prompt = (
+                    f"Please collect procurement contracts and supplier aggregate totals for the subject: '{subject}'.\n"
+                    f"Here is the budget items data collected in Step 1:\n{phase1_ans}"
                 )
-            else:
-                print_agent("Starting Parallel Multi-Step Research Pipeline...")
-                combined_trace = []
-                subject = args.subject
-
-                # Step 1: Budget Analysis (Sequential, runs in main thread first)
-                print_agent("=== Step 1: Budget items analysis ===")
-                skill_p1 = load_skill_file("skill_phase1_budget.md", today_str, model_name)
-                phase1_prompt = f"Please collect aggregate budget data for the subject: '{subject}'."
-                phase1_ans, trace_p1 = run_agent_loop(
-                    provider, mcp_client, tools, phase1_prompt, skill_p1,
-                    max_turns=6, trace_path=trace_path, silent=False
+                return run_agent_loop(
+                    local_provider, mcp_client, tools, phase2_prompt, skill_p2,
+                    max_turns=6, trace_path=None, silent=True
                 )
-                combined_trace.extend(trace_p1)
-                _flush_trace(trace_path, combined_trace)
 
-                if len(trace_p1) >= 6:
-                    print_error("Warning: Step 1 (Budget) reached the maximum turn limit of 6!")
-
-                # Step 2 & 3: Contracts & Decisions in Parallel
-                def run_contracts():
-                    print_agent("  - Initiating Contracts and Suppliers Analysis (Thread 1)")
-                    local_provider = setup_llm_provider(args.provider, args.model)
-                    skill_p2 = load_skill_file("skill_phase2_contracts.md", today_str, model_name)
-                    # Pass Step 1 output to Step 2 so it has the budget codes
-                    phase2_prompt = (
-                        f"Please collect procurement contracts and supplier aggregate totals for the subject: '{subject}'.\n"
-                        f"Here is the budget items data collected in Step 1:\n{phase1_ans}"
-                    )
-                    return run_agent_loop(
-                        local_provider, mcp_client, tools, phase2_prompt, skill_p2,
-                        max_turns=6, trace_path=None, silent=True
-                    )
-
-                def run_decisions():
-                    print_agent("  - Initiating Government Decisions Analysis (Thread 2)")
-                    local_provider = setup_llm_provider(args.provider, args.model)
-                    skill_p3 = load_skill_file("skill_phase3_decisions.md", today_str, model_name)
-                    # Pass Step 1 output to Step 3 for extra context
-                    phase3_prompt = (
-                        f"Please query and extract government decisions related to the subject: '{subject}'.\n"
-                        f"Here is the budget items data collected in Step 1:\n{phase1_ans}"
-                    )
-                    return run_agent_loop(
-                        local_provider, mcp_client, tools, phase3_prompt, skill_p3,
-                        max_turns=6, trace_path=None, silent=True
-                    )
-
-                print_agent("Firing research threads (Contracts & Decisions) concurrently...")
-                with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
-                    future_p2 = executor.submit(run_contracts)
-                    future_p3 = executor.submit(run_decisions)
-
-                    print_agent("Waiting for parallel data collection threads to complete...")
-                    phase2_ans, trace_p2 = future_p2.result()
-                    phase3_ans, trace_p3 = future_p3.result()
-
-                print_agent("All research threads completed! Collating data...")
-                
-                # Check if workers reached the turn limit
-                if len(trace_p2) >= 6:
-                    print_error("Warning: Step 2 (Contracts) reached the maximum turn limit of 6!")
-                if len(trace_p3) >= 6:
-                    print_error("Warning: Step 3 (Decisions) reached the maximum turn limit of 6!")
-
-                combined_trace.extend(trace_p2)
-                combined_trace.extend(trace_p3)
-                _flush_trace(trace_path, combined_trace)
-
-                # Step 4: Dashboard Synthesis (runs in main thread, not silent)
-                print_agent("=== Step 4: Final dashboard synthesis ===")
-                skill_p4 = load_skill_file("skill_phase4_synthesis.md", today_str, model_name)
-                phase4_prompt = (
-                    f"Compile the final Hebrew Markdown dashboard document for the subject '{subject}' using the exact specifications.\n\n"
-                    f"--- PHASE 1 DATA (BUDGET) ---\n{phase1_ans}\n\n"
-                    f"--- PHASE 2 DATA (CONTRACTS & SUPPLIERS) ---\n{phase2_ans}\n\n"
-                    f"--- PHASE 3 DATA (GOVERNMENT DECISIONS) ---\n{phase3_ans}"
+            def run_decisions():
+                print_agent("  - Initiating Government Decisions Analysis (Thread 2)")
+                local_provider = setup_llm_provider(args.provider, args.model)
+                skill_p3 = load_skill_file("skill_phase3_decisions.md", today_str, model_name)
+                # Pass Step 1 output to Step 3 for extra context
+                phase3_prompt = (
+                    f"Please query and extract government decisions related to the subject: '{subject}'.\n"
+                    f"Here is the budget items data collected in Step 1:\n{phase1_ans}"
                 )
-                final_ans, trace_p4 = run_agent_loop(
-                    provider, mcp_client, tools, phase4_prompt, skill_p4, max_turns=1, trace_path=trace_path
+                return run_agent_loop(
+                    local_provider, mcp_client, tools, phase3_prompt, skill_p3,
+                    max_turns=6, trace_path=None, silent=True
                 )
-                combined_trace.extend(trace_p4)
-                _flush_trace(trace_path, combined_trace)
+
+            print_agent("Firing research threads (Contracts & Decisions) concurrently...")
+            with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+                future_p2 = executor.submit(run_contracts)
+                future_p3 = executor.submit(run_decisions)
+
+                print_agent("Waiting for parallel data collection threads to complete...")
+                phase2_ans, trace_p2 = future_p2.result()
+                phase3_ans, trace_p3 = future_p3.result()
+
+            print_agent("All research threads completed! Collating data...")
+            
+            # Check if workers reached the turn limit
+            if len(trace_p2) >= 6:
+                print_error("Warning: Step 2 (Contracts) reached the maximum turn limit of 6!")
+            if len(trace_p3) >= 6:
+                print_error("Warning: Step 3 (Decisions) reached the maximum turn limit of 6!")
+
+            combined_trace.extend(trace_p2)
+            combined_trace.extend(trace_p3)
+            _flush_trace(trace_path, combined_trace)
+
+            # Step 4: Dashboard Synthesis (runs in main thread, not silent)
+            print_agent("=== Step 4: Final dashboard synthesis ===")
+            skill_p4 = load_skill_file("skill_phase4_synthesis.md", today_str, model_name)
+            phase4_prompt = (
+                f"Compile the final Hebrew Markdown dashboard document for the subject '{subject}' using the exact specifications.\n\n"
+                f"--- PHASE 1 DATA (BUDGET) ---\n{phase1_ans}\n\n"
+                f"--- PHASE 2 DATA (CONTRACTS & SUPPLIERS) ---\n{phase2_ans}\n\n"
+                f"--- PHASE 3 DATA (GOVERNMENT DECISIONS) ---\n{phase3_ans}"
+            )
+            final_ans, trace_p4 = run_agent_loop(
+                provider, mcp_client, tools, phase4_prompt, skill_p4, max_turns=1, trace_path=trace_path
+            )
+            combined_trace.extend(trace_p4)
+            _flush_trace(trace_path, combined_trace)
 
         # Save output to Markdown file
         if final_ans and output_path:
