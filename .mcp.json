@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "budgetkey": {
+      "type": "http",
+      "url": "https://next.obudget.org/mcp"
+    }
+  }
+}
