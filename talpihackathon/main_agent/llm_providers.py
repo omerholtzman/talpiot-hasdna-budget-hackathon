@@ -1,6 +1,8 @@
 import os
 import json
 import requests
+import subprocess
+import time
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional
 from mcp_client import ToolDefinition
@@ -289,3 +291,112 @@ class VertexAIProvider(LLMProvider):
                 })
 
         return resp_msg
+
+
+class CLIClaudeProvider(LLMProvider):
+    def __init__(self, cmd: str = "claude", agent: str = "mk-researcher"):
+        self.cmd = cmd
+        self.agent = agent
+
+    def _build_prompt(self, history: List[Message]) -> str:
+        prompt_parts = []
+        for msg in history:
+            if msg.role == "user":
+                prompt_parts.append(f"User: {msg.content}")
+            elif msg.role == "assistant":
+                prompt_parts.append(f"Assistant: {msg.content}")
+                if msg.tool_calls:
+                    for tc in msg.tool_calls:
+                        prompt_parts.append(f"Assistant requested tool call: {tc['name']} with arguments {tc['arguments']}")
+            elif msg.role == "tool":
+                prompt_parts.append(f"Tool {msg.name} returned:\n{msg.content}")
+        return "\n\n".join(prompt_parts)
+
+    def generate(self, history: List[Message], tools: List[ToolDefinition]) -> Message:
+        allowed_tools_str = json.dumps([
+            {
+                "name": t.name,
+                "description": t.description,
+                "input_schema": t.input_schema
+            } for t in tools
+        ])
+
+        prompt = self._build_prompt(history)
+
+        cmd = [
+            self.cmd,
+            "-p", prompt,
+            "--agent", self.agent,
+            "--allowedTools", allowed_tools_str,
+            "--permission-mode", "acceptEdits",
+            "--output-format", "json"
+        ]
+
+        env = {**os.environ, "PYTHONIOENCODING": "utf-8"}
+        try:
+            proc = subprocess.run(
+                cmd, capture_output=True, text=True, encoding="utf-8",
+                env=env, timeout=120
+            )
+        except subprocess.TimeoutExpired:
+            raise RuntimeError("CLI Claude invocation timed out (exceeded 120s)")
+        except FileNotFoundError:
+            raise RuntimeError(
+                f"CLI command '{self.cmd}' was not found. Please ensure it is installed and in your PATH."
+            )
+
+        if proc.returncode != 0:
+            raise RuntimeError(
+                f"CLI Claude invocation returned exit code {proc.returncode}.\n"
+                f"Stdout: {proc.stdout}\nStderr: {proc.stderr}"
+            )
+
+        try:
+            data = json.loads(proc.stdout.strip())
+        except Exception as e:
+            raise RuntimeError(
+                f"Failed to parse JSON output from CLI Claude. Raw output:\n{proc.stdout}\nError: {e}"
+            )
+
+        content_text = ""
+        tool_calls = []
+
+        if isinstance(data, dict):
+            raw_content = data.get("content", "")
+            if isinstance(raw_content, str):
+                content_text = raw_content
+            elif isinstance(raw_content, list):
+                for block in raw_content:
+                    if block.get("type") == "text":
+                        content_text += block.get("text", "")
+                    elif block.get("type") == "tool_use":
+                        tool_calls.append({
+                            "id": block.get("id") or block.get("name"),
+                            "name": block.get("name"),
+                            "arguments": block.get("input", {})
+                        })
+            
+            raw_tool_calls = data.get("tool_calls", [])
+            if isinstance(raw_tool_calls, list):
+                for tc in raw_tool_calls:
+                    tool_calls.append({
+                        "id": tc.get("id") or tc.get("name"),
+                        "name": tc.get("name"),
+                        "arguments": tc.get("arguments", tc.get("input", {}))
+                    })
+        elif isinstance(data, list):
+            for block in data:
+                if block.get("type") == "text":
+                    content_text += block.get("text", "")
+                elif block.get("type") == "tool_use":
+                    tool_calls.append({
+                        "id": block.get("id") or block.get("name"),
+                        "name": block.get("name"),
+                        "arguments": block.get("input", {})
+                    })
+
+        return Message(
+            role="assistant",
+            content=content_text if content_text else None,
+            tool_calls=tool_calls if tool_calls else None
+        )

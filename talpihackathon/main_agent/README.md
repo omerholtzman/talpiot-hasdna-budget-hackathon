@@ -97,7 +97,17 @@ export ANTHROPIC_API_KEY="your-anthropic-api-key"
 ```
 *Note: By default, this uses `claude-3-5-sonnet-latest`.*
 
-### Overriding the Model
+### 4. Local Claude CLI Wrapper (`cli-claude`)
+If you have an installed CLI command `claude` that accepts a text prompt, supports tool calling via `--allowedTools`, and returns JSON responses, you can use the `cli-claude` provider:
+```bash
+./venv/bin/python agent.py "מה התקציב של משרד החינוך לשנת 2025?" --provider=cli-claude
+```
+By default, this invokes the `claude` executable. You can customize the name of the command by specifying the executable using the `--model` flag:
+```bash
+./venv/bin/python agent.py "..." --provider=cli-claude --model=my-claude-cli
+```
+
+### Overriding the Model / Command name
 You can specify a different model name using the `--model` flag:
 ```bash
 ./venv/bin/python agent.py "..." --provider=vertex --model=gemini-2.5-pro

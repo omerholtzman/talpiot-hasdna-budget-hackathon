@@ -10,6 +10,7 @@ from llm_providers import (
     GeminiStudioProvider,
     AnthropicProvider,
     VertexAIProvider,
+    CLIClaudeProvider,
     LLMProvider
 )
 
@@ -80,6 +81,9 @@ def setup_llm_provider(provider_name: str, model_override: Optional[str] = None)
     elif provider_name == "vertex":
         model = model_override or "gemini-2.5-flash"
         return VertexAIProvider(model=model)
+    elif provider_name == "cli-claude":
+        cmd_name = model_override or "claude"
+        return CLIClaudeProvider(cmd=cmd_name)
     else:
         raise ValueError(f"Unknown provider: {provider_name}")
 
@@ -109,7 +113,11 @@ def run_agent_loop(
         print_agent(f"Turn {turn}: Thinking...")
         
         # Call LLM reasoning
-        response = provider.generate(history, tools)
+        try:
+            response = provider.generate(history, tools)
+        except Exception as e:
+            print_error(f"LLM generation error: {e}")
+            break
         if response.content:
             print_llm(f"Response:\n{response.content}")
             final_response = response.content
@@ -170,8 +178,8 @@ def main():
                         help="The prompt/question to ask the budget database")
     parser.add_argument("--subject", type=str, default=None,
                         help="The subject to query budget information for")
-    parser.add_argument("--provider", type=str, default="gemini", choices=["gemini", "anthropic", "vertex"],
-                        help="LLM Provider to use (gemini, anthropic, vertex)")
+    parser.add_argument("--provider", type=str, default="gemini", choices=["gemini", "anthropic", "vertex", "cli-claude"],
+                        help="LLM Provider to use (gemini, anthropic, vertex, cli-claude)")
     parser.add_argument("--model", type=str, default=None,
                         help="Model name override")
     parser.add_argument("--mcp-url", type=str, default="https://next.obudget.org/mcp",
