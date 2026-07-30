@@ -1,0 +1,180 @@
+import os
+import sys
+import argparse
+import uuid
+import json
+from typing import List
+from mcp_client import MCPClient
+from llm_providers import (
+    Message,
+    GeminiStudioProvider,
+    AnthropicProvider,
+    VertexAIProvider,
+    LLMProvider
+)
+
+# Color ANSI escapes for clean formatting
+class Colors:
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    RESET = '\033[0m'
+    BOLD = '\033[1m'
+
+def print_agent(text: str):
+    print(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {text}")
+
+def print_mcp(text: str):
+    print(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {text}")
+
+def print_llm(text: str):
+    print(f"{Colors.YELLOW}{Colors.BOLD}[LLM]{Colors.RESET} {text}")
+
+def print_error(text: str):
+    print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {text}", file=sys.stderr)
+
+def main():
+    parser = argparse.ArgumentParser(description="BudgetKey MCP Autonomous Agent")
+    parser.add_argument("prompt", type=str, help="The prompt/question to ask the budget database")
+    parser.add_argument("--provider", type=str, default="gemini", choices=["gemini", "anthropic", "vertex"],
+                        help="LLM Provider to use (gemini, anthropic, vertex)")
+    parser.add_argument("--model", type=str, default=None,
+                        help="Model name override")
+    parser.add_argument("--mcp-url", type=str, default="https://next.obudget.org/mcp",
+                        help="BudgetKey MCP server URL")
+    args = parser.parse_args()
+
+    # 1. Connect to MCP Server
+    print_agent(f"Connecting to BudgetKey MCP server at {args.mcp_url}...")
+    mcp_client = MCPClient(args.mcp_url)
+    try:
+        mcp_client.connect()
+    except Exception as e:
+        print_error(f"Failed to connect to MCP server: {e}")
+        sys.exit(1)
+
+    try:
+        print_agent("Initializing session...")
+        mcp_client.initialize()
+
+        print_agent("Fetching available tools...")
+        tools = mcp_client.list_tools()
+        print_agent(f"Successfully loaded {len(tools)} tools from MCP:")
+        for t in tools:
+            print_mcp(f"  - {t.name}: {t.description.splitlines()[0]}")
+
+        # 2. Setup LLM Provider
+        print_agent(f"Setting up provider: {args.provider}...")
+        provider: LLMProvider
+        try:
+            if args.provider == "gemini":
+                model_name = args.model or "gemini-2.5-flash"
+                provider = GeminiStudioProvider(model=model_name)
+            elif args.provider == "anthropic":
+                model_name = args.model or "claude-3-5-sonnet-latest"
+                provider = AnthropicProvider(model=model_name)
+            elif args.provider == "vertex":
+                model_name = args.model or "gemini-2.5-flash"
+                provider = VertexAIProvider(model=model_name)
+        except Exception as e:
+            print_error(f"Failed to initialize LLM provider: {e}")
+            mcp_client.close()
+            sys.exit(1)
+
+        # 3. Initialize Conversation History
+        # We append a robust system instruction at the beginning
+        system_instruction = (
+            "You are an expert data researcher, helping to find information on issues related "
+            "to the State Budget of Israel. You provide information from the Israeli budget book "
+            "(ספר התקציב הישראלי), budgetary support data (נתוני תמיכות תקציביות), information on "
+            "contracts (התקשרויות), and tenders (מכרזים).\n\n"
+            "You communicate efficiently in Hebrew.\n"
+            "You use ONLY the information obtained through the tools provided and no other information.\n"
+            "The current year is 2025. Budget data is available from 1997 to 2025.\n\n"
+            "Tool guidelines:\n"
+            "1. ALWAYS call DatasetInfo first to understand the dataset structure and columns before running queries.\n"
+            "2. If you need text identifiers (supplier name, budget codes), search using DatasetFullTextSearch first.\n"
+            "3. Finally, execute SQL query using DatasetDBQuery to get results. Always include 'item_url' in SELECT.\n"
+        )
+        
+        history: List[Message] = [
+            Message(role="user", content=f"System Instruction:\n{system_instruction}"),
+            Message(role="assistant", content="הבנתי. אני מוכן לעזור לך למצוא מידע בתקציב המדינה. כיצד אוכל לסייע?")
+        ]
+
+        # Add the actual user query
+        history.append(Message(role="user", content=args.prompt))
+        print_agent(f"User Query: {args.prompt}")
+
+        # 4. Autonomous Loop
+        max_turns = 10
+        turn = 0
+        while turn < max_turns:
+            turn += 1
+            print_agent(f"Turn {turn}: Thinking...")
+            
+            try:
+                response = provider.generate(history, tools)
+            except Exception as e:
+                print_error(f"LLM generation error: {e}")
+                break
+
+            # If the model has text output, print it
+            if response.content:
+                print_llm(f"Response:\n{response.content}")
+
+            # Append the model's response to history
+            history.append(response)
+
+            # Check if there are tool calls to execute
+            if not response.tool_calls:
+                print_agent("Task completed. No more tool calls requested.")
+                break
+
+            print_agent(f"Model requested {len(response.tool_calls)} tool call(s):")
+            for tc in response.tool_calls:
+                name = tc["name"]
+                args_data = tc["arguments"]
+                call_id = tc.get("id") or str(uuid.uuid4())
+                
+                print_mcp(f"Executing tool {Colors.BOLD}{name}{Colors.RESET} with arguments: {args_data}")
+                
+                try:
+                    tool_output = mcp_client.call_tool(name, args_data)
+                    
+                    # Preview the output in the console with correct decoding/formatting
+                    try:
+                        parsed_output = json.loads(tool_output)
+                        pretty_output = json.dumps(parsed_output, indent=2, ensure_ascii=False)
+                        preview = pretty_output[:500] + "..." if len(pretty_output) > 500 else pretty_output
+                    except Exception:
+                        preview = tool_output[:300] + "..." if len(tool_output) > 300 else tool_output
+                    print_mcp(f"Output Preview:\n{preview}")
+                    
+                    # Append tool output message to history
+                    history.append(Message(
+                        role="tool",
+                        content=tool_output,
+                        tool_response_id=call_id,
+                        name=name
+                    ))
+                except Exception as e:
+                    print_error(f"Tool execution failed: {e}")
+                    # Append error message so the LLM knows it failed and can correct
+                    history.append(Message(
+                        role="tool",
+                        content=f"Error executing tool {name}: {e}",
+                        tool_response_id=call_id,
+                        name=name
+                    ))
+
+        if turn >= max_turns:
+            print_agent("Reached maximum iteration limit.")
+
+    finally:
+        print_agent("Closing MCP connection...")
+        mcp_client.close()
+
+if __name__ == "__main__":
+    main()

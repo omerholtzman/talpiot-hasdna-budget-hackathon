@@ -32,3 +32,9 @@ public/api/
 *.njsproj
 *.sln
 *.sw?
+
+# Python
+__pycache__/
+*.pyc
+main_agent/venv/
+.env
