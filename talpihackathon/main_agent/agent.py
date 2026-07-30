@@ -18,6 +18,16 @@ from llm_providers import (
 )
 
 from colorama import Fore, Style, init
+
+# Hebrew appears in subjects, data and even this project's own path. On Windows the
+# console/pipe defaults to cp1252, which raises UnicodeEncodeError mid-run. Force UTF-8
+# before colorama wraps the streams; the helpers below still guard as a fallback.
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 init()
 
 # Color mappings backed by colorama
@@ -39,17 +49,29 @@ def fix_bidi(text: str) -> str:
     except ImportError:
         return text
 
+def emit(line: str, stream=None):
+    """Prints a line, degrading gracefully if the stream cannot encode it.
+
+    Logging must never be able to abort a run part-way through writing output files.
+    """
+    stream = stream or sys.stdout
+    try:
+        print(line, file=stream)
+    except UnicodeEncodeError:
+        enc = getattr(stream, "encoding", None) or "ascii"
+        print(line.encode(enc, errors="replace").decode(enc, errors="replace"), file=stream)
+
 def print_agent(text: str):
-    print(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {fix_bidi(text)}")
+    emit(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {fix_bidi(text)}")
 
 def print_mcp(text: str):
-    print(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {fix_bidi(text)}")
+    emit(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {fix_bidi(text)}")
 
 def print_llm(text: str):
-    print(f"{Colors.YELLOW}{Colors.BOLD}[LLM]{Colors.RESET} {fix_bidi(text)}")
+    emit(f"{Colors.YELLOW}{Colors.BOLD}[LLM]{Colors.RESET} {fix_bidi(text)}")
 
 def print_error(text: str):
-    print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {fix_bidi(text)}", file=sys.stderr)
+    emit(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {fix_bidi(text)}", stream=sys.stderr)
 
 def clean_markdown_fences(content: str) -> str:
     """Removes leading/trailing code block fences from the content and the frontmatter."""
@@ -75,7 +97,81 @@ def clean_markdown_fences(content: str) -> str:
     
     return content
 
-def get_default_output_path(subject: Optional[str]) -> str:
+# Names the Phase 1 skill asks for; used to label extracted CSV blocks.
+CSV_BLOCK_NAMES = ["selected_items", "related_items", "time_series", "top_line"]
+_FENCE_RE = re.compile(r"```([a-zA-Z]*)[^\S\n]*\n(.*?)```", re.S)
+
+
+def _looks_like_csv(body: str) -> bool:
+    """Heuristic for a fenced block that is CSV but was not tagged ```csv."""
+    lines = [l for l in body.strip().splitlines() if l.strip()]
+    if len(lines) < 2:
+        return False
+    header_commas = lines[0].count(",")
+    if header_commas < 1:
+        return False
+    # Most data rows should have roughly the header's column count.
+    consistent = sum(1 for l in lines[1:] if abs(l.count(",") - header_commas) <= 2)
+    return consistent >= max(1, int(0.6 * (len(lines) - 1)))
+
+
+def extract_csv_blocks(text: str) -> List[tuple]:
+    """Pulls CSV blocks out of an agent's markdown answer.
+
+    Returns [(name, csv_text), ...]. A block is taken when it is fenced as ```csv
+    or simply looks like CSV (models are inconsistent about the language tag).
+    The name comes from the nearest preceding mention of a known block name, so
+    `selected_items` / `time_series` land in predictably named files.
+    """
+    blocks: List[tuple] = []
+    used: Dict[str, int] = {}
+    for m in _FENCE_RE.finditer(text or ""):
+        lang, body = m.group(1).lower(), m.group(2).strip()
+        if not body:
+            continue
+        if lang != "csv" and not (lang == "" and _looks_like_csv(body)):
+            continue
+
+        preceding = text[max(0, m.start() - 300):m.start()]
+        name, best = None, -1
+        for known in CSV_BLOCK_NAMES:
+            idx = preceding.rfind(known)
+            if idx > best:
+                best, name = idx, known
+        if best < 0:
+            name = f"block_{len(blocks) + 1}"
+
+        used[name] = used.get(name, 0) + 1
+        if used[name] > 1:
+            name = f"{name}_{used[name]}"
+        blocks.append((name, body))
+    return blocks
+
+
+def write_csv_blocks(text: str, out_dir: str) -> List[Dict[str, Any]]:
+    """Writes every CSV block found in `text` into out_dir. Returns file metadata."""
+    written: List[Dict[str, Any]] = []
+    for name, body in extract_csv_blocks(text):
+        path = os.path.join(out_dir, f"{name}.csv")
+        try:
+            with open(path, "w", encoding="utf-8-sig", newline="") as f:
+                f.write(body if body.endswith("\n") else body + "\n")
+            rows = max(0, len([l for l in body.splitlines() if l.strip()]) - 1)
+            written.append({"name": name, "path": path, "rows": rows})
+            print_agent(f"Wrote {rows} rows to {os.path.basename(path)}")
+        except Exception as e:
+            print_error(f"Failed to write CSV {path}: {e}")
+    if not written:
+        print_error("No CSV blocks found in the Phase 1 answer - check the raw answer file.")
+    return written
+
+
+def _max_turn(trace: List[Dict[str, Any]]) -> int:
+    """Highest turn number in a trace (the trace has one entry per tool call)."""
+    return max((e.get("turn") or 0 for e in trace), default=0)
+
+
+def get_default_output_path(subject: Optional[str], label: Optional[str] = None) -> str:
     """Generates a default output path under output_examples with subject-timestamp."""
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     if subject:
@@ -86,7 +182,11 @@ def get_default_output_path(subject: Optional[str]) -> str:
     else:
         run_name = f"report-{timestamp}"
         filename = "report.md"
-    
+    if label:
+        # Keeps parallel runs of different models from colliding.
+        label_slug = re.sub(r'[^\w\-.]', '_', label)
+        run_name = f"{run_name}-{label_slug}"
+
     base_dir = os.path.join(os.path.dirname(__file__), "output_examples")
     output_dir = os.path.join(base_dir, run_name)
     os.makedirs(output_dir, exist_ok=True)
@@ -157,13 +257,13 @@ def run_agent_loop(
     """
     def log_agent(msg):
         if not silent:
-            print(f"{agent_color}{Colors.BOLD}[Agent - {agent_name}]{Colors.RESET} {fix_bidi(msg)}")
+            emit(f"{agent_color}{Colors.BOLD}[Agent - {agent_name}]{Colors.RESET} {fix_bidi(msg)}")
     def log_mcp(msg):
         if not silent:
-            print(f"{agent_color}{Colors.BOLD}[MCP - {agent_name}]{Colors.RESET} {fix_bidi(msg)}")
+            emit(f"{agent_color}{Colors.BOLD}[MCP - {agent_name}]{Colors.RESET} {fix_bidi(msg)}")
     def log_llm(msg):
         if not silent:
-            print(f"{agent_color}{Colors.BOLD}[LLM - {agent_name}]{Colors.RESET} {fix_bidi(msg)}")
+            emit(f"{agent_color}{Colors.BOLD}[LLM - {agent_name}]{Colors.RESET} {fix_bidi(msg)}")
     def log_error(msg):
         # Always print errors so failures in background threads are visible
         print_error(f"[Agent - {agent_name}] {msg}")
@@ -288,13 +388,21 @@ def run_agent_loop(
                     name=name
                 ))
 
-    # Only trigger warning if maximum turns were exceeded AND the model wanted to call more tools.
-    # If it completed without requesting tools, it successfully compiled its output.
-    if response and turn >= max_turns and response.tool_calls:
-        print_error(f"Reached maximum iteration limit. Forcing final synthesis turn for query: '{prompt[:60]}...'")
+    # A final synthesis turn is forced in two cases:
+    #  1. The turn limit was hit while the model still wanted to call tools.
+    #  2. The model stopped without emitting any text. Without this, `final_response`
+    #     silently keeps the last turn's *reasoning* - narration like "now I will run
+    #     two queries" - and that gets passed downstream as if it were the answer.
+    hit_limit = bool(response) and turn >= max_turns and bool(response.tool_calls)
+    stopped_empty = bool(response) and not response.tool_calls and not (response.content or "").strip()
+    if hit_limit or stopped_empty:
+        why = "Reached maximum iteration limit" if hit_limit else "Model stopped without producing an answer"
+        print_error(f"{why}. Forcing final synthesis turn for query: '{prompt[:60]}...'")
         history.append(Message(
             role="user",
-            content="You have reached the execution limit. Please stop performing further tool calls and compile your final markdown dashboard using all the information gathered so far."
+            content=("Stop performing further tool calls. Using only the information you have already "
+                     "gathered, produce your complete final answer now, in exactly the output format "
+                     "your instructions specify. Do not describe what you are about to do.")
         ))
         try:
             log_agent("Final Turn: Thinking...")
@@ -336,6 +444,14 @@ def main():
                         help="List all available tools from the MCP server and exit")
     parser.add_argument("--test", "-t", action="store_true",
                         help="Run in test mode (limits execution to 1 loop turn)")
+    parser.add_argument("--phase1-only", action="store_true",
+                        help="Run only Phase 1 (budget items), write its CSV blocks and stop. "
+                             "Intended for evaluating item-discovery completeness across models.")
+    parser.add_argument("--phase1-turns", type=int, default=6,
+                        help="Turn budget for Phase 1 (default: 6)")
+    parser.add_argument("--label", type=str, default=None,
+                        help="Extra tag appended to the output directory name. Defaults to the "
+                             "model name when --phase1-only is set, so parallel model runs do not collide.")
     args = parser.parse_args()
 
     if not args.list_tools and not args.subject:
@@ -356,10 +472,8 @@ def main():
             print_error(f"Failed to load subject prompt template from {subject_prompt_path}: {e}")
             sys.exit(1)
 
-    # Determine output path
+    # Output path is resolved after the provider is known, so the model name can tag the run dir.
     output_path = args.output
-    if not output_path and not args.list_tools:
-        output_path = get_default_output_path(args.subject)
 
     # Initialize MCP Client
     try:
@@ -386,6 +500,11 @@ def main():
             sys.exit(1)
 
         model_name = getattr(provider, "model", None) or getattr(provider, "cmd", None) or args.model or "unknown-model"
+
+        # Resolve the output path now that the model is known.
+        if not output_path:
+            label = args.label or (model_name if args.phase1_only else None)
+            output_path = get_default_output_path(args.subject, label)
 
         # Determine trace path first
         trace_path = None
@@ -414,14 +533,52 @@ def main():
             phase1_prompt = f"Please collect aggregate budget data for the subject: '{subject}'."
             phase1_ans, trace_p1 = run_agent_loop(
                 provider, mcp_client, tools, phase1_prompt, skill_p1,
-                max_turns=6, trace_path=trace_path, silent=False,
+                max_turns=args.phase1_turns, trace_path=trace_path, silent=False,
                 agent_name="Budget", agent_color=Colors.CYAN
             )
             combined_trace.extend(trace_p1)
             _flush_trace(trace_path, combined_trace)
 
-            if len(trace_p1) >= 6:
-                print_error("Warning: Step 1 (Budget) reached the maximum turn limit of 6!")
+            if _max_turn(trace_p1) >= args.phase1_turns:
+                print_error(f"Warning: Step 1 (Budget) reached the maximum turn limit of {args.phase1_turns}!")
+
+            if args.phase1_only:
+                print_agent("=== Phase 1 only: writing CSV output and stopping ===")
+                run_dir = os.path.dirname(output_path) or "."
+                os.makedirs(run_dir, exist_ok=True)
+
+                csv_files = write_csv_blocks(phase1_ans, run_dir)
+
+                # Keep the raw answer too - prose around the CSVs holds selection_notes.
+                with open(output_path, "w", encoding="utf-8") as f:
+                    f.write(phase1_ans or "")
+                print_agent(f"Saved raw Phase 1 answer to: {output_path}")
+
+                def _is_tool_error(entry: Dict[str, Any]) -> bool:
+                    out = str(entry.get("output") or "")
+                    return out.startswith("Error:") or '"error"' in out[:200]
+
+                summary = {
+                    "subject": subject,
+                    "provider": args.provider,
+                    "model": model_name,
+                    "turns_allowed": args.phase1_turns,
+                    "turns_used": _max_turn(trace_p1),
+                    "tool_calls": sum(1 for e in trace_p1 if e.get("tool_name")),
+                    "tool_errors": sum(1 for e in trace_p1 if e.get("tool_name") and _is_tool_error(e)),
+                    "answer_chars": len(phase1_ans or ""),
+                    "csv_files": [{"name": c["name"], "rows": c["rows"]} for c in csv_files],
+                }
+                summary_path = os.path.join(run_dir, "phase1_summary.json")
+                with open(summary_path, "w", encoding="utf-8") as f:
+                    json.dump(summary, f, indent=2, ensure_ascii=False)
+                print_agent(f"Saved run summary to: {summary_path}")
+                print_agent(
+                    f"Phase 1 done: {summary['turns_used']}/{summary['turns_allowed']} turns, "
+                    f"{summary['tool_calls']} tool calls ({summary['tool_errors']} errored), "
+                    f"{sum(c['rows'] for c in csv_files)} CSV rows total."
+                )
+                return
 
             # Step 2, 3 & 5: Contracts, Decisions & Hierarchy in Parallel
             def run_contracts():
