@@ -3,6 +3,7 @@ import json
 import requests
 import subprocess
 import time
+import sys
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional
 from mcp_client import ToolDefinition
@@ -81,9 +82,19 @@ class GeminiStudioProvider(LLMProvider):
             payload["tools"] = gemini_tools
 
         headers = {"Content-Type": "application/json"}
-        resp = requests.post(url, json=payload, headers=headers)
-        if resp.status_code != 200:
-            raise RuntimeError(f"Gemini API returned error {resp.status_code}: {resp.text}")
+        
+        max_retries = 5
+        backoff = 4
+        for attempt in range(max_retries):
+            resp = requests.post(url, json=payload, headers=headers)
+            if resp.status_code == 200:
+                break
+            if resp.status_code in [429, 502, 503, 504] and attempt < max_retries - 1:
+                print(f"[Warning] Gemini API returned error {resp.status_code}. Retrying in {backoff}s...", file=sys.stderr)
+                time.sleep(backoff)
+                backoff *= 2
+            else:
+                raise RuntimeError(f"Gemini API returned error {resp.status_code}: {resp.text}")
 
         resp_data = resp.json()
         candidates = resp_data.get("candidates", [])
@@ -267,9 +278,18 @@ class VertexAIProvider(LLMProvider):
         if gemini_tools:
             payload["tools"] = gemini_tools
 
-        resp = requests.post(url, json=payload, headers=headers)
-        if resp.status_code != 200:
-            raise RuntimeError(f"Vertex AI returned error {resp.status_code}: {resp.text}")
+        max_retries = 5
+        backoff = 4
+        for attempt in range(max_retries):
+            resp = requests.post(url, json=payload, headers=headers)
+            if resp.status_code == 200:
+                break
+            if resp.status_code in [429, 502, 503, 504] and attempt < max_retries - 1:
+                print(f"[Warning] Vertex AI returned error {resp.status_code}. Retrying in {backoff}s...", file=sys.stderr)
+                time.sleep(backoff)
+                backoff *= 2
+            else:
+                raise RuntimeError(f"Vertex AI returned error {resp.status_code}: {resp.text}")
 
         resp_data = resp.json()
         candidates = resp_data.get("candidates", [])
