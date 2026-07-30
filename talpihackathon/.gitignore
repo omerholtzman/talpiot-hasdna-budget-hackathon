@@ -12,13 +12,15 @@ dist
 dist-ssr
 *.local
 
-# Generated dashboards: track only the seed samples, ignore future script output
+# Generated dashboards: track the seed samples plus everything under reports/
 content/*
 !content/overview.md
 !content/getting-started.md
 !content/hebrew-example.md
 !content/reports/
-!content/reports/q1-metrics.md
+
+# Build-time snapshot of content/ served as static JSON (see scripts/generate-static-api.js)
+public/api/
 
 # Editor directories and files
 .vscode/*

@@ -4,7 +4,7 @@ import { dashboardsRouter } from './routes/dashboards.js'
 const app = express()
 const port = process.env.PORT ?? 3001
 
-app.use('/api/dashboards', dashboardsRouter)
+app.use('/api', dashboardsRouter)
 
 app.use('/api', (req, res) => {
   res.status(404).json({ error: 'Not found' })

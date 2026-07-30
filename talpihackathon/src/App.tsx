@@ -5,7 +5,7 @@ import { EmptyState } from './features/dashboards/EmptyState'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route element={<DashboardLayout />}>
           <Route index element={<EmptyState />} />

@@ -5,13 +5,19 @@ import { resolveSlugPath } from '../lib/resolveSlugPath.js'
 
 export const dashboardsRouter = Router()
 
-dashboardsRouter.get('/', async (req, res) => {
+dashboardsRouter.get('/dashboards-list.json', async (req, res) => {
   const dashboards = await listDashboards()
   res.json({ dashboards })
 })
 
-dashboardsRouter.get('/*slug', async (req, res) => {
-  const slugSegments = req.params.slug
+dashboardsRouter.get('/dashboards/*slug', async (req, res) => {
+  const rawSegments = req.params.slug
+  const lastSegment = rawSegments[rawSegments.length - 1] ?? ''
+  const cleanedLast = lastSegment.endsWith('.json')
+    ? lastSegment.slice(0, -'.json'.length)
+    : lastSegment
+  const slugSegments = [...rawSegments.slice(0, -1), cleanedLast]
+
   const filePath = resolveSlugPath(slugSegments)
 
   if (!filePath) {
