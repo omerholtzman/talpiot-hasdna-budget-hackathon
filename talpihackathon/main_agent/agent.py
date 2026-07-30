@@ -22,17 +22,26 @@ class Colors:
     RESET = '\033[0m'
     BOLD = '\033[1m'
 
+def fix_bidi(text: str) -> str:
+    """Applies Bidirectional algorithm to fix RTL languages (like Hebrew) in LTR terminals."""
+    try:
+        from bidi.algorithm import get_display
+        return get_display(text)
+    except ImportError:
+        return text
+
 def print_agent(text: str):
-    print(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {text}")
+    print(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {fix_bidi(text)}")
 
 def print_mcp(text: str):
-    print(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {text}")
+    print(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {fix_bidi(text)}")
 
 def print_llm(text: str):
-    print(f"{Colors.YELLOW}{Colors.BOLD}[LLM]{Colors.RESET} {text}")
+    print(f"{Colors.YELLOW}{Colors.BOLD}[LLM]{Colors.RESET} {fix_bidi(text)}")
 
 def print_error(text: str):
-    print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {text}", file=sys.stderr)
+    print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {fix_bidi(text)}", file=sys.stderr)
+
 
 def load_system_instruction(file_path: str) -> str:
     """Reads system instructions from the text file. Falls back to a default if missing."""
@@ -157,8 +166,10 @@ def run_agent_loop(
 
 def main():
     parser = argparse.ArgumentParser(description="BudgetKey MCP Autonomous Agent")
-    parser.add_argument("prompt", type=str, nargs="?", default=None,
+    parser.add_argument("--prompt", type=str, default=None,
                         help="The prompt/question to ask the budget database")
+    parser.add_argument("--subject", type=str, default=None,
+                        help="The subject to query budget information for")
     parser.add_argument("--provider", type=str, default="gemini", choices=["gemini", "anthropic", "vertex"],
                         help="LLM Provider to use (gemini, anthropic, vertex)")
     parser.add_argument("--model", type=str, default=None,
@@ -169,12 +180,28 @@ def main():
                         help="List all available tools from the MCP server and exit")
     args = parser.parse_args()
 
-    if not args.list_tools and not args.prompt:
-        parser.error("either prompt must be specified or --list-tools flag must be set")
+    if not args.list_tools and not args.prompt and not args.subject:
+        parser.error("either --prompt, --subject, or --list-tools flag must be set")
+    if args.prompt and args.subject:
+        parser.error("cannot specify both --prompt and --subject")
 
     # Load system instructions from file
     instruction_path = os.path.join(os.path.dirname(__file__), "instructions", "system_instruction.txt")
     system_instruction = load_system_instruction(instruction_path)
+
+    # Determine prompt text
+    prompt_text = ""
+    if args.prompt:
+        prompt_text = args.prompt
+    elif args.subject:
+        subject_prompt_path = os.path.join(os.path.dirname(__file__), "instructions", "subject_prompt.txt")
+        try:
+            with open(subject_prompt_path, "r", encoding="utf-8") as f:
+                template = f.read().strip()
+            prompt_text = template.format(subject=args.subject)
+        except Exception as e:
+            print_error(f"Failed to load subject prompt template from {subject_prompt_path}: {e}")
+            sys.exit(1)
 
     # Initialize MCP Client
     try:
@@ -201,7 +228,7 @@ def main():
             sys.exit(1)
 
         # Run autonomous loop
-        run_agent_loop(provider, mcp_client, tools, args.prompt, system_instruction)
+        run_agent_loop(provider, mcp_client, tools, prompt_text, system_instruction)
 
     finally:
         print_agent("Closing MCP connection...")
