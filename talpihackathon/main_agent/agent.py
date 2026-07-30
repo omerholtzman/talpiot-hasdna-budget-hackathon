@@ -5,7 +5,7 @@ import uuid
 import json
 import re
 from datetime import datetime
-from typing import List, Optional, Any
+from typing import List, Optional, Any, Dict
 from mcp_client import MCPClient
 from llm_providers import (
     Message,
@@ -112,8 +112,12 @@ def run_agent_loop(
     prompt: str,
     system_instruction: str,
     max_turns: int = 10
-) -> str:
-    """Runs the autonomous ReAct reasoning-action loop to answer the prompt."""
+) -> tuple[str, List[Dict[str, Any]]]:
+    """Runs the autonomous ReAct reasoning-action loop to answer the prompt.
+    
+    Returns:
+        (final_response, execution_trace)
+    """
     
     # 1. Initialize History with instructions & user query
     history: List[Message] = [
@@ -126,6 +130,8 @@ def run_agent_loop(
     # 2. Loop Execution
     turn = 0
     final_response = ""
+    execution_trace: List[Dict[str, Any]] = []
+    
     while turn < max_turns:
         turn += 1
         print_agent(f"Turn {turn}: Thinking...")
@@ -169,6 +175,15 @@ def run_agent_loop(
                     preview = tool_output[:300] + "..." if len(tool_output) > 300 else tool_output
                 print_mcp(f"Output Preview:\n{preview}")
                 
+                # Capture to execution trace in memory
+                execution_trace.append({
+                    "turn": turn,
+                    "tool_name": name,
+                    "arguments": args_data,
+                    "reasoning": response.content or "",
+                    "output": tool_output
+                })
+
                 # Feed output back to history
                 history.append(Message(
                     role="tool",
@@ -178,6 +193,15 @@ def run_agent_loop(
                 ))
             except Exception as e:
                 print_error(f"Tool execution failed: {e}")
+                
+                execution_trace.append({
+                    "turn": turn,
+                    "tool_name": name,
+                    "arguments": args_data,
+                    "reasoning": response.content or "",
+                    "output": f"Error: {e}"
+                })
+
                 history.append(Message(
                     role="tool",
                     content=f"Error executing tool {name}: {e}",
@@ -188,7 +212,7 @@ def run_agent_loop(
     if turn >= max_turns:
         print_agent("Reached maximum iteration limit.")
     
-    return final_response
+    return final_response, execution_trace
 
 def main():
     parser = argparse.ArgumentParser(description="BudgetKey MCP Autonomous Agent")
@@ -226,7 +250,7 @@ def main():
         try:
             with open(subject_prompt_path, "r", encoding="utf-8") as f:
                 template = f.read().strip()
-            prompt_text = template.format(subject=args.subject)
+            prompt_text = template.replace("{SUBJECT}", args.subject)
         except Exception as e:
             print_error(f"Failed to load subject prompt template from {subject_prompt_path}: {e}")
             sys.exit(1)
@@ -260,8 +284,14 @@ def main():
             print_error(f"Failed to initialize LLM provider: {e}")
             sys.exit(1)
 
+        # Inject today's date and model name into system instruction placeholders
+        today_str = datetime.now().strftime("%Y-%m-%d")
+        model_name = getattr(provider, "model", None) or getattr(provider, "cmd", None) or args.model or "unknown-model"
+        
+        system_instruction = system_instruction.replace("{TODAY}", today_str).replace("{MODEL}", model_name)
+
         # Run autonomous loop
-        final_ans = run_agent_loop(provider, mcp_client, tools, prompt_text, system_instruction)
+        final_ans, trace_logs = run_agent_loop(provider, mcp_client, tools, prompt_text, system_instruction)
 
         # Save output to Markdown file
         if final_ans and output_path:
