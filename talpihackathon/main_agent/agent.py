@@ -57,7 +57,8 @@ def get_default_output_path(subject: Optional[str], prompt: Optional[str]) -> st
         run_name = f"report-{timestamp}"
         filename = "report.md"
     
-    output_dir = os.path.join("/tmp/budgetkey-reports", run_name)
+    base_dir = os.path.join(os.path.dirname(__file__), "output_examples")
+    output_dir = os.path.join(base_dir, run_name)
     os.makedirs(output_dir, exist_ok=True)
     return os.path.join(output_dir, filename)
 
