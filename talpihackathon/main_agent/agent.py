@@ -161,7 +161,7 @@ def run_agent_loop(
         Message(role="assistant", content="הבנתי. אני מוכן לעזור לך למצוא מידע בתקציב המדינה. כיצד אוכל לסייע?")
     ]
     history.append(Message(role="user", content=prompt))
-    log_agent(f"User Query: {prompt}")
+    log_agent(f"User Query: {prompt.splitlines()[0]}")
 
     # 2. Loop Execution
     turn = 0
@@ -192,13 +192,19 @@ def run_agent_loop(
             _flush_trace(trace_path, execution_trace)
             
             if response.content:
-                log_llm(f"Response:\n{response.content}")
+                preview = response.content.splitlines()[0] if response.content else ""
+                if len(response.content) > 150:
+                    preview = response.content[:150].replace('\n', ' ') + "..."
+                log_llm(f"Response Preview:\n{preview}")
                 final_response = response.content
             log_agent("Task completed. No more tool calls requested.")
             break
 
         if response.content:
-            log_llm(f"Response:\n{response.content}")
+            preview = response.content.splitlines()[0] if response.content else ""
+            if len(response.content) > 150:
+                preview = response.content[:150].replace('\n', ' ') + "..."
+            log_llm(f"Response Preview:\n{preview}")
             final_response = response.content
 
         history.append(response)
@@ -263,33 +269,35 @@ def run_agent_loop(
                     name=name
                 ))
 
-    if turn >= max_turns:
-        if response.tool_calls:
-            print_error(f"Reached maximum iteration limit. Forcing final synthesis turn for query: '{prompt[:60]}...'")
-            history.append(Message(
-                role="user",
-                content="You have reached the execution limit. Please stop performing further tool calls and compile your final markdown dashboard using all the information gathered so far."
-            ))
-            try:
-                log_agent("Final Turn: Thinking...")
-                response = provider.generate(history, tools)
-                if response.content:
-                    log_llm(f"Response:\n{response.content}")
-                    final_response = response.content
-                
-                execution_trace.append({
-                    "turn": turn + 1,
-                    "tool_name": "forced_synthesis",
-                    "arguments": None,
-                    "reasoning": "Forced final synthesis turn due to turn limit.",
-                    "output": response.content or "",
-                    "raw_payload": getattr(provider, "last_payload", None)
-                })
-                _flush_trace(trace_path, execution_trace)
-            except Exception as e:
-                log_error(f"LLM final synthesis generation error: {e}")
-        else:
-            print_error(f"Reached maximum iteration limit for query: '{prompt[:60]}...'")
+    # Only trigger warning if maximum turns were exceeded AND the model wanted to call more tools.
+    # If it completed without requesting tools, it successfully compiled its output.
+    if turn >= max_turns and response.tool_calls:
+        print_error(f"Reached maximum iteration limit. Forcing final synthesis turn for query: '{prompt[:60]}...'")
+        history.append(Message(
+            role="user",
+            content="You have reached the execution limit. Please stop performing further tool calls and compile your final markdown dashboard using all the information gathered so far."
+        ))
+        try:
+            log_agent("Final Turn: Thinking...")
+            response = provider.generate(history, tools)
+            if response.content:
+                preview = response.content.splitlines()[0] if response.content else ""
+                if len(response.content) > 150:
+                    preview = response.content[:150].replace('\n', ' ') + "..."
+                log_llm(f"Response Preview:\n{preview}")
+                final_response = response.content
+            
+            execution_trace.append({
+                "turn": turn + 1,
+                "tool_name": "forced_synthesis",
+                "arguments": None,
+                "reasoning": "Forced final synthesis turn due to turn limit.",
+                "output": response.content or "",
+                "raw_payload": getattr(provider, "last_payload", None)
+            })
+            _flush_trace(trace_path, execution_trace)
+        except Exception as e:
+            log_error(f"LLM final synthesis generation error: {e}")
     
     return final_response, execution_trace
 
