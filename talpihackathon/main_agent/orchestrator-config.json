@@ -1,0 +1,4 @@
+{
+  "healthcare": ["periphery-healthcare", "center-healthcare"],
+  "education": ["excellence-periphery", "excellence-center"]
+}
