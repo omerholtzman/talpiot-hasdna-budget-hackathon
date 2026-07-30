@@ -118,7 +118,7 @@ local GCP credentials.
 ./venv/bin/python agent.py --prompt "מה התקציב של משרד החינוך לשנת 2025?" --provider=vertex
 ```
 
-_Note: By default, this uses the `gemini-3.5-flash` model on Vertex AI._
+_Note: By default, this uses the `gemini-2.5-flash` model on Vertex AI._
 
 #### 2. Gemini AI Studio (API Key)
 

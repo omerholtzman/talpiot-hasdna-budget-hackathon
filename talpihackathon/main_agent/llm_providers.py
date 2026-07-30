@@ -187,7 +187,7 @@ class AnthropicProvider(LLMProvider):
 
 
 class VertexAIProvider(LLMProvider):
-    def __init__(self, project_id: Optional[str] = None, region: str = "us-central1", model: str = "gemini-3.5-flash"):
+    def __init__(self, project_id: Optional[str] = None, region: str = "us-central1", model: str = "gemini-2.5-flash"):
         self.project_id = project_id or os.getenv("GCP_PROJECT")
         self.region = region
         self.model = model
