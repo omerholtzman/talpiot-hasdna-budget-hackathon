@@ -58,10 +58,10 @@ class GeminiStudioProvider(LLMProvider):
                     }
                 })
 
-            contents.append({
-                "role": role,
-                "parts": parts
-            })
+            if contents and contents[-1]["role"] == role:
+                contents[-1]["parts"].extend(parts)
+            else:
+                contents.append({"role": role, "parts": parts})
 
         # 2. Map tools to Gemini format
         gemini_tools = []
@@ -82,11 +82,11 @@ class GeminiStudioProvider(LLMProvider):
             payload["tools"] = gemini_tools
 
         headers = {"Content-Type": "application/json"}
-        
+
         print("\n=== Sending prompt to LLM (Turn Context) ===")
         print(json.dumps(payload, indent=2, ensure_ascii=False))
         print("============================================\n")
-        
+
         max_retries = 5
         backoff = 4
         for attempt in range(max_retries):
@@ -206,7 +206,7 @@ class VertexAIProvider(LLMProvider):
         self.project_id = project_id or os.getenv("GCP_PROJECT")
         self.region = region or os.getenv("GCP_REGION") or "europe-west1"
         self.model = model
-        
+
         # Load GCP credentials
         try:
             import google.auth
@@ -226,7 +226,7 @@ class VertexAIProvider(LLMProvider):
 
     def generate(self, history: List[Message], tools: List[ToolDefinition]) -> Message:
         url = f"https://{self.region}-aiplatform.googleapis.com/v1/projects/{self.project_id}/locations/{self.region}/publishers/google/models/{self.model}:generateContent"
-        
+
         token = self._get_access_token()
         headers = {
             "Content-Type": "application/json",
@@ -260,10 +260,10 @@ class VertexAIProvider(LLMProvider):
                     }
                 })
 
-            contents.append({
-                "role": role,
-                "parts": parts
-            })
+            if contents and contents[-1]["role"] == role:
+                contents[-1]["parts"].extend(parts)
+            else:
+                contents.append({"role": role, "parts": parts})
 
         gemini_tools = []
         if tools:
