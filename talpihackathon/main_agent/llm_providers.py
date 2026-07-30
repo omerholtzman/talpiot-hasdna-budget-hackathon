@@ -17,6 +17,9 @@ class Message:
         self.name = name                  # Used by Gemini to match tool name
 
 class LLMProvider(ABC):
+    def __init__(self):
+        self.last_payload = None
+
     @abstractmethod
     def generate(self, history: List[Message], tools: List[ToolDefinition]) -> Message:
         pass
@@ -81,11 +84,8 @@ class GeminiStudioProvider(LLMProvider):
         if gemini_tools:
             payload["tools"] = gemini_tools
 
+        self.last_payload = payload
         headers = {"Content-Type": "application/json"}
-
-        print("\n=== Sending prompt to LLM (Turn Context) ===")
-        print(json.dumps(payload, indent=2, ensure_ascii=False))
-        print("============================================\n")
 
         max_retries = 5
         backoff = 4
@@ -282,9 +282,7 @@ class VertexAIProvider(LLMProvider):
         if gemini_tools:
             payload["tools"] = gemini_tools
 
-        print("\n=== Sending prompt to LLM (Turn Context) ===")
-        print(json.dumps(payload, indent=2, ensure_ascii=False))
-        print("============================================\n")
+        self.last_payload = payload
 
         max_retries = 5
         backoff = 4

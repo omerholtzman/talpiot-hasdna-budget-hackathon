@@ -107,13 +107,22 @@ def setup_llm_provider(provider_name: str, model_override: Optional[str] = None)
     else:
         raise ValueError(f"Unknown provider: {provider_name}")
 
+def _flush_trace(trace_path: Optional[str], trace_data: List[Dict[str, Any]]):
+    if trace_path:
+        try:
+            with open(trace_path, "w", encoding="utf-8") as f:
+                json.dump(trace_data, f, indent=2, ensure_ascii=False)
+        except Exception:
+            pass
+
 def run_agent_loop(
     provider: LLMProvider,
     mcp_client: MCPClient,
     tools: List[Any],
     prompt: str,
     system_instruction: str,
-    max_turns: int = 10
+    max_turns: int = 10,
+    trace_path: Optional[str] = None
 ) -> tuple[str, List[Dict[str, Any]]]:
     """Runs the autonomous ReAct reasoning-action loop to answer the prompt.
     
@@ -144,16 +153,30 @@ def run_agent_loop(
         except Exception as e:
             print_error(f"LLM generation error: {e}")
             break
+
+        # Termination check (synthesis/final response without tools)
+        if not response.tool_calls:
+            execution_trace.append({
+                "turn": turn,
+                "tool_name": None,
+                "arguments": None,
+                "reasoning": response.content or "",
+                "output": None,
+                "raw_payload": getattr(provider, "last_payload", None)
+            })
+            _flush_trace(trace_path, execution_trace)
+            
+            if response.content:
+                print_llm(f"Response:\n{response.content}")
+                final_response = response.content
+            print_agent("Task completed. No more tool calls requested.")
+            break
+
         if response.content:
             print_llm(f"Response:\n{response.content}")
             final_response = response.content
 
         history.append(response)
-
-        # Termination check
-        if not response.tool_calls:
-            print_agent("Task completed. No more tool calls requested.")
-            break
 
         # Action execution phase
         print_agent(f"Model requested {len(response.tool_calls)} tool call(s):")
@@ -168,24 +191,26 @@ def run_agent_loop(
                 # Call tool on MCP server
                 tool_output = mcp_client.call_tool(name, args_data)
                 
-                # Console output preview formatting
+                # Console output preview formatting (short, non-noisy)
                 try:
                     parsed_output = json.loads(tool_output)
                     pretty_output = json.dumps(parsed_output, indent=2, ensure_ascii=False)
-                    preview = pretty_output[:500] + "..." if len(pretty_output) > 500 else pretty_output
+                    preview = pretty_output[:150] + "..." if len(pretty_output) > 150 else pretty_output
                 except Exception:
-                    preview = tool_output[:300] + "..." if len(tool_output) > 300 else tool_output
+                    preview = tool_output[:100] + "..." if len(tool_output) > 100 else tool_output
                 print_mcp(f"Output Preview:\n{preview}")
                 
-                # Capture to execution trace in memory
+                # Capture to execution trace in memory (complete raw payload & output)
                 execution_trace.append({
                     "turn": turn,
                     "tool_name": name,
                     "arguments": args_data,
                     "reasoning": response.content or "",
-                    "output": tool_output
+                    "output": tool_output,
+                    "raw_payload": getattr(provider, "last_payload", None)
                 })
-
+                _flush_trace(trace_path, execution_trace)
+                
                 # Feed output back to history
                 history.append(Message(
                     role="tool",
@@ -201,8 +226,10 @@ def run_agent_loop(
                     "tool_name": name,
                     "arguments": args_data,
                     "reasoning": response.content or "",
-                    "output": f"Error: {e}"
+                    "output": f"Error: {e}",
+                    "raw_payload": getattr(provider, "last_payload", None)
                 })
+                _flush_trace(trace_path, execution_trace)
 
                 history.append(Message(
                     role="tool",
@@ -224,6 +251,16 @@ def run_agent_loop(
                 if response.content:
                     print_llm(f"Response:\n{response.content}")
                     final_response = response.content
+                
+                execution_trace.append({
+                    "turn": turn + 1,
+                    "tool_name": "forced_synthesis",
+                    "arguments": None,
+                    "reasoning": "Forced final synthesis turn due to turn limit.",
+                    "output": response.content or "",
+                    "raw_payload": getattr(provider, "last_payload", None)
+                })
+                _flush_trace(trace_path, execution_trace)
             except Exception as e:
                 print_error(f"LLM final synthesis generation error: {e}")
         else:
@@ -309,9 +346,19 @@ def main():
         
         system_instruction = system_instruction.replace("{TODAY}", today_str).replace("{MODEL}", model_name)
 
+        # Determine trace path first
+        trace_path = None
+        if output_path:
+            parent_dir = os.path.dirname(output_path)
+            if parent_dir:
+                trace_path = os.path.join(parent_dir, "trace.json")
+
         # Run autonomous loop
         max_turns = 1 if args.test else 10
-        final_ans, trace_logs = run_agent_loop(provider, mcp_client, tools, prompt_text, system_instruction, max_turns=max_turns)
+        final_ans, trace_logs = run_agent_loop(
+            provider, mcp_client, tools, prompt_text, system_instruction, 
+            max_turns=max_turns, trace_path=trace_path
+        )
 
         # Save output to Markdown file
         if final_ans and output_path:
