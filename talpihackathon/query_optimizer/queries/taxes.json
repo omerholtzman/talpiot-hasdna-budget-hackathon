@@ -1,0 +1,17 @@
+{
+  "title": "Business-Sector Tax Revenue 2024",
+  "human_request": "how much taxes the government gathered from businesses in year 2024",
+  "notes": "Period: actual tax collections for revenue year 2024. BudgetKey stores actual 2024 revenue as amount_used on source budget year 2025; code 01.03 is the business-sector income-tax aggregate, not every tax incident on businesses.",
+  "dataset": "income_items_data",
+  "page_size": 50,
+  "min_rows": 1,
+  "columns": [
+    "revenue_year",
+    "source_budget_year",
+    "code",
+    "title",
+    "taxes_gathered_nis",
+    "item_url"
+  ],
+  "query": "SELECT 2024 AS revenue_year, year AS source_budget_year, code, title, amount_used AS taxes_gathered_nis, item_url FROM income_items_data WHERE year = 2025 AND code = '01.03' LIMIT 1"
+}

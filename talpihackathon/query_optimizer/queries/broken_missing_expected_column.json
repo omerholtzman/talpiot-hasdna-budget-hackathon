@@ -1,0 +1,16 @@
+{
+  "title": "Broken query for runner validation tests",
+  "human_request": "Deliberately broken query: result is missing an expected column.",
+  "notes": "This query should fail validation with exit code 14. The SQL itself succeeds, but expected_columns includes a column that is not selected.",
+  "dataset": "entities_data",
+  "page_size": 1,
+  "min_rows": 1,
+  "columns": [
+    "entity_name"
+  ],
+  "expected_columns": [
+    "entity_name",
+    "definitely_missing_column"
+  ],
+  "query": "SELECT entity_name FROM entities_data WHERE entity_kind = 'municipality' ORDER BY received_amount DESC NULLS LAST LIMIT 1"
+}

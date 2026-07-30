@@ -1,0 +1,17 @@
+{
+  "title": "Top 15 largest state-budget sections in 2025",
+  "human_request": "Top 15 largest budgets in 2025",
+  "notes": "Uses budget_items_data.amount_allocated for 2025 main budget sections only (level = 1), excluding TOTAL, to avoid double-counting child budget items.",
+  "dataset": "budget_items_data",
+  "page_size": 15,
+  "min_rows": 15,
+  "columns": [
+    "code",
+    "title",
+    "amount_allocated",
+    "amount_revised",
+    "amount_used",
+    "item_url"
+  ],
+  "query": "SELECT code, title, amount_allocated, amount_revised, amount_used, item_url FROM budget_items_data WHERE year = 2025 AND level = 1 AND code <> 'TOTAL' ORDER BY amount_allocated DESC NULLS LAST LIMIT 15"
+}

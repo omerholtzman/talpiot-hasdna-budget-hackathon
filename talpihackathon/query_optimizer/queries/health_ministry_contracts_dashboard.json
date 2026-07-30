@@ -1,0 +1,73 @@
+{
+  "title": "Health Ministry contracts dashboard",
+  "human_request": "Create a multi-table dataset for plotting Health Ministry contract activity.",
+  "notes": "This spec intentionally contains multiple named queries. Use --format json for graph formatters; TSV/CSV output flattens all rows and adds result_name.",
+  "queries": [
+    {
+      "name": "active_health_contracts_trend_2021_2025",
+      "title": "Health Ministry active contracts trend, 2021-2025",
+      "notes": "Counts and sums Health Ministry contracts active in each year.",
+      "dataset": "contracts_data",
+      "page_size": 5,
+      "min_rows": 5,
+      "columns": [
+        "year",
+        "active_contracts",
+        "total_volume",
+        "total_executed"
+      ],
+      "query": "WITH years(year) AS (VALUES (2021), (2022), (2023), (2024), (2025)) SELECT years.year, COUNT(*) AS active_contracts, SUM(contracts_data.volume) AS total_volume, SUM(contracts_data.executed) AS total_executed FROM years JOIN contracts_data ON contracts_data.purchasing_ministry = 'משרד הבריאות' AND contracts_data.start_year <= years.year AND COALESCE(contracts_data.end_year, 9999) >= years.year GROUP BY years.year ORDER BY years.year"
+    },
+    {
+      "name": "top_health_contracts_2025",
+      "title": "Top Health Ministry contracts active in 2025",
+      "notes": "Ranks active 2025 contracts by total approved contract volume.",
+      "dataset": "contracts_data",
+      "page_size": 10,
+      "min_rows": 1,
+      "columns": [
+        "purpose",
+        "supplier_entity_name",
+        "purchasing_method",
+        "start_year",
+        "end_year",
+        "volume",
+        "executed",
+        "item_url"
+      ],
+      "query": "SELECT purpose, supplier_entity_name, purchasing_method, start_year, end_year, volume, executed, item_url FROM contracts_data WHERE purchasing_ministry = 'משרד הבריאות' AND start_year <= 2025 AND COALESCE(end_year, 9999) >= 2025 ORDER BY volume DESC NULLS LAST LIMIT 10"
+    },
+    {
+      "name": "health_contracts_by_method_2025",
+      "title": "Health Ministry active contract volume by purchasing method in 2025",
+      "notes": "Ranks purchasing methods by total approved contract volume for contracts active in 2025.",
+      "dataset": "contracts_data",
+      "page_size": 10,
+      "min_rows": 1,
+      "columns": [
+        "purchasing_method",
+        "contract_count",
+        "total_volume",
+        "total_executed"
+      ],
+      "query": "SELECT purchasing_method, COUNT(*) AS contract_count, SUM(volume) AS total_volume, SUM(executed) AS total_executed FROM contracts_data WHERE purchasing_ministry = 'משרד הבריאות' AND start_year <= 2025 AND COALESCE(end_year, 9999) >= 2025 GROUP BY purchasing_method ORDER BY total_volume DESC NULLS LAST LIMIT 10"
+    },
+    {
+      "name": "top_health_suppliers_2025",
+      "title": "Top Health Ministry suppliers active in 2025",
+      "notes": "Groups active 2025 contracts by supplier and ranks by total approved contract volume.",
+      "dataset": "contracts_data",
+      "page_size": 10,
+      "min_rows": 1,
+      "columns": [
+        "supplier_entity_name",
+        "supplier_entity_id",
+        "supplier_entity_kind",
+        "contract_count",
+        "total_volume",
+        "total_executed"
+      ],
+      "query": "SELECT supplier_entity_name, supplier_entity_id, supplier_entity_kind, COUNT(*) AS contract_count, SUM(volume) AS total_volume, SUM(executed) AS total_executed FROM contracts_data WHERE purchasing_ministry = 'משרד הבריאות' AND start_year <= 2025 AND COALESCE(end_year, 9999) >= 2025 GROUP BY supplier_entity_name, supplier_entity_id, supplier_entity_kind ORDER BY total_volume DESC NULLS LAST LIMIT 10"
+    }
+  ]
+}

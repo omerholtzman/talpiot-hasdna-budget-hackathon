@@ -1,0 +1,14 @@
+{
+  "title": "Top 10 municipalities by state received amount",
+  "human_request": "Which city in Israel has the highest budget?",
+  "notes": "Uses entities_data.received_amount: money received from the state in the last three years through budgetary supports or procurement contracts. This is not the full municipal annual budget.",
+  "dataset": "entities_data",
+  "page_size": 10,
+  "min_rows": 10,
+  "columns": [
+    "entity_name",
+    "received_amount",
+    "item_url"
+  ],
+  "query": "SELECT entity_name, received_amount, item_url FROM entities_data WHERE entity_kind = 'municipality' ORDER BY received_amount DESC NULLS LAST LIMIT 10"
+}

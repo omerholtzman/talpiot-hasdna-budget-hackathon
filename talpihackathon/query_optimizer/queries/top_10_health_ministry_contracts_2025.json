@@ -1,0 +1,19 @@
+{
+  "title": "Top 10 largest Health Ministry contracts active in 2025",
+  "human_request": "Top 10 largest contracts in Ministry of Health",
+  "notes": "No period was specified, so this query uses contracts active in 2025. It ranks by contracts_data.volume, the total approved contract amount.",
+  "dataset": "contracts_data",
+  "page_size": 10,
+  "min_rows": 1,
+  "columns": [
+    "purpose",
+    "supplier_entity_name",
+    "purchasing_method",
+    "start_year",
+    "end_year",
+    "volume",
+    "executed",
+    "item_url"
+  ],
+  "query": "SELECT purpose, supplier_entity_name, purchasing_method, start_year, end_year, volume, executed, item_url FROM contracts_data WHERE purchasing_ministry = 'משרד הבריאות' AND start_year <= 2025 AND COALESCE(end_year, 9999) >= 2025 ORDER BY volume DESC NULLS LAST LIMIT 10"
+}
