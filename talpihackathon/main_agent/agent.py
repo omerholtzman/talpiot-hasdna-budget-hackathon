@@ -73,13 +73,13 @@ def setup_llm_provider(provider_name: str, model_override: Optional[str] = None)
     """Instantiates the selected LLM provider adapter."""
     print_agent(f"Setting up provider: {provider_name}...")
     if provider_name == "gemini":
-        model = model_override or "gemini-2.5-flash"
+        model = model_override or "gemini-3.5-flash"
         return GeminiStudioProvider(model=model)
     elif provider_name == "anthropic":
         model = model_override or "claude-3-5-sonnet-latest"
         return AnthropicProvider(model=model)
     elif provider_name == "vertex":
-        model = model_override or "gemini-2.5-flash"
+        model = model_override or "gemini-3.5-flash"
         return VertexAIProvider(model=model)
     elif provider_name == "cli-claude":
         cmd_name = model_override or "claude"

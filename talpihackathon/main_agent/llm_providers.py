@@ -21,7 +21,7 @@ class LLMProvider(ABC):
         pass
 
 class GeminiStudioProvider(LLMProvider):
-    def __init__(self, api_key: Optional[str] = None, model: str = "gemini-2.5-flash"):
+    def __init__(self, api_key: Optional[str] = None, model: str = "gemini-3.5-flash"):
         self.api_key = api_key or os.getenv("GEMINI_API_KEY")
         if not self.api_key:
             raise ValueError("Gemini API key is required (set GEMINI_API_KEY environment variable)")
@@ -187,7 +187,7 @@ class AnthropicProvider(LLMProvider):
 
 
 class VertexAIProvider(LLMProvider):
-    def __init__(self, project_id: Optional[str] = None, region: str = "us-central1", model: str = "gemini-2.5-flash"):
+    def __init__(self, project_id: Optional[str] = None, region: str = "us-central1", model: str = "gemini-3.5-flash"):
         self.project_id = project_id or os.getenv("GCP_PROJECT")
         self.region = region
         self.model = model

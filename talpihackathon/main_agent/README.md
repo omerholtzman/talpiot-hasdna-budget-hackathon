@@ -78,7 +78,7 @@ If your machine is already authenticated with Google Cloud, you don't need any A
 ```bash
 ./venv/bin/python agent.py "מה התקציב של משרד החינוך לשנת 2025?" --provider=vertex
 ```
-*Note: By default, this uses the `gemini-2.5-flash` model on Vertex AI.*
+*Note: By default, this uses the `gemini-3.5-flash` model on Vertex AI.*
 
 ### 2. Gemini AI Studio (API Key)
 Generate a key at [Google AI Studio](https://aistudio.google.com/), export it, and run:
@@ -110,7 +110,7 @@ By default, this invokes the `claude` executable. You can customize the name of 
 ### Overriding the Model / Command name
 You can specify a different model name using the `--model` flag:
 ```bash
-./venv/bin/python agent.py "..." --provider=vertex --model=gemini-2.5-pro
+./venv/bin/python agent.py "..." --provider=vertex --model=gemini-3.5-pro
 ```
 
 ---
