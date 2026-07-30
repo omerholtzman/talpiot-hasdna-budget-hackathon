@@ -400,59 +400,66 @@ def main():
                 combined_trace = []
                 subject = args.subject
 
-                # We run Step 1, Step 2, and Step 3 in parallel threads!
-                def run_budget():
-                    print_agent("  - Initiating Budget Items Analysis (Thread 1)")
-                    local_provider = setup_llm_provider(args.provider, args.model)
-                    skill_p1 = load_skill_file("skill_phase1_budget.md", today_str, model_name)
-                    phase1_prompt = f"Please collect aggregate budget data for the subject: '{subject}'."
-                    return run_agent_loop(
-                        local_provider, mcp_client, tools, phase1_prompt, skill_p1,
-                        max_turns=6, trace_path=None, silent=True
-                    )
+                # Step 1: Budget Analysis (Sequential, runs in main thread first)
+                print_agent("=== Step 1: Budget items analysis ===")
+                skill_p1 = load_skill_file("skill_phase1_budget.md", today_str, model_name)
+                phase1_prompt = f"Please collect aggregate budget data for the subject: '{subject}'."
+                phase1_ans, trace_p1 = run_agent_loop(
+                    provider, mcp_client, tools, phase1_prompt, skill_p1,
+                    max_turns=6, trace_path=trace_path, silent=False
+                )
+                combined_trace.extend(trace_p1)
+                _flush_trace(trace_path, combined_trace)
 
+                if len(trace_p1) >= 6:
+                    print_error("Warning: Step 1 (Budget) reached the maximum turn limit of 6!")
+
+                # Step 2 & 3: Contracts & Decisions in Parallel
                 def run_contracts():
-                    print_agent("  - Initiating Contracts and Suppliers Analysis (Thread 2)")
+                    print_agent("  - Initiating Contracts and Suppliers Analysis (Thread 1)")
                     local_provider = setup_llm_provider(args.provider, args.model)
                     skill_p2 = load_skill_file("skill_phase2_contracts.md", today_str, model_name)
-                    phase2_prompt = f"Please collect procurement contracts and supplier aggregate totals for the subject: '{subject}'."
+                    # Pass Step 1 output to Step 2 so it has the budget codes
+                    phase2_prompt = (
+                        f"Please collect procurement contracts and supplier aggregate totals for the subject: '{subject}'.\n"
+                        f"Here is the budget items data collected in Step 1:\n{phase1_ans}"
+                    )
                     return run_agent_loop(
                         local_provider, mcp_client, tools, phase2_prompt, skill_p2,
                         max_turns=6, trace_path=None, silent=True
                     )
 
                 def run_decisions():
-                    print_agent("  - Initiating Government Decisions Analysis (Thread 3)")
+                    print_agent("  - Initiating Government Decisions Analysis (Thread 2)")
                     local_provider = setup_llm_provider(args.provider, args.model)
                     skill_p3 = load_skill_file("skill_phase3_decisions.md", today_str, model_name)
-                    phase3_prompt = f"Please query and extract government decisions related to the subject: '{subject}'."
+                    # Pass Step 1 output to Step 3 for extra context
+                    phase3_prompt = (
+                        f"Please query and extract government decisions related to the subject: '{subject}'.\n"
+                        f"Here is the budget items data collected in Step 1:\n{phase1_ans}"
+                    )
                     return run_agent_loop(
                         local_provider, mcp_client, tools, phase3_prompt, skill_p3,
                         max_turns=6, trace_path=None, silent=True
                     )
 
-                print_agent("Firing research threads concurrently...")
-                with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
-                    future_p1 = executor.submit(run_budget)
+                print_agent("Firing research threads (Contracts & Decisions) concurrently...")
+                with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
                     future_p2 = executor.submit(run_contracts)
                     future_p3 = executor.submit(run_decisions)
 
-                    print_agent("Waiting for all parallel data collection threads to complete...")
-                    phase1_ans, trace_p1 = future_p1.result()
+                    print_agent("Waiting for parallel data collection threads to complete...")
                     phase2_ans, trace_p2 = future_p2.result()
                     phase3_ans, trace_p3 = future_p3.result()
 
                 print_agent("All research threads completed! Collating data...")
                 
-                # Check if any worker reached the turn limit of 6
-                if len(trace_p1) >= 6:
-                    print_error("Warning: Step 1 (Budget) reached the maximum turn limit of 6!")
+                # Check if workers reached the turn limit
                 if len(trace_p2) >= 6:
                     print_error("Warning: Step 2 (Contracts) reached the maximum turn limit of 6!")
                 if len(trace_p3) >= 6:
                     print_error("Warning: Step 3 (Decisions) reached the maximum turn limit of 6!")
 
-                combined_trace.extend(trace_p1)
                 combined_trace.extend(trace_p2)
                 combined_trace.extend(trace_p3)
                 _flush_trace(trace_path, combined_trace)
