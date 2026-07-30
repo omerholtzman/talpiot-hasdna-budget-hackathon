@@ -107,31 +107,39 @@ def main():
         history.append(Message(role="user", content=args.prompt))
         print_agent(f"User Query: {args.prompt}")
 
-        # 4. Autonomous Loop
+        # 4. Autonomous Reasoning & Action (ReAct) Loop
+        # The agent loops up to max_turns to allow multi-step queries (e.g. getSchema -> textSearch -> DBQuery).
         max_turns = 10
         turn = 0
         while turn < max_turns:
             turn += 1
             print_agent(f"Turn {turn}: Thinking...")
             
+            # --- REASONING PHASE ---
+            # Send the entire conversation history (including previous tool outputs)
+            # along with the list of available tools to the LLM.
             try:
                 response = provider.generate(history, tools)
             except Exception as e:
                 print_error(f"LLM generation error: {e}")
                 break
 
-            # If the model has text output, print it
+            # Print LLM text reasoning/explanation if it generated one
             if response.content:
                 print_llm(f"Response:\n{response.content}")
 
-            # Append the model's response to history
+            # Append the LLM's response (reasoning + requested tool calls) to history
             history.append(response)
 
-            # Check if there are tool calls to execute
+            # --- DECISION/TERMINATION CHECK ---
+            # If the model did not request any tool calls, it has finished reasoning
+            # and compiled the final output. We can terminate the loop here.
             if not response.tool_calls:
                 print_agent("Task completed. No more tool calls requested.")
                 break
 
+            # --- ACTION PHASE ---
+            # Loop through and execute each tool call requested by the LLM.
             print_agent(f"Model requested {len(response.tool_calls)} tool call(s):")
             for tc in response.tool_calls:
                 name = tc["name"]
@@ -141,9 +149,10 @@ def main():
                 print_mcp(f"Executing tool {Colors.BOLD}{name}{Colors.RESET} with arguments: {args_data}")
                 
                 try:
+                    # Call the local MCP client synchronously (POST request)
                     tool_output = mcp_client.call_tool(name, args_data)
                     
-                    # Preview the output in the console with correct decoding/formatting
+                    # Pretty-print Hebrew JSON output in the console preview
                     try:
                         parsed_output = json.loads(tool_output)
                         pretty_output = json.dumps(parsed_output, indent=2, ensure_ascii=False)
@@ -152,7 +161,7 @@ def main():
                         preview = tool_output[:300] + "..." if len(tool_output) > 300 else tool_output
                     print_mcp(f"Output Preview:\n{preview}")
                     
-                    # Append tool output message to history
+                    # Append the tool's raw output back to history so the LLM can read it in the next turn
                     history.append(Message(
                         role="tool",
                         content=tool_output,
@@ -161,7 +170,7 @@ def main():
                     ))
                 except Exception as e:
                     print_error(f"Tool execution failed: {e}")
-                    # Append error message so the LLM knows it failed and can correct
+                    # Feed the error message back to the LLM so it can attempt self-correction
                     history.append(Message(
                         role="tool",
                         content=f"Error executing tool {name}: {e}",
