@@ -45,15 +45,21 @@ def get_default_output_path(subject: Optional[str], prompt: Optional[str]) -> st
     if subject:
         # Normalize/clean subject slug
         slug = re.sub(r'[^\w\-_]', '_', subject)
-        filename = f"{slug}-{timestamp}.md"
+        run_name = f"{slug}-{timestamp}"
+        filename = f"{slug}.md"
     elif prompt:
         # Use first 3 words of prompt or 'prompt'
         words = [w for w in re.sub(r'[^\w\s]', '', prompt).split() if w][:3]
         slug = "_".join(words) if words else "prompt"
-        filename = f"{slug}-{timestamp}.md"
+        run_name = f"{slug}-{timestamp}"
+        filename = f"{slug}.md"
     else:
-        filename = f"report-{timestamp}.md"
-    return os.path.join("/tmp", filename)
+        run_name = f"report-{timestamp}"
+        filename = "report.md"
+    
+    output_dir = os.path.join("/tmp/budgetkey-reports", run_name)
+    os.makedirs(output_dir, exist_ok=True)
+    return os.path.join(output_dir, filename)
 
 
 
@@ -315,8 +321,15 @@ def main():
                 with open(output_path, "w", encoding="utf-8") as f:
                     f.write(final_ans)
                 print_agent(f"Saved final markdown response to: {output_path}")
+                
+                # Save execution trace to JSON file in same directory
+                trace_path = os.path.join(parent_dir, "trace.json")
+                with open(trace_path, "w", encoding="utf-8") as f:
+                    json.dump(trace_logs, f, indent=2, ensure_ascii=False)
+                print_agent(f"Saved execution trace to: {trace_path}")
+                
             except Exception as e:
-                print_error(f"Failed to save output to {output_path}: {e}")
+                print_error(f"Failed to save outputs to {parent_dir}: {e}")
 
     finally:
         print_agent("Closing MCP connection...")
