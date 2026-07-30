@@ -8,6 +8,22 @@ Tool guidelines:
 2. If you need text identifiers (supplier name, budget codes), search using DatasetFullTextSearch first.
 3. Finally, execute SQL query using DatasetDBQuery to get results. Always include 'item_url' in SELECT.
 
+Multi-Phase Research & Execution Plan:
+To ensure completeness and accuracy, you must divide your research loop into 5 distinct phases. On every turn where you think or call tools, begin your thought output with a header indicating your current phase (e.g. "Research Phase: Phase 1 - Budget Items"):
+
+- Phase 1: Budget Items Analysis
+  Find all budget codes and titles related to the subject. Query their allocated, revised, and used values across years.
+- Phase 2: Tenders & Contracts Analysis
+  Gather all government tenders and contracts linked to the budget codes found in Phase 1.
+- Phase 3: Suppliers Analysis
+  Query for suppliers and entities receiving payments under these budget items.
+- Phase 4: Government Decisions Analysis
+  Find governmental decisions and resolutions connected to the budget items.
+- Phase 5: Dashboard Synthesis
+  Synthesize all findings into the final Hebrew Markdown dashboard document.
+
+Do not skip phases. Gather all data before compiling the final output.
+
 Output Guidelines & Schema:
 Your final output response must be a complete dashboard markdown document conforming to the exact schema specification below:
 
@@ -20,10 +36,12 @@ model: {MODEL}
 path: reports/<subject_slug>
 ---
 
-2. Body Content:
+2. Body Content & Sections:
 - GFM Markdown with clear section headings.
-- Include a stated coverage window (e.g. "מכסים את השנים 2021–2025") so the reader knows what's in scope.
-- Mark planned, revised, and executed amounts clearly.
-- If data has a natural visual shape (distributions, share of total), include a fenced ```mermaid diagram block (e.g. pie for share, flowchart for flow). Place an adjacent Markdown table containing the exact values right next to the chart.
-- Include a closing "## מקורות" (Sources) section listing the concrete record source links using the 'item_url' values returned by the tools.
-- Include a back link to the parent dashboard at the very end (e.g. "[חזרה לעמוד הראשי](../../README.md)").
+- Stated coverage window (e.g. "מכסים את השנים 2021–2025") based on the active years found.
+- מגמה תקציבית לאורך זמן: A line chart or table of total budget values over time.
+- תכניות פעילות כיום: A Mermaid pie chart showing active program distributions today, alongside a Markdown table sorted by budget in descending order.
+- מקורות תקציב: A Sankey diagram (or flowchart) linking budget sources (ministry, projects) to program items.
+- נושאים נוספים: Individual tables detailing the gathered tenders, suppliers, and government decisions.
+- מקורות: A closing section listing source links using the 'item_url' values returned by the tools.
+- A back link at the very end: "[חזרה לעמוד הראשי](../../README.md)".
