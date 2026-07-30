@@ -1,5 +1,6 @@
 import os
 import sys
+import concurrent.futures
 import argparse
 import uuid
 import json
@@ -80,6 +81,17 @@ def load_system_instruction(file_path: str) -> str:
         print_error(f"Warning: Failed to load system instruction from {file_path}: {e}")
         return default_instruction
 
+def load_skill_file(filename: str, today_str: str, model_name: str) -> str:
+    """Reads a phase-specific skill instruction file and injects placeholders."""
+    path = os.path.join(os.path.dirname(__file__), "instructions", filename)
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            content = f.read().strip()
+        return content.replace("{TODAY}", today_str).replace("{MODEL}", model_name)
+    except Exception as e:
+        print_error(f"Failed to load skill instruction from {path}: {e}")
+        sys.exit(1)
+
 def setup_mcp(mcp_url: str) -> MCPClient:
     """Connects to and initializes the MCP server session."""
     print_agent(f"Connecting to BudgetKey MCP server at {mcp_url}...")
@@ -122,13 +134,26 @@ def run_agent_loop(
     prompt: str,
     system_instruction: str,
     max_turns: int = 10,
-    trace_path: Optional[str] = None
+    trace_path: Optional[str] = None,
+    silent: bool = False
 ) -> tuple[str, List[Dict[str, Any]]]:
     """Runs the autonomous ReAct reasoning-action loop to answer the prompt.
     
     Returns:
         (final_response, execution_trace)
     """
+    def log_agent(msg):
+        if not silent:
+            print_agent(msg)
+    def log_mcp(msg):
+        if not silent:
+            print_mcp(msg)
+    def log_llm(msg):
+        if not silent:
+            print_llm(msg)
+    def log_error(msg):
+        if not silent:
+            print_error(msg)
     
     # 1. Initialize History with instructions & user query
     history: List[Message] = [
@@ -136,7 +161,7 @@ def run_agent_loop(
         Message(role="assistant", content="הבנתי. אני מוכן לעזור לך למצוא מידע בתקציב המדינה. כיצד אוכל לסייע?")
     ]
     history.append(Message(role="user", content=prompt))
-    print_agent(f"User Query: {prompt}")
+    log_agent(f"User Query: {prompt}")
 
     # 2. Loop Execution
     turn = 0
@@ -145,13 +170,13 @@ def run_agent_loop(
     
     while turn < max_turns:
         turn += 1
-        print_agent(f"Turn {turn}: Thinking...")
+        log_agent(f"Turn {turn}: Thinking...")
         
         # Call LLM reasoning
         try:
             response = provider.generate(history, tools)
         except Exception as e:
-            print_error(f"LLM generation error: {e}")
+            log_error(f"LLM generation error: {e}")
             break
 
         # Termination check (synthesis/final response without tools)
@@ -167,25 +192,25 @@ def run_agent_loop(
             _flush_trace(trace_path, execution_trace)
             
             if response.content:
-                print_llm(f"Response:\n{response.content}")
+                log_llm(f"Response:\n{response.content}")
                 final_response = response.content
-            print_agent("Task completed. No more tool calls requested.")
+            log_agent("Task completed. No more tool calls requested.")
             break
 
         if response.content:
-            print_llm(f"Response:\n{response.content}")
+            log_llm(f"Response:\n{response.content}")
             final_response = response.content
 
         history.append(response)
 
         # Action execution phase
-        print_agent(f"Model requested {len(response.tool_calls)} tool call(s):")
+        log_agent(f"Model requested {len(response.tool_calls)} tool call(s):")
         for tc in response.tool_calls:
             name = tc["name"]
             args_data = tc["arguments"]
             call_id = tc.get("id") or str(uuid.uuid4())
             
-            print_mcp(f"Executing tool {Colors.BOLD}{name}{Colors.RESET} with arguments: {args_data}")
+            log_mcp(f"Executing tool {Colors.BOLD}{name}{Colors.RESET} with arguments: {args_data}")
             
             try:
                 # Call tool on MCP server
@@ -198,7 +223,7 @@ def run_agent_loop(
                     preview = pretty_output[:150] + "..." if len(pretty_output) > 150 else pretty_output
                 except Exception:
                     preview = tool_output[:100] + "..." if len(tool_output) > 100 else tool_output
-                print_mcp(f"Output Preview:\n{preview}")
+                log_mcp(f"Output Preview:\n{preview}")
                 
                 # Capture to execution trace in memory (complete raw payload & output)
                 execution_trace.append({
@@ -219,7 +244,7 @@ def run_agent_loop(
                     name=name
                 ))
             except Exception as e:
-                print_error(f"Tool execution failed: {e}")
+                log_error(f"Tool execution failed: {e}")
                 
                 execution_trace.append({
                     "turn": turn,
@@ -240,16 +265,16 @@ def run_agent_loop(
 
     if turn >= max_turns:
         if response.tool_calls:
-            print_agent("Reached maximum iteration limit. Forcing final synthesis turn...")
+            log_agent("Reached maximum iteration limit. Forcing final synthesis turn...")
             history.append(Message(
                 role="user",
                 content="You have reached the execution limit. Please stop performing further tool calls and compile your final markdown dashboard using all the information gathered so far."
             ))
             try:
-                print_agent("Final Turn: Thinking...")
+                log_agent("Final Turn: Thinking...")
                 response = provider.generate(history, tools)
                 if response.content:
-                    print_llm(f"Response:\n{response.content}")
+                    log_llm(f"Response:\n{response.content}")
                     final_response = response.content
                 
                 execution_trace.append({
@@ -293,9 +318,8 @@ def main():
     if args.prompt and args.subject:
         parser.error("cannot specify both --prompt and --subject")
 
-    # Load system instructions from file
-    instruction_path = os.path.join(os.path.dirname(__file__), "instructions", "system_instruction.txt")
-    system_instruction = load_system_instruction(instruction_path)
+    # Inject today's date and model name into instruction variables later
+    today_str = datetime.now().strftime("%Y-%m-%d")
 
     # Determine prompt text
     prompt_text = ""
@@ -340,11 +364,7 @@ def main():
             print_error(f"Failed to initialize LLM provider: {e}")
             sys.exit(1)
 
-        # Inject today's date and model name into system instruction placeholders
-        today_str = datetime.now().strftime("%Y-%m-%d")
         model_name = getattr(provider, "model", None) or getattr(provider, "cmd", None) or args.model or "unknown-model"
-        
-        system_instruction = system_instruction.replace("{TODAY}", today_str).replace("{MODEL}", model_name)
 
         # Determine trace path first
         trace_path = None
@@ -353,12 +373,95 @@ def main():
             if parent_dir:
                 trace_path = os.path.join(parent_dir, "trace.json")
 
-        # Run autonomous loop
-        max_turns = 1 if args.test else 10
-        final_ans, trace_logs = run_agent_loop(
-            provider, mcp_client, tools, prompt_text, system_instruction, 
-            max_turns=max_turns, trace_path=trace_path
-        )
+        # Run autonomous loop or structured pipeline
+        if args.prompt:
+            # General generic query: single 10-turn ReAct loop
+            instruction_path = os.path.join(os.path.dirname(__file__), "instructions", "system_instruction.txt")
+            system_instruction = load_system_instruction(instruction_path)
+            system_instruction = system_instruction.replace("{TODAY}", today_str).replace("{MODEL}", model_name)
+            
+            max_turns = 1 if args.test else 10
+            final_ans, combined_trace = run_agent_loop(
+                provider, mcp_client, tools, prompt_text, system_instruction, 
+                max_turns=max_turns, trace_path=trace_path
+            )
+        else:
+            # Subject-specific dashboard: Run 4-step pipeline using specialized skill files
+            if args.test:
+                print_agent("Running in test mode (Phase 1 budget lookup only, 1 turn)...")
+                skill_p1 = load_skill_file("skill_phase1_budget.md", today_str, model_name)
+                final_ans, combined_trace = run_agent_loop(
+                    provider, mcp_client, tools,
+                    f"Gather budget items data for the subject: {args.subject}",
+                    skill_p1, max_turns=1, trace_path=trace_path
+                )
+            else:
+                print_agent("Starting Parallel Multi-Step Research Pipeline...")
+                combined_trace = []
+                subject = args.subject
+
+                # We run Step 1, Step 2, and Step 3 in parallel threads!
+                def run_budget():
+                    print_agent("  - Initiating Budget Items Analysis (Thread 1)")
+                    local_provider = setup_llm_provider(args.provider, args.model)
+                    skill_p1 = load_skill_file("skill_phase1_budget.md", today_str, model_name)
+                    phase1_prompt = f"Please collect aggregate budget data for the subject: '{subject}'."
+                    return run_agent_loop(
+                        local_provider, mcp_client, tools, phase1_prompt, skill_p1,
+                        max_turns=4, trace_path=None, silent=True
+                    )
+
+                def run_contracts():
+                    print_agent("  - Initiating Contracts and Suppliers Analysis (Thread 2)")
+                    local_provider = setup_llm_provider(args.provider, args.model)
+                    skill_p2 = load_skill_file("skill_phase2_contracts.md", today_str, model_name)
+                    phase2_prompt = f"Please collect procurement contracts and supplier aggregate totals for the subject: '{subject}'."
+                    return run_agent_loop(
+                        local_provider, mcp_client, tools, phase2_prompt, skill_p2,
+                        max_turns=4, trace_path=None, silent=True
+                    )
+
+                def run_decisions():
+                    print_agent("  - Initiating Government Decisions Analysis (Thread 3)")
+                    local_provider = setup_llm_provider(args.provider, args.model)
+                    skill_p3 = load_skill_file("skill_phase3_decisions.md", today_str, model_name)
+                    phase3_prompt = f"Please query and extract government decisions related to the subject: '{subject}'."
+                    return run_agent_loop(
+                        local_provider, mcp_client, tools, phase3_prompt, skill_p3,
+                        max_turns=4, trace_path=None, silent=True
+                    )
+
+                print_agent("Firing research threads concurrently...")
+                with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+                    future_p1 = executor.submit(run_budget)
+                    future_p2 = executor.submit(run_contracts)
+                    future_p3 = executor.submit(run_decisions)
+
+                    print_agent("Waiting for all parallel data collection threads to complete...")
+                    phase1_ans, trace_p1 = future_p1.result()
+                    phase2_ans, trace_p2 = future_p2.result()
+                    phase3_ans, trace_p3 = future_p3.result()
+
+                print_agent("All research threads completed! Collating data...")
+                combined_trace.extend(trace_p1)
+                combined_trace.extend(trace_p2)
+                combined_trace.extend(trace_p3)
+                _flush_trace(trace_path, combined_trace)
+
+                # Step 4: Dashboard Synthesis (runs in main thread, not silent)
+                print_agent("=== Step 4: Final dashboard synthesis ===")
+                skill_p4 = load_skill_file("skill_phase4_synthesis.md", today_str, model_name)
+                phase4_prompt = (
+                    f"Compile the final Hebrew Markdown dashboard document for the subject '{subject}' using the exact specifications.\n\n"
+                    f"--- PHASE 1 DATA (BUDGET) ---\n{phase1_ans}\n\n"
+                    f"--- PHASE 2 DATA (CONTRACTS & SUPPLIERS) ---\n{phase2_ans}\n\n"
+                    f"--- PHASE 3 DATA (GOVERNMENT DECISIONS) ---\n{phase3_ans}"
+                )
+                final_ans, trace_p4 = run_agent_loop(
+                    provider, mcp_client, tools, phase4_prompt, skill_p4, max_turns=1, trace_path=trace_path
+                )
+                combined_trace.extend(trace_p4)
+                _flush_trace(trace_path, combined_trace)
 
         # Save output to Markdown file
         if final_ans and output_path:
@@ -373,7 +476,7 @@ def main():
                 # Save execution trace to JSON file in same directory
                 trace_path = os.path.join(parent_dir, "trace.json")
                 with open(trace_path, "w", encoding="utf-8") as f:
-                    json.dump(trace_logs, f, indent=2, ensure_ascii=False)
+                    json.dump(combined_trace, f, indent=2, ensure_ascii=False)
                 print_agent(f"Saved execution trace to: {trace_path}")
                 
             except Exception as e:
