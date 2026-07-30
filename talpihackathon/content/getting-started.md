@@ -24,4 +24,5 @@ path: docs/getting-started
 | model   | Which model produced it           |
 | path    | Free-form source/category tag     |
 
-Head back to the [product overview](./overview.md) to see a real example.
+Head back to the [product overview](./overview.md) to see a real example, or check
+the [Hebrew example](./hebrew-example.md) to see right-to-left (RTL) content rendered.

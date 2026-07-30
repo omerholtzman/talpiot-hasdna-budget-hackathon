@@ -31,7 +31,9 @@ export function Sidebar() {
               to={`/d/${dashboard.slug}`}
               className={({ isActive }) => `sidebar-item${isActive ? ' sidebar-item-active' : ''}`}
             >
-              <span className="sidebar-item-title">{dashboard.title}</span>
+              <span className="sidebar-item-title" dir="auto">
+                {dashboard.title}
+              </span>
               <span className="sidebar-item-meta">
                 {dashboard.model && <span className="sidebar-item-model">{dashboard.model}</span>}
                 <span className="sidebar-item-date">{formatDate(dashboard.updated)}</span>

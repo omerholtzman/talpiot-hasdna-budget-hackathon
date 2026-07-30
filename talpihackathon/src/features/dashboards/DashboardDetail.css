@@ -2,7 +2,7 @@
   max-width: 840px;
   margin: 0 auto;
   padding: 48px 32px 80px;
-  text-align: left;
+  text-align: start;
 }
 
 .dashboard-detail-header {
@@ -13,7 +13,7 @@
 
 .dashboard-detail-header h1 {
   margin: 0 0 12px;
-  text-align: left;
+  text-align: start;
 }
 
 .dashboard-detail-meta {

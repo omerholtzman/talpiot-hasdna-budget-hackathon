@@ -16,6 +16,7 @@ dist-ssr
 content/*
 !content/overview.md
 !content/getting-started.md
+!content/hebrew-example.md
 !content/reports/
 !content/reports/q1-metrics.md
 

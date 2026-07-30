@@ -47,7 +47,7 @@ export function DashboardDetail() {
   return (
     <article className="dashboard-detail">
       <header className="dashboard-detail-header">
-        <h1>{dashboard.title}</h1>
+        <h1 dir="auto">{dashboard.title}</h1>
         <div className="dashboard-detail-meta">
           {dashboard.model && <span className="dashboard-detail-badge">{dashboard.model}</span>}
           {created && <span>Created {created}</span>}
