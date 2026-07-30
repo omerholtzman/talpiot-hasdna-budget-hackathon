@@ -16,34 +16,29 @@ from llm_providers import (
     LLMProvider
 )
 
-# Color ANSI escapes for clean formatting
-class Colors:
-    BLUE = '\033[94m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    RED = '\033[91m'
-    RESET = '\033[0m'
-    BOLD = '\033[1m'
+from colorama import Fore, Style, init
+init()
 
-def fix_bidi(text: str) -> str:
-    """Applies Bidirectional algorithm to fix RTL languages (like Hebrew) in LTR terminals."""
-    try:
-        from bidi.algorithm import get_display
-        return get_display(text)
-    except ImportError:
-        return text
+# Color mappings backed by colorama
+class Colors:
+    BLUE = Fore.BLUE
+    GREEN = Fore.GREEN
+    YELLOW = Fore.YELLOW
+    RED = Fore.RED
+    RESET = Style.RESET_ALL
+    BOLD = Style.BRIGHT
 
 def print_agent(text: str):
-    print(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {fix_bidi(text)}")
+    print(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {text}")
 
 def print_mcp(text: str):
-    print(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {fix_bidi(text)}")
+    print(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {text}")
 
 def print_llm(text: str):
-    print(f"{Colors.YELLOW}{Colors.BOLD}[LLM]{Colors.RESET} {fix_bidi(text)}")
+    print(f"{Colors.YELLOW}{Colors.BOLD}[LLM]{Colors.RESET} {text}")
 
 def print_error(text: str):
-    print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {fix_bidi(text)}", file=sys.stderr)
+    print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {text}", file=sys.stderr)
 def get_default_output_path(subject: Optional[str], prompt: Optional[str]) -> str:
     """Generates a default output path under /tmp with subject-timestamp or prompt-timestamp."""
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -230,6 +225,8 @@ def main():
                         help="Output Markdown file path (defaults to /tmp/<subject>-<timestamp>.md)")
     parser.add_argument("--list-tools", action="store_true",
                         help="List all available tools from the MCP server and exit")
+    parser.add_argument("--test", "-t", action="store_true",
+                        help="Run in test mode (limits execution to 1 loop turn)")
     args = parser.parse_args()
 
     if not args.list_tools and not args.prompt and not args.subject:
@@ -291,7 +288,8 @@ def main():
         system_instruction = system_instruction.replace("{TODAY}", today_str).replace("{MODEL}", model_name)
 
         # Run autonomous loop
-        final_ans, trace_logs = run_agent_loop(provider, mcp_client, tools, prompt_text, system_instruction)
+        max_turns = 1 if args.test else 10
+        final_ans, trace_logs = run_agent_loop(provider, mcp_client, tools, prompt_text, system_instruction, max_turns=max_turns)
 
         # Save output to Markdown file
         if final_ans and output_path:

@@ -174,6 +174,11 @@ the command by specifying the executable using the `--model` flag:
   ```bash
   ./venv/bin/python agent.py --subject "health" --provider=vertex -o ./reports/my_health_report.md
   ```
+* **Testing Mode (`--test` / `-t`):**
+  By default, the agent runs up to 10 reasoning-action loop turns to execute multiple tools and synthesize a detailed report. You can limit it to exactly 1 turn for quick connection and tool-calling tests using the `--test` or `-t` flag:
+  ```bash
+  ./venv/bin/python agent.py --subject "health" --provider=vertex --test
+  ```
 
 ---
 
