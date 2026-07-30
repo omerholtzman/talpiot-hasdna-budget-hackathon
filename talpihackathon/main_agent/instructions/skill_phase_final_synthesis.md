@@ -6,26 +6,14 @@ No database tools are available in this phase. Do not try to call any tools.
 
 Today's date is {TODAY}.
 
-## Output Guidelines & Schema:
-Generate a complete dashboard markdown document conforming to the exact specification below:
+## Instructions:
+1. You must fill out the provided Markdown template exactly.
+2. **Start your response IMMEDIATELY with the frontmatter `---` line.**
+3. **Do NOT wrap the frontmatter or the entire response document in code blocks** (such as ` ```yaml ` or ` ```markdown `). Only use code blocks for inner elements like ` ```mermaid ` graphs and code blocks inside the text.
+4. Replace all placeholders (like `{SUBJECT_HEBREW}`, `{SUMMARY}`, etc.) with the processed markdown content.
+5. Ensure all labels in the Mermaid pie chart are sanitized: remove or replace any internal ASCII double quotes (e.g., replace 'ע"ר' with 'ע''ר' or 'ע״ר' or 'ע׳ר') so they do not conflict with the outer double quotes enclosing the label, which breaks the Mermaid parser syntax.
+6. When presenting budget items (either in the flowchart, list, or tables), include their clickable links using the `item_url` values returned by the tools. Specifically, `{BUDGET_HIERARCHY_LIST}` must contain a nested bulleted list of all level 1-3 budget items from Phase 5 (grouped/nested correctly by their parent-child code prefixes), where each item name/code is a clickable link to its `item_url`.
+7. All source links in the sources list must be formatted as descriptive labeled Markdown links (e.g., `[שם הסעיף / נושא](url)`) instead of raw URL strings, and grouped logically by category (e.g., סעיפי תקציב, התקשרויות, החלטות ממשלה).
+8. **Inline Link Integration:** Across all sections, tables, lists, and charts, verify that every referenced budget item, tender/contract, decision, and major supplier has a corresponding clickable Markdown hyperlink inline where it is mentioned. Never list items as plain text if a link is available in the datasets.
+9. **Link to Main Ministry/Budget Page:** Find the parent budget item (e.g., level 1 or 2 item representing the subject, such as 'משרד הבריאות') and link it inline inside `{SUMMARY}` and `{BUDGET_TABLE}` description so users can navigate to the main BudgetKey page for the subject.
 
-### 1. Frontmatter (YAML block at the very top):
-```yaml
----
-title: <Display Title in Hebrew, e.g. נתוני תקציב, התקשרויות ותמיכות בתחום הבריאות>
-created: {TODAY}
-updated: {TODAY}
-model: {MODEL}
-path: reports/<subject_slug>
----
-```
-
-### 2. Body Content & Sections:
-*   **GFM Markdown** with clear section headings.
-*   **Stated coverage window** (e.g. "מכסים את השנים 1997-2026") based on the active years found in the budget and contract data.
-*   **מגמה תקציבית לאורך זמן:** A clean Markdown table of total budget values over time (allocated, revised, used).
-*   **תכניות פעילות כיום:** A Mermaid pie chart showing active supplier contract distributions (use top 15 suppliers by total volume), alongside a Markdown table of top contracts sorted by volume in descending order. **Important**: Ensure all labels in the Mermaid pie chart are sanitized: remove or replace any internal ASCII double quotes (e.g., replace 'ע"ר' with 'ע''ר' or 'ע״ר' or 'ע׳ר') so they do not conflict with the outer double quotes enclosing the label, which breaks the Mermaid parser syntax.
-*   **מקורות תקציב:** A Sankey diagram (or Mermaid flowchart) linking budget sources to program items. Make sure to represent the hierarchy. When presenting budget items (either in the flowchart, an adjacent list, or a table), include their clickable links using the `item_url` values returned by the budget tool.
-*   **נושאים נוספים:** Individual tables detailing the gathered tenders/contracts, suppliers, and government decisions.
-*   **מקורות:** A closing section listing source links using the 'item_url' values returned by the tools. **Important**: All links must be formatted as descriptive labeled Markdown links (e.g., `[שם הסעיף / נושא](url)`) instead of raw URL strings, and grouped logically by category (e.g., סעיפי תקציב, התקשרויות, החלטות ממשלה).
-*   **A back link at the very end:** `[חזרה לעמוד הראשי](../../README.md)`.

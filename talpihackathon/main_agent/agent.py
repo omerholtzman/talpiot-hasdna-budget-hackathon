@@ -52,13 +52,27 @@ def print_error(text: str):
     print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {fix_bidi(text)}", file=sys.stderr)
 
 def clean_markdown_fences(content: str) -> str:
-    """Removes leading/trailing code block fences (e.g. ```markdown, ```yaml, ```) from the content."""
+    """Removes leading/trailing code block fences from the content and the frontmatter."""
     content = content.strip()
-    match = re.match(r"^```[a-zA-Z]*", content)
-    if match:
-        content = content[match.end():].strip()
-    if content.endswith("```"):
-        content = content[:-3].strip()
+    
+    # Case 1: The entire content is wrapped in a single outer code fence
+    # e.g. starting with ```markdown and ending with ```
+    if content.startswith("```") and content.endswith("```"):
+        first_newline = content.find("\n")
+        if first_newline != -1:
+            content = content[first_newline:].strip()
+        if content.endswith("```"):
+            content = content[:-3].strip()
+            
+    # Case 2: Only the frontmatter is wrapped in code fences
+    # e.g. ```yaml\n---\n...\n---\n```\n# Document Title
+    # We strip the wrapping fences from around the frontmatter block
+    content = re.sub(
+        r"^```[a-zA-Z]*\s*\n(---[\s\S]*?\n---)\s*\n```",
+        r"\1",
+        content
+    )
+    
     return content
 
 def get_default_output_path(subject: Optional[str]) -> str:
@@ -496,12 +510,20 @@ def main():
             # Step 4: Dashboard Synthesis (runs in main thread, not silent)
             print_agent("=== Step 4: Final dashboard synthesis ===")
             skill_p4 = load_skill_file("skill_phase_final_synthesis.md", today_str, model_name)
+            template_content = load_skill_file("synthesis_template.md", today_str, model_name)
+            
+            # Pre-populate static metadata fields
+            template_content = template_content.replace("{TODAY}", today_str).replace("{MODEL}", model_name)
+
             phase4_prompt = (
-                f"Compile the final Hebrew Markdown dashboard document for the subject '{subject}' using the exact specifications.\n\n"
+                f"Compile the final Hebrew Markdown dashboard document for the subject '{subject}' by filling the template below.\n\n"
                 f"--- PHASE 1 DATA (BUDGET TIME-SERIES) ---\n{phase1_ans}\n\n"
                 f"--- PHASE 5 DATA (BUDGET HIERARCHY FLOW) ---\n{phase5_ans}\n\n"
                 f"--- PHASE 2 DATA (CONTRACTS & SUPPLIERS) ---\n{phase2_ans}\n\n"
-                f"--- PHASE 3 DATA (GOVERNMENT DECISIONS) ---\n{phase3_ans}"
+                f"--- PHASE 3 DATA (GOVERNMENT DECISIONS) ---\n{phase3_ans}\n\n"
+                f"Here is the template format you MUST fill. Fill all remaining placeholders (like {{SUBJECT_HEBREW}}, {{SUMMARY}}, etc.) using the data above. "
+                f"Respond ONLY with the filled template starting immediately with '---'. Do NOT wrap your entire response in code blocks:\n\n"
+                f"{template_content}"
             )
             final_ans, trace_p4 = run_agent_loop(
                 provider, mcp_client, tools, phase4_prompt, skill_p4, max_turns=1, trace_path=trace_path,
