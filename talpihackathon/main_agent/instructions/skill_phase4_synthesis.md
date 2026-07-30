@@ -25,7 +25,7 @@ path: reports/<subject_slug>
 *   **Stated coverage window** (e.g. "מכסים את השנים 1997-2026") based on the active years found in the budget and contract data.
 *   **מגמה תקציבית לאורך זמן:** A clean Markdown table of total budget values over time (allocated, revised, used).
 *   **תכניות פעילות כיום:** A Mermaid pie chart showing active supplier contract distributions (use top 15 suppliers by total volume), alongside a Markdown table of top contracts sorted by volume in descending order. **Important**: Ensure all labels in the Mermaid pie chart are sanitized: remove or replace any internal ASCII double quotes (e.g., replace 'ע"ר' with 'ע''ר' or 'ע״ר' or 'ע׳ר') so they do not conflict with the outer double quotes enclosing the label, which breaks the Mermaid parser syntax.
-*   **מקורות תקציב:** A Sankey diagram (or Mermaid flow chart) linking budget sources to program items.
+*   **מקורות תקציב:** A Sankey diagram (or Mermaid flowchart) linking budget sources to program items. Make sure to represent the hierarchy. When presenting budget items (either in the flowchart, an adjacent list, or a table), include their clickable links using the `item_url` values returned by the budget tool.
 *   **נושאים נוספים:** Individual tables detailing the gathered tenders/contracts, suppliers, and government decisions.
-*   **מקורות:** A closing section listing source links using the 'item_url' values returned by the tools.
+*   **מקורות:** A closing section listing source links using the 'item_url' values returned by the tools. **Important**: All links must be formatted as descriptive labeled Markdown links (e.g., `[שם הסעיף / נושא](url)`) instead of raw URL strings, and grouped logically by category (e.g., סעיפי תקציב, התקשרויות, החלטות ממשלה).
 *   **A back link at the very end:** `[חזרה לעמוד הראשי](../../README.md)`.

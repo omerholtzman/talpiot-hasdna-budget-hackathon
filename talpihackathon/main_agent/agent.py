@@ -31,25 +31,32 @@ class Colors:
     RESET = Style.RESET_ALL
     BOLD = Style.BRIGHT
 
+def fix_bidi(text: str) -> str:
+    """Formats Hebrew/RTL text for LTR terminals."""
+    try:
+        from bidi.algorithm import get_display
+        return get_display(text)
+    except ImportError:
+        return text
+
 def print_agent(text: str):
-    print(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {text}")
+    print(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {fix_bidi(text)}")
 
 def print_mcp(text: str):
-    print(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {text}")
+    print(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {fix_bidi(text)}")
 
 def print_llm(text: str):
-    print(f"{Colors.YELLOW}{Colors.BOLD}[LLM]{Colors.RESET} {text}")
+    print(f"{Colors.YELLOW}{Colors.BOLD}[LLM]{Colors.RESET} {fix_bidi(text)}")
 
 def print_error(text: str):
-    print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {text}", file=sys.stderr)
+    print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {fix_bidi(text)}", file=sys.stderr)
 
 def clean_markdown_fences(content: str) -> str:
-    """Removes leading/trailing ```markdown and ``` fences from the generated content."""
+    """Removes leading/trailing code block fences (e.g. ```markdown, ```yaml, ```) from the content."""
     content = content.strip()
-    if content.startswith("```markdown"):
-        content = content[len("```markdown"):].strip()
-    elif content.startswith("```"):
-        content = content[3:].strip()
+    match = re.match(r"^```[a-zA-Z]*", content)
+    if match:
+        content = content[match.end():].strip()
     if content.endswith("```"):
         content = content[:-3].strip()
     return content
@@ -136,13 +143,13 @@ def run_agent_loop(
     """
     def log_agent(msg):
         if not silent:
-            print(f"{agent_color}{Colors.BOLD}[Agent - {agent_name}]{Colors.RESET} {msg}")
+            print(f"{agent_color}{Colors.BOLD}[Agent - {agent_name}]{Colors.RESET} {fix_bidi(msg)}")
     def log_mcp(msg):
         if not silent:
-            print(f"{agent_color}{Colors.BOLD}[MCP - {agent_name}]{Colors.RESET} {msg}")
+            print(f"{agent_color}{Colors.BOLD}[MCP - {agent_name}]{Colors.RESET} {fix_bidi(msg)}")
     def log_llm(msg):
         if not silent:
-            print(f"{agent_color}{Colors.BOLD}[LLM - {agent_name}]{Colors.RESET} {msg}")
+            print(f"{agent_color}{Colors.BOLD}[LLM - {agent_name}]{Colors.RESET} {fix_bidi(msg)}")
     def log_error(msg):
         # Always print errors so failures in background threads are visible
         print_error(f"[Agent - {agent_name}] {msg}")
