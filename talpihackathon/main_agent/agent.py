@@ -265,7 +265,7 @@ def run_agent_loop(
 
     if turn >= max_turns:
         if response.tool_calls:
-            log_agent("Reached maximum iteration limit. Forcing final synthesis turn...")
+            print_error(f"Reached maximum iteration limit. Forcing final synthesis turn for query: '{prompt[:60]}...'")
             history.append(Message(
                 role="user",
                 content="You have reached the execution limit. Please stop performing further tool calls and compile your final markdown dashboard using all the information gathered so far."
@@ -287,9 +287,9 @@ def run_agent_loop(
                 })
                 _flush_trace(trace_path, execution_trace)
             except Exception as e:
-                print_error(f"LLM final synthesis generation error: {e}")
+                log_error(f"LLM final synthesis generation error: {e}")
         else:
-            print_agent("Reached maximum iteration limit.")
+            print_error(f"Reached maximum iteration limit for query: '{prompt[:60]}...'")
     
     return final_response, execution_trace
 
@@ -408,7 +408,7 @@ def main():
                     phase1_prompt = f"Please collect aggregate budget data for the subject: '{subject}'."
                     return run_agent_loop(
                         local_provider, mcp_client, tools, phase1_prompt, skill_p1,
-                        max_turns=4, trace_path=None, silent=True
+                        max_turns=6, trace_path=None, silent=True
                     )
 
                 def run_contracts():
@@ -418,7 +418,7 @@ def main():
                     phase2_prompt = f"Please collect procurement contracts and supplier aggregate totals for the subject: '{subject}'."
                     return run_agent_loop(
                         local_provider, mcp_client, tools, phase2_prompt, skill_p2,
-                        max_turns=4, trace_path=None, silent=True
+                        max_turns=6, trace_path=None, silent=True
                     )
 
                 def run_decisions():
@@ -428,7 +428,7 @@ def main():
                     phase3_prompt = f"Please query and extract government decisions related to the subject: '{subject}'."
                     return run_agent_loop(
                         local_provider, mcp_client, tools, phase3_prompt, skill_p3,
-                        max_turns=4, trace_path=None, silent=True
+                        max_turns=6, trace_path=None, silent=True
                     )
 
                 print_agent("Firing research threads concurrently...")
@@ -443,6 +443,15 @@ def main():
                     phase3_ans, trace_p3 = future_p3.result()
 
                 print_agent("All research threads completed! Collating data...")
+                
+                # Check if any worker reached the turn limit of 6
+                if len(trace_p1) >= 6:
+                    print_error("Warning: Step 1 (Budget) reached the maximum turn limit of 6!")
+                if len(trace_p2) >= 6:
+                    print_error("Warning: Step 2 (Contracts) reached the maximum turn limit of 6!")
+                if len(trace_p3) >= 6:
+                    print_error("Warning: Step 3 (Decisions) reached the maximum turn limit of 6!")
+
                 combined_trace.extend(trace_p1)
                 combined_trace.extend(trace_p2)
                 combined_trace.extend(trace_p3)
