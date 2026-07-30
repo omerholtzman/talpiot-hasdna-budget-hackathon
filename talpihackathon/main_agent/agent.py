@@ -3,7 +3,7 @@ import sys
 import argparse
 import uuid
 import json
-from typing import List
+from typing import List, Optional, Any
 from mcp_client import MCPClient
 from llm_providers import (
     Message,
@@ -34,6 +34,127 @@ def print_llm(text: str):
 def print_error(text: str):
     print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {text}", file=sys.stderr)
 
+def load_system_instruction(file_path: str) -> str:
+    """Reads system instructions from the text file. Falls back to a default if missing."""
+    default_instruction = (
+        "You are an expert data researcher, helping to find information on issues related "
+        "to the State Budget of Israel. You communicate efficiently in Hebrew. "
+        "Use ONLY the tools provided to query database schemas and execute SQL queries."
+    )
+    if not os.path.exists(file_path):
+        return default_instruction
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return f.read().strip()
+    except Exception as e:
+        print_error(f"Warning: Failed to load system instruction from {file_path}: {e}")
+        return default_instruction
+
+def setup_mcp(mcp_url: str) -> MCPClient:
+    """Connects to and initializes the MCP server session."""
+    print_agent(f"Connecting to BudgetKey MCP server at {mcp_url}...")
+    mcp_client = MCPClient(mcp_url)
+    mcp_client.connect()
+    print_agent("Initializing session...")
+    mcp_client.initialize()
+    return mcp_client
+
+def setup_llm_provider(provider_name: str, model_override: Optional[str] = None) -> LLMProvider:
+    """Instantiates the selected LLM provider adapter."""
+    print_agent(f"Setting up provider: {provider_name}...")
+    if provider_name == "gemini":
+        model = model_override or "gemini-2.5-flash"
+        return GeminiStudioProvider(model=model)
+    elif provider_name == "anthropic":
+        model = model_override or "claude-3-5-sonnet-latest"
+        return AnthropicProvider(model=model)
+    elif provider_name == "vertex":
+        model = model_override or "gemini-2.5-flash"
+        return VertexAIProvider(model=model)
+    else:
+        raise ValueError(f"Unknown provider: {provider_name}")
+
+def run_agent_loop(
+    provider: LLMProvider,
+    mcp_client: MCPClient,
+    tools: List[Any],
+    prompt: str,
+    system_instruction: str,
+    max_turns: int = 10
+) -> str:
+    """Runs the autonomous ReAct reasoning-action loop to answer the prompt."""
+    
+    # 1. Initialize History with instructions & user query
+    history: List[Message] = [
+        Message(role="user", content=f"System Instruction:\n{system_instruction}"),
+        Message(role="assistant", content="הבנתי. אני מוכן לעזור לך למצוא מידע בתקציב המדינה. כיצד אוכל לסייע?")
+    ]
+    history.append(Message(role="user", content=prompt))
+    print_agent(f"User Query: {prompt}")
+
+    # 2. Loop Execution
+    turn = 0
+    final_response = ""
+    while turn < max_turns:
+        turn += 1
+        print_agent(f"Turn {turn}: Thinking...")
+        
+        # Call LLM reasoning
+        response = provider.generate(history, tools)
+        if response.content:
+            print_llm(f"Response:\n{response.content}")
+            final_response = response.content
+
+        history.append(response)
+
+        # Termination check
+        if not response.tool_calls:
+            print_agent("Task completed. No more tool calls requested.")
+            break
+
+        # Action execution phase
+        print_agent(f"Model requested {len(response.tool_calls)} tool call(s):")
+        for tc in response.tool_calls:
+            name = tc["name"]
+            args_data = tc["arguments"]
+            call_id = tc.get("id") or str(uuid.uuid4())
+            
+            print_mcp(f"Executing tool {Colors.BOLD}{name}{Colors.RESET} with arguments: {args_data}")
+            
+            try:
+                # Call tool on MCP server
+                tool_output = mcp_client.call_tool(name, args_data)
+                
+                # Console output preview formatting
+                try:
+                    parsed_output = json.loads(tool_output)
+                    pretty_output = json.dumps(parsed_output, indent=2, ensure_ascii=False)
+                    preview = pretty_output[:500] + "..." if len(pretty_output) > 500 else pretty_output
+                except Exception:
+                    preview = tool_output[:300] + "..." if len(tool_output) > 300 else tool_output
+                print_mcp(f"Output Preview:\n{preview}")
+                
+                # Feed output back to history
+                history.append(Message(
+                    role="tool",
+                    content=tool_output,
+                    tool_response_id=call_id,
+                    name=name
+                ))
+            except Exception as e:
+                print_error(f"Tool execution failed: {e}")
+                history.append(Message(
+                    role="tool",
+                    content=f"Error executing tool {name}: {e}",
+                    tool_response_id=call_id,
+                    name=name
+                ))
+
+    if turn >= max_turns:
+        print_agent("Reached maximum iteration limit.")
+    
+    return final_response
+
 def main():
     parser = argparse.ArgumentParser(description="BudgetKey MCP Autonomous Agent")
     parser.add_argument("prompt", type=str, nargs="?", default=None,
@@ -51,19 +172,18 @@ def main():
     if not args.list_tools and not args.prompt:
         parser.error("either prompt must be specified or --list-tools flag must be set")
 
-    # 1. Connect to MCP Server
-    print_agent(f"Connecting to BudgetKey MCP server at {args.mcp_url}...")
-    mcp_client = MCPClient(args.mcp_url)
+    # Load system instructions from file
+    instruction_path = os.path.join(os.path.dirname(__file__), "instructions", "system_instruction.txt")
+    system_instruction = load_system_instruction(instruction_path)
+
+    # Initialize MCP Client
     try:
-        mcp_client.connect()
+        mcp_client = setup_mcp(args.mcp_url)
     except Exception as e:
-        print_error(f"Failed to connect to MCP server: {e}")
+        print_error(f"Failed to connect/initialize MCP server: {e}")
         sys.exit(1)
 
     try:
-        print_agent("Initializing session...")
-        mcp_client.initialize()
-
         print_agent("Fetching available tools...")
         tools = mcp_client.list_tools()
         print_agent(f"Successfully loaded {len(tools)} tools from MCP:")
@@ -73,122 +193,15 @@ def main():
         if args.list_tools:
             return
 
-        # 2. Setup LLM Provider
-        print_agent(f"Setting up provider: {args.provider}...")
-        provider: LLMProvider
+        # Setup LLM Provider
         try:
-            if args.provider == "gemini":
-                model_name = args.model or "gemini-2.5-flash"
-                provider = GeminiStudioProvider(model=model_name)
-            elif args.provider == "anthropic":
-                model_name = args.model or "claude-3-5-sonnet-latest"
-                provider = AnthropicProvider(model=model_name)
-            elif args.provider == "vertex":
-                model_name = args.model or "gemini-2.5-flash"
-                provider = VertexAIProvider(model=model_name)
+            provider = setup_llm_provider(args.provider, args.model)
         except Exception as e:
             print_error(f"Failed to initialize LLM provider: {e}")
-            mcp_client.close()
             sys.exit(1)
 
-        # 3. Initialize Conversation History
-        # We append a robust system instruction at the beginning
-        system_instruction = (
-            "You are an expert data researcher, helping to find information on issues related "
-            "to the State Budget of Israel. You provide information from the Israeli budget book "
-            "(ספר התקציב הישראלי), budgetary support data (נתוני תמיכות תקציביות), information on "
-            "contracts (התקשרויות), and tenders (מכרזים).\n\n"
-            "You communicate efficiently in Hebrew.\n"
-            "You use ONLY the information obtained through the tools provided and no other information.\n"
-            "The current year is 2025. Budget data is available from 1997 to 2025.\n\n"
-            "Tool guidelines:\n"
-            "1. ALWAYS call DatasetInfo first to understand the dataset structure and columns before running queries.\n"
-            "2. If you need text identifiers (supplier name, budget codes), search using DatasetFullTextSearch first.\n"
-            "3. Finally, execute SQL query using DatasetDBQuery to get results. Always include 'item_url' in SELECT.\n"
-        )
-        
-        history: List[Message] = [
-            Message(role="user", content=f"System Instruction:\n{system_instruction}"),
-            Message(role="assistant", content="הבנתי. אני מוכן לעזור לך למצוא מידע בתקציב המדינה. כיצד אוכל לסייע?")
-        ]
-
-        # Add the actual user query
-        history.append(Message(role="user", content=args.prompt))
-        print_agent(f"User Query: {args.prompt}")
-
-        # 4. Autonomous Reasoning & Action (ReAct) Loop
-        # The agent loops up to max_turns to allow multi-step queries (e.g. getSchema -> textSearch -> DBQuery).
-        max_turns = 10
-        turn = 0
-        while turn < max_turns:
-            turn += 1
-            print_agent(f"Turn {turn}: Thinking...")
-            
-            # --- REASONING PHASE ---
-            # Send the entire conversation history (including previous tool outputs)
-            # along with the list of available tools to the LLM.
-            try:
-                response = provider.generate(history, tools)
-            except Exception as e:
-                print_error(f"LLM generation error: {e}")
-                break
-
-            # Print LLM text reasoning/explanation if it generated one
-            if response.content:
-                print_llm(f"Response:\n{response.content}")
-
-            # Append the LLM's response (reasoning + requested tool calls) to history
-            history.append(response)
-
-            # --- DECISION/TERMINATION CHECK ---
-            # If the model did not request any tool calls, it has finished reasoning
-            # and compiled the final output. We can terminate the loop here.
-            if not response.tool_calls:
-                print_agent("Task completed. No more tool calls requested.")
-                break
-
-            # --- ACTION PHASE ---
-            # Loop through and execute each tool call requested by the LLM.
-            print_agent(f"Model requested {len(response.tool_calls)} tool call(s):")
-            for tc in response.tool_calls:
-                name = tc["name"]
-                args_data = tc["arguments"]
-                call_id = tc.get("id") or str(uuid.uuid4())
-                
-                print_mcp(f"Executing tool {Colors.BOLD}{name}{Colors.RESET} with arguments: {args_data}")
-                
-                try:
-                    # Call the local MCP client synchronously (POST request)
-                    tool_output = mcp_client.call_tool(name, args_data)
-                    
-                    # Pretty-print Hebrew JSON output in the console preview
-                    try:
-                        parsed_output = json.loads(tool_output)
-                        pretty_output = json.dumps(parsed_output, indent=2, ensure_ascii=False)
-                        preview = pretty_output[:500] + "..." if len(pretty_output) > 500 else pretty_output
-                    except Exception:
-                        preview = tool_output[:300] + "..." if len(tool_output) > 300 else tool_output
-                    print_mcp(f"Output Preview:\n{preview}")
-                    
-                    # Append the tool's raw output back to history so the LLM can read it in the next turn
-                    history.append(Message(
-                        role="tool",
-                        content=tool_output,
-                        tool_response_id=call_id,
-                        name=name
-                    ))
-                except Exception as e:
-                    print_error(f"Tool execution failed: {e}")
-                    # Feed the error message back to the LLM so it can attempt self-correction
-                    history.append(Message(
-                        role="tool",
-                        content=f"Error executing tool {name}: {e}",
-                        tool_response_id=call_id,
-                        name=name
-                    ))
-
-        if turn >= max_turns:
-            print_agent("Reached maximum iteration limit.")
+        # Run autonomous loop
+        run_agent_loop(provider, mcp_client, tools, args.prompt, system_instruction)
 
     finally:
         print_agent("Closing MCP connection...")
