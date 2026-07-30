@@ -36,14 +36,20 @@ def print_error(text: str):
 
 def main():
     parser = argparse.ArgumentParser(description="BudgetKey MCP Autonomous Agent")
-    parser.add_argument("prompt", type=str, help="The prompt/question to ask the budget database")
+    parser.add_argument("prompt", type=str, nargs="?", default=None,
+                        help="The prompt/question to ask the budget database")
     parser.add_argument("--provider", type=str, default="gemini", choices=["gemini", "anthropic", "vertex"],
                         help="LLM Provider to use (gemini, anthropic, vertex)")
     parser.add_argument("--model", type=str, default=None,
                         help="Model name override")
     parser.add_argument("--mcp-url", type=str, default="https://next.obudget.org/mcp",
                         help="BudgetKey MCP server URL")
+    parser.add_argument("--list-tools", action="store_true",
+                        help="List all available tools from the MCP server and exit")
     args = parser.parse_args()
+
+    if not args.list_tools and not args.prompt:
+        parser.error("either prompt must be specified or --list-tools flag must be set")
 
     # 1. Connect to MCP Server
     print_agent(f"Connecting to BudgetKey MCP server at {args.mcp_url}...")
@@ -63,6 +69,9 @@ def main():
         print_agent(f"Successfully loaded {len(tools)} tools from MCP:")
         for t in tools:
             print_mcp(f"  - {t.name}: {t.description.splitlines()[0]}")
+
+        if args.list_tools:
+            return
 
         # 2. Setup LLM Provider
         print_agent(f"Setting up provider: {args.provider}...")
