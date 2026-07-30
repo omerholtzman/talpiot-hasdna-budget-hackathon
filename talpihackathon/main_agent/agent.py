@@ -42,6 +42,18 @@ def print_llm(text: str):
 
 def print_error(text: str):
     print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {text}", file=sys.stderr)
+
+def clean_markdown_fences(content: str) -> str:
+    """Removes leading/trailing ```markdown and ``` fences from the generated content."""
+    content = content.strip()
+    if content.startswith("```markdown"):
+        content = content[len("```markdown"):].strip()
+    elif content.startswith("```"):
+        content = content[3:].strip()
+    if content.endswith("```"):
+        content = content[:-3].strip()
+    return content
+
 def get_default_output_path(subject: Optional[str]) -> str:
     """Generates a default output path under output_examples with subject-timestamp."""
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -467,8 +479,9 @@ def main():
             if parent_dir:
                 os.makedirs(parent_dir, exist_ok=True)
             try:
+                cleaned_ans = clean_markdown_fences(final_ans)
                 with open(output_path, "w", encoding="utf-8") as f:
-                    f.write(final_ans)
+                    f.write(cleaned_ans)
                 print_agent(f"Saved final markdown response to: {output_path}")
                 
                 # Save execution trace to JSON file in same directory

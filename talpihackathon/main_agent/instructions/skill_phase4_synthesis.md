@@ -24,7 +24,7 @@ path: reports/<subject_slug>
 *   **GFM Markdown** with clear section headings.
 *   **Stated coverage window** (e.g. "מכסים את השנים 1997-2026") based on the active years found in the budget and contract data.
 *   **מגמה תקציבית לאורך זמן:** A clean Markdown table of total budget values over time (allocated, revised, used).
-*   **תכניות פעילות כיום:** A Mermaid pie chart showing active supplier contract distributions (use top 15 suppliers by total volume), alongside a Markdown table of top contracts sorted by volume in descending order.
+*   **תכניות פעילות כיום:** A Mermaid pie chart showing active supplier contract distributions (use top 15 suppliers by total volume), alongside a Markdown table of top contracts sorted by volume in descending order. **Important**: Ensure all labels in the Mermaid pie chart are sanitized: remove or replace any internal ASCII double quotes (e.g., replace 'ע"ר' with 'ע''ר' or 'ע״ר' or 'ע׳ר') so they do not conflict with the outer double quotes enclosing the label, which breaks the Mermaid parser syntax.
 *   **מקורות תקציב:** A Sankey diagram (or Mermaid flow chart) linking budget sources to program items.
 *   **נושאים נוספים:** Individual tables detailing the gathered tenders/contracts, suppliers, and government decisions.
 *   **מקורות:** A closing section listing source links using the 'item_url' values returned by the tools.
