@@ -40,7 +40,7 @@ def fix_bidi(text: str) -> str:
         return text
 
 def print_agent(text: str):
-    print(f"{Colors.BLUE}{Colors.BOLD}[Agent]{Colors.RESET} {fix_bidi(text)}")
+    print(f"{Colors.BLUE}{Colors.BOLD}[Orchestrator]{Colors.RESET} {fix_bidi(text)}")
 
 def print_mcp(text: str):
     print(f"{Colors.GREEN}{Colors.BOLD}[MCP]{Colors.RESET} {fix_bidi(text)}")
