@@ -404,7 +404,7 @@ def main():
             if len(trace_p1) >= 6:
                 print_error("Warning: Step 1 (Budget) reached the maximum turn limit of 6!")
 
-            # Step 2 & 3: Contracts & Decisions in Parallel
+            # Step 2, 3 & 5: Contracts, Decisions & Hierarchy in Parallel
             def run_contracts():
                 print_agent("  - Initiating Contracts and Suppliers Analysis (Thread 1)")
                 local_provider = setup_llm_provider(args.provider, args.model)
@@ -443,14 +443,35 @@ def main():
                 finally:
                     local_mcp.close()
 
-            print_agent("Firing research threads (Contracts & Decisions) concurrently...")
-            with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+            def run_hierarchy():
+                print_agent("  - Initiating Budget Hierarchy Analysis (Thread 3)")
+                local_provider = setup_llm_provider(args.provider, args.model)
+                skill_p5 = load_skill_file("skill_phase5_hierarchy.md", today_str, model_name)
+                # Pass Step 1 output to Step 5 for prefix lookup context
+                phase5_prompt = (
+                    f"Please collect hierarchical budget items breakdown and program structures for the subject: '{subject}'.\n"
+                    f"Here is the budget items data collected in Step 1:\n{phase1_ans}"
+                )
+                local_mcp = setup_mcp(args.mcp_url)
+                try:
+                    return run_agent_loop(
+                        local_provider, local_mcp, tools, phase5_prompt, skill_p5,
+                        max_turns=6, trace_path=None, silent=False,
+                        agent_name="Hierarchy", agent_color=Colors.GREEN
+                    )
+                finally:
+                    local_mcp.close()
+
+            print_agent("Firing research threads (Contracts, Decisions, and Hierarchy) concurrently...")
+            with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
                 future_p2 = executor.submit(run_contracts)
                 future_p3 = executor.submit(run_decisions)
+                future_p5 = executor.submit(run_hierarchy)
 
                 print_agent("Waiting for parallel data collection threads to complete...")
                 phase2_ans, trace_p2 = future_p2.result()
                 phase3_ans, trace_p3 = future_p3.result()
+                phase5_ans, trace_p5 = future_p5.result()
 
             print_agent("All research threads completed! Collating data...")
             
@@ -459,17 +480,21 @@ def main():
                 print_error("Warning: Step 2 (Contracts) reached the maximum turn limit of 6!")
             if len(trace_p3) >= 6:
                 print_error("Warning: Step 3 (Decisions) reached the maximum turn limit of 6!")
+            if len(trace_p5) >= 6:
+                print_error("Warning: Step 5 (Hierarchy) reached the maximum turn limit of 6!")
 
             combined_trace.extend(trace_p2)
             combined_trace.extend(trace_p3)
+            combined_trace.extend(trace_p5)
             _flush_trace(trace_path, combined_trace)
 
             # Step 4: Dashboard Synthesis (runs in main thread, not silent)
             print_agent("=== Step 4: Final dashboard synthesis ===")
-            skill_p4 = load_skill_file("skill_phase4_synthesis.md", today_str, model_name)
+            skill_p4 = load_skill_file("skill_phase_final_synthesis.md", today_str, model_name)
             phase4_prompt = (
                 f"Compile the final Hebrew Markdown dashboard document for the subject '{subject}' using the exact specifications.\n\n"
-                f"--- PHASE 1 DATA (BUDGET) ---\n{phase1_ans}\n\n"
+                f"--- PHASE 1 DATA (BUDGET TIME-SERIES) ---\n{phase1_ans}\n\n"
+                f"--- PHASE 5 DATA (BUDGET HIERARCHY FLOW) ---\n{phase5_ans}\n\n"
                 f"--- PHASE 2 DATA (CONTRACTS & SUPPLIERS) ---\n{phase2_ans}\n\n"
                 f"--- PHASE 3 DATA (GOVERNMENT DECISIONS) ---\n{phase3_ans}"
             )
