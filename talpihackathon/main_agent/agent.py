@@ -205,7 +205,22 @@ def run_agent_loop(
                 ))
 
     if turn >= max_turns:
-        print_agent("Reached maximum iteration limit.")
+        if response.tool_calls:
+            print_agent("Reached maximum iteration limit. Forcing final synthesis turn...")
+            history.append(Message(
+                role="user",
+                content="You have reached the execution limit. Please stop performing further tool calls and compile your final markdown dashboard using all the information gathered so far."
+            ))
+            try:
+                print_agent("Final Turn: Thinking...")
+                response = provider.generate(history, tools)
+                if response.content:
+                    print_llm(f"Response:\n{response.content}")
+                    final_response = response.content
+            except Exception as e:
+                print_error(f"LLM final synthesis generation error: {e}")
+        else:
+            print_agent("Reached maximum iteration limit.")
     
     return final_response, execution_trace
 

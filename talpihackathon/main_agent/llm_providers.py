@@ -83,6 +83,10 @@ class GeminiStudioProvider(LLMProvider):
 
         headers = {"Content-Type": "application/json"}
         
+        print("\n=== Sending prompt to LLM (Turn Context) ===")
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+        print("============================================\n")
+        
         max_retries = 5
         backoff = 4
         for attempt in range(max_retries):
@@ -277,6 +281,10 @@ class VertexAIProvider(LLMProvider):
         }
         if gemini_tools:
             payload["tools"] = gemini_tools
+
+        print("\n=== Sending prompt to LLM (Turn Context) ===")
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+        print("============================================\n")
 
         max_retries = 5
         backoff = 4
