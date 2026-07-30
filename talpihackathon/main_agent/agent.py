@@ -26,6 +26,8 @@ class Colors:
     GREEN = Fore.GREEN
     YELLOW = Fore.YELLOW
     RED = Fore.RED
+    CYAN = Fore.CYAN
+    MAGENTA = Fore.MAGENTA
     RESET = Style.RESET_ALL
     BOLD = Style.BRIGHT
 
@@ -111,7 +113,9 @@ def run_agent_loop(
     system_instruction: str,
     max_turns: int = 10,
     trace_path: Optional[str] = None,
-    silent: bool = False
+    silent: bool = False,
+    agent_name: str = "Agent",
+    agent_color: str = Colors.BLUE
 ) -> tuple[str, List[Dict[str, Any]]]:
     """Runs the autonomous ReAct reasoning-action loop to answer the prompt.
     
@@ -120,16 +124,16 @@ def run_agent_loop(
     """
     def log_agent(msg):
         if not silent:
-            print_agent(msg)
+            print(f"{agent_color}{Colors.BOLD}[Agent - {agent_name}]{Colors.RESET} {msg}")
     def log_mcp(msg):
         if not silent:
-            print_mcp(msg)
+            print(f"{agent_color}{Colors.BOLD}[MCP - {agent_name}]{Colors.RESET} {msg}")
     def log_llm(msg):
         if not silent:
-            print_llm(msg)
+            print(f"{agent_color}{Colors.BOLD}[LLM - {agent_name}]{Colors.RESET} {msg}")
     def log_error(msg):
-        if not silent:
-            print_error(msg)
+        # Always print errors so failures in background threads are visible
+        print_error(f"[Agent - {agent_name}] {msg}")
     
     # 1. Initialize History with instructions & user query
     history: List[Message] = [
@@ -141,6 +145,7 @@ def run_agent_loop(
 
     # 2. Loop Execution
     turn = 0
+    response = None
     final_response = ""
     execution_trace: List[Dict[str, Any]] = []
     
@@ -247,7 +252,7 @@ def run_agent_loop(
 
     # Only trigger warning if maximum turns were exceeded AND the model wanted to call more tools.
     # If it completed without requesting tools, it successfully compiled its output.
-    if turn >= max_turns and response.tool_calls:
+    if response and turn >= max_turns and response.tool_calls:
         print_error(f"Reached maximum iteration limit. Forcing final synthesis turn for query: '{prompt[:60]}...'")
         history.append(Message(
             role="user",
@@ -371,7 +376,8 @@ def main():
             phase1_prompt = f"Please collect aggregate budget data for the subject: '{subject}'."
             phase1_ans, trace_p1 = run_agent_loop(
                 provider, mcp_client, tools, phase1_prompt, skill_p1,
-                max_turns=6, trace_path=trace_path, silent=False
+                max_turns=6, trace_path=trace_path, silent=False,
+                agent_name="Budget", agent_color=Colors.CYAN
             )
             combined_trace.extend(trace_p1)
             _flush_trace(trace_path, combined_trace)
@@ -389,10 +395,15 @@ def main():
                     f"Please collect procurement contracts and supplier aggregate totals for the subject: '{subject}'.\n"
                     f"Here is the budget items data collected in Step 1:\n{phase1_ans}"
                 )
-                return run_agent_loop(
-                    local_provider, mcp_client, tools, phase2_prompt, skill_p2,
-                    max_turns=6, trace_path=None, silent=True
-                )
+                local_mcp = setup_mcp(args.mcp_url)
+                try:
+                    return run_agent_loop(
+                        local_provider, local_mcp, tools, phase2_prompt, skill_p2,
+                        max_turns=6, trace_path=None, silent=False,
+                        agent_name="Contracts", agent_color=Colors.MAGENTA
+                    )
+                finally:
+                    local_mcp.close()
 
             def run_decisions():
                 print_agent("  - Initiating Government Decisions Analysis (Thread 2)")
@@ -403,10 +414,15 @@ def main():
                     f"Please query and extract government decisions related to the subject: '{subject}'.\n"
                     f"Here is the budget items data collected in Step 1:\n{phase1_ans}"
                 )
-                return run_agent_loop(
-                    local_provider, mcp_client, tools, phase3_prompt, skill_p3,
-                    max_turns=6, trace_path=None, silent=True
-                )
+                local_mcp = setup_mcp(args.mcp_url)
+                try:
+                    return run_agent_loop(
+                        local_provider, local_mcp, tools, phase3_prompt, skill_p3,
+                        max_turns=6, trace_path=None, silent=False,
+                        agent_name="Decisions", agent_color=Colors.YELLOW
+                    )
+                finally:
+                    local_mcp.close()
 
             print_agent("Firing research threads (Contracts & Decisions) concurrently...")
             with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
@@ -439,7 +455,8 @@ def main():
                 f"--- PHASE 3 DATA (GOVERNMENT DECISIONS) ---\n{phase3_ans}"
             )
             final_ans, trace_p4 = run_agent_loop(
-                provider, mcp_client, tools, phase4_prompt, skill_p4, max_turns=1, trace_path=trace_path
+                provider, mcp_client, tools, phase4_prompt, skill_p4, max_turns=1, trace_path=trace_path,
+                agent_name="Synthesis", agent_color=Colors.BLUE
             )
             combined_trace.extend(trace_p4)
             _flush_trace(trace_path, combined_trace)

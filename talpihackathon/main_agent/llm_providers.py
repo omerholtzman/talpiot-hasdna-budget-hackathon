@@ -90,7 +90,7 @@ class GeminiStudioProvider(LLMProvider):
         max_retries = 5
         backoff = 4
         for attempt in range(max_retries):
-            resp = requests.post(url, json=payload, headers=headers)
+            resp = requests.post(url, json=payload, headers=headers, timeout=120)
             if resp.status_code == 200:
                 break
             if resp.status_code in [429, 502, 503, 504] and attempt < max_retries - 1:
@@ -181,7 +181,7 @@ class AnthropicProvider(LLMProvider):
         if claude_tools:
             payload["tools"] = claude_tools
 
-        resp = requests.post(url, json=payload, headers=headers)
+        resp = requests.post(url, json=payload, headers=headers, timeout=120)
         if resp.status_code != 200:
             raise RuntimeError(f"Anthropic API returned error {resp.status_code}: {resp.text}")
 
@@ -287,7 +287,7 @@ class VertexAIProvider(LLMProvider):
         max_retries = 5
         backoff = 4
         for attempt in range(max_retries):
-            resp = requests.post(url, json=payload, headers=headers)
+            resp = requests.post(url, json=payload, headers=headers, timeout=120)
             if resp.status_code == 200:
                 break
             if resp.status_code in [429, 502, 503, 504] and attempt < max_retries - 1:

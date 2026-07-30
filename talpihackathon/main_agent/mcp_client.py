@@ -27,7 +27,7 @@ class MCPClient:
         # 1. Handshake to get Mcp-Session-Id
         # Note: The server may return 406 Not Acceptable since this handshake GET does not request
         # text/event-stream, but it still generates and returns the session ID in headers.
-        resp = requests.get(self.base_url)
+        resp = requests.get(self.base_url, timeout=30)
         self.session_id = resp.headers.get("Mcp-Session-Id")
         if not self.session_id:
             raise RuntimeError(f"Handshake failed: missing Mcp-Session-Id header (status {resp.status_code}): {resp.text}")
@@ -42,7 +42,7 @@ class MCPClient:
             "Mcp-Session-Id": self.session_id
         }
         try:
-            with requests.get(self.base_url, headers=headers, stream=True) as r:
+            with requests.get(self.base_url, headers=headers, stream=True, timeout=30) as r:
                 r.raise_for_status()
                 for line in r.iter_lines():
                     if self.close_event.is_set():
@@ -59,7 +59,7 @@ class MCPClient:
             "Accept": "application/json, text/event-stream",
             "Mcp-Session-Id": self.session_id
         }
-        resp = requests.post(self.base_url, json=payload, headers=headers)
+        resp = requests.post(self.base_url, json=payload, headers=headers, timeout=60)
         if resp.status_code != 200:
             raise RuntimeError(f"POST request failed with status {resp.status_code}: {resp.text}")
 
@@ -102,7 +102,7 @@ class MCPClient:
             "Mcp-Session-Id": self.session_id
         }
         try:
-            requests.post(self.base_url, json=initialized_notification, headers=headers)
+            requests.post(self.base_url, json=initialized_notification, headers=headers, timeout=10)
         except Exception:
             pass
 
