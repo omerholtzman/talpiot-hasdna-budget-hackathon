@@ -3,6 +3,8 @@ import sys
 import argparse
 import uuid
 import json
+import re
+from datetime import datetime
 from typing import List, Optional, Any
 from mcp_client import MCPClient
 from llm_providers import (
@@ -42,6 +44,22 @@ def print_llm(text: str):
 
 def print_error(text: str):
     print(f"{Colors.RED}{Colors.BOLD}[Error]{Colors.RESET} {fix_bidi(text)}", file=sys.stderr)
+def get_default_output_path(subject: Optional[str], prompt: Optional[str]) -> str:
+    """Generates a default output path under /tmp with subject-timestamp or prompt-timestamp."""
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    if subject:
+        # Normalize/clean subject slug
+        slug = re.sub(r'[^\w\-_]', '_', subject)
+        filename = f"{slug}-{timestamp}.md"
+    elif prompt:
+        # Use first 3 words of prompt or 'prompt'
+        words = [w for w in re.sub(r'[^\w\s]', '', prompt).split() if w][:3]
+        slug = "_".join(words) if words else "prompt"
+        filename = f"{slug}-{timestamp}.md"
+    else:
+        filename = f"report-{timestamp}.md"
+    return os.path.join("/tmp", filename)
+
 
 
 def load_system_instruction(file_path: str) -> str:
@@ -184,6 +202,8 @@ def main():
                         help="Model name override")
     parser.add_argument("--mcp-url", type=str, default="https://next.obudget.org/mcp",
                         help="BudgetKey MCP server URL")
+    parser.add_argument("--output", "-o", type=str, default=None,
+                        help="Output Markdown file path (defaults to /tmp/<subject>-<timestamp>.md)")
     parser.add_argument("--list-tools", action="store_true",
                         help="List all available tools from the MCP server and exit")
     args = parser.parse_args()
@@ -211,6 +231,11 @@ def main():
             print_error(f"Failed to load subject prompt template from {subject_prompt_path}: {e}")
             sys.exit(1)
 
+    # Determine output path
+    output_path = args.output
+    if not output_path and not args.list_tools:
+        output_path = get_default_output_path(args.subject, args.prompt)
+
     # Initialize MCP Client
     try:
         mcp_client = setup_mcp(args.mcp_url)
@@ -236,7 +261,19 @@ def main():
             sys.exit(1)
 
         # Run autonomous loop
-        run_agent_loop(provider, mcp_client, tools, prompt_text, system_instruction)
+        final_ans = run_agent_loop(provider, mcp_client, tools, prompt_text, system_instruction)
+
+        # Save output to Markdown file
+        if final_ans and output_path:
+            parent_dir = os.path.dirname(output_path)
+            if parent_dir:
+                os.makedirs(parent_dir, exist_ok=True)
+            try:
+                with open(output_path, "w", encoding="utf-8") as f:
+                    f.write(final_ans)
+                print_agent(f"Saved final markdown response to: {output_path}")
+            except Exception as e:
+                print_error(f"Failed to save output to {output_path}: {e}")
 
     finally:
         print_agent("Closing MCP connection...")
