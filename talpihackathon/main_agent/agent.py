@@ -192,6 +192,9 @@ def run_agent_loop(
 
         # Action execution phase
         log_agent(f"Model requested {len(response.tool_calls)} tool call(s):")
+        # The payload is identical for every call in a turn (it is the request that produced
+        # them all), so record it only once per turn instead of once per call.
+        turn_payload = getattr(provider, "last_payload", None)
         for tc in response.tool_calls:
             name = tc["name"]
             args_data = tc["arguments"]
@@ -219,8 +222,9 @@ def run_agent_loop(
                     "arguments": args_data,
                     "reasoning": response.content or "",
                     "output": tool_output,
-                    "raw_payload": getattr(provider, "last_payload", None)
+                    "raw_payload": turn_payload
                 })
+                turn_payload = None
                 _flush_trace(trace_path, execution_trace)
                 
                 # Feed output back to history
@@ -239,8 +243,9 @@ def run_agent_loop(
                     "arguments": args_data,
                     "reasoning": response.content or "",
                     "output": f"Error: {e}",
-                    "raw_payload": getattr(provider, "last_payload", None)
+                    "raw_payload": turn_payload
                 })
+                turn_payload = None
                 _flush_trace(trace_path, execution_trace)
 
                 history.append(Message(
