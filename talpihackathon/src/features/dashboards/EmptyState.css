@@ -1,0 +1,16 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 100svh;
+  padding: 20px;
+  text-align: center;
+  color: var(--text);
+}
+
+.empty-state h1 {
+  margin: 0;
+  font-size: 28px;
+}

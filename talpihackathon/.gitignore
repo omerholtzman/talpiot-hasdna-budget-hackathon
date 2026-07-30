@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Generated dashboards: track only the seed samples, ignore future script output
+content/*
+!content/overview.md
+!content/getting-started.md
+!content/reports/
+!content/reports/q1-metrics.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
