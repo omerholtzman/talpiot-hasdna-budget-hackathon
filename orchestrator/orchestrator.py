@@ -33,12 +33,14 @@ for _stream in (sys.stdout, sys.stderr):
     except Exception:
         pass
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+CURR_DIR = os.path.dirname(os.path.abspath(__file__))
+one_level_up = os.path.dirname(CURR_DIR)
+SCRIPT_DIR = os.path.join(one_level_up, "langgraph-module")
 MAIN_PATH = os.path.join(SCRIPT_DIR, "main.py")
-DEFAULT_CONFIG_PATH = os.path.join(SCRIPT_DIR, "orchestrator-config.json")
-DEFAULT_STATE_PATH = os.path.join(SCRIPT_DIR, "orchestrator-state.json")
+DEFAULT_CONFIG_PATH = os.path.join(CURR_DIR, "orchestrator-config.json")
+DEFAULT_STATE_PATH = os.path.join(CURR_DIR, "orchestrator-state.json")
 DEFAULT_REPORTS_DIR = os.path.join(SCRIPT_DIR, "reports")  # matches config.py's OUTPUT_DIR
-DEFAULT_TIMEOUT_SECONDS = 1200
+DEFAULT_TIMEOUT_SECONDS = 400  # 8 minutes 
 
 
 def slugify(subject: str) -> str:
@@ -184,7 +186,6 @@ def run_subject(
     os.makedirs(run_dir, exist_ok=True)
 
     cmd = [sys.executable, MAIN_PATH, subject, "--slug", slug]
-
     # main.py has no --model/--mcp-url flags of its own; config.py reads these from
     # the environment, so that's the only way an orchestrator run can override them.
     env = os.environ.copy()
