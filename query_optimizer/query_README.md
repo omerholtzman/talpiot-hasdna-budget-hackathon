@@ -14,6 +14,14 @@ about BudgetKey / OpenBudget data into saved, reproducible query specs.
 - `query_run.sh`: runs a saved query spec against `https://next.obudget.org/mcp`.
 - `queries/*.json`: saved query specs.
 
+### Python re-implementation
+Both are equivalent:
+```bash
+./query_optimizer/query_run.sh query_optimizer/queries/top_city_budgets.json
+cd langgraph-module
+python3 -m agent_engineering.query_run ../query_optimizer/queries/top_city_budgets.json
+```
+
 ## Generate A Query
 
 Example:

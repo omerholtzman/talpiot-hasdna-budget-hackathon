@@ -98,6 +98,7 @@ plus `possible_misses` are what a reviewer uses to catch false negatives.
 | `prompt_loader.py` | Reads `prompts/*.md` and fills in `{TODAY}` / `{MODEL}` / the pipeline's fields |
 | `mcp_tools.py` | Connects to the obudget MCP server; exposes its tools to LangChain, and to the pipeline's synchronous code via `SyncMCPBridge` |
 | `budget_api.py` | Paging, warning-aware SQL layer over the MCP — the model-free half of phase 1 |
+| `query_run.py` | Runs saved `query_optimizer` JSON query specs through MCP without a model |
 | `budget_reference.py` | Checked-in office list, functional classes, ordinary↔development pairs |
 | `pipeline.py` | The deterministic phase-1 pipeline, plus the digest and hierarchy renderers |
 | `llm_json.py` | Schema-constrained one-shot JSON calls, for the pipeline's classification steps |
