@@ -1,0 +1,675 @@
+﻿code,title,economic_class,reason
+04.01.11.01,שיא כח אדם,שכר,Personnel cap row.
+04.01.11.15,השתתפות גורמי חוץ,הכנסות מיועדות,Earmarked revenue.
+04.01.11.21,השתתפות במשרד לאיכות הסביבה - פרויקט פארק איילון,העברות  פנים תקציביות,"Environmental protection, internal budgetary transfer."
+04.01.11.32,רזרבה לעמידה ביעד ההוצאה - חגיגות 60 למדינה,קניות,Reserve for meeting expenditure target.
+04.01.11.44,השתתפות ברשות הטבע והגנים,העברות  פנים תקציביות,"Environmental protection, internal budgetary transfer."
+04.01.11.50,השתתפות ברשות הטבע והגנים,העברות  פנים תקציביות,"Environmental protection, internal budgetary transfer."
+04.01.11.51,השתתפות המשרד להגנת הסביבה,העברות  פנים תקציביות,"Environmental protection, internal budgetary transfer."
+04.01.11.55,מכירת שירותים למשרדי הממשלה,העברות  פנים תקציביות,Internal budgetary transfer account.
+04.01.11.56,רכישת שירותים ממשרדי הממשלה,העברות  פנים תקציביות,Internal budgetary transfer account.
+04.01.11.57,רזרבה להשתתפות בסעיף 54,קניות,Reserve for participation.
+04.01.11.95,רזרבה להתייקרויות כללית,רזרבות,General price increase reserve.
+04.01.12.07,רזרבה לתחזוקת הכותל,קניות,Reserve for Western Wall maintenance.
+04.01.12.09,רזרבה לעמידה ביעד ההוצאה,קניות,Reserve for meeting expenditure target.
+04.01.12.17,השתתפות מנהל מקרקעי ישראל - פיתוח מנהרות הכותל,הכנסות מיועדות,Earmarked revenue.
+04.01.12.27,רזרבה לפרויקטים,קניות,Reserve for projects.
+04.01.12.29,השתתפות מינהל מקרקעי ישראל - פיתוח שער המוגרבים,הכנסות מיועדות,Earmarked revenue.
+04.01.12.31,רזרבה להשתתפויות,קניות,Reserve for participations.
+04.01.12.32,השתתפות משרד ראש הממשלה,העברות  פנים תקציביות,Internal budgetary transfer account.
+04.01.12.60,רזרבה להתשתתפויות,קניות,Reserve for participations.
+04.01.12.62,רזרבה לפעולות המשרד,קניות,Reserve for Ministry activities.
+04.01.12.63,מרכזי צעירים,העברות,Internal budgetary transfer account.
+04.01.12.95,רזרבה להתייקוריות כללית,רזרבות,General price increase reserve.
+04.01.19.01,שיא כח אדם,שכר,Personnel cap row.
+04.01.19.11,הכנסות ממכירת מכרזים,הכנסות מיועדות,Earmarked revenue.
+04.01.19.12,הכנסות ממכירת מכרזים,הכנסות מיועדות,Earmarked revenue.
+04.01.19.19,הכנסה מההסתדרות הציונית,הכנסות מיועדות,Earmarked revenue.
+04.01.19.34,שכר דירה,העברות  פנים תקציביות,Internal budgetary transfer account.
+04.01.19.35,שיא כח אדם,שכר,Personnel cap row.
+04.01.19.39,עובדים לא משובצים - שיא כח אדם,שכר,Personnel cap row.
+04.01.19.42,שכר דירה,העברות  פנים תקציביות,Internal budgetary transfer account.
+04.01.19.45,אחזקת רכב ממשלתי,העברות  פנים תקציביות,Internal budgetary transfer account.
+04.01.19.54,השתתפות נציבות שירות המדינה בתחזוקה,העברות  פנים תקציביות,Internal budgetary transfer account.
+04.01.19.55,הכנסות מתפעול,הכנסות מיועדות,Earmarked revenue.
+04.51.10.12,השתתפות במשרדי הממשלה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+04.51.10.16,תכנית פיתוח יישובים בדואים בצפון,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+04.51.10.60,השתתפות משרדי הממשלה בפרויקטים,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+04.51.10.61,הכנסות מגורמי חוץ,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+04.51.10.62,השתתפות במשרד הביטחון - פרוייקט מרינה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+04.70.01.01,רזרבה להתיקרויות שכר,שכר,"General reserve, not specific to subject."
+04.70.01.02,רזרבה ליעדים פיסקליים,קניות,"General reserve, not specific to subject."
+04.70.01.03,רזרבה להתיקרויות העברות,העברות,"General reserve, not specific to subject."
+04.70.01.10,רזרבה לפעולות בסעיף 04,קניות,"General reserve, not specific to subject."
+04.70.01.11,איוש שיא כח אדם ללא ביצוע,שכר,"Personnel cap item, not actual spending."
+04.70.01.12,איוש חודשי עבודה ללא ביצוע,שכר,"Personnel cap item, not actual spending."
+04.70.01.13,"איוש שיא כוח אדם בחו""ל ללא ביצוע",שכר,"Personnel cap item, not actual spending."
+04.70.01.14,עתודה להסכם קואליציוני 2019,קניות,"General reserve, not specific to subject."
+04.70.01.15,חרבות ברזל,קניות,"General reserve, not specific to subject."
+04.99.99.99,חשבון מעבר,חשבונות מעבר,"Clearing account, not actual spending."
+05.01.01.01,שיא כח אדם,שכר,"Personnel cap item, not actual spending."
+05.01.01.19,"השתתפות מטה חשכ""ל בביקורת",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.26,העסקת מתמחים,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.30,"השתתפות משרד התמ""ת",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.34,השתתפות משרד התיירות,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.67,"השתתפות מ""ה",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.68,"השתתפות מ""ה",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.70,"רזרבת מנכ""ל",קניות,"General reserve, not specific to subject."
+05.01.01.76,השתתפות רשות המיסים,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.81,הכנסות מגורמי חוץ,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.01.82,השתתפות משרד החינוך,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.83,השתתפות במשרד הפנים,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.84,השתתפות משרדי ממשלה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.85,"שיא כח אדם - לשכת סמנכ""ל",שכר,"Personnel cap item, not actual spending."
+05.01.01.86,רזרבת מנכל לכא,שכר,"General reserve, not specific to subject."
+05.01.01.91,"טיפול בשליחי מ""ה",העברות,"General transfer, not specific to subject."
+05.01.01.92,"השתתפות מ""ה",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.01.95,רזרבה להתיקרויות כללית,רזרבות,"General reserve, not specific to subject."
+05.01.01.99,רזרבה,קניות,"General reserve, not specific to subject."
+05.01.02.05,הכנסות מעובדים,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.02.09,הכנסה מעובדים לפעולות רווחה,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.02.13,השתתפות הלשכה לשקום נכים,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.14,השתתפות חטיבה להתיישבות,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.15,השתתפות נציבות מס הכנסה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.16,הכנסה מגורמי חוץ,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.02.18,רזרבה להוצאות רכב,שכר,"General reserve, not specific to subject."
+05.01.02.19,אחזקת רכב ממשלתי,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.23,הכנסות מגורמי חוץ (פאלפון),הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.02.24,שכר דירה מוזיאון מיסים,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.28,שכר דירה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.31,הכנסות והשתתפות עובדים בשכר לימוד,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.02.32,השתתפות במרכז ההסברה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.34,השתתפות מנהל הרכב בתפעול,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.36,השתתפות לשכת הפירסום בתפעול,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.02.38,"השתתפות מסעיף השקעות שונות - תפעול מרכבה ו""להבה""",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.44,השתתפות באבטחת שר האוצר,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.46,השתתפות משרדי הממשלה בהדרכה במשרד האוצר,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.48,השתתפות משרדי הממשלה במכרז אבטחה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.49,השתתפות במשרד הבטחון -טלפוניה מסווגת,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.50,הכנסות מגורמי חוץ,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.02.51,השתתפות משרד הקליטה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.52,השתתפות משרד הרווחה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.55,השתתפות מנהל הגמלאות בתפעול ואחזקה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.62,"השתתפות שע""מ בתפעול",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.63,"השתתפות שע""מ בתפעול",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.64,השתתפות המזנון באחזקה,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.02.65,השתתפות במשרד ראש הממשלה,העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.66,"אחזקת בנין רוה""מ",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.80,"השת.בנש""מ",העברות  פנים תקציביות,"Internal budgetary transfer, not specific to subject."
+05.01.02.82,רזרבה להתשתתפויות,קניות,"General reserve, not specific to subject."
+05.01.02.83,רזרבה למול השתתפויות,קניות,"General reserve, not specific to subject."
+05.01.02.84,רזרבה למול השתתפויות,קניות,"General reserve, not specific to subject."
+05.01.02.92,הכנסות מגורמי חוץ,הכנסות מיועדות,"Earmarked revenue, not specific to subject."
+05.01.02.97,השתתפות באיכות הסביבה,העברות  פנים תקציביות,Participation in environmental quality is related to subject.
+05.53.01.02,רזרבה ליעדים פיסקליים,קניות,"General reserve, not specific to green energy."
+05.53.01.03,רזרבה לעמידה ביעד ההוצאה,העברות,"General reserve, not specific to green energy."
+05.53.01.05,יעודה להסכם,שכר,"General reserve, not specific to green energy."
+05.53.01.99,העברת עודפים,קניות,"General transfer of surpluses, not specific to green energy."
+05.99.99.99,חשבון מעבר,חשבונות מעבר,"Transfer account, not specific to green energy."
+26.01.01.01,שיא כח אדם,שכר,"Personnel cap, not actual spending."
+26.01.01.08,אחזקת רכב ממשלתי,העברות  פנים תקציביות,"Internal transfer for vehicle maintenance, not specific to green energy."
+26.01.01.22,השתתפות במערכות בוחן ותהילה,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.24,"השתתפות בלמ""ס",העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.27,הכנסות מהאיחוד האירופי,הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.01.01.28,"השתתפות משרד התמ""ת במכרז לעבודת ייעוץ בתחום טכנולוגית סביבה",העברות  פנים תקציביות,"Internal transfer, not actual spending."
+26.01.01.31,השתתפות משרד הקליטה,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.32,הכנסות מהאפוטרופוס להעסקת עולים,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.35,השתתפות בתקציב משרד המשפטים לצורך העסקת מתמחים,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.37,השתתפות משטרה,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.41,"השתתפות במשרד החקלאות עבור מינהלת פל""ח",העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.42,השתתפות משרד הפנים,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.47,הכנסות - מכירת חומר מקצועי ומכרזים,הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.01.01.50,השתתפות במשרד הביטחון,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.52,הכנסות מעירית ירושלים,הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.01.01.53,הכנסות מחברת הביטוח ענבל,הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.01.01.57,השתתפות משרד התשתיות,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.58,השתתפות משרד התיירות,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.59,השתתפות במשרד הפנים,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.60,"השתתפות במשרד התמ""ת",העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.61,השתתפות במשרד התיירות,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.62,"רזרבה להתייקרויות - מט""ח",רזרבות,"Reserve, not specific to green energy."
+26.01.01.72,הכנסות מפעולות הדרכה,הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.01.01.81,השתתפות בממשל זמין,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.92,הוצאה מיועדת,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.93,"השתתפות של השב""כ - החזר הוצאות אבטחת שר",העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.96,השתתפות במשרד ראש הממשלה,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.01.01.99,שיא כח אדם - רזרבה,שכר,"Personnel cap reserve, not actual spending."
+26.02.01.01,רזרבה להתיקרויות בשכר,שכר,"Reserve for salary increases, not specific to green energy."
+26.02.01.02,רזרבה להתיקרויות בקניות,קניות,"Reserve for purchase price increases, not specific to green energy."
+26.02.01.06,רזרבה להתיקרויות תשלומי העברה,העברות,"Reserve for transfer payments, not specific to green energy."
+26.02.01.08,רזרבה להתייקרויות - תמיכות במפעלי תעשייה,העברות,"Reserve for industrial support, not specific to green energy."
+26.02.01.10,רזרבה להתייקרויות - שינוע פסולת,העברות,"Reserve for waste transport, not specific to green energy."
+26.02.02.01,"רזרבה לכ""א ולפעולות",קניות,"Reserve for personnel and activities, not specific to green energy."
+26.03.02.01,"הכנסות מאירגון האו""מ לאיכות הסביבה תכנית פעולה לים התיכון",הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.03.03.12,השתתפות רשות המים,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.13,השתתפות משרד החקלאות - ירקון,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.14,השתתפות משרד הפנים - ירקון וקישון,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.15,"השתתפות ממ""י - ירקון וקישון",הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.03.03.16,"השתתפות תיירות (חמ""ת) - ירקון",העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.17,"השתתפות רט""ג - ירקון",העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.18,השתתפות רשות המים - קישון,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.19,השתתפות משרד התיירות - קישון,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.20,השתתפות במשרד התירות,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.25,"השתתפות במשרד ראה""מ",העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.26,השתתפות מינהל מקרקעי ישראל בגאולת הירקון,הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.03.03.31,השתתפות המשרד לשיתוף פעולה איזורי,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.03.33,הכנסה ממנהל מקרקעי ישראל,הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.03.03.37,השתתפות רשות המים - פרוייקט בתי הבד,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.09.13,השתתפות משרד הפנים ברשות נחל הירקון,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.09.20,השתתפות נציבות המים,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.09.22,השתתפויות במשרד התשתיות,העברות  פנים תקציביות,"Internal transfer, not specific to green energy."
+26.03.09.24,הכנסה מהנציבות האירופית לפרוייקט שיקום נחלים,הכנסות מיועדות,"Earmarked revenue, not actual spending."
+26.03.09.29,רזרבה לפעולות,קניות,Reserve for activities in a relevant program.
+26.03.09.30,"לייף - נסיעות לחו""ל",קניות,Administrative travel in a relevant program.
+26.03.09.31,השתתפות משרד הקליטה,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.09.33,השתתפות נציבות המים,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.09.35,רזרבה לשיקום נחלים,קניות,Reserve for stream rehabilitation in a relevant program.
+26.03.09.36,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.09.40,השתתפות במשרד הפנים,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.09.41,הכנסה מקרן קיימת לישראל,הכנסות מיועדות,Earmarked revenue for a relevant program.
+26.03.09.42,"השתתפות ממ""י - ""גאולת הירקון""",העברות  פנים תקציביות,Internal transfer for Yarkon River rehabilitation.
+26.03.09.50,השתתפות בתשתיות,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.09.53,השתתפות משרד החקלאות בגאולת הירקון,העברות  פנים תקציביות,Internal transfer for Yarkon River rehabilitation.
+26.03.09.60,"השתתפות ברט""ג - שטחי פיזור בוצר",העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.09.71,הכנסה ממינהל מקרקעי ישראל,הכנסות מיועדות,Earmarked revenue for a relevant program.
+26.03.09.95,רזרבה להתייקרויות כללית,רזרבות,General reserve for a relevant program.
+26.03.10.03,"אחזקת רכבי/ניידות חמ""ס (10 רכבים)",העברות  פנים תקציביות,Internal transfer for hazardous materials management.
+26.03.10.16,השתתפות במשרד האנרגיה,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.11.25,השתתפות במסוף מטענים מסוכנים,העברות  פנים תקציביות,Internal transfer for hazardous cargo terminal.
+26.03.11.31,השתתפות במשרד התחבורה,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.14.21,קרינה - חודשי עבודה,שכר,Personnel costs for radiation control.
+26.03.14.22,קרינה - הכנסות מאגרות,הכנסות מיועדות,Earmarked revenue for radiation control.
+26.03.22.01,חברת כח אדם,קניות,Administrative cost for radiation control program.
+26.03.22.03,פיקוח קרינה - הכנסות מאגרות,הכנסות מיועדות,Earmarked revenue for radiation control.
+26.03.22.05,חודשי עבודה-פיקוח על הקרינה,שכר,Personnel costs for radiation control.
+26.03.22.06,חודשי עבודה-קרינה,שכר,Personnel costs for radiation control.
+26.03.22.95,רזרבה להתייקרויות כללית,רזרבות,General reserve for radiation control program.
+26.03.23.06,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.23.07,"פקע""ר - השתתפות במערך ניטור אויר",העברות  פנים תקציביות,Internal transfer for air monitoring system.
+26.03.23.08,"השתתפות ערית ירושלים במנ""א",הכנסות מיועדות,Earmarked revenue for national air monitoring.
+26.03.23.09,השתתפות במשרד התשתיות,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.23.11,"השתתפות מע""צ באיכ""ס",העברות  פנים תקציביות,Internal transfer for environmental quality.
+26.03.23.13,השתתפות במשרד התחבורה,העברות  פנים תקציביות,Internal transfer in a relevant program.
+26.03.23.15,השתתפות האיחוד האירופי,הכנסות מיועדות,Earmarked revenue for air monitoring.
+26.03.23.16,"סוטרה - נסיעות לחו""ל",קניות,Administrative travel in a relevant program.
+26.03.23.95,רזרבה להתייקריות כללית,רזרבות,General reserve for air monitoring program.
+26.03.25.95,רזרבה להתייקרויות כללית,רזרבות,General reserve for environmental quality laboratory.
+26.03.27.02,השתתפות משרד החקלאות - פרוייקטים משותפים עם המשרד,העברות  פנים תקציביות,Internal transfer for agricultural ecology projects.
+26.03.27.04,הכנסות מגורמי חוץ - פרוייקט הפחתת שימוש בחומרי הדברה,הכנסות מיועדות,Earmarked revenue for pesticide reduction project.
+26.03.27.95,רזרבה להתייקרויות כללית,רזרבות,General reserve for agricultural ecology program.
+26.03.28.10,"השתתפות קק""ל - פרוייקט שטחים פתוחים",הכנסות מיועדות,Earmarked revenue for open spaces project.
+26.03.28.11,"השתתפות חל""ט - שטחים פתוחים",הכנסות מיועדות,Earmarked revenue for open spaces.
+26.03.28.12,השתתפות משרד הפנים - פארק איילון,העברות  פנים תקציביות,Internal transfer for Ayalon Park.
+26.03.28.15,26030933 בורות ים המלח,העברות  פנים תקציביות,Internal transfer for Dead Sea sinkholes.
+26.03.28.17,השתתפות משרד הפנים - פארק איילון,העברות  פנים תקציביות,Internal transfer for Ayalon Park.
+26.03.28.19,"השתתפות משרד רוה""מ - פארק איילון",העברות  פנים תקציביות,Internal transfer for Ayalon Park.
+26.03.28.30,השתתפות במשרד החקלאות - קורס שטחים פתוחים,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.28.32,"השתתפות במשרד התמ""ת",העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.28.33,הכנסות מעירית ירושלים,הכנסות מיועדות,Earmarked revenue.
+26.03.28.37,"השתתפות משרד התעשייה, מסחר ותעסוקה",העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.28.40,השתתפות במכון הגיאולוגי,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.28.41,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.28.50,הכנסות מגורמי חוץ,הכנסות מיועדות,Earmarked revenue.
+26.03.28.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+26.03.35.02,השתתפות התאחדות התעשיינים,הכנסות מיועדות,Earmarked revenue.
+26.03.35.04,השתתפות משרד השיכון,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.35.10,הכנסות מ RAC-CP,הכנסות מיועדות,Earmarked revenue.
+26.03.35.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+26.03.36.02,השתתפות במשרד התשתיות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.36.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+26.03.38.03,השתתפות משרד השיכון,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.38.04,השתתפות משרד החקלאות - תכניות רפתות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.38.07,השתתפות נציבות המים,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.38.08,קולחין ארצי,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.38.09,השתתפות במשרד חקלאות - פרוייקטים משותפים בתחום החקלאות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.40.15,הכנסות בית ספר חומרים מסוכנים,הכנסות מיועדות,Earmarked revenue.
+26.03.40.21,"הכנסה תע""ש",הכנסות מיועדות,Earmarked revenue.
+26.03.40.22,הכנסה מינהל מקרקעי ישראל,הכנסות מיועדות,Earmarked revenue.
+26.03.40.23,הכנסה עירית ירושלים,הכנסות מיועדות,Earmarked revenue.
+26.03.40.24,השתתפות משרד התשתיות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.40.25,השתתפות במשרד הביטחון,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.40.27,השתתפות משרד התשתיות הלאומיות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.40.42,קרינה - הכנסות מאגרות,הכנסות מיועדות,Earmarked revenue.
+26.03.40.72,השתתפות בלשכה מרכזית לסטטיסטיקה,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.40.91,השתתפות במשרד התחבורה - פרוייקט גריטת רכבים,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.11,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.12,"השתתפות ברט""ג - מוקד מידע",העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.14,השתתפות משרד החינוך,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.16,השתתפות משרד התיירות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.20,"השתתפות משהב""ט",העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.21,השתתפות במנהל אזרחי עבור תגבור מערך החומרים המסוכנים במעברי הגבול,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.22,השתתפות משרד התחבורה,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.25,"השתתפות במשרד המדע, התרבות והספורט",העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.28,"השתתפות בות""ת",העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.31,השתתפות משרד האוצר,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.33,רכישת שירותים ממשרדי הממשלה,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.34,מכירת שירותים למשרדי הממשלה,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.03.41.35,הכנסה ממינהל מקרקעי ישראל,הכנסות מיועדות,Earmarked revenue.
+26.05.01.06,השתתפות משרד התיירות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.05.01.11,הכנסות לטיפול בפסולת בניין,הכנסות מיועדות,Earmarked revenue.
+26.05.01.12,השתתפות משרד החקלאות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.05.01.20,השתתפות משרד השיכון,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.05.01.27,השתתפות משרד הפנים,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.05.01.30,השתתפות במשרד הפנים,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.05.01.60,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.05.01.61,הכנסה ממינהל מקרקעי ישראל,הכנסות מיועדות,Earmarked revenue.
+26.05.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+26.05.03.04,השתתפות משרד הפנים,העברות  פנים תקציביות,Inter-budgetary transfer.
+26.05.04.02,קרן הנקיון הכנסות,הכנסות מיועדות,Earmarked revenue.
+26.05.04.13,הכנסות בגין קנסות חוק הפיקדון,הכנסות מיועדות,Earmarked revenue.
+26.05.04.30,הכנסות מהיטל ההטמנה לקרן הניקיון,הכנסות מיועדות,Earmarked revenue for cleanliness fund.
+26.05.04.31,שיא כוח אדם - היטל ההטמנה במסגרת קרן הניקיון,שכר,Personnel cap for cleanliness fund.
+26.05.04.39,"השתתפות בות""ת",העברות  פנים תקציביות,Internal transfer for cleanliness fund.
+26.05.04.40,השתתפות במשרד החינוך,העברות  פנים תקציביות,Internal transfer for cleanliness fund.
+26.05.04.63,השתתפות במשרד החינוך,העברות  פנים תקציביות,Internal transfer for cleanliness fund.
+26.05.04.64,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Internal transfer for cleanliness fund.
+26.05.04.66,השתתפות במשרד הביטחון - מיחזור,העברות  פנים תקציביות,"Internal transfer for recycling, which is relevant."
+26.05.04.74,השתתפות בממשל זמין,העברות  פנים תקציביות,Internal transfer for cleanliness fund.
+26.05.04.82,הכנסות מגורמי חוץ-אסבסט גליל מערבי,הכנסות מיועדות,Earmarked revenue for asbestos treatment.
+26.05.04.90,"הכנסות היטל הטמנה מתחומי איו""ש",הכנסות מיועדות,Earmarked revenue for landfill levy.
+26.05.05.01,הכנסות חשבון כללי,הכנסות מיועדות,Earmarked revenue for cleanliness fund.
+26.05.05.08,הכנסה ממנהל מקרקעי ישראל,הכנסות מיועדות,Earmarked revenue for cleanliness fund.
+26.05.05.10,שיא כוח אדם-חשבון כללי קרן הניקיון,שכר,Personnel cap for cleanliness fund.
+26.05.06.01,הכנסות חשבון הפקדון,הכנסות מיועדות,Earmarked revenue for deposit account.
+26.05.10.05,השתתפות ברשות הטבע והגנים,העברות  פנים תקציביות,Internal transfer for solid waste program.
+26.05.10.06,"העברה לרט""ג מחזור מיכלי משקה",העברות  פנים תקציביות,Internal transfer for beverage container recycling.
+26.05.10.11,השתתפות במשרד התשתיות,העברות  פנים תקציביות,Internal transfer for solid waste program.
+26.05.10.12,השתתפות משרד הפנים,העברות  פנים תקציביות,Internal transfer for solid waste program.
+26.05.10.13,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Internal transfer for solid waste program.
+26.05.10.14,השתתפות במשרד לבטחון פנים,העברות  פנים תקציביות,Internal transfer for solid waste program.
+26.05.10.30,רזרבה לתמיכה במחזור,קניות,Reserve for recycling support.
+26.05.10.95,רזרבה להתייקרויות כללית,רזרבות,General inflation reserve.
+26.07.01.06,"תשתיות משרפת חומ""ס - הכנסות",הכנסות מיועדות,Earmarked revenue for hazardous waste incinerator.
+26.07.01.08,השתתפות במשרד החקלאות טיפול בתשטיפי - רפתות,העברות  פנים תקציביות,"Internal transfer for dairy effluent treatment, environmental protection."
+26.07.01.95,רזרבה להתייקרויות כללית,רזרבות,General inflation reserve.
+26.09.01.01,"הכנסות מאירגון האו""מ לאיכות הסביבה - תוכנית פעולה בים התיכון",הכנסות מיועדות,Earmarked revenue for UN environmental action plan.
+26.09.02.02,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Internal transfer for international conventions program.
+26.09.02.03,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Internal transfer for international conventions program.
+26.09.02.95,רזרבה להתייקרויות כללית,רזרבות,General inflation reserve.
+26.09.03.02,"הכנסות מאונ""פ (unep)",הכנסות מיועדות,Earmarked revenue from UN Environment Programme.
+26.09.03.95,רזרבה להתייקרויות כללית,רזרבות,General inflation reserve.
+26.10.01.95,רזרבה להתייקרויות כללית,רזרבות,General inflation reserve.
+26.10.02.06,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Internal transfer for grants to local authorities program.
+26.10.02.08,השתתפות משרד הפנים נקיון סובב כנרת,העברות  פנים תקציביות,Internal transfer for Kinneret cleanliness.
+26.10.02.10,השתתפות בסעיף 54 - רשות הטבע והגנים,העברות  פנים תקציביות,Internal transfer for grants to local authorities program.
+26.10.02.95,רזרבה להתייקרויות כללית,רזרבות,General inflation reserve.
+26.10.04.04,השתתפות בתקציב הוצאות אזרחיות,העברות  פנים תקציביות,Internal transfer for projects program.
+26.12.01.02,השתתפות במשרדי ממשלה,העברות  פנים תקציביות,Internal transfer for ministry unit activities program.
+26.12.01.27,הכנסות מגורמי חוץ לפעולות מקצועיות,הכנסות  מיועדות,Earmarked revenue for professional activities.
+26.12.01.29,הכנסות מצוק חופי מרשות מקרקעי ישראל,הכנסות  מיועדות,Earmarked revenue for coastal cliff project.
+26.12.01.33,הכנסות מהאפוטרופוס הכללי,הכנסות  מיועדות,Earmarked revenue for ministry unit activities.
+26.12.01.36,השתתפות במשרדי ממשלה,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+26.12.01.43,"הכנסות מקק""ל",הכנסות מיועדות,Earmarked revenue is related but not direct spending.
+26.12.01.99,רזרבה לתקציב התאמות  2019,קניות,Budget reserve is related but not direct spending.
+26.13.01.01,שיא כח אדם,שכר,Personnel cap is related but not direct spending.
+26.13.01.05,הכנסות,הכנסות  מיועדות,Earmarked revenue is related but not direct spending.
+26.13.01.09,הכנסות מאזור יהודה ושומרון,הכנסות  מיועדות,Earmarked revenue is related but not direct spending.
+26.13.01.15,הכנסות מגורמי חוץ לקרן הנקיון (היטל ההטמנה),הכנסות מיועדות,Earmarked revenue is related but not direct spending.
+26.13.02.01,שיא כח אדם,שכר,Personnel cap is related but not direct spending.
+26.13.02.06,הכנסות,הכנסות  מיועדות,Earmarked revenue is related but not direct spending.
+26.13.02.09,הכנסות מהיטל שקיות,הכנסות  מיועדות,Earmarked revenue is related but not direct spending.
+26.13.03.01,הכנסות,הכנסות  מיועדות,Earmarked revenue is related but not direct spending.
+26.13.04.01,שיא כח אדם,שכר,Personnel cap is related but not direct spending.
+26.13.04.07,הכנסות,הכנסות  מיועדות,Earmarked revenue is related but not direct spending.
+26.13.04.10,השתתפות במנהל הדיור הממשלתי,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+26.13.04.13,הכנסות צער בעלי חיים,הכנסות  מיועדות,"Earmarked revenue, program is kept, but animal welfare is not core."
+26.14.01.01,"הכנסות קק""ל",הכנסות מיועדות,Earmarked revenue is related but not direct spending.
+26.14.01.04,"השתתפות במשרדי ממשלה מתקציב קק""ל",העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+26.26.01.01,רזרבה ליעדים פיסקליים,קניות,Budget reserve is related but not direct spending.
+26.26.01.02,רזרבה להתיקרויות שכר,שכר,Budget reserve is related but not direct spending.
+26.26.01.03,רזרבה להתייקרויות העברו,העברות,Budget reserve is related but not direct spending.
+26.98.01.01,רזרבה להתייקרויות בשכר,שכר,Budget reserve is related but not direct spending.
+26.98.01.02,רזרבה להתייקרויות קניות,קניות,Budget reserve is related but not direct spending.
+26.98.01.03,רזרבה להתייקרויות - תשלומי העברה,העברות,Budget reserve is related but not direct spending.
+26.98.01.04,רזרבה להתייקרויות - תמיכות במפעלים,העברות,Budget reserve is related but not direct spending.
+26.98.01.05,רזרבה להתייקרויות - שינוע פסולת והטמנתה,העברות,Budget reserve is related but not direct spending.
+26.98.01.06,"רזרבה להתיקרויות - הוצאות מט""ח",שכר,Budget reserve is related but not direct spending.
+26.98.01.07,רזרבה לעמידה ביעדי הגירעון,קניות,Budget reserve is related but not direct spending.
+26.98.01.08,רזרבה לעמידה במגבלת ההוצאה,קניות,Budget reserve is related but not direct spending.
+26.98.01.95,רזרבה להתייקרויות כללית,רזרבות,Budget reserve is related but not direct spending.
+26.98.02.01,רזרבה לפעולות,קניות,Budget reserve is related but not direct spending.
+26.98.02.04,רזרבת חודשי עבודה,שכר,Budget reserve is related but not direct spending.
+26.98.02.08,רזרבה להוצאות ביטחון 2006,רזרבות,Budget reserve is related but not direct spending.
+26.98.02.95,רזרבה להתייקרויות כללית,רזרבות,Budget reserve is related but not direct spending.
+26.99.99.99,חשבון מעבר,חשבונות מעבר,Clearing account is related but not direct spending.
+34.01.01.01,שיא כח אדם,שכר,Personnel cap is related but not direct spending.
+34.01.01.06,הכנסות ממנהל מקרקעי ישראל,הכנסות מיועדות,Earmarked revenue is related but not direct spending.
+34.01.01.11,ךךךך,הכנסות מיועדות,Earmarked revenue is related but not direct spending.
+34.01.01.17,רזרבה לשעות נוספות,שכר,Budget reserve is related but not direct spending.
+34.01.01.18,רזרבה לשכר עידוד,שכר,Budget reserve is related but not direct spending.
+34.01.01.95,רזרבה להתייקרויות כללית,רזרבות,Budget reserve is related but not direct spending.
+34.01.01.99,שיא כח אדם - רזרבה,שכר,Personnel cap is related but not direct spending.
+34.01.02.10,אחזקת רכב ממשלתי,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.11,"רזרבה לנסיעות לחו""ל",קניות,Budget reserve is related but not direct spending.
+34.01.02.12,השתתפות רשות הגז הטבעי,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.15,"שכר דירה בת""א",העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.16,שכר דירה שער העיר - ירושלים,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.18,שכר דירה,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.20,רזרבה לשכר דירה,קניות,Budget reserve is related but not direct spending.
+34.01.02.21,"אחזקת מערכת כ""א בנש""מ",העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.24,השתתפות ממשרדי הממשלה,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.26,השתתפות משרד המדע,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.27,השתתפות באבטחת השר,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.28,השתתפות בהוצאות רשות המים,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.29,השתתפות משרד הפנים,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.30,השתתפות במשרד להגנת הסביבה,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.31,"השתתפות מרכב""ה",העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.01.02.32,הכנסות ממכירת רכב,הכנסות מיועדות,Earmarked revenue is related but not direct spending.
+34.01.02.34,הכנסות שונות מאמרכלות,הכנסות מיועדות,Earmarked revenue is related but not direct spending.
+34.01.02.52,הכנסות מגורמי חוץ,הכנסות מיועדות,Earmarked revenue is related but not direct spending.
+34.01.02.95,רזרבה להתייקרויות כללית,רזרבות,Budget reserve is related but not direct spending.
+34.01.02.96,רזרבה להתייקרויות כללית,רזרבות,Budget reserve is related but not direct spending.
+34.02.01.08,רזרבה - פיקוח יחידת המכרות,שכר,Budget reserve is related but not direct spending.
+34.02.01.09,רזרבה,שכר,Budget reserve is related but not direct spending.
+34.02.01.11,הכנסות ממכרז להתפלת מי ים,הכנסות מיועדות,Earmarked revenue is related but not direct spending.
+34.02.01.12,השתתפות נציבות המים בהכנת המכרז להתפלת מי ים,העברות  פנים תקציביות,Internal transfers are related but not direct spending.
+34.02.01.13,רזרבה ליחידת הנפט,שכר,"Budget reserve for oil unit, not green energy."
+34.02.01.16,הכנסות ממכירת מסמכי מכרזים- מישור רותם,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+34.02.01.95,רזרבה להתייקרויות כללית,רזרבות,"General reserve, not direct spending."
+34.06.03.01,שיא כח אדם,שכר,"Personnel cap, not direct spending."
+34.06.03.16,הכנסות ממכירת שרותים,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+34.06.03.17,"שיא כ""א ע""ח משרד הקליטה",שכר,"Personnel cap, not direct spending."
+34.06.03.18,השתתפות משרד הקליטה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.03.21,השתתפות משרדי ממשלה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.03.22,רזרבה למחקרים,קניות,"Reserve for research, not direct spending."
+34.06.03.23,הכנסות ממינהל מדעי האדמה,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+34.06.03.26,הכנסות מקרנות מחקר,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+34.06.03.28,השתתפות משרד המדע בקרנות מחקר,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.03.33,הכנסות מועדת היגוי לרעידות אדמה,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+34.06.03.89,השתתפות משרד לפיתוח אזורי,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.03.95,רזרבה להתייקרויות כללית,רזרבות,"General reserve, not direct spending."
+34.06.03.96,רזרבה להתייקרויות כללית,רזרבות,"General reserve, not direct spending."
+34.06.04.06,שכר דירה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.08,"אחזקת מערכת כ""א בנש""מ",העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.10,אחזקת רכב ממשלתי,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.11,השתתפות בפרוייקט תהילה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.13,השתתפות משרדי ממשלה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.14,הכנסות ממכירת שירותים לגורמי חוץ,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+34.06.04.18,השתתפות המכס,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.19,השתתפות רשות המים,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.20,השתתפות משרד הביטחון,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.21,"השתתפות מע""צ",העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.22,השתתפות משרד הביטחון,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.23,"השתתפות המשרד לאיכה""ס",העברות  פנים תקציביות,"Internal transfer, but related to environmental protection."
+34.06.04.25,"השתתפות במפ""י",העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.26,השתתפות משרד המדע,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.27,הכנסות ממינהל מדעי האדמה,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+34.06.04.28,השתתפות משרד הקליטה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.29,השתתפות משרד השיכון,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.32,השתתפות משרד התחבורה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.33,השתתפות משרד התיירות,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.34,הכנסות ממנהל מקרקעי ישר ישראל,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+34.06.04.37,רזרבה לגורמי יציבות ים המלח,העברות,"Reserve, not direct spending."
+34.06.04.40,השתתפות משרד הקליטה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.41,רכישת שירותים ממשרדי ממשלה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.42,מכירת שירותים למשרדי ממשלה,העברות  פנים תקציביות,"Internal transfer, not direct spending."
+34.06.04.95,רזרבה להתייקרויות כללית,רזרבות,"General reserve, not direct spending."
+34.06.06.01,רזרבה להתייקרויות שכר,שכר,"Salary reserve, not direct spending."
+34.06.06.03,רזרבה להתייקרויות,שכר,"Salary reserve, not direct spending."
+34.06.06.04,רזרבה לעמידה ביעד הוצאה,קניות,"General reserve, not direct spending."
+34.07.01.02,השתתפות משרד הביטחון,העברות  פנים תקציביות,"Internal transfer, but program is green-related."
+34.07.01.03,השתתפות משרד החקלאות,העברות  פנים תקציביות,"Internal transfer, but program is green-related."
+34.07.01.04,הכנסות ממינהל מקרקעי ישראל,הכנסות מיועדות,"Earmarked revenue, but program is green-related."
+34.07.01.05,הכנסות מקרן קיימת לישראל עבור סיירת הירוקה,הכנסות מיועדות,"Earmarked revenue, but program is green-related."
+34.11.01.03,"השתתפות משרד התמ""ת",העברות  פנים תקציביות,"Internal transfer, but program is green energy."
+34.11.01.08,השתתפות במשק המים,העברות  פנים תקציביות,"Internal transfer, but program is green energy."
+34.11.01.09,השתתפות בשרות המטאורולוגי,העברות  פנים תקציביות,"Internal transfer, but program is green energy."
+34.11.01.10,רזרבה לסקרים ומענקים,העברות,Reserve for surveys and grants in green energy.
+34.11.01.11,השתתפות המשרד לאיכות הסביבה,העברות  פנים תקציביות,"Internal transfer, but program is green energy."
+34.11.01.12,השתתפות במשרד התחבורה,העברות  פנים תקציביות,"Internal transfer, but program is green energy."
+34.11.01.13,השתתפות במשרד החקלאות,העברות  פנים תקציביות,"Internal transfer, but program is green energy."
+34.11.01.14,השתתפות משרד התחבורה,העברות  פנים תקציביות,"Internal transfer, but program is green energy."
+34.11.01.16,הכנסות ממכירת מחקרים,הכנסות מיועדות,"Earmarked revenue, but program is green energy."
+34.11.01.23,הכנסות למחקרים,הכנסות מיועדות,"Earmarked revenue, but program is green energy."
+34.11.01.95,רזרבה להתייקרויות כללית,רזרבות,"General reserve, but program is green energy."
+34.12.01.95,רזרבה להתייקרויות כללית,רזרבות,"General reserve, but program is energy saving."
+34.12.02.95,רזרבה להתייקרויות כללית,רזרבות,"General reserve, but program is energy saving."
+34.12.03.03,רזרבה לפעילות שימור אנרגיה,קניות,Reserve for energy conservation activities.
+34.12.03.12,השתתפות במשרד החינוך,העברות  פנים תקציביות,"Internal transfer, but program is energy efficiency."
+34.13.01.10,"השתתפות בלמ""ס",העברות  פנים תקציביות,"Internal transfer, not specific to subject."
+34.13.01.12,השתתפות במשרד לאיכות,העברות  פנים תקציביות,"Internal transfer, potentially related to environmental quality."
+34.13.01.13,השתתפות במשרד התחבורה,העברות  פנים תקציביות,"Internal transfer, not specific to subject."
+34.13.01.14,"השתתפות המשרד לאיכ""ס",העברות  פנים תקציביות,"Internal transfer, but related to environmental protection."
+34.13.01.15,השתתפות בתקציב משרד הפנים,העברות  פנים תקציביות,"Internal transfer, not specific to subject."
+34.13.01.17,השתתפות ביח' הביקורת,העברות  פנים תקציביות,"Internal transfer, not specific to subject."
+34.13.01.18,רזרבה לפעולות מידע,קניות,"Reserve for information activities, not direct spending."
+34.13.01.20,"השתתפות במשרד רוה""מ",העברות  פנים תקציביות,Transfer account.
+34.13.01.21,השתתפות משרד האוצר,העברות  פנים תקציביות,Transfer account.
+34.13.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+34.16.02.05,רזרבה להערכות לסיום זכיון חברת חשמל,קניות,Reserve for electricity company concession.
+34.16.03.06,שכר דירה,העברות  פנים תקציביות,Transfer account.
+34.16.03.09,אחזקת רכב ממשלתי,העברות  פנים תקציביות,Transfer account.
+34.16.04.07,רזרבה,קניות,Reserve account.
+34.16.04.09,רזרבה לייעוץ בנושא שינויים מבניים,קניות,Reserve for consulting on structural changes.
+34.16.04.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+34.16.04.96,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+34.17.01.10,רזרבה לפעילות חקר ימים,העברות,Reserve for marine research.
+34.17.01.11,רזרבה לפעולות חקלאות ימית,העברות,Reserve for aquaculture activities.
+34.17.01.14,השתתפות במשרד החקלאות,העברות  פנים תקציביות,Transfer account.
+34.17.01.17,השתתפות משרד הקליטה,העברות  פנים תקציביות,Transfer account.
+34.17.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+34.17.04.02,השתתפות משרד התיירות,העברות  פנים תקציביות,Transfer account.
+34.17.05.01,רזרבה לפעילות מחקר,קניות,Reserve for research activities.
+34.18.01.01,רזרבה להתיקרויות שכר,שכר,Reserve for salary increases.
+34.18.01.02,רזרבה להתיקרויות קניות,קניות,Reserve for purchase increases.
+34.18.01.03,רזרבה להתיקרות בפעולות,העברות,Reserve for activity increases.
+34.18.01.04,רזרבה להתיקרויות רשויות  פיתוח איזוריות,העברות,Reserve for regional development authorities.
+34.18.01.05,"רזרבה להתיקרויות הוצאות  בחו""ל",שכר,Reserve for overseas expenses.
+34.18.01.06,רזרבה לעמידה ביעדי גרעון,קניות,Reserve for deficit targets.
+34.18.01.07,רזרבה לעמידה ביעד ההוצאה,קניות,Reserve for expenditure target.
+34.18.01.08,רזרבה להוצאות ביטחון 2006,רזרבות,Reserve account.
+34.18.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+34.22.01.09,עתודה,קניות,Contingency reserve.
+34.22.01.20,השתתפויות במינהל הרכב,העברות  פנים תקציביות,Transfer account.
+34.22.01.21,"השתתפויות בשכ""ד",העברות  פנים תקציביות,Transfer account.
+34.30.01.01,שיא כח אדם,שכר,Personnel cap.
+34.30.02.03,אחזקת רכב ממשלתי,העברות  פנים תקציביות,Transfer account.
+34.30.02.05,השתתפות באבטחת השר,העברות  פנים תקציביות,Transfer account.
+34.30.02.06,השתתפות ממשרדי הממשלה,העברות  פנים תקציביות,Transfer account.
+34.30.02.08,הכנסות מגורמי חוץ,העברות  פנים תקציביות,Transfer account.
+34.30.02.10,השתתפות במנהל הדיור הממשלתי,העברות  פנים תקציביות,Transfer account.
+34.30.02.13,השתתפות במשרדי הממשלה - תפעול,העברות  פנים תקציביות,Transfer account.
+34.30.02.14,עתודת הוצאות תפעול,קניות,Operating expenses reserve.
+34.30.02.15,הכנסות מתביעות אזרחיות יזומות,הכנסות מיועדות,Earmarked revenue.
+34.30.02.16,השתתפויות ממשרדים,העברות  פנים תקציביות,Transfer account.
+34.30.02.18,הכנסות מגורמי חוץ,הכנסות מיועדות,Earmarked revenue.
+34.30.02.21,הכנסה מגורמי חוץ,הכנסות  מיועדות,Earmarked revenue.
+34.30.03.13,הכנסות ממכירת דלקים,הכנסות מיועדות,Earmarked revenue.
+34.30.03.14,השתתפות ממשרדי הממשלה,העברות  פנים תקציביות,Transfer account.
+34.30.03.15,השתתפות במשרדי הממשלה - מקצועי,העברות  פנים תקציביות,Transfer account.
+34.30.03.22,רזרבה לתקציב התאמות  2019,קניות,Reserve for budget adjustments.
+34.30.03.33,"השתתפות בתכנית המו""פ האירופית",העברות  פנים תקציביות,Transfer account.
+34.30.03.35,השתתפויות התייעלות אנרגטית ואנרגיה נקיה - פרויקטים במשרדי ממשלה,העברות  פנים תקציביות,Transfer account for energy efficiency and clean energy.
+34.30.03.38,הפחתות - מחקרים למכון גיאולוגי,העברות  פנים תקציביות,Transfer account.
+34.30.03.40,הכנסות מפעילות אכיפה - דלקים,הכנסות  מיועדות,Earmarked revenue.
+34.30.03.41,השתתפויות במשרדי ממשלה,העברות  פנים תקציביות,Transfer account.
+34.30.03.53,הכנסה מהקרן לאזרחי ישראל,הכנסות  מיועדות,"Earmarked revenue, not direct spending."
+34.30.05.03,הכנסות ממאגר תל-ארד,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+34.32.01.01,רזרבה להתיקרויות העברות,העברות,Reserve for transfers.
+34.32.01.02,רזרבה להתיקרויות שכר,שכר,Reserve for salary increases.
+34.32.01.03,רזרבה ליעדים פיסקליים,קניות,Reserve for fiscal targets.
+34.32.01.04,רזרבה לתקציב התאמות,קניות,Reserve for budget adjustments.
+34.32.01.98,"חיא""ל הוצאה - לא לתקצוב - לצורך פעילות במרכב""ה",קניות,Reserve related item.
+34.32.01.99,"חיא""ל הכנסה - לא לתקצוב - לצורך פעילות במרכב""ה",הכנסות מיועדות,Earmarked revenue and reserve related.
+34.99.99.99,חשבון מעבר,חשבונות מעבר,Transfer account.
+38.02.01.03,גביה מזכאי קרן מחקר,הכנסות מיועדות,Earmarked revenue.
+38.02.01.04,החזרים ממקבלי מענקים,הכנסות מיועדות,Earmarked revenue.
+38.02.01.05,הכנסות מתמלוגים,הכנסות מיועדות,Earmarked revenue.
+38.02.01.10,הכנסות מהאיחוד האירופי,הכנסות מיועדות,Earmarked revenue.
+38.02.01.12,"הכשרת כ""א טכנולוגי",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.01.13,"הכשרת כ""א טכנולוגי הפחתה לקרן הניהול",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.01.21,השתתפות במשרד המדע בגין מימון ביניים למרכז לקשרים אקדמיים וחינוכיים,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.01.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve.
+38.02.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve.
+38.02.01.98,הכנסות מקרנות מחקר,הכנסות מיועדות,Earmarked revenue.
+38.02.02.04,מנהלת חממות -העברה,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.06,"השתתפות משרד הביטחון במגנ""ט",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.10,הכנסות תמלוגים מפרויקטי חממות,הכנסות מיועדות,Earmarked revenue.
+38.02.02.21,"הכנסות מתכנית ""תנופה""",הכנסות מיועדות,Earmarked revenue.
+38.02.02.23,השתתפות במשרד התשתיות עבור אנרגיה מתחדשת - ה.מ. 3954,העברות  פנים תקציביות,Internal transfer for renewable energy.
+38.02.02.28,"השתתפות משרד התמ""ס",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.29,הפחתה לתקציב מרכז,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.31,"השתתפות בות""ת- ביו בבן גוריון",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.32,"השתתפות ות""ת במו""פ אירופי",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.33,"השתתפות מדע- ישום הסכם המו""פ",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.34,"השתתפות ות""ת- ישום הסכם המו""פ",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.36,"הפחתה מתגבור תוכניות מו""פ",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.40,היי-טק קומישן - העברה לקרן הניהול,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.56,דמי חבר ב- ESRF,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.57,"השתתפות בתקציב ות""ת למימון תל""ם",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.58,השתתפות במשרד הבטחון - פרוייקט מאיץ הפרוטונים,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.60,השתתפות משרד המדע,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.63,השתתפות משרד החקלאות,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.67,הכשרת עולים,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.68,מרכז לקשרי אקדמיה עם מכינות חבר העמים,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.69,השתתפות בפרויקטים משרד הבטחון,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.70,ביקורת פרויקטים,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.74,"השתתפות בות""ת - לנושא ננו טכנולוגיה",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.77,"השתתפות בננו טכנולוגיה בות""ת",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.79,השתתפות משרד הביטחון בגלליאו,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.83,השתתפות בטחון- גליליאו,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.02.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve.
+38.02.02.95,רזרבה להתייקרויות כללית,רזרבות,Reserve.
+38.02.03.03,"השתתפות בות""ת מרכז ננו",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.03.06,"השתתפות ות""ת בביו טכנולוגיה בנגב",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.03.07,השתתפות המשרד לפיתוח הנגב והגליל בביוטכנולוגיה בנגב,העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.03.08,הכנסות מקרן השיווק,הכנסות מיועדות,Earmarked revenue.
+38.02.03.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve.
+38.02.03.95,רזרבה להתייקרויות כללית,רזרבות,Reserve.
+38.02.04.03,"השתתפות ות""ת בהוצאות גוף המטה למו""פ אירופאי",העברות  פנים תקציביות,Internal budgetary transfer.
+38.02.04.04,"השתתפות משרד התמ""ס במשרד הקישור לתוכנית המ ו""פ האירופית",העברות  פנים תקציביות,"Internal transfer, general R&D program."
+38.02.04.05,"השתתפות משרד המדע במשרד הקישור לתוכנית המו""פ האירופית",העברות  פנים תקציביות,"Internal transfer, general R&D program."
+38.02.04.07,"השתתפות משרד המדע במו""פ אירופי",העברות  פנים תקציביות,"Internal transfer, general R&D program."
+38.02.04.08,"השתתפות ות""ת במו""פ אירופי",העברות  פנים תקציביות,"Internal transfer, general R&D program."
+38.02.04.16,דמי חבר ב- ESRF,העברות  פנים תקציביות,"Internal transfer, general scientific research."
+38.02.04.21,השתתפות בטחון - גלילאו,העברות  פנים תקציביות,"Internal transfer, related to Galileo (dropped)."
+38.02.04.22,הכנסות מגלילאו,הכנסות מיועדות,"Earmarked revenue, related to Galileo (dropped)."
+38.02.04.23,"גריד - השתתפות בות""ת",העברות  פנים תקציביות,"Internal transfer, ""Grid"" too ambiguous for green energy."
+38.02.04.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve account.
+38.02.04.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+38.02.05.33,"השתתפות מדע- יישום הסכם המו""פ",העברות  פנים תקציביות,"Internal transfer, general R&D agreement."
+38.02.05.34,"השתתפות ות""ת- יישום הסכם המו""פ",העברות  פנים תקציביות,"Internal transfer, general R&D agreement."
+38.02.05.35,"השתתפות מדע- יישום הסכם המו""פ",העברות  פנים תקציביות,"Internal transfer, general R&D agreement."
+38.02.05.36,"השתתפות ות""ת- יישום הססכם המו""פ",העברות  פנים תקציביות,"Internal transfer, general R&D agreement."
+38.02.06.03,הכנסות קרן הניהול,העברות  פנים תקציביות,"Internal transfer, general technology fund."
+38.02.15.01,"רזרבה להיתיקרויות במו""פ",העברות,Reserve account.
+38.02.15.03,"רזרבה להתייקרויות - מו""פ אירופי",שכר,Reserve account.
+38.02.15.05,רזרבה להתייקרויות,העברות,Reserve account.
+38.02.15.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve account.
+38.02.15.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+38.03.01.04,השתתפות במשרד החקלאות,העברות  פנים תקציביות,"Internal transfer, general agricultural participation."
+38.03.01.05,עתודה למענקים לפי חוק,קניות,Reserve account.
+38.03.01.08,השתתפות מינהלת סלע,העברות  פנים תקציביות,"Internal transfer, general directorate."
+38.03.01.10,רזרבה למימון התחייבויות עבר,קניות,Reserve account.
+38.03.01.11,רזרבה למענק לטאואר,העברות,Reserve account.
+38.03.01.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve account.
+38.03.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+38.03.02.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+38.03.03.02,"הכנסות מפרמית סיכון - מפעלים שקבלו הלוואות עפ""י תיקון 39",הכנסות מיועדות,"Earmarked revenue, general loans."
+38.03.03.04,הכנסות מחילוט פיקדונות,הכנסות מיועדות,"Earmarked revenue, general financial."
+38.03.03.07,הכנסות מתאם לתיקון 39,הכנסות מיועדות,"Earmarked revenue, general financial."
+38.03.03.08,השתתפות בבדיקות עבור מרכז השקעות,העברות  פנים תקציביות,"Internal transfer, general investment center."
+38.03.03.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve account.
+38.03.03.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+38.03.04.07,השתתפות בבדיקה עבור מרכז ההשקעות,העברות  פנים תקציביות,"Internal transfer, general investment center."
+38.03.04.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve account.
+38.03.04.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+38.03.10.01,רזרבה להיתיקרויות מרכז השקעות,העברות,Reserve account.
+38.03.10.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve account.
+38.03.10.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+38.04.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+38.04.04.03,הפחתה מתיגבור תוכניות שיווק,העברות  פנים תקציביות,"Internal transfer, general marketing."
+38.04.04.07,הכנסות מתמלוגים,הכנסות מיועדות,"Earmarked revenue, general."
+38.04.04.08,עתודה לכלי תמיכה חדשים בפעולות שיווק,העברות,Reserve account.
+38.04.04.12,רזרבה למענקי שיווק,קניות,Reserve account.
+38.04.04.25,"עתודה לפרוייקטים בי""ל",העברות,Reserve account.
+38.04.04.34,רזרבה לסקרים,העברות,Reserve account.
+38.04.04.37,הכנסות מקרן השיווק,הכנסות מיועדות,"Earmarked revenue, general marketing."
+38.04.04.50,עתודה לתמיכות,העברות,Reserve account.
+38.04.04.52,רזרבה לקידום פעילות שיווקית,קניות,Reserve account.
+38.04.04.55,עתודה לקידום השקעות,קניות,Reserve account.
+38.04.04.60,השתתפות בתקציב השוטף בגין הוצ' ביטחון,העברות  פנים תקציביות,"Internal transfer, security expenses."
+38.04.04.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve account.
+38.04.04.95,רזרבה להייקרויות כללית,רזרבות,Reserve account.
+38.09.01.01,רזרבה למימון התקינה,העברות,Reserve account.
+38.09.01.04,הכנסות מקיזוז חוב,הכנסות מיועדות,"Earmarked revenue, general financial."
+38.09.01.05,"שכ""ד - הרשות להסמכת מעבדות",העברות  פנים תקציביות,"Internal transfer, general administrative."
+38.09.01.06,הכנסות מקרן השווק,העברות  פנים תקציביות,"Internal transfer, general marketing."
+38.09.01.15,עתודה לקרן המחקר,קניות,Reserve account.
+38.09.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve account.
+38.09.02.01,עתודה לפעילות המעבדה לפיזיקה,קניות,Reserve account.
+38.09.02.02,השתתפות בתקציב השוטף בגין העסקת עובדי המעבדה,העברות  פנים תקציביות,"Internal transfer, general administrative."
+38.09.02.03,הכנסות משרותים לתעשייה,הכנסות מיועדות,"Earmarked revenue, general services."
+38.12.01.02,הכנסות מתמלוגים,הכנסות מיועדות,"Earmarked revenue, general."
+38.12.01.40,השתתפות המשרד לאיכות הסביבה,העברות  פנים תקציביות,Environmental protection overlap; internal transfer
+38.12.01.41,הכנסה מקרן השיווק,הכנסות מיועדות,Earmarked revenue
+38.12.01.43,הכנסות מקרן השיווק,הכנסות מיועדות,Earmarked revenue
+38.12.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve
+38.12.02.08,"הפחתה מתמיכה במס""קים",העברות  פנים תקציביות,Internal transfer
+38.12.02.28,השתתפות משרד ראש הממשלה,העברות  פנים תקציביות,Internal transfer
+38.12.02.50,הכנסות מקרן השיווק,הכנסות מיועדות,Earmarked revenue
+38.12.02.71,השתתפות בתקציב תנופה,העברות  פנים תקציביות,Internal transfer
+38.12.02.72,"השתתפות בתקציב רוה""מ",העברות  פנים תקציביות,Internal transfer
+38.12.02.90,"רזרבה להתייקרויות כללי- מט""ח",רזרבות,Reserve
+38.12.02.95,רזרבה להתייקרויות כללית,רזרבות,Reserve
+38.12.03.02,הכנסות מאגרות,הכנסות מיועדות,Earmarked revenue
+38.12.03.03,הכנסות מקרן הסיוע לעסקים קטנים,הכנסות מיועדות,Earmarked revenue
+38.12.03.05,הכנסות מפרמית סיכון - עסקים קטנים,הכנסות מיועדות,Earmarked revenue
+38.12.03.95,רזרבה להתייקרויות כללית,רזרבות,Reserve
+38.13.01.01,תגבור תוכניות שיווק,העברות  פנים תקציביות,Internal transfer
+38.13.01.03,ביטוח סיכוני סחר חוץ - רוסיה,העברות  פנים תקציביות,Internal transfer
+38.13.01.05,"תמיכה במס""קים",העברות  פנים תקציביות,Internal transfer
+38.13.01.07,תמיכה בחונכות,העברות  פנים תקציביות,Internal transfer
+38.13.01.95,רזרבה להתייקרויות כללית,רזרבות,Reserve
+38.13.02.05,השתתפות משרד החינוך,העברות  פנים תקציביות,Internal transfer
+38.13.02.08,השתתפות במשרד החינוך,העברות  פנים תקציביות,Internal transfer
+38.13.02.10,השתתפות משרד העבודה והרווחה,העברות  פנים תקציביות,"Internal budgetary transfer, not direct spending."
+38.13.02.11,השתתפות מפעלים,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+38.13.03.24,אכסניית נוער בבית שאן,העברות  פנים תקציביות,"Internal budgetary transfer, not direct spending."
+38.13.03.43,השתתפות בשער הירדן,העברות  פנים תקציביות,"Internal budgetary transfer, not direct spending."
+38.13.03.46,השתתפות מתקציב משרד השיכון הפיתוח טיילת בקרית מלאכי,העברות  פנים תקציביות,"Internal budgetary transfer, not direct spending."
+38.13.03.49,השתתפות במשרד התשתיות עלי נגב,העברות  פנים תקציביות,"Internal budgetary transfer, not direct spending."
+38.13.03.50,השתתפות משרד התחבורה במנחת מצפה רמון,העברות  פנים תקציביות,"Internal budgetary transfer, not direct spending."
+38.13.03.74,השתתפות במשרד המדע - פרוייקט מיגל,העברות  פנים תקציביות,"Internal budgetary transfer, not direct spending."
+38.13.03.91,הכנסות מקרן השיווק,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+38.13.03.92,השתתפות המשרד לפיתוח הנגב והגליל,העברות  פנים תקציביות,"Internal budgetary transfer, not direct spending."
+38.20.02.95,רזרבה להתייקרויות כללית,רזרבות,"Reserve account, not direct spending."
+38.30.01.02,הכנסות מתמלוגים והחזרים,הכנסות מיועדות,"Earmarked revenue, not direct spending."
+38.30.01.04,השתתפות במשרד הבריאות,העברות  פנים תקציביות,"Internal budgetary transfer, not direct spending."
+76.01.01.06,"רזרבה להתייקרויות - מט""ח",השקעה,"General reserve, not direct spending."
+76.01.01.95,רזרבה להתייקרויות כללית,רזרבות,General reserve.
+76.01.02.02,אשראי לחברת יוזמה,מתן אשראי,"Credit provision, not direct spending."
+76.01.09.01,השתתפות במשרד הפנים - מע'אר,העברות  פנים תקציביות,Internal budgetary transfer.
+76.01.09.06,עתודה ליישום החלטה 2467,השקעה,General reserve.
+76.01.09.09,"גבית אגרות השתתפות בפיתוח תשתית תעשיתית באז""פ",הכנסות מיועדות,Earmarked revenue.
+76.01.09.12,עתודה לפיתוח אזורי תעשייה,השקעה,General reserve.
+76.01.09.15,רזרבה לפיתוח איזורי תעשיה,השקעה,General reserve.
+76.01.09.16,רזרבה לפיתוח אזורים בירושלים,השקעה,General reserve.
+76.01.09.39,רזרבה להשתתפות במסוף מטענים מסוכנים ברמת חובב,השקעה,General reserve.
+76.01.09.40,הכנסות לאיזור תעשיה קרית גת,הכנסות מיועדות,Earmarked revenue.
+76.01.09.43,השתתפות תקציב תמיכות בשער הירדן,העברות  פנים תקציביות,Internal budgetary transfer.
+76.01.09.44,הכנסות מאזור פיתוח ארז,הכנסות מיועדות,Earmarked revenue.
+76.01.09.50,השתתפות משרד השיכון - ק. מלאכי,העברות  פנים תקציביות,Internal budgetary transfer.
+76.01.09.51,"השתתפות משרד רוה""מ בפרוייקט שער הירדן",העברות  פנים תקציביות,Internal budgetary transfer.
+76.01.09.53,השתתפות במשרד התחבורה,העברות  פנים תקציביות,Internal budgetary transfer.
+76.01.09.67,השתתפות משרד ראש הממשלה,העברות  פנים תקציביות,Internal budgetary transfer.
+76.01.09.68,השתתפות משרד לפיתוח הנגב והגליל,העברות  פנים תקציביות,Internal budgetary transfer.
+76.01.09.93,הכנסות מרמת חובב,הכנסות מיועדות,Earmarked revenue.
+76.01.09.97,השתתפות במינהל האזרחי לתכנון אתר ניצני שלום,העברות  פנים תקציביות,Internal budgetary transfer.
+76.01.10.06,עתודה לפיתוח אזורי תעשייה מרחביים,השקעה,General reserve.
+76.01.15.01,הלואות להון חוזר לתעשיה,מתן אשראי,"Credit provision, not direct spending."
+76.01.15.03,עתודה להלוואות,מתן אשראי,Reserve for credit provision.
+76.01.15.18,קרן משותפת צרפת-ישראל,מתן אשראי,"Credit provision, not direct spending."
+76.01.15.19,הכנסות - קרן צרפת ישראל,הכנסות מיועדות,Earmarked revenue.
+76.01.15.20,הלוואה למפעל דימונה,מתן אשראי,"Credit provision, not direct spending."
+76.01.15.30,הלוואות למימון שכר למפעלי גיבור סברינה הפועלים תחת מפרק זמני,מתן אשראי,"Credit provision, not direct spending."
+76.01.21.01,רזרבה להתייקרויות בהשקעה עקיפה,מתן אשראי,Reserve for credit provision.
+76.01.21.03,רזרבה להתייקרויות בהשקעה ישירה,השקעה,General reserve.
+76.01.21.05,רזרבה להתייקרויות,השקעה,General reserve.
+76.01.21.06,רזרבה לעמידה ביעד הגירעון,השקעה,General reserve.
+76.01.21.07,רזרבה לעמידה ביעד הגירעון,השקעה,General reserve.
+76.01.21.08,רזרבה לעמידה ביעד ההוצאה,השקעה,General reserve.
+76.01.21.09,רזרבה להתייקרויות,השקעה,General reserve.
+76.01.21.95,רזרבה להתייקרויות כללית,רזרבות,General reserve.
+76.10.01.50,הכנסות משיווק מגרשים במימון משותף ליזם ולמינהל אזורי פיתוח,הכנסות  מיועדות,Earmarked revenue.
+76.10.01.51,הכנסות משיווק במימון מלא של היזם,הכנסות  מיועדות,Earmarked revenue.

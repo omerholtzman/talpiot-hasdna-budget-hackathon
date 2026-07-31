@@ -1,7 +1,9 @@
 import os
 import json
+import re
 import requests
 import subprocess
+import threading
 import time
 import sys
 from abc import ABC, abstractmethod
@@ -16,7 +18,122 @@ class Message:
         self.tool_response_id = tool_response_id  # Used by Claude to match tool result to call ID
         self.name = name                  # Used by Gemini to match tool name
 
+# JSON-schema support for the one-shot pipeline steps. Gemini/Vertex can constrain the
+# response natively; everything else falls back to prompting plus tolerant parsing.
+
+# generate_json() is only ever used for classification - expand, triage, judge - where
+# there is a best answer rather than a diverse one. Gemini defaults to temperature 1.0,
+# and at that setting two runs of the identical prompt disagreed on 17 items and on
+# whether the subject spanned 5 ministries or 9, which changed the run's cost 3.3x.
+JSON_TEMPERATURE = 0.0
+
+_GEMINI_SCHEMA_KEYS = {
+    "type", "format", "description", "nullable", "enum",
+    "items", "properties", "required", "minItems", "maxItems",
+}
+
+
+def sanitize_gemini_schema(schema: Any) -> Any:
+    """Strips JSON-Schema keywords the Gemini responseSchema validator rejects.
+
+    `additionalProperties`, `$schema`, `default` and friends cause a 400, so they are
+    removed rather than passed through.
+    """
+    if isinstance(schema, list):
+        return [sanitize_gemini_schema(x) for x in schema]
+    if not isinstance(schema, dict):
+        return schema
+    out = {}
+    for key, value in schema.items():
+        if key not in _GEMINI_SCHEMA_KEYS:
+            continue
+        if key == "properties" and isinstance(value, dict):
+            out[key] = {k: sanitize_gemini_schema(v) for k, v in value.items()}
+        elif key == "items":
+            out[key] = sanitize_gemini_schema(value)
+        else:
+            out[key] = value
+    return out
+
+
+def _post_json_text(url: str, payload: Dict[str, Any], headers: Dict[str, str],
+                    label: str, max_retries: int = 5) -> str:
+    """POSTs a generateContent request and returns the concatenated answer text.
+
+    Retries the transient statuses the interactive path already retries, and skips
+    parts flagged `thought` - those are reasoning summaries, not the answer, and
+    concatenating them prepends stray self-instructions to the reply.
+    """
+    backoff = 4
+    resp = None
+    for attempt in range(max_retries):
+        resp = requests.post(url, json=payload, headers=headers, timeout=180)
+        if resp.status_code == 200:
+            break
+        if resp.status_code in (429, 502, 503, 504) and attempt < max_retries - 1:
+            print(f"[Warning] {label} returned {resp.status_code}. Retrying in {backoff}s...",
+                  file=sys.stderr)
+            time.sleep(backoff)
+            backoff *= 2
+        else:
+            raise RuntimeError(f"{label} returned error {resp.status_code}: {resp.text[:500]}")
+
+    candidates = resp.json().get("candidates", [])
+    if not candidates:
+        raise RuntimeError(f"No candidates returned by {label}")
+    text = ""
+    for part in candidates[0].get("content", {}).get("parts", []):
+        if part.get("thought"):
+            continue
+        if "text" in part:
+            text += part["text"]
+    return text
+
+
+def parse_json_response(text: str) -> Any:
+    """Parses a model reply that should be JSON but may be fenced or padded.
+
+    Models wrap JSON in ```json fences, prepend a sentence, or append a note. Try the
+    strict parse first, then a fenced block, then the outermost bracketed span.
+    """
+    if text is None:
+        raise ValueError("empty response")
+    text = text.strip()
+    try:
+        return json.loads(text)
+    except Exception:
+        pass
+    fence = re.search(r"```(?:json)?\s*\n(.*?)```", text, re.S)
+    if fence:
+        try:
+            return json.loads(fence.group(1).strip())
+        except Exception:
+            pass
+    for opener, closer in (("{", "}"), ("[", "]")):
+        start, end = text.find(opener), text.rfind(closer)
+        if start != -1 and end > start:
+            try:
+                return json.loads(text[start:end + 1])
+            except Exception:
+                continue
+    raise ValueError("could not parse JSON from response: %s" % text[:300])
+
+
 class LLMProvider(ABC):
+    # One provider instance is shared by every worker thread, so the payload of the
+    # last call has to be per-thread: the pipeline reads it straight after its own
+    # generate_json() to size that call, and a plain attribute would hand it whichever
+    # concurrent call happened to finish most recently.
+    _payload_tls = threading.local()
+
+    @property
+    def last_payload(self) -> Optional[Dict[str, Any]]:
+        return getattr(LLMProvider._payload_tls, "payload", None)
+
+    @last_payload.setter
+    def last_payload(self, value: Optional[Dict[str, Any]]) -> None:
+        LLMProvider._payload_tls.payload = value
+
     def __init__(self):
         self.last_payload = None
 
@@ -24,12 +141,48 @@ class LLMProvider(ABC):
     def generate(self, history: List[Message], tools: List[ToolDefinition]) -> Message:
         pass
 
+    def generate_json(self, prompt: str, schema: Dict[str, Any],
+                      system: Optional[str] = None) -> Any:
+        """One-shot call returning parsed JSON.
+
+        Base implementation asks for JSON in the prompt and parses tolerantly.
+        Providers that can constrain the response natively override this, and those
+        overrides also pin temperature to JSON_TEMPERATURE - this fallback cannot,
+        since it goes through generate(), which the interactive path shares.
+        """
+        instruction = (
+            "Respond with a single JSON value matching this schema. "
+            "Output JSON only - no prose, no code fences.\n\n"
+            + json.dumps(schema, ensure_ascii=False)
+        )
+        blocks = [b for b in (system, instruction, prompt) if b]
+        content = "\n\n".join(blocks)
+        reply = self.generate([Message(role="user", content=content)], [])
+        return parse_json_response(reply.content)
+
 class GeminiStudioProvider(LLMProvider):
     def __init__(self, api_key: Optional[str] = None, model: str = "gemini-3.5-flash"):
         self.api_key = api_key or os.getenv("GEMINI_API_KEY")
         if not self.api_key:
             raise ValueError("Gemini API key is required (set GEMINI_API_KEY environment variable)")
         self.model = model
+
+    def generate_json(self, prompt: str, schema: Dict[str, Any],
+                      system: Optional[str] = None) -> Any:
+        """Schema-constrained one-shot; see VertexAIProvider.generate_json."""
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}"
+        content = "\n\n".join(b for b in (system, prompt) if b)
+        payload = {
+            "contents": [{"role": "user", "parts": [{"text": content}]}],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "responseSchema": sanitize_gemini_schema(schema),
+                "temperature": JSON_TEMPERATURE,
+            },
+        }
+        self.last_payload = payload
+        headers = {"Content-Type": "application/json"}
+        return parse_json_response(_post_json_text(url, payload, headers, "Gemini API"))
 
     def generate(self, history: List[Message], tools: List[ToolDefinition]) -> Message:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent?key={self.api_key}"
@@ -109,6 +262,10 @@ class GeminiStudioProvider(LLMProvider):
         resp_msg = Message(role="assistant", content="")
 
         for part in candidate_content.get("parts", []):
+            # Gemini marks reasoning-summary parts with thought=True. They are not the
+            # answer, and concatenating them prepends stray self-instructions to the reply.
+            if part.get("thought"):
+                continue
             if "text" in part:
                 resp_msg.content += part["text"]
             if "functionCall" in part:
@@ -224,6 +381,25 @@ class VertexAIProvider(LLMProvider):
         self.credentials.refresh(self.auth_req)
         return self.credentials.token
 
+    def generate_json(self, prompt: str, schema: Dict[str, Any],
+                      system: Optional[str] = None) -> Any:
+        """Schema-constrained one-shot. The model cannot emit prose or fences here,
+        which removes the whole class of output-format failures."""
+        url = f"https://{self.region}-aiplatform.googleapis.com/v1/projects/{self.project_id}/locations/{self.region}/publishers/google/models/{self.model}:generateContent"
+        content = "\n\n".join(b for b in (system, prompt) if b)
+        payload = {
+            "contents": [{"role": "user", "parts": [{"text": content}]}],
+            "generationConfig": {
+                "responseMimeType": "application/json",
+                "responseSchema": sanitize_gemini_schema(schema),
+                "temperature": JSON_TEMPERATURE,
+            },
+        }
+        self.last_payload = payload
+        headers = {"Authorization": f"Bearer {self._get_access_token()}",
+                   "Content-Type": "application/json"}
+        return parse_json_response(_post_json_text(url, payload, headers, "Vertex AI"))
+
     def generate(self, history: List[Message], tools: List[ToolDefinition]) -> Message:
         url = f"https://{self.region}-aiplatform.googleapis.com/v1/projects/{self.project_id}/locations/{self.region}/publishers/google/models/{self.model}:generateContent"
 
@@ -306,6 +482,10 @@ class VertexAIProvider(LLMProvider):
         resp_msg = Message(role="assistant", content="")
 
         for part in candidate_content.get("parts", []):
+            # Gemini marks reasoning-summary parts with thought=True. They are not the
+            # answer, and concatenating them prepends stray self-instructions to the reply.
+            if part.get("thought"):
+                continue
             if "text" in part:
                 resp_msg.content += part["text"]
             if "functionCall" in part:

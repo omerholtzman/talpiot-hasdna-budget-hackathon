@@ -1,0 +1,33 @@
+{
+  "offices": [
+    "34",
+    "35",
+    "83",
+    "38",
+    "76"
+  ],
+  "functional_classes": [
+    "אנרגיה",
+    "הגנת הסביבה"
+  ],
+  "keywords": [
+    "מתחדשת",
+    "סולארית",
+    "פוטו-וולטאי",
+    "אגירה",
+    "התייעלות",
+    "שימור אנרגיה",
+    "קוגנרציה"
+  ],
+  "fts_queries": [
+    "אנרגיה מתחדשת",
+    "אנרגיה סולארית",
+    "התייעלות אנרגטית",
+    "אגירת אנרגיה"
+  ],
+  "notes": "The subject primarily focuses on renewable energy sources and energy efficiency, with a strong connection to environmental protection. While 'green energy' can sometimes encompass natural gas as a transitional fuel, the focus here is on non-fossil fuel sources and related technologies.",
+  "rejected_offices": [],
+  "rejected_keywords": [
+    "רוח"
+  ]
+}

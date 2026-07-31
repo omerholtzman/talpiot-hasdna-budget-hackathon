@@ -1,0 +1,927 @@
+﻿code,title,program,reason
+04.01.11.02,שעות נוספות,שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.03,עבודה בלתי צמיתה,שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.04,פעולות הנהלה מיוחדות,שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.05,השתתפות בפרוייקט מרכבה,שירותים מרכזיים,Not related to green energy.
+04.01.11.06,מיכון,שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.07,עלויות פרישה,שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.08,השתתפות בבוחן ותהילה,שירותים מרכזיים,Not related to green energy.
+04.01.11.09,השתתפות במשרד האוצר - הרפורמה בחשבונאות הממשלתית,שירותים מרכזיים,Not related to green energy.
+04.01.11.10,טיפול בבעיות הדרוזים,שירותים מרכזיים,Not related to green energy.
+04.01.11.11,מלגות לדרוזים,שירותים מרכזיים,Not related to green energy.
+04.01.11.12,"ועידת רוה""מ לעסקים",שירותים מרכזיים,Not related to green energy.
+04.01.11.13,קתדרה ללימודי יהדות,שירותים מרכזיים,Not related to green energy.
+04.01.11.14,"השתתפות משרד תמ""ס",שירותים מרכזיים,Not related to green energy.
+04.01.11.16,"פעולות, תפעול ותשתיות",שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.17,העצמת תשתיות מורשת - הרשאה להתחייב,שירותים מרכזיים,Not related to green energy.
+04.01.11.18,"השתתפות בבניין רוה""מ",שירותים מרכזיים,Not related to green energy.
+04.01.11.19,השתתפות בפרוייקט ממשל זמין,שירותים מרכזיים,Not related to green energy.
+04.01.11.20,"פרוייקטים - משרד רוה""מ",שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.22,השתתפות במשרד החינוך,שירותים מרכזיים,Not related to green energy.
+04.01.11.23,השתתפות במשרד הביטחון,שירותים מרכזיים,Not related to green energy.
+04.01.11.24,השתתפות בדיור הממשלתי - פרויקט אלמוג,שירותים מרכזיים,Not related to green energy.
+04.01.11.25,פרויקט אלמוג,שירותים מרכזיים,Not related to green energy.
+04.01.11.26,השתתפות במשרד החינוך - פרויקט יד בן צבי,שירותים מרכזיים,Not related to green energy.
+04.01.11.27,השתתפות במשרד הביטחון,שירותים מרכזיים,Not related to green energy.
+04.01.11.28,חגיגות 60 שנה למדינה ו-40 שנה לירושלים,שירותים מרכזיים,Not related to green energy.
+04.01.11.29,"השתתפות במשרד המדע, התרבות והספורט - בית התפוצות",שירותים מרכזיים,Not related to green energy.
+04.01.11.30,העסקת סטודנטים,שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.31,שכר עידוד,שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.32,רזרבה לעמידה ביעד ההוצאה - חגיגות 60 למדינה,שירותים מרכזיים,Not related to green energy.
+04.01.11.33,השתתפות בביתן יהודי באושוויץ,שירותים מרכזיים,Not related to green energy.
+04.01.11.35,הרשאה - חגיגות 60 שנה למדינה,שירותים מרכזיים,Not related to green energy.
+04.01.11.36,השתתפות בלשכת הפרסום הממשלתית במסגרת חגיגות ה-60,שירותים מרכזיים,Not related to green energy.
+04.01.11.37,השתתפות במשרד הביטחון במסגרת חגיגות ה-60,שירותים מרכזיים,Not related to green energy.
+04.01.11.38,השתתפות במשרד החינוך במסגרת חגיגות ה-60 למדינה,שירותים מרכזיים,Not related to green energy.
+04.01.11.39,השתתפות במשרד התיירות- חגיגות ה- 60,שירותים מרכזיים,Not related to green energy.
+04.01.11.40,השתתפות במשרד התחבורה- חגיגות ה- 60,שירותים מרכזיים,Not related to green energy.
+04.01.11.41,"השתתפות במשרד המדע, התרבות והספורט- חגיגות ה- 60",שירותים מרכזיים,Not related to green energy.
+04.01.11.42,"""שירותי כבאות אווירית""",שירותים מרכזיים,Not related to green energy.
+04.01.11.43,השתתפות משרד הקליטה,שירותים מרכזיים,Not related to green energy.
+04.01.11.45,השתתפות במשרד לביטחון פנים,שירותים מרכזיים,Not related to green energy.
+04.01.11.46,השתתפות המשרד לענייני גימלאים,שירותים מרכזיים,Not related to green energy.
+04.01.11.47,תכנון מדיניות עבודת הממשלה,שירותים מרכזיים,"General administrative item, not related to green energy."
+04.01.11.48,השתתפות במשרד הפנים - תכניות עבודה,שירותים מרכזיים,Not related to green energy.
+04.01.11.49,השתתפות ברשות האוכלוסין,שירותים מרכזיים,Not related to green energy.
+04.01.11.52,השתתפות בסעיף 54 - החלטת ממשלה 3367 - עידוד תרבות הפנאי והנופש,שירותים מרכזיים,Not related to green energy.
+04.01.11.53,השתתפות במשרד התיירות - החלטת ממשלה 3368,שירותים מרכזיים,Not related to green energy.
+04.01.11.54,השתתפות במשרד הבינוי והשיכון - החלטת ממשלה 3855,שירותים מרכזיים,Not related to green energy.
+04.01.11.58,השתתפות במשרד הביטחון,שירותים מרכזיים,Not related to green energy.
+04.01.11.59,חינוך בלתי פורמלי,שירותים מרכזיים,Not related to green energy.
+04.01.11.60,"פרוייקט תמ""ר-מע' ממוחשבת לניהול תכניות עבודה",שירותים מרכזיים,Not related to green energy.
+04.01.11.61,פעילות המטה הביומטרי,שירותים מרכזיים,Not related to green energy.
+04.01.12.01,תכנית רב שנתית לפיתוח אגן העיר העתיקה והר הזיתים,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.02,תכנית רב שנתית לעידוד הצמיחה בירושלים,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.03,טיפול נקודתי,המינהלה לפרוייקטים,"General administrative item, not related to green energy."
+04.01.12.04,תוכנית רב שנתית לפיתוח אגן העיר העתיקה והר הזיתים,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.05,תחזוקת מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.06,תוכנית מרום,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.08,פיתוח מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.10,השתתפות משרד הביטחון -  פיתוח מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.11,השתתפות משרד החינוך - פיתוח מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.12,השתתפות משרד השיכון - פיתוח מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.13,השתתפות משרד התיירות - פיתוח מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.14,השתתפות משרד הפנים - פיתוח מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.15,השתתפות משרד התחבורה - פיתוח מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.16,השתתפות משרד לביטחון פנים - פיתוח מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.18,השתתפות משרד האוצר - פיתוח מנהרות הכותל,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.19,תכנית רב שנתית לעידוד הצמיחה בירושלים (הרשאה להתחייב),המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.20,יעודה לטיפול בילדים בסיכון,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.21,יעודה לטיפול בתקיפה מינית וזנות,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.22,פיתוח שער המוגרבים-רשות העתיקות,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.23,פיתוח שער המוגרבים,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.24,השתתפות משרד לביטחון פנים - פיתוח שער המוגרבים,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.25,"השתתפות במשרד התעשייה, המסחר והתעסוקה - ילדים בסיכון",המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.26,השתתפות במשרד הרווחה - ילדים בסיכון,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.28,השתתפות במשרד הבריאות,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.30,השתתפות בלשכת הפרסום הממשלתית,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.40,השתתפות משרד התיירות בפיתוח שער המוגרבים,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.45,תוכנית רב שנתית לפיתוח הגן העיר העתיקה והר הזיתים (הרשאה להתחייב),המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.46,השתתפות במשרד הפנים,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.47,השתתפות במשרד החקלאות - חטיבה להתישבות,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.48,פיתוח מנהרות הכותל (הרשאה להתחייב),המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.49,השתתפות משרד החינוך,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.50,הקמת גרעיני משימה עירוניים,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.61,תוכנית לעשייה ציונית,המינהלה לפרוייקטים,Not related to green energy.
+04.01.12.63,מרכזי צעירים,המינהלה לפרוייקטים,Not related to green energy.
+04.01.19.02,עבודה בלתי צמיתה,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.03,עלויות פרישה,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.04,כוננויות,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.05,"השת, משרד הביטחון",אמרכלות,Not related to green energy.
+04.01.19.06,"קניית שרותי כ""א",אמרכלות,"General administrative item, not related to green energy."
+04.01.19.07,"עב""צ - קשבים",אמרכלות,"General administrative item, not related to green energy."
+04.01.19.08,שעות נוספות,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.09,"נסיעות לחו""ל",אמרכלות,"General administrative item, not related to green energy."
+04.01.19.10,תפעול ואחזקה,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.13,תפעול,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.14,השתתפות באחזקת הקריה,אמרכלות,Not related to green energy.
+04.01.19.15,השתתפות בשכר מתמחים,אמרכלות,Not related to green energy.
+04.01.19.16,מתמחים,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.20,"הפעלת בתי ספר בחב""מ",אמרכלות,Not related to green energy.
+04.01.19.30,אחזקה,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.31,שיפוץ מערכת חשמל,אמרכלות,Not explicitly related to green energy.
+04.01.19.32,דמי שמוש בנכסי מדינה,אמרכלות,Not related to green energy.
+04.01.19.33,מיסי ארנונה,אמרכלות,Not related to green energy.
+04.01.19.34,שכר דירה,אמרכלות,Not related to green energy.
+04.01.19.36,עבודה ארעית,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.37,החזר הוצאות רכב,אמרכלות,Not related to green energy.
+04.01.19.38,שעות נוספות,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.40,עובדים לא משובצים - עבודה ארעית,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.41,רכישת רכבים,אמרכלות,Not related to green energy.
+04.01.19.42,שכר דירה,אמרכלות,Not related to green energy.
+04.01.19.43,"תפעול, אחזקה, דואר טלפונים ומשלוחים",אמרכלות,"General administrative item, not related to green energy."
+04.01.19.44,דלק לרכב ממשלתי,אמרכלות,Not related to green energy (fossil fuel).
+04.01.19.45,אחזקת רכב ממשלתי,אמרכלות,Not related to green energy.
+04.01.19.46,הדרכת עובדים,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.47,שירותי ייעוץ,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.48,מיכון,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.49,פעולות אבטחה ושמירה,אמרכלות,Not related to green energy.
+04.01.19.50,הדרכה והשתלמות,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.51,דואר טלפונים ומשלוחים,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.52,פעולות רווחה,אמרכלות,Not related to green energy.
+04.01.19.53,הוצאות שמירה וביטחון,אמרכלות,Not related to green energy.
+04.01.19.54,השתתפות נציבות שירות המדינה בתחזוקה,אמרכלות,Not related to green energy.
+04.01.19.56,העסקת עובדים זמניים,אמרכלות,"General administrative item, not related to green energy."
+04.01.19.57,הכנסות ממכונים,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.58,הכנסות ממכונים,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.59,פסקי דין,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.61,החזר הוצאות רכב,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.62,העסקת סטודנטים - קשבים,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.63,דלק לרכב ממשלתי,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.65,נסיעות והובלה,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.66,רכישת רכב,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.67,רכישת כלי רכב ממשלתיים,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.69,שעות נוספות-קשבים,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.72,אבטחת הרבנות הראשית,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.94,מחשוב יחידות המשרד,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.96,הוצאות אירגוניות שונות,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.19.97,שכירת רכב,אמרכלות,"Generic title, ambiguous program, not related to subject"
+04.01.21.01,פעילות הועדה הבינמשרדית להערכות לרעידות אדמה,הוועדה הבינמשרדית,Not related to green energy
+04.01.21.03,עבודה בלתי צמיתה,הוועדה הבינמשרדית,"Generic title, ambiguous program, not related to subject"
+04.01.21.04,החזר הוצאות רכב,הוועדה הבינמשרדית,"Generic title, ambiguous program, not related to subject"
+04.01.21.05,שעות נוספות,הוועדה הבינמשרדית,"Generic title, ambiguous program, not related to subject"
+04.01.61.04,הוצאות מנהליות,מחקרים שונים,"Generic title, ambiguous program, not related to subject"
+04.01.61.05,מחקרים,מחקרים שונים,"Generic title, ambiguous program, not related to subject"
+04.01.90.01,פעולות בעקבות המצב הבטחוני בצפון,פעולות בעקבות המצב,Not related to green energy
+04.01.90.06,תשלום עבור שהיית תושבי הצפון בבתי מלון,פעולות בעקבות המצב,Not related to green energy
+04.01.92.01,משרד ראש הממשלה - מנהלת שיקום,משרד ראש הממשלה -,"Generic title, ambiguous program, not related to subject"
+04.04.01.02,איוש ללא ביצוע,רזרבה למשרד ראש הממשלה,"Generic title, ambiguous program, not related to subject"
+04.04.01.06,יעודה לכח אדם,רזרבה למשרד ראש הממשלה,"Generic title, ambiguous program, not related to subject"
+04.51.01.22,פרויקטים למשרד,מטה המשרד,"Generic title, ambiguous program, not related to subject"
+04.51.08.99,פרויקטים במטה הקיברנטי הלאומי,מערך הסייבר הלאומי,Not related to green energy
+04.70.01.12,איוש חודשי עבודה ללא ביצוע,רזרבה לעמידה במגבלה,"Generic title, ambiguous program, not related to subject"
+04.70.01.14,עתודה להסכם קואליציוני 2019,רזרבה לעמידה במגבלה,"Generic title, ambiguous program, not related to subject"
+04.70.01.15,חרבות ברזל,רזרבה לעמידה במגבלה,Not related to green energy
+05.01.01.02,עבודה בלתי צמיתה,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.03,שעות נוספות,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.04,כוננויות,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.05,שכר עידוד,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.06,העסקת סטודנטים,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.07,עלויות פרישה,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.08,דמי חבר בארגונים,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.09,העסקת מתמחים,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.17,"סקרים, מחקרים, יעוץ וחוות דעת",משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.18,עובד מצטיין,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.27,מתמחים,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.29,טיפול בשליחי מסחר ותעשיה,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.33,טיפול בשליחי משרד התיירות,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.57,"נסיעות לחו""ל לשכת השר",משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.58,תפעול לשכת השר,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.60,תרגומים והדפסות לשכת השר,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.61,שרותי כח אדם - לשכת שר,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.62,עבודה בלתי צמיתה - מזכירות לשכת השר,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.63,נציגות לונדון,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.64,אירוח משלחות,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.65,רכישת כלי רכב (2),משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.66,הוצאות ריבית והוצאות משפטיות,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.69,"הוצאות שליחי מ""ה בחו""ל",משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.71,ייעוץ אסטרטגי - הנהלה,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.72,ייעוץ ליחידת מחקר כלכלי,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.73,ייעוץ אסטרטגי לקשר עם אמצעי התקשורת,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.75,טיפול בשליחי רשות המיסים,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.77,הסברה,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.80,פירסומים,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.87,הנחיות למכרזי B.O.T.,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.88,"עבודה בלתי צמיתה - לשכת סמנכ""ל",משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.89,הוצאות ארגון,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.90,פרויקטים מיוחדים - פיתוח,משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.91,"טיפול בשליחי מ""ה",משרד ראשי,"Generic title, ambiguous program, not related to subject"
+05.01.01.96,תשלום מענק ושעות נוספות לעובדי המדפיס הממשלתי,משרד ראשי,Not related to green energy
+05.01.02.04,תפעול,אמרכלות,"Generic title, ambiguous program, not related to subject"
+05.01.02.06,"ייעוץ-מעבר תע""ש לנגב",אמרכלות,"Generic consulting, not related to subject."
+05.01.02.07,פרישה ורווחה,אמרכלות,"Generic welfare expenses, not related to subject."
+05.01.02.08,"נסיעות לחו""ל",אמרכלות,"Generic travel expenses, not related to subject."
+05.01.02.10,הוצאות חשמל,אמרכלות,"Generic electricity expenses, not necessarily green energy."
+05.01.02.11,אחזקה,אמרכלות,"Generic maintenance, not related to subject."
+05.01.02.12,דואר  ומשלוחים,אמרכלות,"Generic postal services, not related to subject."
+05.01.02.17,החזר הוצאת רכב,אמרכלות,"Generic car expenses, not related to subject."
+05.01.02.20,דלק לרכב ממשלתי,אמרכלות,"Generic fuel expenses, not related to subject."
+05.01.02.21,הובלות,אמרכלות,"Generic transport services, not related to subject."
+05.01.02.22,שכירת רכב,אמרכלות,"Generic car rental, not related to subject."
+05.01.02.25,ייעוץ בעניני פיצויים,אמרכלות,"Generic consulting, not related to subject."
+05.01.02.26,הוצאות טלפון,אמרכלות,"Generic phone expenses, not related to subject."
+05.01.02.27,הדרכה ומענקי שכר לימוד,אמרכלות,"Generic training, not related to subject."
+05.01.02.29,ארנונה,אמרכלות,"Generic municipal tax, not related to subject."
+05.01.02.30,דמי שמוש בנכסים ממשלתים,אמרכלות,"Generic property use fees, not related to subject."
+05.01.02.33,"שכ""ד והוצאות ענבל",אמרכלות,"Generic rent expenses, not related to subject."
+05.01.02.35,הוצאות אירגוניות,אמרכלות,"Generic organizational expenses, not related to subject."
+05.01.02.37,תקציב אבטחה וביטחון,אמרכלות,"Generic security budget, not related to subject."
+05.01.02.39,אבטחת שר האוצר,אמרכלות,"Generic security expenses, not related to subject."
+05.01.02.40,הסברה כלכלית,אמרכלות,"Generic economic information, not related to subject."
+05.01.02.41,הוצאות אחזקה בקריה,אמרכלות,"Generic maintenance, not related to subject."
+05.01.02.42,אבטחת מבני ממשלה,אמרכלות,"Generic security expenses, not related to subject."
+05.01.02.43,מוזיאון המיסים - שוטף,אמרכלות,"Generic museum expenses, not related to subject."
+05.01.02.45,מכרז אבטחה,אמרכלות,"Generic security tender, not related to subject."
+05.01.02.47,הנחיית הבורסה לניירות ערך - אבטחת מערכות מידע,אמרכלות,"Generic security expenses, not related to subject."
+05.01.02.71,רכישת קטעי עתונות,אמרכלות,"Generic media purchase, not related to subject."
+05.01.02.75,הסברה,אמרכלות,"Generic information, not related to subject."
+05.01.02.81,טיפול במעמד האשה,אמרכלות,Not related to green energy.
+05.01.02.85,ספריה,אמרכלות,"Generic library, not related to subject."
+05.01.02.90,קניית שירותי כח אדם,אמרכלות,"Generic personnel services, not related to subject."
+05.01.02.91,הכנסות מגורמי חוץ,אמרכלות,"Generic income, not related to subject."
+05.01.02.93,כנסים וארועים,אמרכלות,"Generic events, not related to subject."
+05.01.02.94,שכר דירה דירת מאבטחים (שר אוצר),אמרכלות,"Generic rent, not related to subject."
+05.01.02.95,הדרכה ומענקי שכר לימוד - מינהל הרכב,אמרכלות,"Generic training, not related to subject."
+05.53.01.05,יעודה להסכם,רזרבה,"Generic allocation, not related to subject."
+05.53.01.99,העברת עודפים,רזרבה,"Generic transfer, not related to subject."
+07.80.02.51,שיפץ והרחבת תחנות משטרה,קניות,Not related to green energy.
+08.20.09.02,שירותי ייעוץ להתייעלות בתי המשפט,הוצאות כלליות,"Operational efficiency, not energy efficiency."
+09.51.02.99,פרויקטים בינלאומיים,"תפעול הנציגויות בחו""ל","Generic international projects, not related to subject."
+19.42.02.81,פרויקטים בתרבות,מינהל התרבות,"Generic culture projects, not related to subject."
+20.60.01.21,קידום פרויקטים במערכת החינוך,פעילויות מטה מרכזיות -,"Generic education projects, not related to subject."
+26.01.01.02,תפעול המשרד,הנהלת המשרד,"Generic office operations, not related to subject."
+26.01.01.03,"רכישת שרותי כ""א",הנהלת המשרד,"Generic personnel services, not related to subject."
+26.01.01.05,שעות נוספות,הנהלת המשרד,"Generic overtime, not related to subject."
+26.01.01.06,רכישת שירותי ייעוץ,הנהלת המשרד,"Generic consulting, not related to subject."
+26.01.01.07,החזר הוצאות רכב,הנהלת המשרד,"Generic car expenses, not related to subject."
+26.01.01.09,"חודשי עבודה - חומ""ס בהתאם להחלטת הממשלה.",הנהלת המשרד,"Hazardous materials, not green energy."
+26.01.01.10,"שעות נוספות חומ""ס-בהתאם להחלטת הממשלה.",הנהלת המשרד,"Hazardous materials, not green energy."
+26.01.01.11,"כונניות חומ""ס-בגין החלטת ממשלה.",הנהלת המשרד,"Hazardous materials, not green energy."
+26.01.01.12,שכירת רכב,הנהלת המשרד,"Generic car rental, not related to subject."
+26.01.01.13,ציוד חומרים מסוכנים,הנהלת המשרד,"Hazardous materials equipment, not green energy."
+26.01.01.14,הוצאות דלק לרכבי המשרד,הנהלת המשרד,"Generic fuel expenses, not related to subject."
+26.01.01.15,דואר וטלפון,הנהלת המשרד,"Generic postal and phone, not related to subject."
+26.01.01.16,"הדרכה, רווחה והשתלמויות בארץ",הנהלת המשרד,"Generic training, not related to subject."
+26.01.01.17,עובדים ארעיים חודשי עבודה,הנהלת המשרד,"Generic temporary workers, not related to subject."
+26.01.01.18,"נסיעות לחו""ל",הנהלת המשרד,"Generic travel expenses, not related to subject."
+26.01.01.19,"נגישות מידע לציבור - חוק חופש המידע, ספריה ומרכז מידע",הנהלת המשרד,"Generic information access, not related to subject."
+26.01.01.20,"נסיעות לחו""ל אמנת אוולים ו-oecd",הנהלת המשרד,"Generic travel expenses, not related to subject."
+26.01.01.21,הוצאות חשמל,הנהלת המשרד,"Generic electricity expenses, not necessarily green energy."
+26.01.01.23,פעולות רווחה,הנהלת המשרד,"Generic welfare activities, not related to subject."
+26.01.01.25,פעולות לישכה משפטית וספרות מקצועית,הנהלת המשרד,"Generic legal activities, not related to subject."
+26.01.01.26,פיצוי לנפגעי אסבסט,הנהלת המשרד,"Asbestos compensation, not green energy."
+26.01.01.30,העסקת עובדים ממשרד הקליטה,הנהלת המשרד,"Generic personnel, not related to subject."
+26.01.01.36,העסקת מתמחים,הנהלת המשרד,"Generic personnel, not related to subject."
+26.01.01.39,דוברות ויחסי ציבור,הנהלת המשרד,"Generic public relations, not related to subject."
+26.01.01.43,שכר עידוד,הנהלת המשרד,"Generic incentive pay, not related to subject."
+26.01.01.44,כוננויות,הנהלת המשרד,"Generic on-call, not related to subject."
+26.01.01.45,פעולות מחוזות המשרד,הנהלת המשרד,"Generic regional operations, not related to subject."
+26.01.01.46,העסקת מתמחים,הנהלת המשרד,"Generic personnel, not related to subject."
+26.01.01.48,פעולות שונות ואבטחת השר,הנהלת המשרד,"Generic operations and security, not related to subject."
+26.01.01.49,רכישת כלי רכב,הנהלת המשרד,"Generic vehicle purchase, not related to subject."
+26.01.01.51,שכר עידוד,הנהלת המשרד,"Generic incentive pay, not related to subject."
+26.01.01.54,הוצאות לחברת הביטוח ענבל,הנהלת המשרד,"General administrative expense, no relation to green energy."
+26.01.01.55,מחוזות-פעולות מקצועיות,הנהלת המשרד,"General professional activities, no relation to green energy."
+26.01.01.56,העסקת סטודנטים,הנהלת המשרד,"General employment, no relation to green energy."
+26.01.01.57,השתתפות משרד התשתיות,הנהלת המשרד,"General participation, not specific to green energy."
+26.01.01.58,השתתפות משרד התיירות,הנהלת המשרד,"General participation, not specific to green energy."
+26.01.01.59,השתתפות במשרד הפנים,הנהלת המשרד,"General participation, not specific to green energy."
+26.01.01.60,"השתתפות במשרד התמ""ת",הנהלת המשרד,"General participation, not specific to green energy."
+26.01.01.61,השתתפות במשרד התיירות,הנהלת המשרד,"General participation, not specific to green energy."
+26.01.01.63,איחוד מחוזות,הנהלת המשרד,"Administrative activity, no relation to green energy."
+26.01.01.64,"איחוד מחוזות-ח""ע",הנהלת המשרד,"Administrative activity, no relation to green energy."
+26.01.01.65,"הוצאות רכב- טב""ק",הנהלת המשרד,"General vehicle expenses, no relation to green energy."
+26.01.01.70,מרכז מידע - שעות עבודה של מוקדנים,הנהלת המשרד,"General administrative expense, no relation to green energy."
+26.01.01.80,"רכב - דרגת שירות ""אישי"" על פי הסכם",הנהלת המשרד,"General vehicle expenses, no relation to green energy."
+26.01.01.90,תפעול ואחזקת מערכת ניטור אוויר,הנהלת המשרד,"Air monitoring is general environmental, not green energy."
+26.01.01.91,הוצאות בגין פרישה,הנהלת המשרד,"General personnel expense, no relation to green energy."
+26.01.01.94,תפעול המשרד - הרשאה,הנהלת המשרד,"General ministry operation, no relation to green energy."
+26.01.01.95,רכישת שירותי ייעוץ - הרשאה,הנהלת המשרד,"General consulting services, no relation to green energy."
+26.01.01.97,פעולות רווחה- הרשאה,הנהלת המשרד,"General welfare activities, no relation to green energy."
+26.01.01.98,תשלום לפי פסקי דין,הנהלת המשרד,"General legal expenses, no relation to green energy."
+26.01.02.01,תחזוקת חומרה,מחשוב,"General IT maintenance, no relation to green energy."
+26.01.02.02,תחזוקת תוכנה בסיסית,מחשוב,"General IT maintenance, no relation to green energy."
+26.01.02.03,תחזוקת תוכנה ישומית,מיחשוב,"General IT maintenance, no relation to green energy."
+26.01.02.04,תחזוקת תקשורת,מחשוב,"General IT maintenance, no relation to green energy."
+26.01.02.05,קניית שירותי מיחשוב,מחשוב,"General IT services, no relation to green energy."
+26.01.02.12,מערכת רישוי עסקים,מיחשוב,"Business licensing system, no relation to green energy."
+26.01.02.13,פיתוח מערכות,מחשוב,"General systems development, no relation to green energy."
+26.01.02.14,פיתוח מערכות - הרשאה להתחייב,מחשוב,"General systems development, no relation to green energy."
+26.01.02.16,הקמת תשתיות,מיחשוב,"General infrastructure, no relation to green energy."
+26.01.02.17,רכישת חומרה מרכזית,מחשוב,"General hardware purchase, no relation to green energy."
+26.01.02.18,רכישת ציוד קצה,מיחשוב,"General equipment purchase, no relation to green energy."
+26.01.04.01,דיור ממשלתי - שכר דירה,דיור המשרד,"General housing expenses, no relation to green energy."
+26.01.04.02,דיור - מיסים עירוניים,דיור המשרד,"General housing expenses, no relation to green energy."
+26.01.04.03,אחזקת המשרד,דיור המשרד,"General office maintenance, no relation to green energy."
+26.01.04.07,דיור - הוצאות מעבר,דיור המשרד,"General housing expenses, no relation to green energy."
+26.01.04.09,הוצאות תכנון ומעבר לדיור,דיור המשרד,"General housing expenses, no relation to green energy."
+26.03.01.01,"השתתפות בארגון האו""מ לאיכות הסביבה","השתתפות בארגון האו""מ","General environmental participation, not specific to green energy."
+26.03.02.02,"הוצאות למחקר הים התיכון בשיתוף האו""מ","העברות מאירגון האו""מ",Mediterranean research is not specific to green energy.
+26.03.03.01,אשכול משאבי טבע - פעולות מקצועיות,אשכול משאבי טבע,Natural resources is too general for green energy.
+26.03.03.02,אשכול משאבי טבע - הרשאה לפעולות מקצועיות,אשכול משאבי טבע,Natural resources is too general for green energy.
+26.03.03.03,אשכול משאבי טבע - תמיכות,אשכול משאבי טבע,Natural resources is too general for green energy.
+26.03.03.06,רשות נחל ירקון,אשכול משאבי טבע,"River authority activities, no relation to green energy."
+26.03.03.07,רשות נחל קישון,אשכול משאבי טבע,"River authority activities, no relation to green energy."
+26.03.03.08,הפעלת היחידה לניטור ברשות הטבע והגנים,אשכול משאבי טבע,"Nature monitoring, not specific to green energy."
+26.03.03.11,פרוייקטים עם משרד החקלאות ופיתוח הכפר,אשכול משאבי טבע,"General projects, not specific to green energy."
+26.03.03.24,פרוייקט גאולת הירקון,אשכול משאבי טבע,"River rehabilitation, not green energy."
+26.03.03.30,פעולות לשיקום נחלים,אשכול משאבי טבע,"River rehabilitation, not green energy."
+26.03.03.32,אשכול משאבי טבע תמיכות מזומן,אשכול משאבי טבע,Natural resources is too general for green energy.
+26.03.03.34,אתרי מורשת על פי החלטת ממשלה 1412 מיום 21.2.2010,אשכול משאבי טבע,"Heritage sites, no relation to green energy."
+26.03.03.35,חיבור מחנות צהל לביוב - השתתפות במשרד הבטחון,אשכול משאבי טבע,"Sewage connection, no relation to green energy."
+26.03.03.36,שיקום החי והצומח בכרמל,אשכול משאבי טבע,"Fauna and flora rehabilitation, not green energy."
+26.03.03.40,אשכול משאבי טבע - פעולות,אשכול משאבי טבע,Natural resources is too general for green energy.
+26.03.03.50,שיקום נחל הקישון על פי החלטת ממשלה 3454 מיום 10/07/2011,אשכול משאבי טבע,"River rehabilitation, not green energy."
+26.03.04.01,מערכת ניטור אויר,פרוייקטים,"Air monitoring is general environmental, not green energy."
+26.03.04.02,ניטור מפרץ אילת,פרוייקטים,"Environmental monitoring, not specific to green energy."
+26.03.04.03,ניטור ים התיכון,פרוייקטים,"Environmental monitoring, not specific to green energy."
+26.03.11.01,סקרים ומחקרים,פעולות לאיכות הסביבה,"General surveys and research, not specific to green energy."
+26.03.11.03,פעילות במסגרת שנת איכות הסביבה - באמצעות גורמים חיצוניים,פעולות לאיכות הסביבה,"General environmental activity, not specific to green energy."
+26.03.11.14,יועצים ובדיקות לפרויקט מטמנות,פעולות לאיכות הסביבה,"Landfill project, not green energy."
+26.03.11.19,פרויקט מחזור שפכי תעשיה במפעלים,פעולות לאיכות הסביבה,"Wastewater recycling, not green energy."
+26.03.11.22,פרוייקט איסוף סוללות,פעולות לאיכות הסביבה,"Battery collection, not green energy."
+26.03.11.24,הגברת אכיפה בנושא ביוב ומים,פעולות לאיכות הסביבה,"Sewage and water enforcement, not green energy."
+26.03.11.34,יעוץ לחוק זיכיון ים המלח,פעולות לאיכות הסביבה,"Dead Sea concession, no relation to green energy."
+26.03.12.01,סקרים ומחקרים - מדען ראשי - הרשאה,סקרים ומחקרים,"General research, not specific to green energy."
+26.03.12.02,סקרים ומחקרים במדען הראשי - מזומן,סקרים ומחקרים,"General research, not specific to green energy."
+26.03.12.03,פעולות יחידת המדען הראשי,סקרים ומחקרים,"General research unit activities, not specific to green energy."
+26.03.12.05,סקרים ומחקרים,סקרים ומחקרים,"General surveys and research, not specific to green energy."
+26.03.12.06,פרוייקט כדאיות כלכלית ייעוץ ופעולות,סקרים ומחקרים,Economic feasibility is too general for green energy.
+26.03.12.08,מחקר הערכה - הוצאה,סקרים ומחקרים,"General evaluation research, not specific to green energy."
+26.03.12.12,התאחדות התעשיינים - הוצאה,סקרים ומחקרים,Manufacturers Association expenses are too general.
+26.03.12.19,"מדענים מחו""ל",סקרים ומחקרים,"General scientists from abroad, not specific to green energy."
+26.03.12.23,סקרים ומחקרים עולים חדשים,סקרים ומחקרים,"Research on new immigrants, no relation to green energy."
+26.03.12.25,סקרים אפדימיולוגים,סקרים ומחקרים,"Epidemiological surveys, no relation to green energy."
+26.03.20.01,יחידת הפיקוח (9 עובדים),יחידת הפיקוח לאיכות,"General inspection unit, no relation to green energy."
+26.03.20.02,דלק,יחידת הפיקוח לאיכות,"General fuel expense, no relation to green energy."
+26.03.20.05,יחידת הפיקוח,יחידת הפיקוח לאיכות,"General inspection unit, no relation to green energy."
+26.03.20.06,פעולות אשכול יישום מדיניות ואכיפה - הרשאה,אשכול יישום מדיניות,"General policy enforcement, not specific to green energy."
+26.03.20.07,פעולות אשכול יישום מדיניות ואכיפה - מזומן,אשכול יישום מדיניות,"General policy enforcement, not specific to green energy."
+26.03.20.09,אכיפה בתחום פסולת בניין - העברה לרשות הטבע והגנים,אשכול יישום מדיניות,"Construction waste enforcement, not green energy."
+26.03.20.10,מערכות מחשוב לאכיפה,אשכול יישום מדיניות,"General computing systems, no relation to green energy."
+26.03.20.11,רכישת קטנועים,יחידת הפיקוח לאיכות,"General vehicle purchase, no relation to green energy."
+26.03.20.15,שיקום,יחידת הפיקוח לאיכות,"General rehabilitation, no relation to green energy."
+26.03.20.16,רכישת רכבים,יחידת הפיקוח לאיכות,"General vehicle purchase, no relation to green energy."
+26.03.21.01,"קרן האוזון אמנת וינה EERV ,IUCN, אמנת מיגוון המינים",השתתפות באמנות וקרנות,"Ozone fund is environmental, not specific to green energy."
+26.03.25.01,רכישת ציוד מעבדה,מעבדה לאיכות הסביבה,"General laboratory equipment, no relation to green energy."
+26.03.26.01,"פעולות האגף ליחב""ל ופרויקטים מיוחדים",קשרי חוץ ופרויקטים,"General international relations, not specific to green energy."
+26.03.28.01,פעולות אשכול תכנון ומדיניות,אשכול תכנון ומדיניות,"General planning and policy, not specific to green energy."
+26.03.28.03,תכנון ייעוץ ופעולות - פארק איילון,אשכול תכנון ומדיניות,"Ayalon Park planning, no relation to green energy."
+26.03.28.06,תכנון וייעוץ פרוייקטים,אשכול תכנון ומדיניות,"General planning, ambiguous program, not green energy"
+26.03.28.07,פעולות אשכול תכנון ומדיניות - הרשאה,אשכול תכנון ומדיניות,"General administrative, ambiguous program, not green energy"
+26.03.28.08,תשלום לאמנות בין-לאומיות בתחום הסביבה עליהן חתומה ישראל,אשכול תכנון ומדיניות,"General environmental conventions, not specifically green energy"
+26.03.28.13,"אגף תכנון - רכישת שירותי כ""א",תכנון,"General HR services, ambiguous program, not green energy"
+26.03.28.14,"רכישת שירותי כ""א",תכנון,"General HR services, ambiguous program, not green energy"
+26.03.28.20,ביצוע פרוייקט פארק איילון,אשכול תכנון ומדיניות,"General park project, ambiguous program, not green energy"
+26.03.28.21,ביצוע פרוייקט פארק אריאל שרון - הרשאה,אשכול תכנון ומדיניות,"General park project, ambiguous program, not green energy"
+26.03.28.22,"ביצוע פרוייקט המצוק החופי בחברת פארק אריאל שרון בע""מ",אשכול תכנון ומדיניות,"General park project, ambiguous program, not green energy"
+26.03.28.42,פיתוח פארק נחל באר שבע,אשכול תכנון ומדיניות,"General park development, ambiguous program, not green energy"
+26.03.28.43,פיתוח פארק נחל באר שבע - הרשאה,אשכול תכנון ומדיניות,"General park development, ambiguous program, not green energy"
+26.03.32.01,יעוץ,ועדה לבחינת תקני,"General consulting, ambiguous program, not green energy"
+26.03.32.02,"נסיעות לחו""ל",ועדה לבחינת תקני,"General travel, ambiguous program, not green energy"
+26.03.32.03,אמרכלות,ועדה לבחינת תקני,"General administration, ambiguous program, not green energy"
+26.03.34.01,הפקת פרסומים ופעולות,יחידת הפרסומים ופניות,"General publications, ambiguous program, not green energy"
+26.03.36.01,פעולות יחידת כלכלה ותקינה,"יחידת הכלכלה, התקינה","General unit activities, ambiguous program, not green energy"
+26.03.38.01,קידום תשתיות איכות סביבה,תשתיות איכות סביבה,"General environmental infrastructure, not specifically green energy"
+26.03.38.02,יחידת ניטור - רשות הטבע והגנים,תשתיות איכות סביבה,"General monitoring, ambiguous program, not green energy"
+26.03.38.05,העסקת פרוייקטורים - לתכניות ברפתות,תשתיות איכות סביבה,"General project management, ambiguous program, not green energy"
+26.03.38.06,איכות קולחין - בדיקת תועלת,תשתיות איכות סביבה,"General environmental assessment, not specifically green energy"
+26.03.38.10,תמיכה ברשויות - טיפול בפסולת חקלאית,תשתיות איכות סביבה,"General waste treatment, ambiguous program, not green energy"
+26.03.38.15,תמיכה ברשויות - שבילי אופניים,תשתיות איכות סביבה,"General infrastructure, ambiguous program, not green energy"
+26.03.38.40,תמיכה בבתי בד יזמיים,תשתיות איכות סביבה,"General support, ambiguous program, not green energy"
+26.03.40.01,פעולות אשכול תעשיות,אשכול תעשיות,"General industry activities, ambiguous program, not green energy"
+26.03.40.02,אשכול תעשיות - הרשאה לפעולות,אשכול תעשיות,"General industry activities, ambiguous program, not green energy"
+26.03.40.04,תמיכה במפעלי תעשיה להפחתת פסולת מסוכנת,אשכול תעשיות,"General waste reduction, ambiguous program, not green energy"
+26.03.40.05,שפכי תעשייה ודלקים-פעולות,אשכול תעשיות,"Industrial wastewater and fuels, not specifically green energy"
+26.03.40.07,טיפול באתר הפסולת הרעילה רמת חובב,אשכול תעשיות,"Hazardous waste treatment, not specifically green energy"
+26.03.40.08,"ייעוץ, פיקוח ופעולות שיקום באתר רמת חובב",אשכול תעשיות,"Hazardous waste site rehabilitation, not specifically green energy"
+26.03.40.10,הפחתת פסולת במקור,אשכול תעשיות,"General waste reduction, ambiguous program, not green energy"
+26.03.40.16,פעולות בנושא IPPC ו-PRTR,אשכול תעשיות,"Environmental regulations, not specifically green energy"
+26.03.40.20,"סקר תע""ש בית הכרם",אשכול תעשיות,"General survey, ambiguous program, not green energy"
+26.03.40.40,קרינה - פעולות,אשכול תעשיות,"General radiation activities, not specifically green energy"
+26.03.40.43,החזר אגרות קרינה,אשכול תעשיות,"General radiation fees, not specifically green energy"
+26.03.40.44,תמיכה ברשויות בנושא רעש וקרינה,אשכול תעשיות,"General noise and radiation, not specifically green energy"
+26.03.40.70,איכות אויר - פעולות - מזומן,אשכול תעשיות,"General air quality activities, not specifically green energy"
+26.03.40.71,איכות אויר - פעולות - הרשאה להתחייב,אשכול תעשיות,"General air quality activities, not specifically green energy"
+26.03.40.80,תמיכות - אשכול תעשיות,אשכול תעשיות,"General industry support, ambiguous program, not green energy"
+26.03.40.81,תמיכה ביזמים - הרשאה להתחייב,אשכול תעשיות,"General entrepreneur support, ambiguous program, not green energy"
+26.03.40.90,גריטת רכבים,אשכול תעשיות,"Vehicle scrapping is waste management, not green energy"
+26.03.40.92,פעולות פיקוח קרינה בלתי מייננת,אשכול תעשיות,"General radiation supervision, not specifically green energy"
+26.03.41.01,פרוייקטים מקצועיים,פרוייקטים מקצועיים,"General professional projects, ambiguous program, not green energy"
+26.03.41.02,פרויקטים מקצועיים,פרוייקטים סביבתיים,"General professional projects, ambiguous program, not green energy"
+26.03.41.04,פעולות מקצועיות - מזומן,פרוייקטים סביבתיים,"General professional activities, ambiguous program, not green energy"
+26.03.41.05,פרוייקטים מקצועים למימון בשנה שוטפת,פרוייקטים סביבתיים,"General professional projects, ambiguous program, not green energy"
+26.03.41.06,פרוייקטים מקצועיים - הרשאה,פרוייקטים סביבתיים,"General professional projects, ambiguous program, not green energy"
+26.03.41.07,ניטור מימי ים תיכון וים סוף,פרוייקטים סביבתיים,"General water monitoring, not specifically green energy"
+26.03.41.08,פעולות אגף כלכלה ותקינה,פרוייקטים סביבתיים,"General unit activities, ambiguous program, not green energy"
+26.03.41.10,פינוי הפסולת מפעלי הפלדה בעכו,פרוייקטים סביבתיים,"Waste removal, not specifically green energy"
+26.03.41.13,"העברה לרט""ג - פרוייקט שיקום מצדה",פרוייקטים מקצועיים,"General rehabilitation project, not specifically green energy"
+26.03.41.15,ביצוע החלטת ממשלה בנושא קו התפר השלמת חלקו של מינהל מקרקעי ישראל,פרוייקטים סביבתיים,"General government decision, ambiguous program, not green energy"
+26.03.41.23,העברה לרשות הטבע והגנים לצורך ניטור,פרוייקטים סביבתיים,"General monitoring, ambiguous program, not green energy"
+26.03.41.24,רכישת שרותי פיקוח ושיטור,פרוייקטים סביבתיים,"General services, ambiguous program, not green energy"
+26.03.41.26,פרוייקטים כלכליים,פרוייקטים סביבתיים,"General economic projects, ambiguous program, not green energy"
+26.03.41.27,פינוי הפסולת ממפעל הפלדה בעכו,פרוייקטים סביבתיים,"Waste removal, not specifically green energy"
+26.03.41.30,רכישת פקחים ושוטרים,פרוייקטים מקצועיים,"General services, ambiguous program, not green energy"
+26.03.41.32,תרגום חקיקה ישראלית לפי דרישת ה-OECD,פרוייקטים סביבתיים,"General legislation translation, not specifically green energy"
+26.07.01.01,תמיכה במפעלי תעשיה המשקיעים בפרוייקטים באיכות הסביבה,השקעות מפעלי תעשיה,"General environmental projects, not specifically green energy"
+26.07.01.02,הוצאות מינהליות ויעוץ לוועדת ההשקעות במפעלי תעשייה,השקעות מפעלי תעשיה,"General administrative, ambiguous program, not green energy"
+26.07.01.03,תמיכה בשעור של עד %40 מעלויות הקמת המישרפה לפסולת מסוכנת ברמת חובב,השקעות מפעלי תעשיה,"Hazardous waste incinerator, not specifically green energy"
+26.07.01.05,תמיכה במפעלי תעשיה ורפתות,השקעות מפעלי תעשיה,"General support, ambiguous program, not green energy"
+26.07.01.07,"תשתיות משרפת חומ""ס - הוצאות",השקעות מפעלי תעשיה,"Hazardous waste incinerator, not specifically green energy"
+26.07.01.09,"תמיכה במפעלים - הפחתת חמ""ס",השקעות מפעלי תעשיה,"Hazardous materials reduction, not specifically green energy"
+26.07.01.10,קידום תשתיות חקלאיות,השקעות מפעלי תעשיה,"General agricultural infrastructure, not specifically green energy"
+26.08.01.04,תמיכה ביחידות סביבתיות,האגף לחומרים מסוכנים,"General environmental units, not specifically green energy"
+26.09.01.02,"מחקר הים התיכון בשיתוף האו""מ","אירגון האו""מ לאיכות","General environmental research, not specifically green energy"
+26.09.03.01,פעולות האגף לקשרי חוץ,האגף לקשרי חוץ,"General foreign relations, ambiguous program, not green energy"
+26.10.01.01,תמיכות באירגונים ציבוריים לשמירת איכות הסביבה,תמיכות בארגונים,"General environmental preservation, not specifically green energy"
+26.10.02.01,פרוייקטים סביבתיים ורכישת ציוד למניעת מפגעים,מענקים לרשויות מקומיות,"General environmental projects, not specifically green energy"
+26.10.02.02,הפעלת יחידות לאיכות הסביבה,מענקים לרשויות מקומיות,"General environmental units, not specifically green energy"
+26.10.02.03,"רט""ג רכישת שירותים",מענקים לרשויות מקומיות,"General services, ambiguous program, not green energy"
+26.10.02.05,רשות הטבע והגנים - מחקר מינים זרים,מענקים לרשויות מקומיות,"General research, ambiguous program, not green energy"
+26.10.02.07,ניקיון סובב כינרת- תמיכה ברשויות מקומיות,מענקים לרשויות מקומיות,"General cleanup, ambiguous program, not green energy"
+26.10.02.09,"רשטג""ל - העברה לחי בר כרמל",מענקים לרשויות מקומיות,"General transfer, ambiguous program, not green energy"
+26.10.02.11,העברה לרשות הטבע והגנים - ביצוע פרוייקטים,מענקים לרשויות מקומיות,"General project execution, not specifically green energy"
+26.10.02.12,תמיכה ברשויות בתחום התכנון,מענקים לרשויות מקומיות,"General planning support, ambiguous program, not green energy"
+26.10.02.30,ניקיון סובב כנרת - פעולות,מענקים לרשויות מקומיות,"General cleanup, ambiguous program, not green energy"
+26.11.01.05,שכר עידוד,שכר ותפעול,"Generic administrative pay, ambiguous program."
+26.11.01.06,הוצאות פרישה,שכר ותפעול,"Generic administrative pay, ambiguous program."
+26.11.01.07,החזר הוצאות רכב,שכר ותפעול,"Generic administrative pay, ambiguous program."
+26.11.01.09,העסקה לפי שעות,שכר ותפעול,"Generic administrative pay, ambiguous program."
+26.11.01.10,הוצאות תפעול,שכר ותפעול,"Generic operating expenses, ambiguous program."
+26.11.01.11,הדרכה ושכר לימוד,שכר ותפעול,"Generic administrative expenses, ambiguous program."
+26.11.01.12,הוצאות מחשוב,שכר ותפעול,"Generic administrative expenses, ambiguous program."
+26.11.01.13,דמי שימוש בנכסים ממשלתיים,שכר ותפעול,"Generic administrative expenses, ambiguous program."
+26.11.01.16,תשלום לפי פסקי דין,שכר ותפעול,"Generic administrative expenses, ambiguous program."
+26.11.01.18,רכישת שירותי ייעוץ,שכר ותפעול,"Generic administrative expenses, ambiguous program."
+26.11.01.21,צוערים וממשק,שכר ותפעול,"Generic administrative pay, ambiguous program."
+26.11.02.01,הוצאות תפעול,תפעול,"Generic operating expenses, ambiguous program."
+26.11.02.02,הדרכה ושכר לימוד,תפעול,"Generic administrative expenses, ambiguous program."
+26.11.02.03,הוצאות מחשוב,תפעול,"Generic administrative expenses, ambiguous program."
+26.11.02.04,שכר דירה לגורמי חוץ,תפעול,"Generic administrative expenses, ambiguous program."
+26.11.02.07,תשלום לפי פסקי דין,תפעול,"Generic administrative expenses, ambiguous program."
+26.11.02.10,רכישת שירותי ייעוץ,תפעול,"Generic administrative expenses, ambiguous program."
+26.12.01.01,תמיכות ויישום החלטות ממשלה,פעולות יחידות המשרד,"Generic support, ambiguous program."
+26.12.01.03,ערים שקטות,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.05,רשויות נחל ירקון וקישון,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.06,יועצי תכנון,פעולות יחידות המשרד,"Generic administrative expenses, ambiguous program."
+26.12.01.07,רישוי משולב,פעולות יחידות המשרד,"Generic administrative expenses, ambiguous program."
+26.12.01.08,מחשוב לרישוי משולב,פעולות יחידות המשרד,"Generic administrative expenses, ambiguous program."
+26.12.01.09,תמיכות ועדת עזבונות,פעולות יחידות המשרד,"Generic administrative expenses, ambiguous program."
+26.12.01.10,פרוייקטים סביבתיים,פעולות יחידות המשרד,"Generic environmental projects, ambiguous program."
+26.12.01.11,פעולות אשכול משאבי טבע,פעולות יחידות המשרד,"Generic natural resources, ambiguous program."
+26.12.01.12,הוצאות באשכול משאבי טבע,פעולות יחידות המשרד,"Generic natural resources, ambiguous program."
+26.12.01.13,הוצאה מותנית למדען ואשכול תכנון,פעולות יחידות המשרד,"Generic administrative expenses, ambiguous program."
+26.12.01.14,פעולות אשכול תכנון ומדיניות,פעולות יחידות המשרד,"Generic administrative expenses, ambiguous program."
+26.12.01.15,פעולות אשכול תעשיות,פעולות יחידות המשרד,"Generic administrative expenses, ambiguous program."
+26.12.01.16,פעולות אגף איכות אוויר,פעולות יחידות המשרד,"Air quality, not directly green energy."
+26.12.01.17,"מדען ראשי - סקרים, מחקרים ופעולות",פעולות יחידות המשרד,"Generic research, ambiguous program."
+26.12.01.18,הפעלת יחידות סביבתיות,פעולות יחידות המשרד,"Generic environmental activities, ambiguous program."
+26.12.01.19,קורונה - האצת טכנולוגיות סביבה,פעולות יחידות המשרד,"Generic environmental technologies, ambiguous program."
+26.12.01.20,פארק אריאל שרון,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.21,פיתוח פארק נחל באר שבע,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.26,פרוייקט המצוק החופי,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.28,פיתוח המצוק החופי,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.30,מזומן תכנית לטיפול בזיהום אוויר במפרץ חיפה,פעולות יחידות המשרד,"Air pollution treatment, not directly green energy."
+26.12.01.31,הרשאה תכנית לטיפול בזיהום אוויר במפרץ חיפה,פעולות יחידות המשרד,"Air pollution treatment, not directly green energy."
+26.12.01.32,פארק אריאל שרון - פיתוח,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.34,טיפול בלישמניה,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.35,פעולות הסברה,פעולות יחידות המשרד,"Generic administrative expenses, ambiguous program."
+26.12.01.37,תמיכות בעמותות,פעולות יחידות המשרד,"Generic support, ambiguous program."
+26.12.01.38,פעולות תכנית זיהום אוויר,פעולות יחידות המשרד,"Air pollution treatment, not directly green energy."
+26.12.01.39,תמיכות בתכנית זיהום אוויר,פעולות יחידות המשרד,"Air pollution treatment, not directly green energy."
+26.12.01.40,מפגעים סביבתיים חרבות ברזל,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.41,חירום חרבות ברזל 2024,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.44,תמיכות בצער בעלי חיים,פעולות יחידות המשרד,"Not green energy, ambiguous program."
+26.12.01.52,תמיכה בעמותות,פעולות יחידות המשרד,"Generic support, ambiguous program."
+26.13.02.02,עבודה בלתי צמיתה,הקרן לשמירת הנקיון -,"Generic administrative pay, ambiguous program."
+26.13.02.03,שעות נוספות,חשבון כללי - הקרן,"Generic administrative pay, ambiguous program."
+26.13.02.04,כוננות,חשבון כללי - הקרן,"Generic administrative pay, ambiguous program."
+26.13.02.05,החזר הוצאות רכב,חשבון כללי - הקרן,"Generic administrative pay, ambiguous program."
+26.13.02.07,פעולות מקצועיות,חשבון כללי - הקרן,"Generic professional activities, ambiguous program."
+26.13.02.08,תמיכות,חשבון כללי - הקרן,"Generic support, ambiguous program."
+26.13.02.10,פעולות מקצועיות על פי חוק השקיות,חשבון כללי - הקרן,"Not green energy, ambiguous program."
+26.13.02.11,תמיכות על פי חוק השקיות,חשבון כללי - הקרן,"Not green energy, ambiguous program."
+26.13.02.15,שירותי שוטרים,חשבון כללי - הקרן,"Not green energy, ambiguous program."
+26.13.03.02,פעולות מקצועיות,חשבון פקדון - הקרן,"Generic professional activities, ambiguous program."
+26.13.03.03,תמיכות,חשבון פקדון - הקרן,"Generic support, ambiguous program."
+26.14.01.02,תמיכות,פרוייקטים סביבתיים,"Generic support, ambiguous program."
+26.14.01.03,רכש,פרוייקטים סביבתיים,"Generic purchases, ambiguous program."
+26.98.01.05,רזרבה להתייקרויות - שינוע פסולת והטמנתה,רזרבה להתייקרויות,"Not green energy, ambiguous program."
+26.98.02.02,רזרבה לטיפול במפגעים ולמדיניות סביבתית,רזרבה לפעולות,"Not green energy, ambiguous program."
+26.98.02.03,השתתפות בנציבות המים - מסע הסברה לחיסכון במים,רזרבה לפעולות,"Not green energy, ambiguous program."
+26.98.02.05,רזרבה לפעולות סביבתיות,רזרבה לפעולות,"Not green energy, ambiguous program."
+26.98.02.07,רזרבה להשקעות במתקן מרכזי לאיסוף פסולת חקלאית - החלטת ממשלה 1464 מיום 5.2.2004,רזרבה לפעולות,"Not green energy, ambiguous program."
+31.01.01.03,כח אדם לפרוייקטי ביטחון,הוצאות ביטחוניות,"Security projects, not green energy."
+33.06.02.08,מענקי הסכמים אחרים,תמיכות ומחקרים בחקלאות,"Generic grants, no green energy connection."
+34.01.01.02,עבודה בלתי צמיתה,שירותים מרכזיים,"Generic administrative pay, ambiguous program."
+34.01.01.03,שעות נוספות,שירותים מרכזיים,"Generic administrative pay, ambiguous program."
+34.01.01.04,כוננויות,שירותים מרכזיים,"Generic administrative pay, ambiguous program."
+34.01.01.05,פרישת עובדים,שירותים מרכזיים,"Generic administrative pay, ambiguous program."
+34.01.01.07,שעות סטודנטים,שירותים מרכזיים,"Generic administrative pay, ambiguous program."
+34.01.01.14,החזר הוצאות רכב שירות ואישי,שירותים מרכזיים,"Generic administrative pay, ambiguous program."
+34.01.01.15,שכר עידוד,שירותים מרכזיים,"Generic administrative pay, ambiguous program."
+34.01.01.16,הדרכה והשתלמות,שירותים מרכזיים,"Generic administrative expenses, ambiguous program."
+34.01.02.01,"נסיעות לחו""ל",אמרכלות ופעולות,"Generic administrative expenses, ambiguous program."
+34.01.02.02,"קניית שרותי כ""א",אמרכלות,"Generic administrative expenses, ambiguous program."
+34.01.02.03,שיפוץ מבנה המשרד,אמרכלות ופעולות,"Generic administrative expenses, ambiguous program."
+34.01.02.12,השתתפות רשות הגז הטבעי,אמרכלות ופעולות,Natural gas is not green energy.
+34.01.02.14,אחזקת משרדים,אמרכלות,"Generic administrative expenses, ambiguous program."
+34.01.02.17,דיור ממשלתי,אמרכלות,"Generic administrative expenses, ambiguous program."
+34.01.02.19,דמי שימוש בדיור ממשלתי,אמרכלות ופעולות,"Generic administrative expenses, ambiguous program."
+34.01.02.22,הוצאות במימון רשות הגז הטבעי,אמרכלות ופעולות,Natural gas is not green energy.
+34.01.02.23,פעולות המשרד,אמרכלות ופעולות,"Generic ministry activities, ambiguous program."
+34.01.02.25,אבטחת השר,אמרכלות ופעולות,"Generic administrative expenses, ambiguous program."
+34.01.02.35,הוצאות חשמל,אמרכלות ופעולות,"General electricity expenses, not specific to green energy."
+34.01.02.40,רווחה,אמרכלות ופעולות,"General welfare expenses, not specific to green energy."
+34.01.02.51,"מחשוב - רכש, תחזוקה ומערכות מידע",אמרכלות ופעולות,"General computing expenses, not specific to green energy."
+34.01.02.53,"הוצאה סקר סיכונים קצא""א",אמרכלות ופעולות,"Risk survey for oil pipeline, not green energy."
+34.01.02.54,בוררות חברת חשמל,אמרכלות ופעולות,"General arbitration for electric company, not green energy."
+34.02.01.01,"עב""צ לשכת השר",שירותים מרכזיים,"General administrative staff, not specific to green energy."
+34.02.01.02,"עב""צ לשכת מנכ""ל",שירותים מרכזיים,"General administrative staff, not specific to green energy."
+34.02.01.03,"עב""צ לשכת מתאם משק המים",שירותים מרכזיים,"General administrative staff, not specific to green energy."
+34.02.01.04,עבודה בלתי צמיתה,שירותים מרכזיים,"General temporary work, not specific to green energy."
+34.02.01.05,החזר הוצאות רכב שירות ואישי,שירותים מרכזיים,"General vehicle expenses, not specific to green energy."
+34.02.01.06,שעות נוספות,שירותים מרכזיים,"General overtime expenses, not specific to green energy."
+34.02.01.07,שכר עידוד,שירותים מרכזיים,"General incentive pay, not specific to green energy."
+34.02.01.08,רזרבה - פיקוח יחידת המכרות,שירותים מרכזיים,"Reserve for mines unit, not green energy."
+34.02.01.09,רזרבה,שירותים מרכזיים,"General salary reserve, not specific to green energy."
+34.02.01.10,ייעוץ למרכז להתפלת מי ים ויבוא מים,שירותים מרכזיים,"Consulting for water desalination, not green energy."
+34.02.01.13,רזרבה ליחידת הנפט,שירותים מרכזיים,"Reserve for oil unit, not green energy."
+34.02.01.14,"רזרבה לעב""צ",שירותים מרכזיים,"General salary reserve, not specific to green energy."
+34.02.01.15,יעוץ למכרז להתפלה - מישור רותם,שירותים מרכזיים,"Consulting for water desalination, not green energy."
+34.02.01.17,יעוץ להסכם עקרונות - ליבוא מים,שירותים מרכזיים,"Consulting for water import, not green energy."
+34.06.03.02,עבודה בלתי צמיתה,שירותים מרכזיים,"General temporary work, not specific to green energy."
+34.06.03.03,שעות נוספות,שירותים מרכזיים,"General overtime expenses, not specific to green energy."
+34.06.03.04,השתלמות חוקרים,שירותים מרכזיים,"General researcher training, not specific to green energy."
+34.06.03.05,עבודה בלתי צמיתה על חשבון הכנסות מגורמי חוץ,שירותים מרכזיים,"General temporary work, not specific to green energy."
+34.06.03.06,שעות נוספות על חשבון הכנסות מגורמי חוץ,שירותים מרכזיים,"General overtime expenses, not specific to green energy."
+34.06.03.07,פעולות רווחה,שירותים מרכזיים,"General welfare activities, not specific to green energy."
+34.06.03.08,שעות סטודנטים,שירותים מרכזיים,"General student hours, not specific to green energy."
+34.06.03.09,פרישת עובדים,שירותים מרכזיים,"General employee retirement, not specific to green energy."
+34.06.03.19,כוננויות,שירותים מרכזיים,"General on-call duty, not specific to green energy."
+34.06.03.20,שבתונים,שירותים מרכזיים,"General sabbaticals, not specific to green energy."
+34.06.03.22,רזרבה למחקרים,שירותים מרכזיים,"General research reserve, not specific to green energy."
+34.06.03.24,"מחקרים ע""ח קרנות מחקר",שירותים מרכזיים,"General research, not specific to green energy."
+34.06.03.25,"עב""צ ע""ח קרנות מחקר",שירותים מרכזיים,"General temporary staff for research, not specific to green energy."
+34.06.03.27,החזר הוצ' רכב שירות ואישי,שירותים מרכזיים,"General vehicle expenses, not specific to green energy."
+34.06.03.29,שכר עידוד,שירותים מרכזיים,"General incentive pay, not specific to green energy."
+34.06.03.35,שעות סטודנטים,שירותים מרכזיים,"General student hours, not specific to green energy."
+34.06.04.07,דמי שימוש בדיור ממשלתי,אמרכלות,"General housing fees, not specific to green energy."
+34.06.04.12,פעולות המכון הגיאולוגי,אמרכלות,"Geological Institute activities, not specific to green energy."
+34.06.04.15,גורמי יציבות ים המלח רכישת ציוד ותוכנה,אמרכלות,"Dead Sea stability, not specific to green energy."
+34.06.04.16,גורמי יציבות ים המלח מחקרים וייעוץ,אמרכלות,"Dead Sea stability research, not specific to green energy."
+34.06.04.17,שרותים מיוחדים,אמרכלות,"General special services, not specific to green energy."
+34.06.04.30,מחקרים עבור הועדה לרעידות אדמה,אמרכלות,"Research for earthquake committee, not specific to green energy."
+34.06.04.31,מודל אגן כלנית,אמרכלות,"Specific basin model, not clearly green energy."
+34.06.04.35,הוצאות חשמל,אמרכלות,"General electricity expenses, not specific to green energy."
+34.06.04.38,קניית שירותים סייסמיים,אמרכלות,"Seismic services, not specific to green energy."
+34.06.04.39,"קניית שירותים - חיא""ל",אמרכלות,"General services purchase, not specific to green energy."
+34.06.04.43,שדרוג המערך הססמי,אמרכלות,"Upgrading seismic array, not specific to green energy."
+34.06.06.02,"ע.ב.צ ע""ח האחוד האירופי","מו""פ האחוד האירופי","General temporary staff, not specific to green energy."
+34.06.06.06,שונות,"מו""פ האחוד האירופי","General miscellaneous expenses, not specific to green energy."
+34.10.01.04,"פרוייקט ""עלי נגב"" השתתפות משרד הפנים",רשויות פיתוח אזוריות,"Regional development project, not specific to green energy."
+34.12.03.06,מידע ומחשוב,יעילות השימוש באנרגיה,"General information and computing, not direct green energy."
+34.13.01.01,מחקרים ויצירת מידע בנושאי תכנון סטטיסטיקה וכלכלה,יצירת מידע והפצתו,"Generic research, no direct link to green energy."
+34.13.01.02,יעוץ וחוות דעת מומחים בנושאי תשתית,יצירת מידע והפצתו,"Generic consultation, no direct link to green energy."
+34.13.01.03,ייעוץ ומחקרים,יצירת מידע והפצתו,Generic consultation and studies.
+34.13.01.04,פרסום והפצת מידע,יצירת מידע והפצתו,Generic publication and information dissemination.
+34.13.01.05,ייעוץ ארוך טווח,יצירת מידע והפצתו,Generic long-term consultation.
+34.13.01.06,ייעוץ ארוך טווח,יצירת מידע והפצתו,Generic long-term consultation.
+34.13.01.07,פרסום לחסכון במים,יצירת מידע והפצתו,"About water saving, not green energy."
+34.13.01.09,דמי חבר בארגונים,יצירת מידע והפצתו,Generic membership fees.
+34.13.01.11,"השתתפות בתקציב משרד התחבורה - ניבוי להנעת אוטובוסים בגפ""מ",יצירת מידע והפצתו,"About LPG, not typically green energy."
+34.13.01.14,"השתתפות המשרד לאיכ""ס",יצירת מידע והפצתו,"Generic environmental participation, no direct link to green energy."
+34.13.01.16,יעוץ בנושא כריית חול,יצירת מידע והפצתו,"About sand mining, not green energy."
+34.13.01.18,רזרבה לפעולות מידע,יצירת מידע והפצתו,Generic reserve for information activities.
+34.13.01.19,הכנת תקן ישראלי למערכת הגז הטבעי,יצירת מידע והפצתו,"About natural gas, not green energy."
+34.13.01.24,פרסום,יצירת מידע והפצתו,Generic publication.
+34.13.01.25,תכנון קווי גז טבעי,יצירת מידע והפצתו,"About natural gas infrastructure, not green energy."
+34.13.01.26,ביצוע תכניות מתקני חשמל,יצירת מידע והפצתו,"Generic electricity facility plans, no green energy link."
+34.13.01.27,תיכנון מתקני דלק,יצירת מידע והפצתו,"About fuel facilities, not green energy."
+34.16.01.01,מענקים לפיתוח תשתיות חשמל,מענקים לפיתוח תשתית,Generic electricity infrastructure development.
+34.16.03.01,עתודה להקמת גוף לפיקוח על משק החשמל,הקמת גוף לפיקוח על משק,Generic electricity market oversight.
+34.16.03.02,עבודה בלתי צמיתה,הקמת גוף לפיקוח על משק,Generic temporary work.
+34.16.03.04,"יעוץ וחו""ד מומחים",הקמת גוף לפיקוח על משק,Generic consultation and expert opinions.
+34.16.03.05,"נסיעות וחו""ל",הקמת גוף לפיקוח על משק,Generic travel expenses.
+34.16.03.07,קנית רכבים,הקמת גוף לפיקוח על משק,Generic vehicle purchase.
+34.16.03.08,פעולות הרשות,הקמת גוף לפיקוח על משק,Generic authority activities.
+34.16.03.10,החזר הוצאות רכב שרות,הקמת גוף לפיקוח על משק,Generic service vehicle expenses.
+34.16.04.01,פעולות לישום חוק משק החשמל,פעילות ליישום חוק משק,Generic electricity market law implementation.
+34.16.04.02,"העסקת חברת ייעוץ בינ""ל - מכרז יצרן פרטי",פעילות ליישום חוק משק,Generic consulting firm employment.
+34.16.04.03,ע.ב.צ.- תגבור מנהל החשמל,פעילות ליישום חוק משק,Generic temporary work.
+34.16.04.04,החזר הוצאות רכב שירות,פעילות ליישום חוק משק,Generic service vehicle expenses.
+34.16.04.05,שעות נוספות - תגבור מנהל החשמל,פעילות ליישום חוק משק,Generic overtime expenses.
+34.16.04.06,פעילות ליישום חוקי החשמ ל,פעילות ליישום חוק משק,Generic electricity laws implementation.
+34.16.04.07,רזרבה,פעילות ליישום חוק משק,Generic reserve.
+34.16.04.08,ייעוץ בנושא שינויים מבניים בחשמל,פעילות ליישום חוק משק,Generic electricity market structural changes.
+34.16.04.09,רזרבה לייעוץ בנושא שינויים מבניים,פעילות ליישום חוק משק,Generic reserve for consultation.
+34.16.04.10,אכיפה במשק החשמל,פעילות ליישום חוק משק,Generic electricity market enforcement.
+34.16.04.11,מחקרים בתחום פיתוח משק החשמל,פעילות ליישום חוק משק,Generic electricity market development studies.
+34.17.01.01,פעולות לחקר ימים ואגמים,מענקים למוסדות מחקר,"About marine and lake research, not energy."
+34.17.01.02,השקעה בהון בעלים המכון לחקר הימים והאגמים,מענקים למוסדות מחקר,"About marine and lake research, not energy."
+34.17.01.03,סקרים ומענקי מחקר,מענקים למוסדות מחקר,Generic surveys and research grants.
+34.17.01.04,דמי חבר באירגונים,מענקים למוסדות מחקר,Generic membership fees.
+34.17.01.05,סקרים ומענקי מחקר,מענקים למוסדות מחקר,Generic surveys and research grants.
+34.17.01.06,חקלאות ימית,מענקים למוסדות מחקר,"About marine agriculture, not energy."
+34.17.01.07,רכישת שירותי מחקר ימים ואגמים,מענקים למוסדות מחקר,"About marine and lake research, not energy."
+34.17.01.08,מחקרי נפט,מענקים למוסדות מחקר,"About oil research, not green energy."
+34.17.01.09,סקרים ומחקרים,מענקים למוסדות מחקר,Generic surveys and studies.
+34.17.01.10,רזרבה לפעילות חקר ימים,מענקים למוסדות מחקר,"About marine research, not energy."
+34.17.01.11,רזרבה לפעולות חקלאות ימית,מענקים למוסדות מחקר,"About marine agriculture, not energy."
+34.17.01.12,השקעה בהון בעלים - המכון הגיאופיזי,מענקים למוסדות מחקר,"Geophysical institute, not specifically green energy."
+34.17.01.19,חברות בארגונים בינלאומיים בנושא מדעי האדמה,מענקים למוסדות מחקר,"About earth sciences, not specifically green energy."
+34.17.05.01,רזרבה לפעילות מחקר,רזרבה למחקר,Generic reserve for research.
+34.18.01.01,רזרבה להתיקרויות שכר,רזרבה להתייקרויות,Generic salary reserve.
+34.18.01.02,רזרבה להתיקרויות קניות,רזרבה להתייקרויות,Generic purchases reserve.
+34.18.01.03,רזרבה להתיקרות בפעולות,רזרבה להתייקרויות,Generic activities reserve.
+34.18.01.04,רזרבה להתיקרויות רשויות  פיתוח איזוריות,רזרבה להתייקרויות,Generic regional development reserve.
+34.18.01.05,"רזרבה להתיקרויות הוצאות  בחו""ל",רזרבה להתייקרויות,Generic overseas expenses reserve.
+34.18.01.06,רזרבה לעמידה ביעדי גרעון,רזרבה להתייקרויות,Generic reserve for deficit targets.
+34.18.01.07,רזרבה לעמידה ביעד ההוצאה,רזרבה להתייקרויות,Generic reserve for expenditure target.
+34.20.02.05,תחזוקת תחנות הידרומטריות ורכישת שרותים מקצועיים,אמרכלות,"About hydrometric stations, not energy."
+34.30.01.02,עבודה בלתי צמיתה,הוצאות שכר,Generic temporary work.
+34.30.01.03,שעות נוספות,הוצאות שכר,Generic overtime expenses.
+34.30.01.04,כוננות,הוצאות שכר,Generic on-call duty expenses.
+34.30.01.05,הוצאות פרישה,הוצאות שכר,Generic retirement expenses.
+34.30.01.06,העסקת סטודנטים,הוצאות שכר,Generic student employment.
+34.30.01.07,החזר הוצאות רכב,הוצאות שכר,Generic vehicle expense reimbursement.
+34.30.01.08,שכר עידוד,הוצאות שכר,Generic incentive pay.
+34.30.01.09,עבודה בלתי צמיתה - צוערים,הוצאות שכר,Generic temporary work for cadets.
+34.30.01.10,עידכון שיטות שכר עידוד,הוצאות שכר,Generic incentive pay methods update.
+34.30.01.11,עדכון מערכות שכר עידוד,הוצאות שכר,Generic incentive pay systems update.
+34.30.02.01,הוצאות תפעול,תפעול ופעולות,Generic operating expenses.
+34.30.02.02,שכר דירה,תפעול ופעולות,Generic rent expenses.
+34.30.02.04,רווחה והדרכה,תפעול ופעולות,Generic welfare and training.
+34.30.02.07,הוצאות מחשוב,תפעול ופעולות,Generic computing expenses.
+34.30.02.09,הדרכה והשתלמויות,תפעול ופעולות,Generic training and professional development.
+34.30.02.11,"נסיעות לחו""ל",תפעול ופעולות,Generic overseas travel expenses.
+34.30.02.12,אבטחת שר,תפעול ופעולות,Generic minister's security.
+34.30.02.14,עתודת הוצאות תפעול,תפעול ופעולות,Generic operating expenses reserve.
+34.30.02.17,דמי שימוש בנכסים ממשלתיים,תפעול ופעולות,Generic usage fees for government assets.
+34.30.02.19,מחשוב ומעבר לשירותי ענן,תפעול ופעולות,Generic computing and cloud services.
+34.30.02.20,פעילות שוטפת משרד,תפעול ופעולות,Generic ministry routine activity.
+34.30.02.22,טיסות,תפעול ופעולות,Generic flight expenses.
+34.30.03.05,פעולות המדען הראשי,יחידות מקצועיות,Generic Chief Scientist activities.
+34.30.03.06,המדען הראשי – הרשאה,יחידות מקצועיות,Generic Chief Scientist authorization.
+34.30.03.07,פעולות דלק וחשמל,יחידות מקצועיות,Generic fuel and electricity activities.
+34.30.03.08,פעולות אוצרות טבע,יחידות מקצועיות,Generic natural resources activities.
+34.30.03.09,ייעוץ ומחקרים,יחידות מקצועיות,Generic consultation and studies.
+34.30.03.10,ייעוץ ומחקרים – הרשאה,יחידות מקצועיות,Generic consultation and studies authorization.
+34.30.03.11,ייעוץ תכנוני - הרשאה,יחידות מקצועיות,Generic planning consultation authorization.
+34.30.03.12,פרסום והפצת מידע,יחידות מקצועיות,Generic publication and information dissemination.
+34.30.03.16,הוצאות מלאי דלקים בשעת חירום,יחידות מקצועיות,About emergency fossil fuel stock.
+34.30.03.17,פעולות שונות של יחידות מקצועיות,יחידות מקצועיות,Generic professional unit activities.
+34.30.03.18,מאגר מידע נפט וגז,יחידות מקצועיות,"About oil and gas, not green energy."
+34.30.03.19,מענקים לתחנות תדלוק בגז טבעי דחוס,יחידות מקצועיות,"About compressed natural gas, not green energy."
+34.30.03.20,שדרוג תשתיות חלוקת גז טבעי,יחידות מקצועיות,"About natural gas infrastructure, not green energy."
+34.30.03.21,חיבור צרכנים מרוחקים לגז טבעי,יחידות מקצועיות,"About natural gas connection, not green energy."
+34.30.03.22,רזרבה לתקציב התאמות  2019,יחידות מקצועיות,Generic reserve for adjustments.
+34.30.03.23,ייעוץ רפורמות,יחידות מקצועיות,Generic reform consultation.
+34.30.03.25,חקר ימים ואגמים,יחידות מקצועיות,"About marine and lake research, not energy."
+34.30.03.26,אתרי אחסון דלקים,יחידות מקצועיות,About fossil fuel storage sites.
+34.30.03.28,החברה לחקר ימים ואגמים,יחידות מקצועיות,"About marine and lake research, not energy."
+34.30.03.30,תמיכה במקטע מאגרים קטנים,יחידות מקצועיות,"Vague ""small reservoir segment"" support."
+34.30.03.32,מנהל המערכת,יחידות מקצועיות,Generic system administrator.
+34.30.03.34,דמי שימוש משרד האנרגיה,יחידות מקצועיות,"Administrative line, no subject connection."
+34.30.03.38,הפחתות - מחקרים למכון גיאולוגי,יחידות מקצועיות,Geological research not directly green energy.
+34.30.03.39,הוצאות מפעילות אכיפה - דלקים,יחידות מקצועיות,"Related to fuels, not green energy."
+34.30.03.40,הכנסות מפעילות אכיפה - דלקים,יחידות מקצועיות,"Related to fuels, not green energy."
+34.30.03.42,ביטחון סייבר ואבטחת מידע,יחידות מקצועיות,"Administrative line, no subject connection."
+34.30.03.43,רשת בטחון לחלוקת גז,יחידות מקצועיות,"Related to gas distribution, not green energy."
+34.30.03.45,תמיכה ברשויות מקומיות – חירום (חרבות ברזל),יחידות מקצועיות,"Emergency support, no subject connection."
+34.30.03.47,"מו""פ במגזר פרטי – מדען ראשי",יחידות מקצועיות,"General R&D, no specific green energy connection."
+34.30.03.48,"מו""פ באקדמיה ובמכוני מחקר ממשלתיים – מדען ראשי",יחידות מקצועיות,"General R&D, no specific green energy connection."
+34.30.03.49,יועצי מינהל אוצרות טבע,יחידות מקצועיות,"Natural resources too broad, no specific green energy."
+34.30.03.50,יועצי מחשוב,יחידות מקצועיות,"Administrative line, no subject connection."
+34.30.03.51,פרויקטי פסולת - מדען ראשי,יחידות מקצועיות,Waste projects not explicitly green energy.
+34.30.03.53,הכנסה מהקרן לאזרחי ישראל,יחידות מקצועיות,"General income, no subject connection."
+34.30.03.55,תמיכה לפריסת רשת החלוקה בירושלים,יחידות מקצועיות,"General distribution network, no green energy connection."
+34.30.04.01,מדען - סקרים ומענקים,יחידות מקצועיות,"General R&D, no specific green energy connection."
+34.30.04.02,מדען - הרשאה - סקרים ומענקים,יחידות מקצועיות,"General R&D, no specific green energy connection."
+34.30.05.01,פיקוח ובדיקות במשק הדלק והחשמל,מנהל הדלק ואוצרות טבע,"Related to fuel and general electricity, not green energy."
+34.30.05.02,פעולות אוצרות טבע,מנהל הדלק ואוצרות טבע,"Natural resources too broad, no specific green energy."
+34.30.05.03,הכנסות ממאגר תל-ארד,מנהל הדלק ואוצרות טבע,"Related to natural gas, not green energy."
+34.30.06.01,ייעוץ ומחקרים,ייעוץ מקצועי ומחקרים,"General consulting and research, no subject connection."
+34.30.06.02,ייעוץ ומחקרים - הרשאה,ייעוץ מקצועי ומחקרים,"General consulting and research, no subject connection."
+34.30.06.04,ייעוץ תכנוני - הרשאה,ייעוץ מקצועי ומחקרים,"General planning consulting, no subject connection."
+34.30.06.05,פרסום והפצת מידע,ייעוץ מקצועי ומחקרים,"General information dissemination, no subject connection."
+34.30.06.06,חברות בארגונים וכנסים,ייעוץ מקצועי ומחקרים,"General memberships, no subject connection."
+34.32.01.98,"חיא""ל הוצאה - לא לתקצוב - לצורך פעילות במרכב""ה",רזרבה להתייקרויות,"Administrative line, no subject connection."
+34.32.01.99,"חיא""ל הכנסה - לא לתקצוב - לצורך פעילות במרכב""ה",רזרבה להתייקרויות,"Administrative line, no subject connection."
+35.01.01.01,הועדה לאנרגיה אטומית,הועדה לאנרגיה אטומית,Atomic energy is not green energy.
+38.02.01.01,קרן למחקר ופיתוח תעשיתי,"מענקי מחקר ופיתוח עפ""י","General industrial R&D, no specific green energy."
+38.02.01.02,חברות הזנק,"מענקי מחקר ופיתוח עפ""י","General startup companies, no subject connection."
+38.02.01.03,גביה מזכאי קרן מחקר,"מענקי מחקר ופיתוח עפ""י","General research fund income, no subject connection."
+38.02.01.04,החזרים ממקבלי מענקים,"מענקי מחקר ופיתוח עפ""י","General grant refunds, no subject connection."
+38.02.01.05,הכנסות מתמלוגים,"מענקי מחקר ופיתוח עפ""י","General royalty income, no subject connection."
+38.02.01.06,"מו""פ בחברות מסורתיות","מענקי מחקר ופיתוח עפ""י","General R&D, no specific green energy connection."
+38.02.01.07,"מו""פ בחברות ההסדר-ללא תמלוגים","מענקי מחקר ופיתוח עפ""י","General R&D, no specific green energy connection."
+38.02.01.09,קניית שירותי ניהול,"מענקי מחקר ופיתוח עפ""י","Administrative line, no subject connection."
+38.02.01.10,הכנסות מהאיחוד האירופי,"מענקי מחקר ופיתוח עפ""י","General income, no subject connection."
+38.02.01.11,קרן למחקר ופיתוח תעשייתי בפריפריה,"מענקי מחקר ופיתוח עפ""י","General industrial R&D, no specific green energy."
+38.02.01.12,"הכשרת כ""א טכנולוגי","מענקי מחקר ופיתוח עפ""י","General personnel training, no subject connection."
+38.02.01.13,"הכשרת כ""א טכנולוגי הפחתה לקרן הניהול","מענקי מחקר ופיתוח עפ""י","General personnel training, no subject connection."
+38.02.01.15,"דמי קיום - הסדרת כ""א טכנולוגי","מענקי מחקר ופיתוח עפ""י","General personnel regulation, no subject connection."
+38.02.01.16,מחקר ופיתוח בירושלים,"מענקי מחקר ופיתוח עפ""י","General R&D, no specific green energy connection."
+38.02.01.17,"קרן המו""פ חברות גדולות - מסלול רגיל","מענקי מחקר ופיתוח עפ""י","General R&D, no specific green energy connection."
+38.02.01.18,"קרן המו""פ חברות גדולות - שיפור טכנולוגי","מענקי מחקר ופיתוח עפ""י","General R&D, no specific green energy connection."
+38.02.01.19,"קרן המו""פ חברות קטנות - מסלול רגיל","מענקי מחקר ופיתוח עפ""י","General R&D, no specific green energy connection."
+38.02.01.20,"קרן המו""פ חברות קטנות - שיפור טכנולוגי","מענקי מחקר ופיתוח עפ""י","General R&D, no specific green energy connection."
+38.02.01.21,השתתפות במשרד המדע בגין מימון ביניים למרכז לקשרים אקדמיים וחינוכיים,"מענקי מחקר ופיתוח עפ""י","General academic relations, no subject connection."
+38.02.01.22,קרן לקשרים אקדמאים בין ישראל לחבר המדינות העצמאיות,"מענקי מחקר ופיתוח עפ""י","General academic relations, no subject connection."
+38.02.01.23,הוצאות משפטיות,"מענקי מחקר ופיתוח עפ""י","Administrative line, no subject connection."
+38.02.01.98,הכנסות מקרנות מחקר,"מענקי מחקר ופיתוח עפ""י","General research fund income, no subject connection."
+38.02.02.01,מענקים לשלב המעבר מפיתוח ליצור,מענקים מנהליים,"General development to production, no subject connection."
+38.02.02.02,קידום טכנולוגי במגזר הערבי: החלטה 412,"מענקים לשלבי מו""פ","General technological promotion, no subject connection."
+38.02.02.03,חממות ליזמות טכנולוגית,"מענקים לשלבי מו""פ","General technological entrepreneurship, no subject connection."
+38.02.02.04,מנהלת חממות -העברה,תוכניות מחקר ופיתוח שלא,"General incubator administration, no subject connection."
+38.02.02.05,"מו""פ גנרי","מענקים לשלבי מו""פ","General R&D, no specific green energy connection."
+38.02.02.06,"השתתפות משרד הביטחון במגנ""ט","מענקים לשלבי מו""פ","General R&D program, no specific green energy."
+38.02.02.07,"מימ""ד- מו""פ דואלי","מענקים לשלבי מו""פ","General R&D, no specific green energy connection."
+38.02.02.08,מסלול לקידום מחקר אקדמי בעל פוטנציאל לקליטה בתעשייה,"מענקים לשלבי מו""פ","General academic research, no subject connection."
+38.02.02.09,"מרכזי מו""פ פיננסי","מענקים לשלבי מו""פ","General R&D centers, no subject connection."
+38.02.02.10,הכנסות תמלוגים מפרויקטי חממות,"מענקים לשלבי מו""פ","General royalty income, no subject connection."
+38.02.02.12,חממות שנה ב',"מענקים לשלבי מו""פ","General incubators, no subject connection."
+38.02.02.14,מרכז טכנולוגי למים בשדה בוקר,"מענקים לשלבי מו""פ",Water technology not directly green energy.
+38.02.02.15,מנהלת החממות,"מענקים לשלבי מו""פ","General incubator administration, no subject connection."
+38.02.02.16,"מנהלת מגנ""ט","מענקים לשלבי מו""פ","General R&D program, no specific green energy."
+38.02.02.19,קרן צרפת סבסוד אשראי,תוכניות מחקר ופיתוח שלא,"General credit subsidy, no subject connection."
+38.02.02.20,קרן מענקים לממציאים,"מענקים לשלבי מו""פ","General grants for inventors, no subject connection."
+38.02.02.21,"הכנסות מתכנית ""תנופה""","מענקים לשלבי מו""פ","General program income, no subject connection."
+38.02.02.22,קרן ההזנק,"מענקים לשלבי מו""פ","General startup fund, no subject connection."
+38.02.02.24,מינהלת תכנית תנופה,"מענקים לשלבי מו""פ","General program administration, no subject connection."
+38.02.02.25,"מו""פ אירופי",תוכניות מחקר ופיתוח שלא,"General R&D, no specific green energy connection."
+38.02.02.28,"השתתפות משרד התמ""ס",תוכניות מחקר ופיתוח שלא,"General ministry participation, no subject connection."
+38.02.02.29,הפחתה לתקציב מרכז,תוכניות מחקר ופיתוח שלא,"General budget reduction, no subject connection."
+38.02.02.30,"מו""פ לצרכים מיוחדים","מענקים לשלבי מו""פ","General R&D, no specific green energy connection."
+38.02.02.31,"השתתפות בות""ת- ביו בבן גוריון","מענקים לשלבי מו""פ","General bio-research, no specific green energy."
+38.02.02.32,"השתתפות ות""ת במו""פ אירופי",תוכניות מחקר ופיתוח שלא,"General R&D, no specific green energy connection."
+38.02.02.33,"השתתפות מדע- ישום הסכם המו""פ","מענקים לשלבי מו""פ","General R&D agreement, no subject connection."
+38.02.02.34,"השתתפות ות""ת- ישום הסכם המו""פ","מענקים לשלבי מו""פ","General R&D agreement, no subject connection."
+38.02.02.35,"מתי מו""פ","מענקים לשלבי מו""פ","General R&D, no specific green energy connection."
+38.02.02.36,"הפחתה מתגבור תוכניות מו""פ",תוכניות מחקר ופיתוח שלא,"General R&D program, no subject connection."
+38.02.02.38,היי טק קומישן,תוכניות מחקר ופיתוח שלא,"General high-tech commission, no subject connection."
+38.02.02.40,היי-טק קומישן - העברה לקרן הניהול,תוכניות מחקר ופיתוח שלא,"General high-tech commission, no subject connection."
+38.02.02.45,קרן משותפת סינגפור - ישראל,"מענקים לשלבי מו""פ","General joint fund, no subject connection."
+38.02.02.46,קרן ישראל- קוריאה,"מענקים לשלבי מו""פ","General joint fund, no subject connection."
+38.02.02.48,קרן משותפת קנדה ישראל,"מענקים לשלבי מו""פ","General joint fund, no subject connection."
+38.02.02.49,קרן בריטניה - ישראל,"מענקים לשלבי מו""פ","General joint fund, no subject connection."
+38.02.02.51,הסכם עם הודו,"מענקים לשלבי מו""פ","General international agreement, no subject connection."
+38.02.02.52,הסכם עם אוסטרליה,"מענקים לשלבי מו""פ","General international agreement, no subject connection."
+38.02.02.55,הסכם עם ארגון CERN,"מענקים לשלבי מו""פ",CERN is not related to green energy.
+38.02.02.56,דמי חבר ב- ESRF,"מענקים לשלבי מו""פ",ESRF is not related to green energy.
+38.02.02.57,"השתתפות בתקציב ות""ת למימון תל""ם","מענקים לשלבי מו""פ","General program funding, no subject connection."
+38.02.02.58,השתתפות במשרד הבטחון - פרוייקט מאיץ הפרוטונים,"מענקים לשלבי מו""פ",Proton accelerator not related to green energy.
+38.02.02.60,השתתפות משרד המדע,תוכניות מחקר ופיתוח שלא,"General ministry participation, no subject connection."
+38.02.02.61,"ות""ת",תוכניות מחקר ופיתוח שלא,"General administrative line, no subject connection."
+38.02.02.62,"דמי קיום - הסבת כ""א טכנולוגי",תוכניות מחקר ופיתוח שלא,"General personnel retraining, no subject connection."
+38.02.02.63,השתתפות משרד החקלאות,"מענקים לשלבי מו""פ","General ministry participation, no subject connection."
+38.02.02.64,"מו""פ עסקי בחקלאות","מענקים לשלבי מו""פ","General agricultural R&D, no subject connection."
+38.02.02.65,ייעוץ לקידום קשרי אקדמיה - תעשייה,"מענקים לשלבי מו""פ","General consulting, no subject connection."
+38.02.02.67,הכשרת עולים,תוכניות מחקר ופיתוח שלא,"General immigrant training, no subject connection."
+38.02.02.68,מרכז לקשרי אקדמיה עם מכינות חבר העמים,תוכניות מחקר ופיתוח שלא,"General academic relations, no subject connection."
+38.02.02.69,השתתפות בפרויקטים משרד הבטחון,תוכניות מחקר ופיתוח שלא,"General defense projects, no subject connection."
+38.02.02.70,ביקורת פרויקטים,"מענקים לשלבי מו""פ","General project audit, no subject connection."
+38.02.02.72,הפעלת קרן תמורה,מענקים מנהליים,"General fund operation, no subject connection."
+38.02.02.73,דמי חבר יוריקה,"מענקים לשלבי מו""פ","Eureka is general R&D, no specific green energy."
+38.02.02.74,"השתתפות בות""ת - לנושא ננו טכנולוגיה",תוכניות מחקר ופיתוח שלא,"Nanotechnology is too broad, no specific green energy."
+38.02.02.75,השתתפות אוצר בננוטכנולוגיה,"מענקים לשלבי מו""פ","Nanotechnology is too broad, no specific green energy."
+38.02.02.77,"השתתפות בננו טכנולוגיה בות""ת","מענקים לשלבי מו""פ","Nanotechnology is too broad, no specific green energy."
+38.02.02.78,תוכנית לאומית לתעשיה הכימית בישראל,תוכניות מחקר ופיתוח שלא,"Chemical industry is too broad, no specific green energy."
+38.02.02.79,השתתפות משרד הביטחון בגלליאו,מענקים מנהליים,Galileo is not related to green energy.
+38.02.02.80,וונוס,"מענקים לשלבי מו""פ",VENUS satellite is not related to green energy.
+38.02.02.81,תוכנית גלליאו,"מענקים לשלבי מו""פ",Galileo is not related to green energy.
+38.02.02.82,מדענים עולים,מענקים מנהליים,"General immigrant scientists, no subject connection."
+38.02.02.83,השתתפות בטחון- גליליאו,"מענקים לשלבי מו""פ",Galileo is not related to green energy.
+38.02.02.84,השתתפות מדע- גליליאו,מענקים מנהליים,Galileo is not related to green energy.
+38.02.02.85,השתתפות אוצר- גליליאו,מענקים מנהליים,Galileo is not related to green energy.
+38.02.03.01,ציוד למכוני מחקר,"תשתיות מו""פ ומכוני מחקר","General research equipment, no subject connection."
+38.02.03.02,תמיכה בפרויקטים במכוני מחקר,"תשתיות מו""פ ומכוני מחקר","General research projects, no subject connection."
+38.02.03.03,"השתתפות בות""ת מרכז ננו","תשתיות מו""פ ומכוני מחקר","Nanotechnology is too broad, no specific green energy."
+38.02.03.04,מכון מחקר לביו טכנולוגיה בנגב,"תשתיות מו""פ ומכוני מחקר","Biotechnology is too broad, no specific green energy."
+38.02.03.05,חלק האוצר בננו טכנולוגיה באוניברסיטאות,"תשתיות מו""פ ומכוני מחקר","Nanotechnology is too broad, no specific green energy."
+38.02.03.06,"השתתפות ות""ת בביו טכנולוגיה בנגב","תשתיות מו""פ ומכוני מחקר","Biotechnology is too broad, no specific green energy."
+38.02.03.10,ציוד מדעי החיים,"תשתיות מו""פ ומכוני מחקר",Life sciences equipment not related to green energy
+38.02.03.11,השתתפות במשרד הבריאות,"תשתיות מו""פ ומכוני מחקר",Participation in Ministry of Health not related to green energy
+38.02.04.01,"תמיכה בישום הסכם המו""פ עם האיחוד האירופי ע""י מתימו""פ","מו""פ בין לאומי",General R&D agreement not specific to green energy
+38.02.04.02,קרנות דו לאומיות,"מו""פ בין לאומי",Bi-national R&D funds not specific to green energy
+38.02.04.06,"מו""פ אירופי","מו""פ בין לאומי",European R&D not specific to green energy
+38.02.04.09,קרן סינגפור ישראל,"מו""פ בין לאומי",General R&D fund not specific to green energy
+38.02.04.10,קרן קוריאה-ישראל,"מו""פ בין לאומי",General R&D fund not specific to green energy
+38.02.04.11,קרן קנדה-ישראל,"מו""פ בין לאומי",General R&D fund not specific to green energy
+38.02.04.12,קרן בריטניה ישראל,"מו""פ בין לאומי",General R&D fund not specific to green energy
+38.02.04.13,הסכם עם הודו,"מו""פ בין לאומי",General R&D agreement not specific to green energy
+38.02.04.14,הסכם עם אוסטרליה,"מו""פ בין לאומי",General R&D agreement not specific to green energy
+38.02.04.15,הסכם עם ארגון CERN,"מו""פ בין לאומי",CERN organization not related to green energy
+38.02.04.17,מרכז לקשרים אקדמיים עם חבר המדינות,"מו""פ בין לאומי",Academic relations not specific to green energy
+38.02.04.18,דמי השתתפות בתוכניות מחקר ופיתוח אירופאיות,"מו""פ בין לאומי",European R&D programs not specific to green energy
+38.02.04.19,וונוס,"מו""פ בין לאומי","Vague title, not clearly related to green energy"
+38.02.04.20,תוכנית גלילאו,"מו""פ בין לאומי",Galileo program not related to green energy
+38.02.04.60,תמיכה במחקר תעשייתי,"מו""פ בין לאומי",Industrial research not specific to green energy
+38.02.04.61,תמיכה במחקר בסיסי,"מו""פ בין לאומי",Basic research not specific to green energy
+38.02.04.62,תמיכה במחקר חקלאי,"מו""פ בין לאומי",Agricultural research not specific to green energy
+38.02.05.01,"מתי מו""פ",בדיקת פרויקטים ומנהלות,General R&D administration not specific to green energy
+38.02.05.02,ביקורת פרויקטים,בדיקת פרויקטים ומנהלות,Project audit not specific to green energy
+38.02.06.01,עידוד השקעות מוסדיים בתעשיה עתירת הידע,תוכניות סיוע אחרות,Knowledge-intensive industry not specific to green energy
+38.02.06.02,הפעלת קרן תמורה,הקרן לקידום טכנולוגי,General technology promotion not specific to green energy
+38.02.06.04,מנהלת חממות,הקרן לקידום טכנולוגי,Business incubators not related to green energy
+38.02.06.05,"מנהלת מגנ""ט",הקרן לקידום טכנולוגי,MAGNET R&D program not specific to green energy
+38.02.06.06,פעולות קרן הניהול,הקרן לקידום טכנולוגי,Management fund operations not specific to green energy
+38.02.06.07,סקרים,הקרן לקידום טכנולוגי,Surveys not specific to green energy
+38.02.06.08,תפעול קרן תמורה,הקרן לקידום טכנולוגי,General technology promotion not specific to green energy
+38.02.06.09,העסקת עובדים עבור לשכת המדען הראשי עד לפרישתם,הקרן לקידום טכנולוגי,Administrative salaries not specific to green energy
+38.09.01.02,מימון התקינה,פעולות בתחום התקינה,Standardization funding not specific to green energy
+38.09.01.03,הסמכת מעבדות,פעולות בתחום התקינה,Laboratory accreditation not specific to green energy
+38.09.01.07,פעולות שבוע האיכות,פעולות בתחום התקינה,Quality week activities not specific to green energy
+38.09.01.09,פרס האיכות,פעולות בתחום התקינה,Quality award not specific to green energy
+38.09.01.10,"פעילות בתחום התקינה הבינ""ל",פעולות בתחום התקינה,International standardization not specific to green energy
+38.09.01.11,"התאמת תקנים ישראליים לתקנים ב""ל",פעולות בתחום התקינה,Standards adaptation not specific to green energy
+38.09.01.12,"תוכנה להתאמת תקנים ישראליים לתקנים ב""ל",פעולות בתחום התקינה,Standards adaptation software not specific to green energy
+38.09.01.15,עתודה לקרן המחקר,פעולות בתחום התקינה,Reserve for research fund not specific to green energy
+38.09.02.01,עתודה לפעילות המעבדה לפיזיקה,המעבדה הלאומית לפיזיקה,Physics laboratory activities not specific to green energy
+38.09.02.04,ציוד וחומרים,המעבדה הלאומית לפיזיקה,Equipment and materials not specific to green energy
+38.09.02.05,שירותים,המעבדה הלאומית לפיזיקה,Services not specific to green energy
+38.09.02.06,ייעוץ מדעי,המעבדה הלאומית לפיזיקה,Scientific consulting not specific to green energy
+38.09.02.07,אמרכלות,המעבדה הלאומית לפיזיקה,Management not specific to green energy
+38.09.02.08,"ארגונים בינ""ל",המעבדה הלאומית לפיזיקה,International organizations not specific to green energy
+38.09.02.09,"נסיעות לחו""ל לכיול מכשירים",המעבדה הלאומית לפיזיקה,Instrument calibration travel not specific to green energy
+38.30.01.01,קרן למחקר ופיתוח תעשייתיים,הפעלת הרשות לחדשנות,Industrial R&D fund not specific to green energy
+38.30.01.05,שכר הרשות לחדשנות,הפעלת הרשות לחדשנות,Innovation Authority salary not specific to green energy
+38.30.01.07,"מרכז מו""פ לחברה רב לאומית",הפעלת הרשות לחדשנות,Multinational R&D center not specific to green energy
+38.30.01.08,קרן ביוטכנולוגיה וקרנות אחרות,הפעלת הרשות לחדשנות,Biotechnology fund not directly green energy
+38.30.01.13,עידוד השקעות מוסדיים בהייטק,מענקי מחקר ופיתוח,High-tech investments not specific to green energy
+38.30.01.21,ביקורת פרוייקטים,הפעלת הרשות לחדשנות,Project audit not specific to green energy
+38.30.01.23,1,הפעלת הרשות לחדשנות,"Uninformative title, not related to green energy"
+38.30.01.91,תפעול הרשות הלאומית לחדשנות,הפעלת הרשות לחדשנות,Innovation Authority operation not specific to green energy
+38.30.01.98,פרויקטים מופ אירופי,הפעלת הרשות לחדשנות,European R&D projects not specific to green energy
+38.30.02.01,זירת הזנק,מענקי מחקר ופיתוח,Startup arena not specific to green energy
+38.30.02.02,זירת תשתיות טכנולוגיות,מענקי מחקר ופיתוח,Technological infrastructure not specific to green energy
+38.30.02.03,קידום מחקר יישומי נבחר,מענקי מחקר ופיתוח,Applied research not specific to green energy
+38.30.02.05,מסלול תנופה,מענקי מחקר ופיתוח,General R&D support program not specific to green energy
+38.30.02.06,"מו""פ עסקי בחקלאות","מענקי מו""פ לשלבים",Agricultural R&D not specific to green energy
+38.30.02.12,קרן ביו-טכנולוגיה,"מענקי מו""פ לשלבים",Biotechnology fund not directly green energy
+38.30.02.14,חברות הזנק,מענקי מחק ופיתוח,Startup companies not specific to green energy
+38.30.02.15,"מימ""ד- מו""פ דואלי",מענקי מחקר ופיתוח,Dual R&D not specific to green energy
+38.30.02.16,זירת חברתי ציבורי,מענקי מחקר ופיתוח,Social public arena not specific to green energy
+38.30.02.18,חממה עסקית בחיפה,מענקי מחקר ופיתוח,Business incubator not related to green energy
+38.30.02.19,חממות תעשיתיות בנגב,מענקי מחק ופיתוח,Industrial incubators not related to green energy
+38.30.02.22,חדשנות במגזר הציבורי,מענקי מחקר ופיתוח,Public sector innovation not specific to green energy
+38.30.02.24,זירת צמיחה,מענקי מחקר ופיתוח,Growth arena not specific to green energy
+38.30.02.26,חרבות ברזל מסלול מהיר,מענקי מחקר ופיתוח,Military operation not related to green energy
+38.30.02.27,תקצוב המסלול המהיר,מענקי מחקר ופיתוח,Fast track budgeting not specific to green energy
+38.30.02.28,מכון מחקר ביוטכנולוגי,מענקי מחקר ופיתוח,Biotechnology research institute not directly green energy
+38.30.02.32,זירת ייצור מתקדם,מענקי מחקר ופיתוח,Advanced manufacturing not specific to green energy
+38.30.02.36,זירה בינלאומית,מענקי מחקר ופיתוח,International arena not specific to green energy
+38.30.02.38,מסלול הגנת מוסדיים,מענקי מחקר ופיתוח,Institutional protection track not specific to green energy
+38.30.02.39,קרן יוזמה- מוסדיים,מענקי מחקר ופיתוח,Initiative fund not specific to green energy
+38.30.02.40,תכניות ארוכות טווח,מענקי מחקר ופיתוח,Long-term programs not specific to green energy
+38.30.02.43,קרן הודו ישראל,מענקי מחקר ופיתוח,India-Israel fund not specific to green energy
+38.30.02.46,תקנת קורונה - רשות החדשנות,מענקי מחקר ופיתוח,Corona regulation not related to green energy
+38.30.02.48,קורונה - פיתוח הון אנושי,מענקי מחקר ופיתוח,Human capital development not related to green energy
+38.30.02.49,קרן קוריאה ישראל,מענקי מחקר ופיתוח,Not specific to green energy.
+38.30.02.99,רזרבה להתייקרויות העברות,מענקי מחקר ופיתוח,"Generic reserve, not specific to green energy."
+38.30.03.01,מכוני מחקר,"תשתיות מו""פ","Generic research institutes, not specific to green energy."
+38.30.03.02,"השתתפות בות""ת - מרכזי ננו טכנווגיה","תשתיות מו""פ",Nano-technology not explicitly green energy.
+38.30.03.03,מכון מחקר לביו-טכנולוגיה בנגב,"תשתיות מו""פ",Biotechnology not explicitly green energy.
+38.30.03.04,"השתתפות ות""ת - מרכז ביו-טכנולוגיה","תשתיות מו""פ",Biotechnology not explicitly green energy.
+38.30.03.05,ציוד מדעי החיים,"תשתיות מו""פ",Life sciences equipment not specific to green energy.
+38.30.03.06,"גריד - השתתפות בות""ת","תשתיות מו""פ","Grid too vague, not explicitly green energy."
+38.30.03.07,השתתפות במשרד הבטחון,"תשתיות מו""פ",Ministry of Defense not related to green energy.
+38.30.04.01,"מרכזי מו""פ פיננסי","מו""פ בין-לאומי",Financial R&D not related to green energy.
+38.30.04.02,"מו""פ בינלאומי","מו""פ בין-לאומי",International R&D not specific to green energy.
+38.30.04.03,"מו""פ אירופי","מו""פ בין-לאומי",European R&D not specific to green energy.
+38.30.04.05,"מו""פ אירופי - השתתפות ות""ת","מו""פ בין-לאומי",European R&D not specific to green energy.
+38.30.04.06,"מו""פ אירופי- השתתפות המשרדים","מו""פ בין-לאומי",European R&D not specific to green energy.
+38.30.04.07,CERN,"מו""פ בין-לאומי",CERN not related to green energy.
+38.30.04.08,דמי השתתפות בתכניות מחקר ופיתוח אירופאיות,"מו""פ בין-לאומי",European R&D programs not specific to green energy.
+38.30.04.09,וונוס,"מו""פ בין-לאומי",Venus not specific to green energy.
+38.30.04.10,רזרבת עמידה בהחלטת ממשלה מספר 1879,"מו""פ בין-לאומי","Generic reserve, not specific to green energy."
+38.30.04.11,תוכנית גלילאו,"מו""פ בין-לאומי",Galileo program not related to green energy.
+38.30.10.01,רזרבה להתיקרויות העברות,רזרבה,"Generic reserve, not specific to green energy."
+38.30.10.02,"רזרבה להתייקרויות - מו""פ אירופי",רזרבה,"Generic reserve, not specific to green energy."
+38.30.10.03,עתודה להרשאה מדען ראשי,רזרבה,"Generic reserve, not specific to green energy."
+38.50.01.01,תקינה ישראלית,"תקינה, איכות והסמכה","General standardization, not specific to green energy."
+38.50.01.10,הסמכת מעבדות,"תקינה, איכות והסמכה","General laboratory accreditation, not specific to green energy."
+39.11.01.37,עיבוי אנרגטי,פעילות משרד התקשורת,Energy densification not explicitly green energy.
+52.40.01.30,יעודה פרויקטים,פיתוח,"Generic projects, not specific to green energy."
+54.30.01.27,התייעלות במשרדי ממשלה,שכר ופעולות,"General efficiency, not specific to energy efficiency."
+54.50.01.61,אנרגיה,מנהלת תקומה,"Energy too broad, not explicitly green."
+60.02.10.15,עתודה להתאמת עלות פרויקטים,בניית כיתות לימוד,"Generic reserve, not specific to green energy."
+70.20.01.21,פרויקטים דירה להשכיר,מרקם ותיק ופעולות,Not related to green energy.
+76.10.01.01,פיתוח אזורי תעשייה,השקעה בפיתוח תשתיות,"General industrial zone development, not green energy."
+76.10.01.02,שדרוג אזורי תעשייה,השקעה בפיתוח תשתיות,"General industrial zone upgrading, not green energy."
+76.10.01.03,נוהל אירועים בלתי צפויים,השקעה בפיתוח תשתיות,"Generic procedure, not specific to green energy."
+76.10.01.04,הקמת והרחבת אזורי תעשייה,השקעה בפיתוח תשתיות,"General industrial zone development, not green energy."
+76.10.01.05,מענקים להוצאות פיתוח,השקעה בפיתוח תשתיות,"General development grants, not specific to green energy."
+76.10.01.10,שיווק במימון מלא של היזם,השקעה בפיתוח תשתיות,Not related to green energy.
+76.10.01.20,פיתוח אזורי תעשייה מרחביים,השקעה בפיתוח תשתיות,"General industrial zone development, not green energy."
+76.10.01.30,מחויבויות עבר ליזמים,השקעה בפיתוח תשתיות,Not related to green energy.
+76.10.01.40,ניהול ותכנון עבודות הפיתוח,השקעה בפיתוח תשתיות,"General development management, not specific to green energy."
+76.10.01.41,החזרים ליזמים,השקעה בפיתוח תשתיות,Not related to green energy.
+76.10.01.50,הכנסות משיווק מגרשים במימון משותף ליזם ולמינהל אזורי פיתוח,השקעה בפיתוח תשתיות,"Earmarked revenue, not specific to green energy."
+76.10.01.51,הכנסות משיווק במימון מלא של היזם,השקעה בפיתוח תשתיות,"Earmarked revenue, not specific to green energy."
+76.10.01.60,פיתוח תעשייה במגזר המיעוטים לפי החלטות ממשלה 1539 4193 1052 2861 3708 1298,השקעה בפיתוח תשתיות,"General industrial development, not green energy."
+76.10.01.61,פיתוח אזורי תעשייה על קרקע פרטית לפי החלטת ממשלה 1539,השקעה בפיתוח תשתיות,"General industrial zone development, not green energy."
+76.10.01.62,שילוב רשויות ממגזר המיעוטים במינהלות אזורי תעשייה קיימים לפי החלטת ממשלה 1539,השקעה בפיתוח תשתיות,"General industrial zone administration, not green energy."
+76.10.01.63,פיתוח אזורי תעשייה במגזר הערבי בהתאם להחלטת ממשלה 4193,השקעה בפיתוח תשתיות,"General industrial zone development, not green energy."
+76.10.01.64,שידרוג איזור התעשיה מג'דל שמס החלטת ממשלה 1052,השקעה בפיתוח תשתיות,"General industrial zone upgrading, not green energy."
+76.10.01.65,פיתוח תעשייה במגזר הדרוזי והצ'רקסי לפי החלטת ממשלה 2861,השקעה בפיתוח תשתיות,"General industrial development, not green energy."
+76.10.01.66,שילוב רשויות מהמגזר הדרוזי במינהלות אזורי תעשייה קיימים לפי החלטת ממשלה 2861,השקעה בפיתוח תשתיות,"General industrial zone administration, not green energy."
+76.10.01.68,פיתוח תעשייה במגזר הבדואי בדרום לפי החלטת ממשלה 3708,השקעה בפיתוח תשתיות,"General industrial development, not green energy."
+76.10.01.69,שדרוג איזור התעשייה בטייבה והקמת מינהלת לפי החלטת ממשלה 1298,השקעה בפיתוח תשתיות,"General industrial zone upgrading, not green energy."
+76.10.01.70,פיתוח אזורי תעשייה לפי החלטות ממשלה שהסתיימו 546 1846,השקעה בפיתוח תשתיות,"General industrial zone development, not green energy."
+76.10.01.71,פיתוח באזורי התעשייה בשדרות לפי החלטת ממשלה 1846,השקעה בפיתוח תשתיות,"General industrial zone development, not green energy."
+76.10.01.72,פיתוח שדרות ועוטף עזה - החלטות ממשלה 2017 ו-4328,השקעה בפיתוח תשתיות,"General regional development, not green energy."
+76.10.01.73,פיתוח ישובים דרוזים וצ'רקסים - החלטת ממשלה מס' 59,השקעה בפיתוח תשתיות,"General settlement development, not green energy."
+76.10.01.74,העצמת היישובים הבדואים בצפון - החלטת ממשלה 1480,השקעה בפיתוח תשתיות,"General settlement empowerment, not green energy."
+76.10.01.76,פיתוח כלכלי במגזר המיעוטים - החלטת ממשלה 2365,השקעה בפיתוח תשתיות,"General economic development, not green energy."
+76.10.01.80,עתודה לפיתוח אזורי תעשייה,השקעה בפיתוח תשתיות,"Generic reserve for industrial development, not green energy."
+76.10.01.90,טיפול ממוקד - מימון התחייבויות עבר,השקעה בפיתוח תשתיות,Not related to green energy.
+76.10.01.91,רזרבה לתקציב התאמות  2019,השקעה בפיתוח תשתיות,"Generic reserve, not specific to green energy."
+76.10.01.92,רזרבה לעמידה ביעדים פיסקליים,השקעה בפיתוח תשתיות,"Generic reserve, not specific to green energy."
+79.50.01.12,רי - פרויקטים קטנים,רכבות כבדות,"Generic small projects, not specific to green energy."
+79.51.01.02,נתי - פרויקטים המשכיים בינעירוני,כבישים בין-עירוניים,"Generic transport projects, not specific to green energy."
+79.55.01.71,פרויקטים טכנולוגים,תמיכות בתחבורה ציבורית,"Generic technological projects, not explicitly green energy."
+83.03.01.99,פרויקטים בתקשוב הממשלתי,דיגיטל וסייבר,Not related to green energy.
+83.04.01.12,מכרז להתקמת שוק סיטוני,השקעות שונות,Not related to green energy.
+98.73.32.01,הכנסות מקופות פרוייקטים,הכנסות מפרויקטים,"Earmarked revenue, not specific to green energy."

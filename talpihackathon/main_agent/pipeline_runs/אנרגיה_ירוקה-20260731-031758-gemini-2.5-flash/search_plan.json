@@ -1,0 +1,39 @@
+{
+  "offices": [
+    "34",
+    "83",
+    "26",
+    "04",
+    "38",
+    "76",
+    "35",
+    "05",
+    "89"
+  ],
+  "functional_classes": [
+    "אנרגיה",
+    "הגנת הסביבה"
+  ],
+  "keywords": [
+    "מתחדש",
+    "סולארי",
+    "פוטו-וולטאי",
+    "רוח",
+    "הידרו",
+    "ביו-גז",
+    "התייעלות",
+    "שימור אנרגיה",
+    "אגירה",
+    "קלינטק"
+  ],
+  "fts_queries": [
+    "אנרגיה מתחדשת",
+    "פרויקטים סולאריים",
+    "התייעלות אנרגטית"
+  ],
+  "notes": "The term 'אנרגיה ירוקה' primarily encompasses renewable energy sources and energy efficiency measures within the budget context.",
+  "rejected_offices": [],
+  "whole_word_keywords": [
+    "רוח"
+  ]
+}

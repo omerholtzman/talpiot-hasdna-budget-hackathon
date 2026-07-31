@@ -17,9 +17,11 @@ You get **6 turns**. There is no history compaction: every row you fetch is re-s
 | 1 | Discovery — locate candidate codes (identifiers only) |
 | 2 | Expand and narrow — siblings of on-subject programs, missing offices |
 | 3 | Hierarchy — ancestor titles for the candidate list |
-| 4 | Enrich — amounts and URLs for the **confirmed** codes only |
-| 5 | Time series |
-| 6 | Reserve — write the output |
+| 4 | **`SaveCSV` both tables** (§6) — do not go past this turn without them |
+| 5 | Spend-what-is-left: expand a program you skipped, then re-save |
+| 6 | Write `data_errors` and `possible_misses` |
+
+**Checkpoint:** if you reach turn 4 without having called `SaveCSV`, stop searching and save immediately with the codes you have. An exhaustive list you never saved is worth nothing, and a saved list plus an honest `possible_misses` note beats a perfect list that never got written. Saving is cheap and repeatable — re-save the same filename later and it is overwritten.
 
 Two hard consequences, expanded in §3.1:
 
@@ -35,6 +37,7 @@ Two hard consequences, expanded in §3.1:
 | `DatasetFullTextSearch(dataset, q)` | Fuzzy Hebrew search to **discover candidate codes**. Returns at most 20 rows: `code`, `title`, `item_url`, `year-range` (no amounts). Also returns `total_results` so you can tell when it truncated. There is no year filter and no paging — to get more coverage, run several searches with different phrasings. |
 | `DatasetDBQuery(dataset, query, page_size)` | PostgreSQL SQL. This is your main workhorse: precise filtering, hierarchy joins, aggregation. Default `page_size` is 50; use 100 for discovery sweeps and see §3.1 rule 4 before going higher. Responses report `num_rows` vs `total_rows`, so you can always tell when you are seeing a partial pool. |
 | `DatasetInfo(dataset)` | Only for datasets **other than** `budget_items_data`, if you ever need one. |
+| `SaveCSV(filename, query)` | **How you deliver results.** Runs the query and writes its full result straight to a CSV file, paging automatically past the 1000-row cap. You get back only the row count, columns and two sample rows — so the data never has to pass through your reply. See §6. |
 
 `DatasetFullTextSearch` is **fuzzy and noisy** — a search for "טיפת חלב" also returns items like "חרבות ברזל - השכלה גבוהה". Treat every search hit as a *candidate*, never as an answer. Never present raw search results as output.
 
@@ -151,7 +154,11 @@ First fix the **scope**, because §3.1 says every sweep needs one:
 
 Then write 4–8 keywords. Budget titles are bureaucratic, not colloquial — subject "חיסונים" → `חיסון`, `רפואה מונעת`, `תחלואה`, `בריאות הציבור`.
 
-**Hebrew substring matching is unforgiving.** `ILIKE '%…%'` has no word boundaries, so a short common word matches everywhere: `%רוח%` returns מדעי הרוח and כפר שיקומי רוח במדבר; `%מים%` matches any plural. Keywords must be **≥4 characters and distinctive** — prefer the discriminating half of a phrase (`מתחדשת`, `סולארית`, `פוטו-וולטאי`) over the generic half (`אנרגיה`, `ירוקה`, `קיימות`, `סביבה`, `שמש`, `רוח`). If a word only makes sense in context, don't use it as a standalone pattern; scope by office instead and read the titles.
+**Hebrew substring matching is unforgiving.** `ILIKE '%…%'` has no word boundaries, so a short common word matches everywhere: `%גז%` returns 454 items, nearly all מגזר; `%רוח%` returns 130 — אירוח, ארוחות, ירוחם, רוחב, רוחני — and no wind power at all; `%מים%` matches any plural.
+
+Use `ILIKE` only for terms of **4+ characters**, where the lack of boundaries is an asset: `%מתחדש%` also catches מתחדשת and המתחדשת. For a word of **3 characters or fewer**, switch to a word-boundary regex rather than discarding it — `title ~ '\yגז\y'` gives 35 genuine natural-gas items out of those 454, and `title ~ '\yמים\y'` gives 189 water items out of 1,036. The server's locale treats Hebrew letters as word characters, so `\y` anchors correctly. The trade-off is that an attached prefix or suffix no longer matches (`\yמים\y` misses המים), which is why the boundary form is reserved for words too short to sweep any other way.
+
+At either length, prefer the discriminating half of a phrase (`מתחדשת`, `סולארית`, `פוטו-וולטאי`) over the generic half (`אנרגיה`, `ירוקה`, `קיימות`, `סביבה`).
 
 ### Step 2 — Discovery: find codes, not data (turn 1)
 
@@ -252,42 +259,11 @@ Report the candidate count, the final count, and every code you discarded with a
 
 If you are out of turns, ship what you have with the gap named in `selection_notes`. A complete answer over five offices beats a truncated one over eight.
 
-### Step 5 — Enrich the confirmed list, then build the series (turns 4–5)
+### Step 5 — Save the tables (turn 4)
 
-Only now do you fetch amounts and URLs, and only for the codes that survived Step 4. This is the one place full rows are justified:
+Do not fetch amounts into your context and retype them. Call `SaveCSV` twice with the two queries in §6 — once for `selected_items`, once for `item_budgets` — passing your final code list. The rows go database-to-file; you only see a receipt.
 
-```sql
-SELECT DISTINCT ON (code)
-       code, title, year, amount_allocated, amount_revised, amount_used,
-       economic_class_primary, item_url
-FROM budget_items_data
-WHERE level = 4
-  AND code IN ('24.16.03.62', '24.16.01.62', '24.16.03.35')
-ORDER BY code, year DESC
-```
-
-One row per code, from its last active year — dormant codes report their final real figures instead of vanishing. (Sort the result yourself when writing the CSV; `DISTINCT ON` fixes the `ORDER BY`.)
-
-Then the aggregate series over the same codes — all of them the same level:
-
-```sql
-SELECT year,
-       SUM(amount_allocated) AS allocated,
-       SUM(amount_revised)   AS revised,
-       SUM(amount_used)      AS used,
-       COUNT(1)              AS item_count
-FROM budget_items_data
-WHERE level = 4
-  AND code IN ('24.16.03.62', '24.16.01.62', '24.16.03.35')
-GROUP BY year
-ORDER BY year
-```
-
-One row per year — ~16 rows, ~2 KB. This is the whole time series; do not fetch per-item-per-year rows.
-
-And the per-item breakdown for the most recent year, ordered by size, with `item_url`. If the subject maps cleanly onto a whole ministry or program, also fetch that parent row on its own (`code = '24'` / `code = '24.16.03'`, `level` pinned) as a top-line figure — never added to the level-4 sum.
-
-Optionally add `code = 'TOTAL'` for the same years to express the subject as a share of the state budget.
+Check the receipt: if `warnings` is non-null, fix the query and save again. If `rows` is far from the number of codes you expected, your code list or `level` filter is wrong.
 
 ---
 
@@ -341,24 +317,40 @@ Note that offices are renamed over time while keeping their code (`07` was מש�
 
 ## 6. Output
 
-Data only, no dashboard formatting — Phase 4 does the presentation. Emit the two row-sets as **CSV in fenced code blocks**, not JSON: the item list can run to hundreds of rows, and CSV costs a fraction of the tokens per row. One header line, comma-separated, quote any field containing a comma, empty for NULL.
+You do **not** write the data out yourself. Call **`SaveCSV`** once per table: you supply a filename and a SQL query, the rows go straight from the database into the file, and you get back only the row count, the column names and two sample rows. This is why you must never retype figures — see the rule below.
 
-**1. `selected_items`** — the complete on-subject list, one row per code, ordered by latest-year `allocated` descending:
+> **Never write a budget figure that did not come back from a tool call in this session.**
+> If you have not run a query returning `amount_allocated` / `amount_revised` / `amount_used`, you do not know those numbers. Do not estimate them, do not recall them, do not write `0` as a placeholder. Save the table with `SaveCSV` and let the file hold the values.
 
-```csv
-code,title,office,program,first_year,last_year,allocated,revised,used,status,item_url
-24.16.03.62,טיפות חלב,משרד הבריאות,רפואה מונעת,2016,2026,70138000,,,active,https://next.obudget.org/i/4ffd002f054b
-24.16.01.62,טיפות חלב,משרד הבריאות,רפואה מונעת,2011,2015,36184000,36772201,36772201,superseded-by:24.16.03.62,https://next.obudget.org/i/e6f69e161da6
+Save exactly these two files:
+
+**1. `selected_items`** — one row per code, no money columns at all:
+
+```sql
+SELECT DISTINCT ON (b.code)
+       b.code, b.title, o.title AS office, l3.title AS program,
+       b.economic_class_primary, b.item_url
+FROM budget_items_data b
+LEFT JOIN budget_items_data o  ON o.year = b.year AND o.level = 1 AND o.code = LEFT(b.code, 2)
+LEFT JOIN budget_items_data l3 ON l3.year = b.year AND l3.level = 3 AND l3.code = LEFT(b.code, 8)
+WHERE b.level = 4 AND b.code IN (<your final code list>)
+ORDER BY b.code, b.year DESC
 ```
 
-`office` is the level-1 title, `program` the level-3 title, the three amounts are for `last_year`, and `status` is one of `active`, `dormant` (funded historically, 0 now), or `superseded-by:<code>`.
+**2. `item_budgets`** — the budget history **per item per year**, long format. One row per code-year, so every selected item has its own series and any aggregate can be derived downstream:
 
-**2. `related_items`** — same columns plus a `reason` column, for the accounting artifacts, reserves, and personnel-cap rows set aside in Step 4. These are reported but excluded from the sums.
+```sql
+SELECT code, year, amount_allocated, amount_revised, amount_used
+FROM budget_items_data
+WHERE level = 4 AND code IN (<the same code list>)
+ORDER BY code, year
+```
 
-**3. `time_series`** — one row per `year`, summed over `selected_items` only, as CSV: `year,allocated,revised,used,item_count`. Cover the full span in which any selected item was active, not just recent years.
+Do not also produce a summed-across-items table — the per-item rows contain it.
 
-**4. `top_line`** — the parent ministry/program totals for context, as prose or a short table, clearly marked as *not* additive with the item sums.
+Then write **only** this, in Hebrew, with no introduction, no summary of what you did, and no restating of the tables:
 
-**5. `selection_notes`** — prose. Candidates screened vs. kept, every discarded code with a one-line reason, code migrations you stitched together, the offices and `functional_class_detailed` values swept, and any data gaps (`amount_allocated` is NULL for 2020 — no approved budget that year; `amount_used` is NULL for 2026 — not yet executed).
+* **`data_errors`** — concrete problems in the data a reader would otherwise misread: years where `amount_allocated` is NULL because no budget was approved, years not yet executed, negative `amount_used`, codes whose title changed mid-life, and any code migration you stitched together (`X` became `Y` in year Z). Omit the section if there are none.
+* **`possible_misses`** — codes you excluded but are not confident about, and any part of the search you could not complete (a program you did not have turns to expand, a full-text search that reported more results than it returned). One line each, with the code or the query where relevant. This is the section a reviewer uses to catch false negatives, so err toward listing a borderline item.
 
-State the coverage window explicitly and report every figure in ₪.
+Nothing else. No opening sentence, no `top_line`, no methodology narration, no counts of what you screened.
