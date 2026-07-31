@@ -34,15 +34,35 @@ def parse_args() -> argparse.Namespace:
         help="URL/filesystem-safe slug for the subject (e.g. 'health'). "
         "Used for the output filename and the report's frontmatter 'path' field.",
     )
+    parser.add_argument(
+        "--skip-phase1",
+        action="store_true",
+        help="Reuse existing reports/<slug>/ Phase 1 CSVs instead of rerunning budget discovery.",
+    )
+    parser.add_argument(
+        "--stop-after-research",
+        action="store_true",
+        help="Run through phases 2-4, then write a diagnostic report without calling final synthesis.",
+    )
     return parser.parse_args()
 
 
-async def run(subject: str, slug: str) -> str:
+async def run(
+    subject: str,
+    slug: str,
+    *,
+    skip_phase1: bool = False,
+    stop_after_research: bool = False,
+) -> str:
     """Run the full pipeline for one subject and return the path to the written report."""
     # Created up front rather than inside the node: the graph is easier to reason
     # about when every node is handed the paths it needs instead of deriving them.
     run_dir = OUTPUT_DIR / slug
-    run_dir.mkdir(parents=True, exist_ok=True)
+    if skip_phase1:
+        if not run_dir.is_dir():
+            raise FileNotFoundError(f"--skip-phase1 requires an existing run directory: {run_dir}")
+    else:
+        run_dir.mkdir(parents=True, exist_ok=True)
 
     initial_state: WikiState = {
         "subject": subject,
@@ -50,6 +70,8 @@ async def run(subject: str, slug: str) -> str:
         "today": today_str(),
         "model": MODEL_NAME,
         "run_dir": str(run_dir),
+        "skip_phase1": skip_phase1,
+        "stop_after_research": stop_after_research,
         "budget_result": "",
         "contracts_result": "",
         "decisions_result": "",
@@ -59,8 +81,10 @@ async def run(subject: str, slug: str) -> str:
     }
 
     print(f"=== Starting pipeline for subject '{subject}' (slug: {slug}) ===")
-    print("Stages: Phase 1 (Budget, deterministic) -> Phase 2 (Contracts), "
-          "Phase 3 (Decisions), Phase 4 (Hierarchy) in parallel -> Final Synthesis")
+    phase1_label = "Phase 1 (Budget, reuse existing CSVs)" if skip_phase1 else "Phase 1 (Budget, deterministic)"
+    final_label = "Stop after research" if stop_after_research else "Final Synthesis"
+    print(f"Stages: {phase1_label} -> Phase 2 (Contracts), "
+          f"Phase 3 (Decisions), Phase 4 (Hierarchy) in parallel -> {final_label}")
     print(f"Phase 1 data files: {run_dir}")
 
     app = build_graph()
@@ -68,7 +92,7 @@ async def run(subject: str, slug: str) -> str:
 
     print("=== All stages complete ===")
 
-    output_path = OUTPUT_DIR / f"{slug}.md"
+    output_path = OUTPUT_DIR / (f"{slug}.research.md" if stop_after_research else f"{slug}.md")
     output_path.write_text(final_state["final_report"], encoding="utf-8")
 
     if final_state["errors"]:
@@ -82,4 +106,11 @@ async def run(subject: str, slug: str) -> str:
 
 if __name__ == "__main__":
     args = parse_args()
-    asyncio.run(run(args.subject, args.slug))
+    asyncio.run(
+        run(
+            args.subject,
+            args.slug,
+            skip_phase1=args.skip_phase1,
+            stop_after_research=args.stop_after_research,
+        )
+    )

@@ -139,6 +139,16 @@ python main.py "בריאות" --slug health
 This writes `reports/health.md` and the phase-1 data files under
 `reports/health/` (see [Output](#output)).
 
+To test Phase 2/3 cached-query reuse without paying for Phase 1 or final
+synthesis, run:
+
+```bash
+python main.py "בריאות" --slug health --skip-phase1 --stop-after-research
+```
+
+`--skip-phase1` requires existing `reports/<slug>/` CSVs. The diagnostic output
+is written to `reports/<slug>.research.md`.
+
 ## Things to double-check before your first real run
 
 This was written and reviewed for correctness, but authored in a

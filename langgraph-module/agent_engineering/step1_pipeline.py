@@ -8,8 +8,8 @@ number in the output CSVs comes straight from SQL. Steps 1, 3 and 4 are single
 schema-constrained calls with bounded input, so cost is predictable and the run is
 reproducible enough to compare models against each other.
 
-This is ordinary synchronous code, called from the async phase-1 node via
-`asyncio.to_thread`. Its SQL goes through a SyncMCPBridge (mcp_tools.py) and its
+This is ordinary synchronous code, called from the async phase-1 node on a
+worker thread. Its SQL goes through a SyncMCPBridge (mcp_tools.py) and its
 model calls through a JSONLLM (llm_json.py); neither the graph nor the event loop
 appears anywhere below.
 

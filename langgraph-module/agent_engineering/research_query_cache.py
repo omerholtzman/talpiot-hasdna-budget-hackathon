@@ -86,7 +86,7 @@ def save_from_react_transcript(
     messages: Sequence[Any],
     final_text: str,
 ) -> list[str]:
-    """Persist successful DatasetDBQuery calls as query_gen.sh-compatible JSON."""
+    """Persist successful DatasetDBQuery calls from a completed ReAct run as query_gen.sh-compatible JSON."""
     if not QUERY_RESEARCH_CACHE_ENABLED:
         return ["query research cache disabled; not saving ReAct SQL"]
 

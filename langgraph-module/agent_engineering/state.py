@@ -31,6 +31,8 @@ class WikiState(TypedDict):
     today: str            # ISO date (YYYY-MM-DD), injected into every prompt
     model: str            # model name recorded in the report's frontmatter
     run_dir: str          # directory phase 1 writes its CSVs into; phase 4 reads them back
+    skip_phase1: bool     # reuse existing phase-1 CSVs instead of running the pipeline
+    stop_after_research: bool  # skip the final synthesis model call after phases 2-4
 
     # --- filled in by phases 1-3 (run in parallel, one writer each) ---
     budget_result: str

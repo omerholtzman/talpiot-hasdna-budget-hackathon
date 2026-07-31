@@ -25,7 +25,9 @@ pasted in as context, no tool loop at all — matching its skill file's
 """
 import asyncio
 import logging
+import threading
 from datetime import date, datetime
+from typing import Any, Callable
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -63,6 +65,36 @@ def _truncate(text: str, limit: int = 500) -> str:
     if len(text) <= limit:
         return text
     return f"{text[:limit]}... [truncated, {len(text)} chars total]"
+
+
+async def _run_blocking(func: Callable[..., Any], *args: Any, **kwargs: Any) -> Any:
+    """Run blocking work on a plain thread and wake the current event loop."""
+    loop = asyncio.get_running_loop()
+    future = loop.create_future()
+
+    def set_result(value: Any) -> None:
+        if not future.cancelled():
+            future.set_result(value)
+
+    def set_exception(exc: BaseException) -> None:
+        if not future.cancelled():
+            future.set_exception(exc)
+
+    def worker() -> None:
+        try:
+            result = func(*args, **kwargs)
+        except BaseException as exc:  # noqa: BLE001 - propagate worker failures to the async caller
+            loop.call_soon_threadsafe(set_exception, exc)
+        else:
+            loop.call_soon_threadsafe(set_result, result)
+
+    thread = threading.Thread(
+        target=worker,
+        name=f"{getattr(func, '__name__', 'blocking')}-worker",
+        daemon=True,
+    )
+    thread.start()
+    return await future
 
 
 def _log_agent_transcript(label: str, messages: list) -> None:
@@ -137,7 +169,7 @@ async def _run_research_phase(phase_name: str, state: WikiState,
     if extra_context:
         user_message += f"\n\n{extra_context}"
 
-    cache_result = await asyncio.to_thread(
+    cache_result = await _run_blocking(
         research_query_cache.run_cached,
         phase_name=phase_name,
         phase_label=label,
@@ -165,7 +197,7 @@ async def _run_research_phase(phase_name: str, state: WikiState,
         )
         _log_agent_transcript(label, result["messages"])
         final_text = result["messages"][-1].content
-        cache_messages = await asyncio.to_thread(
+        cache_messages = await _run_blocking(
             research_query_cache.save_from_react_transcript,
             phase_name=phase_name,
             phase_label=label,
@@ -202,6 +234,17 @@ async def phase1_budget_node(state: WikiState) -> dict:
     """
     label = PHASE_LABELS[PHASE1]
     subject, run_dir = state["subject"], state["run_dir"]
+    if state.get("skip_phase1"):
+        _log(label, f"Skipping - reusing existing Phase 1 CSVs from {run_dir}")
+        try:
+            digest = pipeline.build_digest(run_dir, subject)
+        except Exception as exc:  # noqa: BLE001 - consistent with the normal phase failure path
+            _log(label, f"FAILED: {exc}")
+            placeholder = f"_No cached budget data could be loaded for this subject ({exc})._"
+            return {"budget_result": placeholder, "errors": [f"{PHASE1} skip failed: {exc}"]}
+        _log(label, f"Done - loaded cached digest ({len(digest)} chars)")
+        return {"budget_result": digest, "errors": []}
+
     _log(label, f"Starting - subject: '{subject}' (deterministic pipeline, not an agent)")
     _log(label, f"Writing CSVs to {run_dir}")
 
@@ -210,10 +253,10 @@ async def phase1_budget_node(state: WikiState) -> dict:
     provider = JSONLLM()
 
     try:
-        summary = await asyncio.to_thread(
+        summary = await _run_blocking(
             pipeline.run_pipeline, subject, run_dir, provider, bridge
         )
-        digest = await asyncio.to_thread(pipeline.build_digest, run_dir, subject)
+        digest = pipeline.build_digest(run_dir, subject)
     except Exception as exc:  # noqa: BLE001 - a failed phase 1 must not kill the run
         _log(label, f"FAILED: {exc}")
         placeholder = f"_No budget data could be retrieved for this subject ({exc})._"
@@ -309,6 +352,16 @@ async def final_phase_synthesis_node(state: WikiState) -> dict:
     _log(label, f"  contracts_result: {_truncate(state['contracts_result'])}")
     _log(label, f"  decisions_result: {_truncate(state['decisions_result'])}")
     _log(label, f"  hierarchy_result: {_truncate(state['hierarchy_result'])}")
+
+    if state.get("stop_after_research"):
+        _log(label, "stop_after_research enabled - skipping final model call")
+        return {
+            "final_report": (
+                f"# Research output for {state['subject']}\n\n"
+                f"{combined_data}"
+            )
+        }
+
     _log(label, "No tools attached for this phase (skill file: no DB tools in phase 5)")
 
     response = await _llm().ainvoke(

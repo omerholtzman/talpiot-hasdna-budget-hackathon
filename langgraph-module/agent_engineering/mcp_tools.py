@@ -55,7 +55,7 @@ class SyncMCPBridge:
     it is ordinary synchronous code that issues dozens of queries and fans its
     model calls out over a thread pool. Rewriting it as async would spread
     `await` through every step for no benefit, so instead the node runs it in a
-    worker thread (`asyncio.to_thread`) and hands it this bridge, which posts
+    worker thread and hands it this bridge, which posts
     each tool call back to the event loop it came from.
 
     Only safe to call from a thread OTHER than the one running `loop` — which is
@@ -81,7 +81,7 @@ class SyncMCPBridge:
         if running is self._loop:
             raise RuntimeError(
                 "SyncMCPBridge.call_tool was called on the event loop's own thread; "
-                "run the pipeline via asyncio.to_thread()."
+                "run the pipeline on a worker thread."
             )
 
         future = asyncio.run_coroutine_threadsafe(tool.ainvoke(arguments), self._loop)
