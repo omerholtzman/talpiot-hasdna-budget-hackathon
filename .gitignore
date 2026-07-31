@@ -3,4 +3,6 @@ langgraph-module/*/__pycache__/*
 langgraph-module/agent_engineering/__pycache__/*
 langgraph-module/helpers/__pycache__/*
 langgraph-module/helpers/prompts/__pycache__/*
-talpihackathon/main_agent/__pycache__/*
+orchestrator/__pycache__/*
+orchestrator/orchestrator-state.json
+.env

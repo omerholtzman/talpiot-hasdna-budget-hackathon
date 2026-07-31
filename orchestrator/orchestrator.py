@@ -1,20 +1,17 @@
 """
-Batch runner for main.py, parallel to talpihackathon/main_agent/orchestrator.py.
+Batch runner: one `langgraph-module/main.py` subprocess per configured subject.
 
-That orchestrator drives agent.py (which slugifies its own `--subject` and
-accepts `--provider`/`--output`/`--mcp-url`) as a subprocess per configured
-subject, tracks state so a run can resume, and syncs "related reports" links
-across a category once everything's done.
+This is the normal way to produce reports. It reads a JSON config of
+category -> subjects, runs each one as its own process, records the outcome in
+a state file so a batch can be inspected or re-run, and finally rewrites the
+"related reports" cross-link block in every report of each touched category.
 
-main.py is the same shape of worker but a different interface: it takes the
-slug as its own required `--slug` flag rather than deriving one, has no
-`--provider` (this pipeline only ever talks to Gemini via Vertex - see
-config.py), and always writes to `reports/<slug>.md` + `reports/<slug>/`
-rather than an orchestrator-supplied `--output` path. So this file keeps the
-same shape - JSON config of category -> subjects, a state file for resuming,
-one subprocess per subject, dry-run, category/subject filters, related-report
-link sync - but adapts each of those points to main.py's actual CLI and fixed
-output layout instead of copying agent.py's.
+main.py's interface constrains the design here: it takes the slug as a required
+`--slug` flag rather than deriving one from the Hebrew subject, has no
+`--provider` (the pipeline talks to whatever config.py is pointed at), and
+always writes to `reports/<slug>.md` + `reports/<slug>/` rather than an
+orchestrator-supplied output path. So --model and --mcp-url are passed down as
+environment variables, which is the only override channel main.py has.
 """
 import argparse
 import json
@@ -26,7 +23,7 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 # Subjects and titles are Hebrew; Windows consoles default to cp1252 and raise
-# UnicodeEncodeError on them mid-run. Same fix as main_agent/agent.py.
+# UnicodeEncodeError on them mid-run. Do the same in any new CLI added here.
 for _stream in (sys.stdout, sys.stderr):
     try:
         _stream.reconfigure(encoding="utf-8", errors="replace")
@@ -40,14 +37,13 @@ MAIN_PATH = os.path.join(SCRIPT_DIR, "main.py")
 DEFAULT_CONFIG_PATH = os.path.join(CURR_DIR, "orchestrator-config.json")
 DEFAULT_STATE_PATH = os.path.join(CURR_DIR, "orchestrator-state.json")
 DEFAULT_REPORTS_DIR = os.path.join(SCRIPT_DIR, "reports")  # matches config.py's OUTPUT_DIR
-DEFAULT_TIMEOUT_SECONDS = 400  # 8 minutes 
+DEFAULT_TIMEOUT_SECONDS = 1800  # 30 minutes
 
 
 def slugify(subject: str) -> str:
-    """Fallback only: langgraph-module's existing reports (gynecology, tipathalav, ...)
-    are hand-picked English slugs, not mechanically derived from the Hebrew subject like
-    agent.py's are. Config entries should set "slug" explicitly; this only covers an
-    entry that omits it."""
+    """Fallback only: the existing reports (gynecology, tipathalav, ...) use hand-picked
+    English slugs rather than ones mechanically derived from the Hebrew subject. Config
+    entries should set "slug" explicitly; this only covers an entry that omits it."""
     return re.sub(r"[^\w\-_]", "_", subject).strip("_") or "subject"
 
 
@@ -73,8 +69,8 @@ def parse_frontmatter_title(md_path: str) -> Optional[str]:
 
 def discover_category_reports(category: str, entries: List[Dict[str, str]], reports_dir: str) -> List[Dict[str, str]]:
     """Finds every successfully-produced report (reports/{slug}.md) for a category's
-    configured slugs. Unlike main_agent's version, there's no category subdirectory to
-    list - reports/ is flat - so membership comes from the config, not the filesystem."""
+    configured slugs. There is no category subdirectory to list - reports/ is flat - so
+    category membership comes from the config, not from the filesystem."""
     reports: List[Dict[str, str]] = []
     for entry in entries:
         slug = entry["slug"]

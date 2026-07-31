@@ -2,98 +2,36 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+For setup and how to run things, see [README.md](README.md). This file is the architecture, the domain traps, and the handover notes.
+
 ## What this is
 
-A hackathon project that generates Hebrew "topic pages" (דפי נושא) about Israeli government spending. Everything is driven off the **BudgetKey MCP server** at `https://next.obudget.org/mcp` (declared in [.mcp.json](.mcp.json)), which exposes three tools over a read-only Postgres: `DatasetInfo`, `DatasetFullTextSearch`, `DatasetDBQuery`.
+A hackathon project, now handed over, that generates Hebrew "topic pages" (דפי נושא) about Israeli government spending. Everything is driven off the **BudgetKey MCP server** at `https://next.obudget.org/mcp` (declared in [.mcp.json](.mcp.json)), which exposes three tools over a read-only Postgres: `DatasetInfo`, `DatasetFullTextSearch`, `DatasetDBQuery`.
 
-The end product is a markdown file with YAML frontmatter, rendered by a React viewer. `talpihackathon/main_agent/instructions/content-file-schema.md` is the contract between generator and viewer.
+The deliverable is a markdown file with YAML frontmatter, containing prose, tables and `​```plotly` chart blocks. Nothing here renders it; [langgraph-module/PLOTLY_BLOCK_SPEC.md](langgraph-module/PLOTLY_BLOCK_SPEC.md) is the contract a viewer must implement.
 
-## Repository layout — three independent pieces
+## Repository layout
 
-| Path | What it is | Language |
-|---|---|---|
-| `talpihackathon/main_agent/` | **The primary generator.** Custom MCP client + LLM abstraction + the deterministic phase-1 pipeline. | Python (stdlib + `requests`) |
-| `langgraph-module/` | A LangGraph re-implementation of the same pipeline, as a `StateGraph` fan-out/fan-in. | Python (langgraph/langchain) |
-| `talpihackathon/` (root) | The viewer: Vite + React 19 SPA with a small Express API that reads `content/*.md`. | TypeScript/JS |
+| Path | What it is |
+|---|---|
+| `langgraph-module/` | **The generator.** LangGraph `StateGraph`, the prompts, the deterministic phase-1 SQL pipeline, the chart/frontmatter rendering. |
+| `orchestrator/` | Batch runner. One `main.py` subprocess per subject in `orchestrator-config.json`, with a state file and cross-report link sync. The normal entry point. |
+| `query_optimizer/` | A standalone bash workflow (`query_gen.sh` / `query_run.sh`) that compiles NL questions into saved, re-runnable SQL specs in `queries/*.json` — no LLM at run time. **Not wired into the generator**; kept as future optimization infrastructure. |
+| `docs/` | `BUDGETKEY_MCP_IMPROVEMENTS.md` — bugs in the MCP server itself, worth passing upstream. |
 
-`talpihackathon/query_optimizer/` is a separate bash workflow (`query_gen.sh` / `query_run.sh`) for compiling NL questions into saved, re-runnable SQL specs in `queries/*.json` — no LLM needed at run time.
-
-**The two Python trees are deliberate duplicates.** `langgraph-module/agent_engineering/step1_pipeline.py` and `helpers/prompts/{budget_api,budget_reference}.py` are ports of `main_agent/{pipeline,budget_api,budget_reference}.py`; `skill_phase1_budget.md` exists in both. When you change logic or prompts in one, mirror it in the other or explicitly note the divergence — the READMEs claim they are kept in sync.
-
-Two divergences already exist, so check before assuming a file is shared:
-
-- **The synthesis half has split.** `langgraph-module/prompts/synthesis_template.md` has Plotly charts, a `סעיפים בולטים` section and the `{{TOKEN}}` blocks; `main_agent/instructions/synthesis_template.md` has none of those and different section names (`{BUDGET_TABLE}`, `{SOURCES_LIST}`). `blocks.py` exists only in the LangGraph tree.
-- **The phases are numbered differently.** Synthesis is `final_phase_synthesis` (PHASE5) in `langgraph-module` but **"Step 4"** in `main_agent/agent.py`; hierarchy is phase 4 in the first and phase 5 in the second. "Phase 4" is ambiguous across trees — say which one.
-
-## Commands
-
-### Viewer (from `talpihackathon/`)
-
-```bash
-npm install
-npm run dev          # Vite on :5173 + Express API on :3001 (proxied at /api) via concurrently
-npm run dev:client   # Vite only
-npm run dev:server   # Express only
-npm run typecheck    # tsc -b
-npm run lint         # oxlint
-npm run build        # generate:content -> tsc -b -> vite build -> copy-404
-```
-
-There are no tests. `npm run build` is the closest thing to a full check.
-
-The API re-scans `content/` on **every request** — after writing a `.md` file, a browser refresh is enough, no restart. The production build is static (GitHub Pages): `scripts/generate-static-api.js` snapshots `content/` into `public/api/*.json` at build time, so a deployed site does **not** pick up new content without a rebuild. Base path is `/talpiot-hasdna-budget-hackathon/` in production ([vite.config.ts](talpihackathon/vite.config.ts)); CI is [.github/workflows/deploy.yml](.github/workflows/deploy.yml), which builds from `talpihackathon/` on push to `main`.
-
-### main_agent (from `talpihackathon/main_agent/`)
-
-```bash
-python3 -m venv venv
-./venv/bin/pip install -r requirements.txt
-
-# ReAct agent, one subject end-to-end -> output_examples/<slug>-<timestamp>/
-./venv/bin/python agent.py --subject "חינוך" --provider vertex
-./venv/bin/python agent.py --prompt "מה התקציב של משרד החינוך ל-2025?" --provider gemini
-./venv/bin/python agent.py --list-tools            # sanity-check the MCP connection
-./venv/bin/python agent.py --subject health -t     # 1 turn only, quick smoke test
-
-# Deterministic phase-1 pipeline -> pipeline_runs/<subject>-<timestamp>-<model>/
-./venv/bin/python pipeline.py --subject "אנרגיה ירוקה" --provider vertex
-./venv/bin/python pipeline.py --subject "..." --stop-after retrieve   # cheap partial run
-./venv/bin/python pipeline.py --subject "..." --max-parallel 1        # sequential judging
-
-# Score / diff runs
-./venv/bin/python compare.py pipeline_runs/runA/ pipeline_runs/runB/
-./venv/bin/python compare.py pipeline_runs/runA/ --truth eval/truth_energy.csv
-
-# Batch over orchestrator-config.json -> ../structured_report/<category>/<subject>/
-./venv/bin/python orchestrator.py --provider vertex
-./venv/bin/python orchestrator.py --dry-run
-./venv/bin/python orchestrator.py --category healthcare --subject center-healthcare
-```
-
-Providers: `vertex` (default for `pipeline.py`, uses local gcloud ADC, no key), `gemini` (`GEMINI_API_KEY`), `anthropic` (`ANTHROPIC_API_KEY`), `cli-claude` (shells out to a local `claude` executable).
-
-`compare.py` is the evaluation harness: for every ground-truth code a run missed, it reports **where** it was lost (never retrieved / dropped at program triage / dropped at item judging). Use it before/after prompt changes — that's the only signal distinguishing "the pipeline broke" from "one prompt needs tuning".
-
-### langgraph-module (from `langgraph-module/`)
-
-```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env      # ANTHROPIC_API_KEY
-python main.py "בריאות" --slug health    # -> reports/health.md + reports/health/*.csv
-```
+There is one Python tree. An earlier `talpihackathon/main_agent/` implementation and a Vite/React viewer both existed and were removed once `langgraph-module` superseded them; if you find a reference to either, it is stale and should be deleted.
 
 ## Architecture: how a topic page gets made
 
-Five phases, fanned out then synthesized. Node names below are `langgraph-module`'s; see the numbering divergence noted above before mapping them onto `main_agent`.
+Five phases, fanned out then synthesized, wired in [langgraph-module/agent_engineering/graph.py](langgraph-module/agent_engineering/graph.py):
 
 ```
 START → phase1_budget → ┬→ phase2_contracts ─┐
-                        ├→ phase3_decisions ─┼→ final_synthesis → END
+                        ├→ phase3_decisions ─┼→ final_phase_synthesis → END
                         └→ phase4_hierarchy ─┘
 ```
 
-Phase 1 alone first (everything downstream needs its codes), then 2/3/4 concurrently, then synthesis once all three land.
+Phase 1 alone first (everything downstream needs its codes), then 2/3/4 concurrently, then synthesis once all three land. Phases 2/3/4 all write to `WikiState.errors`, which is why that key — and only that key — carries an `operator.add` reducer; see [state.py](langgraph-module/agent_engineering/state.py).
 
 | Phase | LLM? | What it does |
 |---|---|---|
@@ -103,7 +41,7 @@ Phase 1 alone first (everything downstream needs its codes), then 2/3/4 concurre
 | 4 · hierarchy | **none** | Formats `hierarchy.csv` as text |
 | final · synthesis | one call, no tools | Writes the page; four blocks computed in Python |
 
-**Phase 1 is not an agent.** Seven steps, and the split is the point — *the LLM only ever classifies, never counts:*
+**Phase 1 is not an agent.** Seven steps in [step1_pipeline.py](langgraph-module/agent_engineering/step1_pipeline.py), and the split is the point — *the LLM only ever classifies, never counts:*
 
 | Step | How | (scale, from one real run) |
 |---|---|---|
@@ -117,34 +55,55 @@ Phase 1 alone first (everything downstream needs its codes), then 2/3/4 concurre
 
 Every LLM step is a schema-constrained one-shot JSON call at temperature 0 over bounded, chunked input — not an agent loop. Steps 3/6/7 never touch a model, so **no budget figure can be invented**; the model's influence is entirely in *which* rows were selected, and that is auditable in `excluded_items.csv`. Judging dominates cost (16 of 21 LLM calls in that run).
 
-Phases 2/3 are the only real ReAct loops (model → MCP tool → model, step-capped); each is fed phase 1's digest so it can filter by the budget codes already found, and a failure is caught per-phase so one dead agent doesn't kill the run.
+The pipeline is synchronous code run via `asyncio.to_thread`; its SQL reaches the event loop through `SyncMCPBridge` ([mcp_tools.py](langgraph-module/agent_engineering/mcp_tools.py)) and its model calls through `JSONLLM` ([llm_json.py](langgraph-module/agent_engineering/llm_json.py)).
 
-Hierarchy used to be an agent that queried the tree itself with `code LIKE '24%'` — the wildcard that double-counts a parent with its children. Phase 1 already writes those rows correctly, so in `langgraph-module` it is now pure formatting. **`main_agent` still runs it as an agent** (its "Step 5", turn-capped at 6), so the old wildcard bug is still reachable there.
+Phases 2/3 are the only real ReAct loops (model → MCP tool → model, step-capped); phase 2 is fed `build_scope()`'s three-tier SQL filter ladder so it joins contracts on the exact budget codes phase 1 found rather than widening to a whole ministry, and a failure is caught per-phase so one dead agent doesn't kill the run.
 
-Final synthesis is split down the middle. The model writes the prose, the contracts/suppliers/decisions tables, the suppliers pie and all inline linking. **`langgraph-module/agent_engineering/blocks.py` writes the four blocks phase 1's CSVs fully determine** — trend chart, top-10 pie, sources pie, nested item list. The template carries a `{{TOKEN}}` where each goes and `apply_blocks()` substitutes after the call, so the model never transcribes a number or a Plotly fence. It used to, and it silently dropped whole charts (see `langgraph-module/reports/GreenEnergy.md`). If a token goes missing, the block is repaired back under its heading and logged.
+Phase 4 is pure formatting. It was once an agent that queried the tree itself with `code LIKE '24%'` — the wildcard that double-counts a parent with its children. Phase 1 already writes those rows correctly, so it now only renders them.
 
-**The frontmatter is computed too, in `langgraph-module`** — `blocks.apply_frontmatter()` strips whatever the model emitted (including a code fence wrapping the whole document) and prepends the real block; the skill file tells the model to start at the `# {SUBJECT_HEBREW}` heading instead. It has to be at offset 0 or gray-matter ignores it, and the model was inventing `model:` values. **`main_agent` still asks its model for the frontmatter**, and its template still carries it at the bottom of the file.
+Final synthesis is split down the middle. The model writes the prose, the contracts/suppliers/decisions tables, the suppliers pie and all inline linking. **[blocks.py](langgraph-module/agent_engineering/blocks.py) writes the four blocks phase 1's CSVs fully determine** — trend chart, top-10 pie, sources pie, appendix item table. The template carries a `{{TOKEN}}` where each goes and `apply_blocks()` substitutes after the call, so the model never transcribes a number or a Plotly fence. It used to, and it silently dropped whole charts (see `langgraph-module/reports/GreenEnergy.md`). If a token goes missing, the block is repaired back under its heading and logged.
 
-Prompts are files, not string literals: `main_agent/instructions/skill_*.md` (system prompts for the agent phases, plus `synthesis_template.md` and `subject_prompt.txt`) and `main_agent/prompts/*.md` (the pipeline's four classification prompts). In `langgraph-module` both kinds live together in `prompts/`, keyed by `PROMPT_FILES` in `config.py`. Editing behaviour usually means editing these, not Python.
+**The frontmatter is computed too** — `blocks.apply_frontmatter()` strips whatever the model emitted (including a code fence wrapping the whole document) and prepends the real block; the skill file tells the model to start at the `# {SUBJECT_HEBREW}` heading instead. It has to be at offset 0 or a gray-matter-style parser ignores it, and the model was inventing `model:` values.
 
-A pipeline run directory is the real deliverable — `selected_items.csv` + `item_budgets.csv` are the data, the markdown is a summary of them, and `excluded_items.csv` + `report.json`'s `possible_misses` are the audit trail a reviewer uses to catch false negatives. `run_summary.json` records verdict splits and per-step SQL/LLM cost.
+Prompts are files, not string literals, in `langgraph-module/prompts/`, keyed by `PROMPT_FILES` in [config.py](langgraph-module/config.py). Editing behaviour usually means editing these, not Python.
+
+A run directory is the real deliverable alongside the page — `selected_items.csv` + `item_budgets.csv` are the data, the markdown is a summary of them, and `excluded_items.csv` + `report.json`'s `possible_misses` are the audit trail a reviewer uses to catch false negatives. `run_summary.json` records verdict splits and per-step SQL/LLM cost.
 
 ## Domain rules that break things silently
 
-From `main_agent/instructions/skill_phase1_budget.md` — read it before touching any budget SQL.
+From `langgraph-module/prompts/skill_phase1a_main.md` — read it before touching any budget SQL. (That file is no longer loaded by any phase, but it remains the best description of the dataset and its traps.)
 
 - `budget_items_data.code` is a dotted hierarchy: level 1 = ministry (`24`), 2 = domain (`24.16`), 3 = program (`24.16.03`), 4 = the atomic line item / תקנה (`24.16.03.62`). **Parent rows already contain their descendants — never sum across mixed levels.**
 - **Never use `%` in a `code` filter.** `code LIKE '24%'` mixes levels and double-counts; the server attaches a warning and results carrying warnings must not be reported. Use `LEFT(code,2)='24'` plus an explicit `level = N`. `ILIKE '%…%'` on `title` is fine.
-- Every policy area exists **twice**: an ordinary-budget office and a high-numbered development-budget office (בריאות = `24` *and* `67`/`92`/`93`/`94`). Missing the second half is the most common way to under-report a subject. `budget_reference.py` holds the checked-in office list and the ordinary↔development pairs.
+- Every policy area exists **twice**: an ordinary-budget office and a high-numbered development-budget office (בריאות = `24` *and* `67`/`92`/`93`/`94`). Missing the second half is the most common way to under-report a subject. [budget_reference.py](langgraph-module/helpers/prompts/budget_reference.py) holds the checked-in office list and the ordinary↔development pairs.
 - `(code, year)` is unique and codes get **recycled** — the same code can carry a different title in a different year. Always carry the year; prefer the latest year's title.
 - `functional_class_*` and `economic_class_*` are populated for `level=4` rows only.
-- Hard limits in `budget_api.py`: `PAGE_SIZE = 1000` (server-side cap, larger silently clamped) and `MAX_SQL_CHARS = 2800`. `verify_sql()` / `check_sql()` enforce the rules above before a query is sent.
-- Tuning knobs at the top of `pipeline.py` (`CHUNK_ITEMS`, `MAX_PROGRAMS_PER_CALL`, `MAX_PARALLEL_CALLS`, `MAX_DOMAINS_INLINE`) carry measured comments. The failure mode to watch is a **truncated judging reply**, which costs recall silently — only the unjudged-count log reveals it.
+- Hard limits in [budget_api.py](langgraph-module/helpers/prompts/budget_api.py): `PAGE_SIZE = 1000` (server-side cap, larger silently clamped) and `MAX_SQL_CHARS = 2800` (past ~2990 chars the server returns **zero rows, no error** — the most dangerous limit here, because it looks exactly like "no such data"). `verify_sql()` / `check_sql()` enforce the rules above before a query is sent.
+- Tuning knobs at the top of `step1_pipeline.py` (`CHUNK_ITEMS`, `MAX_PROGRAMS_PER_CALL`, `MAX_PARALLEL_CALLS`, `MAX_DOMAINS_INLINE`) carry measured comments. The failure mode to watch is a **truncated judging reply**, which costs recall silently — only the unjudged-count log reveals it.
 
-`talpihackathon/BUDGETKEY_MCP_IMPROVEMENTS.md` documents known bugs in the MCP server itself (its `DatasetDBQuery` description omits two real datasets and its example query names columns that don't exist). Don't trust the tool descriptions over `DatasetInfo`.
+`docs/BUDGETKEY_MCP_IMPROVEMENTS.md` documents known bugs in the MCP server itself (its `DatasetDBQuery` description omits two real datasets and its example query names columns that don't exist). Don't trust the tool descriptions over `DatasetInfo`.
+
+## Known problems
+
+Live issues in the code as handed over. None of these break a run; all of them will mislead someone.
+
+- **The `model:` field in every generated page is wrong.** [config.py](langgraph-module/config.py) sets `MODEL_NAME = "claude-sonnet-5"`, `main.py` puts it in the state, and `blocks.frontmatter()` writes it verbatim — but every actual call goes through `ChatGoogleGenerativeAI` with `GEMINI_MODEL`. `reports/renewables.md` claims `model: claude-sonnet-5`; it was generated by `gemini-2.5-flash`. Fixing it means pointing both call sites at one config value — see "Switching the model provider" in the README. `ANTHROPIC_API_KEY` is likewise read and never used, and `_llm()`'s comments still describe Claude-on-Vertex model IDs.
+- **`GOOGLE_PROJECT` defaults to a hardcoded qwiklabs lab project.** That project will expire. Set `GCP_PROJECT`.
+- **Two prompts are wired but never loaded.** `PROMPT_FILES` maps `PHASE1 → skill_phase1a_main.md` and `PHASE4 → skill_phase4_hierarchy.md`; nothing calls `load_prompt` for either, because those phases stopped being agents. Keep `skill_phase1a_main.md` (it is the dataset documentation). `skill_phase4_hierarchy.md` is actively harmful to copy from — it is the file that teaches `code LIKE '24%'`.
+- **Debug prints left in [agents.py](langgraph-module/agent_engineering/agents.py)** around the phase-1 node: `print("type(summary)", ...)`.
+- **`budget_reference.py` says to regenerate itself with `tools/refresh_reference.py`.** No such script exists. The office list, functional classes and development pairs were generated on 2026-07-31 and are checked in by hand; they need updating when a new budget year lands (`LATEST_YEAR` is `2026`).
+- **`AGENT_MAX_STEPS` is passed as LangGraph's `recursion_limit`**, which counts graph supersteps, not agent turns — a ReAct turn is roughly two. `12` is about 6 tool calls, not 12.
+
+## Future work
+
+- **Phase 3 is unscoped.** Phase 2 gets `build_scope()`'s tiered budget-code filters and is explicitly forbidden from filtering by ministry. Phase 3 gets only the digest, and its prompt tells it to match a Hebrew keyword against `title`/`content`. That is the weakest link in the page: decisions are selected by substring, not by any connection to the budget lines the rest of the page is about. Whether decisions *can* be linked to budget codes at all is an open question — investigate before designing the fix.
+- **`hierarchy.csv` is wider than the subject.** `build_hierarchy()` queries every office in `plan["offices"]` — every ministry the expansion step named — at full budget, not just the parts funding selected items. `blocks.py` deliberately refuses to build the sources pie from it for exactly that reason, and uses it only to name and link the level 1–3 ancestors of selected items. Either narrow the query to the ancestors actually needed, or drop the file and read the ancestors directly.
+- **`query_optimizer/` is unintegrated.** Its premise — pay an agent once to compile SQL, then re-run the saved spec for free and deterministically — applies directly to this pipeline's fixed queries. Nothing connects the two today.
+- **No viewer.** The pages are markdown with `​```plotly` fences and the render contract is written down, but nothing in this repo or downstream implements it yet.
+- **No tests, and no evaluation harness.** An earlier implementation had a `compare.py` that scored a run against a ground-truth CSV and reported *where* a missed code was lost (never retrieved / dropped at program triage / dropped at item judging). It was removed with that tree. Prompt changes are currently unmeasurable — this is the single most valuable thing to rebuild, since every phase-1 prompt is a recall/precision tradeoff with no signal on it.
 
 ## Conventions
 
 - Content and prompts are **Hebrew**; code, comments and docs are English. Output is RTL markdown.
-- Hebrew paths and console output on Windows: `compare.py` re-wraps stdout as UTF-8 because a cp1252 pipe aborts on the first Hebrew line. Do the same in any new CLI.
-- Generated output is gitignored: `content/*` (except the three seed dashboards and `content/reports/`), `public/api/`, `main_agent/venv/`, `main_agent/orchestrator-state.json`, `.env`. `output_examples/` and `pipeline_runs/` are checked in as reference runs.
+- Hebrew paths and console output on Windows: CLIs re-wrap stdout as UTF-8 because a cp1252 pipe aborts on the first Hebrew line. Do the same in any new CLI.
+- Generated output is gitignored (`__pycache__`, `orchestrator-state.json`, `.env`, `*.preview.html`). `langgraph-module/reports/` is checked in as reference runs — some of them (`gynecology.md`, `tipathalav.md`, `Magendavidadom.md`) predate the current pipeline and have no run directory.

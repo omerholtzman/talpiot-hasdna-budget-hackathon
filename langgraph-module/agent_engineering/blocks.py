@@ -589,8 +589,9 @@ def apply_blocks(text: str, blocks: Dict[str, str]) -> Tuple[str, List[str]]:
 # them buys nothing and it got them wrong in four of the six checked-in reports
 # — `model:` came back as `gpt-4o`, `gpt-4`, `ReportGeneratorV1.0` and a literal
 # `{MODEL}`. Worse, the block only works if it is the very first thing in the
-# file: `server/lib/scanDashboards.js` parses it with gray-matter, which gives
-# up unless the opening `---` is at offset 0. `reports/Magendavidadom.md` wrapped
+# file: a gray-matter-style parser gives up unless the opening `---` sits at
+# offset 0, so anything before it loses all the metadata.
+# `reports/Magendavidadom.md` wrapped
 # the whole document in a code fence, which is enough to lose all of its
 # metadata. So the model is now told not to write frontmatter at all (see
 # prompts/skill_phase_final_synthesis.md rule 2) and we prepend it here.
@@ -610,7 +611,7 @@ _TAIL_FRONTMATTER = re.compile(r"\n-{3,}[ \t]*\n(?:[^\n]*\n)+?-{3,}[ \t]*\s*\Z")
 
 
 def frontmatter(subject: str, slug: str, today: str, model: str) -> str:
-    """The YAML block `main_agent/instructions/content-file-schema.md` requires.
+    """The YAML block a downstream markdown viewer reads the page's metadata from.
 
     Dates are quoted per that schema: bare YAML dates are parsed into `Date`
     objects and can shift a day across timezones.
