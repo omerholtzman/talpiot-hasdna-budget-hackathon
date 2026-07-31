@@ -250,16 +250,20 @@ async def final_phase_synthesis_node(state: WikiState) -> dict:
 
     The model writes the prose and the phase 2/3 tables only. The four blocks
     that phase 1's CSVs fully determine — the trend chart, the top-10 pie, the
-    sources pie and the nested item list — are computed in blocks.py and
+    sources pie and the appendix table of selected items — are computed in blocks.py and
     substituted into the reply afterwards; the model just carries their
     `{{TOKEN}}` through. See blocks.py for why that is worth the indirection.
+    The frontmatter is computed there too and prepended after the call: the
+    model is told not to write one, because gray-matter only reads it at
+    offset 0 and every field in it is already known here.
     """
     label = "Final Synthesis"
     _log(label, f"Starting - subject: '{state['subject']}'")
 
     system_prompt = load_prompt(PHASE5, TODAY=state["today"], MODEL=state["model"])
-    # The template's own frontmatter carries {TODAY}/{MODEL} too; without these the
-    # model is left to guess them, and it has shipped a literal "model: {MODEL}".
+    # No {TODAY}/{MODEL} in the template itself any more (they lived in its
+    # frontmatter); passed anyway so re-adding a date to it can't silently
+    # leave a literal placeholder in the page, as it once did.
     template = load_prompt(TEMPLATE, TODAY=state["today"], MODEL=state["model"])
 
     combined_data = (
@@ -280,9 +284,17 @@ async def final_phase_synthesis_node(state: WikiState) -> dict:
     _log(label, f"  hierarchy_result: {_truncate(state['hierarchy_result'])}")
     _log(label, "No tools attached for this phase (skill file: no DB tools in phase 5)")
 
+    # The heading matters: concatenated bare, the skill file's last rule ran
+    # straight into the template's first line, leaving the model to guess where
+    # instructions stopped and the document to reproduce started.
     response = await _llm().ainvoke(
         [
-            {"role": "system", "content": system_prompt + template},
+            {"role": "system",
+             "content": f"{system_prompt}\n\n"
+                        "## The template\n\n"
+                        "Everything below this line is the document to produce. "
+                        "Reproduce it as-is, replacing only the placeholders.\n\n"
+                        f"{template}"},
             {"role": "user", "content": user_message},
         ]
     )
@@ -295,6 +307,15 @@ async def final_phase_synthesis_node(state: WikiState) -> dict:
         # heading it lived under, so there is nowhere to put it back. Worth a
         # loud line — the section is simply missing from the page.
         _log(label, f"WARNING: no place found in the reply for: {', '.join(unplaced)}")
+
+    report, cleanups = blocks.apply_frontmatter(
+        report, state["subject"], state["subject_slug"], state["today"], state["model"]
+    )
+    for note in cleanups:
+        # Not an error - the reply was repaired. But each one means the model
+        # ignored an explicit rule, which is how prompt drift becomes visible.
+        _log(label, f"Frontmatter: {note}")
+
     _log(label, f"Done - {len(computed)} computed block(s) substituted, "
                 f"{len(report)} chars")
     return {"final_report": report}

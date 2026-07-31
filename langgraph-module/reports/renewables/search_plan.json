@@ -1,0 +1,39 @@
+{
+  "offices": [
+    "34",
+    "83",
+    "04",
+    "38",
+    "26",
+    "76",
+    "35",
+    "05",
+    "89"
+  ],
+  "functional_classes": [
+    "אנרגיה",
+    "הגנת הסביבה"
+  ],
+  "keywords": [
+    "מתחדש",
+    "סולארי",
+    "פוטו-וולטאי",
+    "רוח",
+    "שמש",
+    "הידרו",
+    "ביו-גז",
+    "התייעלות",
+    "שימור אנרגיה"
+  ],
+  "fts_queries": [
+    "אנרגיה מתחדשת",
+    "פיתוח אנרגיה ירוקה",
+    "השקעות באנרגיה סולארית"
+  ],
+  "notes": "The scope includes both generation of renewable energy and related energy efficiency measures, reflecting the integrated approach often taken in policy.",
+  "rejected_offices": [],
+  "whole_word_keywords": [
+    "רוח",
+    "שמש"
+  ]
+}

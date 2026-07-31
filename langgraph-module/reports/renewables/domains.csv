@@ -1,0 +1,154 @@
+﻿code,title,office,verdict,reason
+04.01,תחום פעולה כללי,משרד ראש הממשלה,ambiguous,Generic administrative container
+04.02,ראשות הממשלה,משרד ראש הממשלה,ambiguous,Generic administrative container
+04.03,סטטיסטיקה ממלכתית,משרד ראש הממשלה,drop,National statistics
+04.04,רזרבה לסעיף ראש הממשלה,משרד ראש הממשלה,ambiguous,Reserve for ministry
+04.05,לשכת העיתונות הממשלתית,משרד ראש הממשלה,drop,Government press office
+04.06,השלמת טיפול במפוני,משרד ראש הממשלה,drop,Evacuee treatment
+04.07,רזרבה להתייקרויות,משרד ראש הממשלה,ambiguous,Reserve for price increases
+04.08,שירותי דת,משרד ראש הממשלה,drop,Religious services
+04.09,רבנות ראשית,משרד ראש הממשלה,drop,Chief Rabbinate
+04.10,נציבות שירות המדינה,משרד ראש הממשלה,drop,Civil Service Commission
+04.12,רשות החברות הממשלתיות,משרד ראש הממשלה,drop,Government Companies Authority
+04.15,נתיב,משרד ראש הממשלה,drop,Liaison bureau
+04.16,נציבות שירות המדינה,משרד ראש הממשלה,drop,Civil Service Commission
+04.20,השר לשיתוף פעולה,משרד ראש הממשלה,drop,Minister for Cooperation
+04.21,המשרד לפיתוח הנגב,משרד ראש הממשלה,drop,Negev development
+04.22,תוכנית לחיזוק הצפון,משרד ראש הממשלה,drop,Strengthening the North
+04.23,המשרד לשיתוף פעולה,משרד ראש הממשלה,drop,Ministry for Cooperation
+04.51,משרד ראשי,משרד ראש הממשלה,ambiguous,Generic administrative container
+04.52,משרדי ממשלה ולשכות שרים,משרד ראש הממשלה,ambiguous,Generic administrative container
+04.53,סטטיסטיקה ממלכתית,משרד ראש הממשלה,drop,National statistics
+04.54,הרבנות הראשית לישראל,משרד ראש הממשלה,drop,Chief Rabbinate
+04.55,נציבות שירות המדינה,משרד ראש הממשלה,drop,Civil Service Commission
+04.56,המשרד לשיתוף פעולה,משרד ראש הממשלה,drop,Ministry for Cooperation
+04.57,המשרד לשוויון חברתי,משרד ראש הממשלה,drop,Social equality
+04.59,לשכת הקשר נתיב,משרד ראש הממשלה,drop,Liaison bureau
+04.60,מנהלת השירות האזרחי,משרד ראש הממשלה,drop,Civil Service Administration
+04.61,החטיבה להתיישבות,משרד ראש הממשלה,drop,Settlement division
+04.62,המשרד לשירותי הדת,משרד ראש הממשלה,drop,Religious services
+04.63,המשרד לפיתוח הנגב,משרד ראש הממשלה,drop,Negev development
+04.64,הרשות לפיתוח המגזר,משרד ראש הממשלה,drop,Sector development
+04.70,רזרבות,משרד ראש הממשלה,ambiguous,Reserves
+04.99,חשבון מעבר,משרד ראש הממשלה,ambiguous,Clearing account
+05.01,תחום פעולה כללי,משרד האוצר,ambiguous,Generic administrative container
+05.02,שירותי מטה ממשלתיים,משרד האוצר,ambiguous,Generic administrative container
+05.03,שירותי מטה כלל משקיים,משרד האוצר,ambiguous,Generic administrative container
+05.04,בצוע פקודת מס הכנסה,משרד האוצר,drop,Income tax
+05.05,"אגף המכס והמע""מ",משרד האוצר,drop,Customs and VAT
+05.06,שירותי עזר למשרדי ממשלה,משרד האוצר,ambiguous,Auxiliary services for government offices
+05.07,נציבות שירות המדינה,משרד האוצר,drop,Civil Service Commission
+05.08,רזרבה לפעולות משרד,משרד האוצר,ambiguous,Reserve for ministry operations
+05.09,רשות החברות הממשלתיות,משרד האוצר,drop,Government Companies Authority
+05.10,שירות עיבודים ממוכנים,משרד האוצר,drop,Automated processing services
+05.20,רשות המסים בישראל,משרד האוצר,drop,Tax authority
+05.51,משרד האוצר ראשי,משרד האוצר,ambiguous,Generic administrative container
+05.52,רשות המיסים,משרד האוצר,drop,Tax authority
+05.53,רזרבה למשרד האוצר,משרד האוצר,ambiguous,Reserve for Ministry of Finance
+05.90,כיסוי גירעון המדפיס,משרד האוצר,drop,Printer deficit
+05.99,חשבון מעבר,משרד האוצר,ambiguous,Clearing account
+26.01,תחום פעולה כללי,המשרד להגנת הסביבה,ambiguous,Generic administrative container
+26.02,רזרבה,משרד איכות הסביבה,ambiguous,Reserve
+26.03,פעילות יחידות המשרד,המשרד להגנת הסביבה,ambiguous,Generic administrative container
+26.05,קרן הניקיון,המשרד להגנת הסביבה,drop,Cleanliness fund
+26.06,ים וחופים,המשרד להגנת הסביבה,drop,Seas and coasts
+26.07,השקעות מפעלי תעשיה,המשרד להגנת הסביבה,drop,Industrial plant investments
+26.08,חומרים מסוכנים,המשרד להגנת הסביבה,drop,Hazardous materials
+26.09,קשרים בינלאומיים,המשרד להגנת הסביבה,ambiguous,International relations
+26.10,השתתפות בארגונים,המשרד להגנת הסביבה,ambiguous,Participation in organizations
+26.11,שכר ותפעול,המשרד להגנת הסביבה,ambiguous,Salaries and operations
+26.12,פעולות,המשרד להגנת הסביבה,ambiguous,Activities
+26.13,קרנות,המשרד להגנת הסביבה,ambiguous,Funds
+26.14,"פרוייקטים מקק""ל",המשרד להגנת הסביבה,ambiguous,KKL projects
+26.26,רזרבות,המשרד להגנת הסביבה,ambiguous,Reserves
+26.97,צער בעלי חיים,המשרד להגנת הסביבה,drop,Animal welfare
+26.98,רזרבות,המשרד להגנת הסביבה,ambiguous,Reserves
+26.99,חשבון מעבר,המשרד להגנת הסביבה,ambiguous,Clearing account
+34.01,תחום פעולה כללי,משרד האנרגיה והמים,ambiguous,Generic administrative container
+34.02,מטה משרד התשתיות,משרד האנרגיה והמים,ambiguous,Ministry staff
+34.04,מחשוב המשרד,משרד האנרגיה והמים,drop,Ministry computerization
+34.05,הערכות לגז טבעי,משרד התשתיות הלאומיות,drop,Natural gas preparations
+34.06,מינהל המחקר למדעי,משרד האנרגיה והמים,ambiguous,Research administration for sciences
+34.07,סיירת ירוקה,משרד התשתיות הלאומיות,drop,Environmental enforcement
+34.08,מנהלת ההקמה של צנרת,משרד התשתיות הלאומיות,drop,Pipeline establishment
+34.10,רשויות פיתוח אזוריות,משרד התשתיות הלאומיות,ambiguous,Regional development authorities
+34.11,מחקר ופיתוח באנרגיה,משרד האנרגיה והמים,keep,Research and development in energy
+34.12,יעול השימוש באנרגיה,משרד האנרגיה והמים,keep,Energy efficiency
+34.13,פעולות מידע,משרד האנרגיה והמים,ambiguous,Information activities
+34.14,פעולות פיקוח במשק הדלק,משרד האנרגיה והמים,drop,Fuel market supervision
+34.16,פיתוח מערכת החשמל,משרד התשתיות הלאומיות,keep,Electricity system development
+34.17,מחקר ופיתוח תשתית,משרד האנרגיה והמים,ambiguous,Infrastructure research and development
+34.18,רזרבה להתייקרויות,משרד האנרגיה והמים,ambiguous,Reserve for price increases
+34.20,רשות ממשלתית למים,משרד התשתיות הלאומיות,drop,Water authority
+34.21,פעולות משק המים,משרד התשתיות הלאומיות,drop,Water economy activities
+34.22,היחידה לקידום מפעלי,משרד התשתיות הלאומיות,ambiguous,Unit for promoting enterprises
+34.23,המינהל לתשתיות ביוב,משרד התשתיות הלאומיות,drop,Sewage infrastructure
+34.24,רזרבה למשק המים,משרד התשתיות הלאומיות,drop,Water economy reserve
+34.30,מטה המשרד,משרד האנרגיה,ambiguous,Ministry staff
+34.31,מכון גיאולוגי,משרד האנרגיה,ambiguous,Geological Institute
+34.32,רזרבות,משרד האנרגיה,ambiguous,Reserves
+34.33,משאבי מים,משרד האנרגיה,drop,Water resources
+34.99,חשבון מעבר,משרד האנרגיה,ambiguous,Clearing account
+35.01,הועדה לאנרגיה אטומית,הועדה לאנרגיה אטומית,drop,Atomic energy
+38.01,פתוח שוקים ליצוא,תמיכות בענפי המשק,ambiguous,Export market development
+38.02,מחקר ופיתוח תעשייתי,תמיכות בענפי המשק,ambiguous,Industrial research and development
+38.03,הטבות לעידוד השקעות הון,תמיכות בענפי המשק,ambiguous,Capital investment incentives
+38.04,פעולות שונות לפיתוח,תמיכות בענפי המשק,ambiguous,Various development activities
+38.05,ביטוח סיכוני סחר חוץ,תמיכות בענפי המשק,drop,Foreign trade risk insurance
+38.07,תמיכות בגופים המקדמים,תמיכות בענפי המשק,ambiguous,Support for promoting bodies
+38.08,פעולות מנהל סחר חוץ,תמיכות בענפי המשק,drop,Foreign trade administration
+38.09,תקינה,תמיכות בענפי המשק,ambiguous,Standardization
+38.10,ה.מ. חזוק הצפון והדרום,תמיכות בענפי המשק,drop,Strengthening North and South
+38.11,עידוד הסרט,תמיכות בענפי המשק,drop,Film encouragement
+38.12,עידוד עסקים קטנים,תמיכות בענפי המשק,ambiguous,Small business encouragement
+38.13,תמיכה בתעשייה,תמיכות בענפי המשק,ambiguous,Industry support
+38.14,תקציב להערכות התעשייה,תמיכות בענפי המשק,ambiguous,Budget for industry assessments
+38.15,מימוש ערבויות שלא,תמיכות בענפי המשק,drop,Financial guarantees
+38.16,צרכנות,תמיכות בענפי המשק,drop,Consumerism
+38.17,עתודות התעשייה,תמיכות בענפי המשק,ambiguous,Industry reserves
+38.18,אפוטרופוס כללי,תמיכות בענפי המשק,drop,Public Guardian
+38.19,הטבות לעידוד השקעות,תמיכות בענפי המשק,ambiguous,Investment incentives
+38.20,רזרבות,תמיכות בענפי המשק,ambiguous,Reserves
+38.21,השתתפויות,תמיכות בענפי המשק,ambiguous,Participations
+38.22,תמיכה בנגב,תמיכות בענפי המשק,ambiguous,Support for Negev
+38.23,רזרבות מיוחדות,תמיכות בענפי המשק,ambiguous,Special reserves
+38.30,המדען הראשי,כלכלה ותעשייה,ambiguous,Chief Scientist
+38.40,עידוד המגזר העסקי,כלכלה ותעשייה,ambiguous,Encouragement of business sector
+38.50,תמיכות בגופים ציבוריים,תמיכות בענפי המשק,ambiguous,Support for public bodies
+38.60,מלאי חירום,תמיכות בענפי המשק,drop,Emergency stock
+38.70,שכר ותפעול המשרד,כלכלה ותעשייה,ambiguous,Ministry salaries and operations
+38.80,רזרבה,כלכלה ותעשייה,ambiguous,Reserve
+38.90,רשות הרגולציה,כלכלה ותעשייה,ambiguous,Regulatory Authority
+38.99,חשבון מעבר,כלכלה ותעשייה,ambiguous,Clearing account
+76.01,פיתוח התעשייה,תעשיה,ambiguous,Industry development
+76.02,מפעלים במצוקה,תעשיה,drop,Distressed factories
+76.03,רזרבה להוצאות ביטחון,תעשיה,drop,Security expenses reserve
+76.04,תכנית הדרום,תעשיה,drop,Southern plan
+76.10,השקעה בפיתוח תשתיות,תעשייה,ambiguous,Investment in infrastructure development
+76.80,רזרבה,תעשייה,ambiguous,Reserve
+83.01,הלוואות לעובדים,הוצאות פיתוח אחרות,drop,Loans to employees
+83.02,פיתוח משרד האוצר,הוצאות פיתוח אחרות,ambiguous,Ministry of Finance development
+83.03,פיתוח משרד ראש,הוצאות פיתוח אחרות,ambiguous,Prime Minister's Office development
+83.04,פרוייקטי פיתוח,הוצאות פיתוח אחרות,ambiguous,Development projects
+83.05,השקעות בטכנולוגיות,הוצאות פיתוח אחרות,ambiguous,Investments in technologies
+83.06,השקעות,הוצאות פיתוח אחרות,ambiguous,Investments
+83.07,מימון תוכניות הבראה,הוצאות פיתוח אחרות,ambiguous,Funding recovery programs
+83.08,פרויקטי משרד הביטחון,הוצאות פיתוח אחרות,drop,Defense projects
+83.11,"פיתוח נציגויות בחו""ל",הוצאות פיתוח אחרות,drop,Overseas missions development
+83.12,הלוואות לעולים,הוצאות פיתוח אחרות,drop,Loans to immigrants
+89.01,המדפיס הממשלתי,"מפעלי משרד ראה""מ והאוצר",drop,Government Printer
+89.02,לשכת הפרסום הממשלתית,"מפעלי משרד ראה""מ והאוצר",drop,Government Advertising Agency
+89.03,המדפיס הממשלתי,מפעלי משרד ראש הממשלה,drop,Government Printer
+89.04,רזרבות להתייקרויות,מפעלי משרד ראש הממשלה,ambiguous,Reserves for price increases
+89.10,לשכת פרסום ממשלתית,מפעלי משרד ראש הממשלה,drop,Government Advertising Agency
+89.50,רזרבה,מפעלי משרד ראש הממשלה,ambiguous,Reserve
+89.69,חשבון מעבר,"מפעלי משרד ראה""מ והאוצר",ambiguous,Clearing account
+89.72,מכירות,מפעלי משרד ראש הממשלה,drop,Sales
+89.73,הגדלת מלאי מורשה,מפעלי משרד ראש הממשלה,drop,Authorized stock increase
+89.74,הכנסות מריבית,מפעלי משרד ראש הממשלה,drop,Interest income
+89.75,הכנסות שונות,מפעלי משרד ראש הממשלה,drop,Various income
+89.76,סגירת חייבים,מפעלי משרד ראש הממשלה,drop,Closing debtors
+89.80,הון חוזר,מפעלי משרד ראש הממשלה,drop,Working capital
+89.89,הכנסות המדפיס,"מפעלי משרד ראה""מ והאוצר",drop,Income from printing operations.
+89.90,הכנסות לשכת הפרסום,"מפעלי משרד ראה""מ והאוצר",drop,Income from advertising bureau operations.
+89.99,כיסוי גירעון המדפיס,"מפעלי משרד ראה""מ והאוצר",drop,Covering deficit of printing operations.

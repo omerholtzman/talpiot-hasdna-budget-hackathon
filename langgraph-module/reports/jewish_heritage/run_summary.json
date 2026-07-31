@@ -1,0 +1,86 @@
+{
+  "subject": "מורשת יהודית",
+  "model": "gemini-2.5-flash",
+  "seconds": 1294.7,
+  "search_plan": {
+    "offices": [
+      "22",
+      "19",
+      "04",
+      "18",
+      "05",
+      "89"
+    ],
+    "functional_classes": [
+      "שירותי דת",
+      "מדע, תרבות וספורט",
+      "חינוך"
+    ],
+    "keywords": [
+      "מורשת",
+      "יהודי",
+      "דת",
+      "תרבות",
+      "מסורת",
+      "קודש",
+      "אתר",
+      "שימור",
+      "הנצחה",
+      "זהות"
+    ]
+  },
+  "counts": {
+    "domains": 99,
+    "open_domains": 54,
+    "programs": 390,
+    "candidates": 9323,
+    "keyword_hits": 378,
+    "fts_hits": 19,
+    "items_judged": 3389,
+    "selected": 1097,
+    "not_in_total": 213,
+    "dropped": 2292,
+    "item_budget_rows": 7954,
+    "hierarchy_rows": 116
+  },
+  "domain_split": {
+    "keep": 19,
+    "ambiguous": 35,
+    "drop": 45
+  },
+  "triage_split": {
+    "keep": 74,
+    "ambiguous": 172,
+    "drop": 144
+  },
+  "cost": {
+    "llm_calls": 28,
+    "llm_request_chars": 579835,
+    "sql_queries": 120,
+    "sql_request_chars": 221130,
+    "by_step": {
+      "expand": {
+        "calls": 1,
+        "chars": 6731,
+        "seconds": 7.5
+      },
+      "domains": {
+        "calls": 1,
+        "chars": 7111,
+        "seconds": 38.0
+      },
+      "triage": {
+        "calls": 3,
+        "chars": 38144,
+        "seconds": 209.2
+      },
+      "judge": {
+        "calls": 23,
+        "chars": 527849,
+        "seconds": 1765.6
+      }
+    }
+  },
+  "data_errors": 313,
+  "possible_misses": 130
+}

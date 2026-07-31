@@ -1,0 +1,38 @@
+{
+  "offices": [
+    "22",
+    "19",
+    "04",
+    "18",
+    "05",
+    "89"
+  ],
+  "functional_classes": [
+    "שירותי דת",
+    "מדע, תרבות וספורט",
+    "חינוך"
+  ],
+  "keywords": [
+    "מורשת",
+    "יהודי",
+    "דת",
+    "תרבות",
+    "מסורת",
+    "קודש",
+    "אתר",
+    "שימור",
+    "הנצחה",
+    "זהות"
+  ],
+  "fts_queries": [
+    "שימור אתרי מורשת יהודית",
+    "פיתוח תרבות יהודית",
+    "חינוך למורשת ישראל"
+  ],
+  "notes": "The subject 'מורשת יהודית' encompasses religious, cultural, and historical aspects, potentially involving archaeological sites, educational programs, and national projects, thus requiring a broad search across relevant ministries.",
+  "rejected_offices": [],
+  "whole_word_keywords": [
+    "דת",
+    "אתר"
+  ]
+}

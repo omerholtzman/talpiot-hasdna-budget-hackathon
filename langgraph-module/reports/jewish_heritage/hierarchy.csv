@@ -1,0 +1,117 @@
+﻿code,title,level,amount_allocated,item_url
+04,משרד ראש הממשלה,1,5522752000,https://next.obudget.org/i/fb3dc8fc5306
+04.51,משרד ראשי,2,1282864000,https://next.obudget.org/i/2640248ea7dd
+04.51.01,מטה המשרד,3,786257000,https://next.obudget.org/i/5912ce5122cf
+04.51.03,מערך הגיור,3,68295000,https://next.obudget.org/i/c0583a485640
+04.51.04,תמיכות בארגוני הנצחה,3,44525000,https://next.obudget.org/i/15ffb927839f
+04.51.07,ארכיון המדינה,3,42169000,https://next.obudget.org/i/bc6b4dc2a1bc
+04.51.08,מערך הסייבר הלאומי,3,299764000,https://next.obudget.org/i/2aedb8828edf
+04.51.10,פרויקטים והחלטות ממשלה,3,19982000,https://next.obudget.org/i/a5ebcd7b4f2e
+04.51.11,לשכת העיתונות הממשלתית,3,21872000,https://next.obudget.org/i/eaf8ae2f1e20
+04.51.13,מרכז ההסברה,3,0,https://next.obudget.org/i/3ce6df897458
+04.52,משרדי ממשלה ולשכות שרים,2,1592782000,https://next.obudget.org/i/f7ea7c85f75d
+04.52.01,חברי הממשלה,3,34155000,https://next.obudget.org/i/038d0ff29c35
+04.52.03,משרד התפוצות,3,191164000,https://next.obudget.org/i/620c3e851432
+04.52.04,המשרד לנושאים אסטרטגים,3,6047000,https://next.obudget.org/i/95431393ceae
+04.52.05,המשרד למודיעין,3,0,https://next.obudget.org/i/7817ba3a71ba
+04.52.09,לשכות שרים וסגני שרים,3,19659000,https://next.obudget.org/i/eb994fb744f0
+04.52.11,משרד ירושלים ומסורת,3,100507000,https://next.obudget.org/i/93c29243b138
+04.52.12,משרד מורשת,3,86218000,https://next.obudget.org/i/078ea874412f
+04.52.13,משרד ההתיישבות,3,580602000,https://next.obudget.org/i/9db44f2e0b60
+04.52.15,מערך הדיגיטל הלאומי,3,534400000,https://next.obudget.org/i/86455f1e0f10
+04.52.17,מטה לבינה מלאכותית,3,40030000,https://next.obudget.org/i/04538da470c8
+04.53,סטטיסטיקה ממלכתית,2,404411000,https://next.obudget.org/i/6ba2e7d4b8c2
+04.53.01,הלשכה המרכזית,3,334811000,https://next.obudget.org/i/18fc19fe35dd
+04.53.02,ביצוע סקרים חיצוניים,3,69600000,https://next.obudget.org/i/1c24ab81b9f8
+04.55,נציבות שירות המדינה,2,152041000,https://next.obudget.org/i/1306de193abc
+04.55.01,נציבות שירות המדינה,3,137843000,https://next.obudget.org/i/c8b5fb7fe3b2
+04.55.02,תכניות מיוחדות,3,14198000,https://next.obudget.org/i/f4a32587d4a3
+04.56,המשרד לשיתוף פעולה,2,26061000,https://next.obudget.org/i/e3ae9c51ee2d
+04.56.01,שיתוף פעולה אזורי,3,26061000,https://next.obudget.org/i/89af54ebd54f
+04.57,המשרד לשוויון חברתי,2,139656000,https://next.obudget.org/i/910fa77252b4
+04.57.01,המשרד לשוויון חברתי,3,113978000,https://next.obudget.org/i/6f215cd334ee
+04.57.02,הרשות לקידום מעמד,3,3406000,https://next.obudget.org/i/9d309c10f1a4
+04.57.03,הרשות לפיתוח כלכלי של,3,22272000,https://next.obudget.org/i/4c17366b7a99
+04.59,לשכת הקשר נתיב,2,84774000,https://next.obudget.org/i/daae88f5ef9b
+04.59.01,נתיב,3,84774000,https://next.obudget.org/i/2f4d255bc8d9
+04.63,המשרד לפיתוח הנגב,2,529827000,https://next.obudget.org/i/70f52d66f59e
+04.63.01,שכר,3,29412000,https://next.obudget.org/i/3f273d44e94d
+04.63.02,תפעול,3,6475000,https://next.obudget.org/i/82789cf36792
+04.63.03,פיתוח הנגב והגליל,3,493940000,https://next.obudget.org/i/ff67d28f4757
+04.64,הרשות לפיתוח המגזר,2,7002000,https://next.obudget.org/i/07796b3f4593
+04.64.01,הרשות לפיתוח חברתי,3,7002000,https://next.obudget.org/i/038c3a96d64f
+04.70,רזרבות,2,1303334000,https://next.obudget.org/i/fc43175e1918
+04.70.01,רזרבה לעמידה במגבלה,3,1303334000,https://next.obudget.org/i/315d2c1b799a
+04.99,חשבון מעבר,2,0,https://next.obudget.org/i/50d4a7e747fb
+04.99.99,חשבון מעבר,3,0,https://next.obudget.org/i/7f9c3022cef7
+05,משרד האוצר,1,4147196000,https://next.obudget.org/i/b8c1e2580616
+05.51,משרד האוצר ראשי,2,757445000,https://next.obudget.org/i/3fa63beae5ba
+05.51.01,מטה משרד האוצר,3,236797000,https://next.obudget.org/i/49ed5d6e92a7
+05.51.02,אגף התקציבים,3,24949000,https://next.obudget.org/i/e12019eeab9d
+05.51.04,החשב הכללי,3,204807000,https://next.obudget.org/i/a18a38bc42eb
+05.51.06,שכר והסכמי עבודה,3,45230000,https://next.obudget.org/i/4ddff6fb697a
+05.51.07,"מחקר, כלכלה והכנסות",3,35470000,https://next.obudget.org/i/ae0b75fed636
+05.51.08,"פעולות בחו""ל",3,133176000,https://next.obudget.org/i/c7a42c9539d3
+05.51.09,הלשכה לפיצויים אישיים,3,0,https://next.obudget.org/i/77be6b6f4cc9
+05.51.11,מנהל הדיור והרכש,3,31409000,https://next.obudget.org/i/303286adf434
+05.51.12,רשות החברות הממשלתיות,3,45607000,https://next.obudget.org/i/5d6ef6d66228
+05.51.13,מנהל הרכב הממשלתי,3,0,https://next.obudget.org/i/e79c55e4844c
+05.52,רשות המיסים,2,3223456000,https://next.obudget.org/i/d4ec87b69405
+05.52.03,רשות המיסים ראשי,3,3223456000,https://next.obudget.org/i/175c124635b6
+05.53,רזרבה למשרד האוצר,2,166295000,https://next.obudget.org/i/9aa63156bf8c
+05.53.01,רזרבה,3,166295000,https://next.obudget.org/i/37a89322874c
+05.99,חשבון מעבר,2,0,https://next.obudget.org/i/b7996b765d22
+05.99.99,חשבון מעבר,3,0,https://next.obudget.org/i/21bc174b59d2
+18,הרשויות המקומיות,1,7023469000,https://next.obudget.org/i/c881034a8100
+18.11,העברות לרשויות,2,6225101000,https://next.obudget.org/i/9d6215652abe
+18.11.02,מענקים אזוריים,3,82698000,https://next.obudget.org/i/650b025401c9
+18.11.03,מענקים שוטפים,3,5387242000,https://next.obudget.org/i/7033eeca5c78
+18.11.04,מענקי פיתוח,3,694467000,https://next.obudget.org/i/25025bef5d8a
+18.11.05,איגוד ערים כנרת,3,60694000,https://next.obudget.org/i/074555436d31
+18.12,קרן לצמצום פערים,2,562293000,https://next.obudget.org/i/64ef9ad4a355
+18.12.01,קרן לצמצום פערים,3,562293000,https://next.obudget.org/i/a85273fef0d4
+18.90,רזרבות,2,236075000,https://next.obudget.org/i/0cd5c053ec83
+18.90.01,רזרבה להתייקרויות +,3,236075000,https://next.obudget.org/i/86ba14f0f2e1
+19,"מדע, תרבות וספורט",1,2878113000,https://next.obudget.org/i/eaeac1cae0aa
+19.40,משרד המדע,2,311001000,https://next.obudget.org/i/5ffdc8aa7c00
+19.40.01,פעילות משרד המדע,3,311001000,https://next.obudget.org/i/a76df935ee85
+19.41,מטה המשרדים,2,199769000,https://next.obudget.org/i/20c90400b627
+19.41.01,שכר,3,93328000,https://next.obudget.org/i/a3cf55b32aba
+19.41.02,תפעול,3,76842000,https://next.obudget.org/i/2e74c5ad4085
+19.41.03,מרכז הסברה,3,29599000,https://next.obudget.org/i/1e45e7694b78
+19.42,מינהל התרבות,2,1169107000,https://next.obudget.org/i/8171369bc3fc
+19.42.01,רשות העתיקות,3,57264000,https://next.obudget.org/i/f977eca8aaf6
+19.42.02,מינהל התרבות,3,1111843000,https://next.obudget.org/i/f594c1539a76
+19.43,מינהל הספורט,2,1088000000,https://next.obudget.org/i/acd834d936e4
+19.43.03,פעילות ספורט,3,888000000,https://next.obudget.org/i/9b18f6677b06
+19.43.04,תשתיות ספורט,3,200000000,https://next.obudget.org/i/62267df611ea
+19.44,רזרבות פיסקאליות,2,110236000,https://next.obudget.org/i/fec666eedd02
+19.44.01,רזרבות פיסקאליות,3,110236000,https://next.obudget.org/i/28d84ef9a063
+19.99,חשבוןמעבר,2,0,https://next.obudget.org/i/9c8589af1c1a
+19.99.99,חשבון מעבר,3,0,https://next.obudget.org/i/64ec2ef87c2b
+22,המשרד לשירותי דת,1,878562000,https://next.obudget.org/i/caa3c337cd18
+22.01,המשרד לשירותי דת,2,649797000,https://next.obudget.org/i/3662731e7b02
+22.01.01,מועצות דתיות,3,429823000,https://next.obudget.org/i/422bff0d65de
+22.01.02,תמיכה בשירותי דת,3,88489000,https://next.obudget.org/i/4c59a3aa27a9
+22.01.03,בתי עלמין,3,19771000,https://next.obudget.org/i/9ed3bc4bfe0c
+22.01.05,שכר ותפעול,3,62710000,https://next.obudget.org/i/e79f9926d06c
+22.01.08,רזרבה,3,49004000,https://next.obudget.org/i/49dc581c530d
+22.02,הרבנות הראשית,2,28713000,https://next.obudget.org/i/b3398a5e90a7
+22.02.01,הרבנות הראשית,3,28713000,https://next.obudget.org/i/2225cb0d413c
+22.03,בתי הדין הרבניים,2,200052000,https://next.obudget.org/i/b79039fe1396
+22.03.01,בתי הדין הרבניים,3,200052000,https://next.obudget.org/i/038fe214cc86
+22.99,חשבון מעבר,2,0,https://next.obudget.org/i/0d2865a82eec
+22.99.99,חשבון מעבר,3,0,https://next.obudget.org/i/3f7f5ed7e079
+89,"מפעלי משרד ראה""מ והאוצר",1,2284642000,https://next.obudget.org/i/0b92e9dc4458
+89.01,המדפיס הממשלתי,2,103575000,https://next.obudget.org/i/925ea7725e95
+89.01.01,פעילות המדפיס הממשלתי,3,103575000,https://next.obudget.org/i/e160e16e2ddc
+89.02,לשכת הפרסום הממשלתית,2,1038746000,https://next.obudget.org/i/0bd55149aead
+89.02.01,פעילות לשכת הפרסום,3,1038746000,https://next.obudget.org/i/9904cdd7d8c1
+89.69,חשבון מעבר,2,0,https://next.obudget.org/i/20da306cd851
+89.69.99,חשבון מעבר,3,0,https://next.obudget.org/i/37b807b0657c
+89.89,הכנסות המדפיס,2,103575000,https://next.obudget.org/i/684c81063fbe
+89.89.01,הכנסות המדפיס,3,103575000,https://next.obudget.org/i/ac4d19660090
+89.90,הכנסות לשכת הפרסום,2,1038746000,https://next.obudget.org/i/86aa3d9e8a0d
+89.90.01,הכנסות,3,1038746000,https://next.obudget.org/i/f4e1f3f60ddc
+89.99,כיסוי גירעון המדפיס,2,0,https://next.obudget.org/i/b360bf7439c0
+89.99.99,כיסוי גירעון המדפיס,3,0,https://next.obudget.org/i/941b4d4054ee

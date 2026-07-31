@@ -62,7 +62,7 @@ over what the four phases produced — and only runs once all three of its
 predecessors finish.
 
 Synthesis does not write the charts. Four blocks of the template — the
-trend chart, the top-10 pie, the sources pie and the nested item list —
+trend chart, the top-10 pie, the sources pie and the appendix item table —
 are fully determined by phase 1's CSVs, so `blocks.py` computes them and
 substitutes them into the model's reply afterwards; the template carries
 a `{{TOKEN}}` where each one goes. The model writes prose and the
@@ -71,6 +71,18 @@ Asking it for the charts too meant re-typed numbers at best and, in
 `reports/GreenEnergy.md`, whole sections replaced by "לא נמצא מידע"
 while the items sat in `selected_items.csv`. If the model drops a token
 anyway, `apply_blocks` puts the block back under its heading and logs it.
+
+The frontmatter is computed the same way, for the same reason. Its five
+fields are all known before the call (subject, slug, today, model name)
+and it only counts if it is the very first thing in the file — gray-matter,
+in the viewer's `scanDashboards.js`, gives up unless the opening `---` sits
+at offset 0. The model was getting both wrong: `model:` came back as
+`gpt-4o` or a literal `{MODEL}`, and `reports/Magendavidadom.md` wrapped
+the whole document in a code fence, which loses the metadata entirely. So
+the skill file now tells the model to start at the `# {SUBJECT_HEBREW}`
+heading and write no frontmatter at all; `apply_frontmatter` strips a
+wrapping fence or a stray block if one shows up, prepends the real one,
+and logs each repair.
 
 ## Output
 
@@ -101,7 +113,7 @@ plus `possible_misses` are what a reviewer uses to catch false negatives.
 | `budget_reference.py` | Checked-in office list, functional classes, ordinary↔development pairs |
 | `pipeline.py` | The deterministic phase-1 pipeline, plus the digest and hierarchy renderers |
 | `llm_json.py` | Schema-constrained one-shot JSON calls, for the pipeline's classification steps |
-| `blocks.py` | The template blocks phase 1's CSVs fully determine — Plotly fences and the nested item list — computed rather than written by the model |
+| `blocks.py` | The template blocks phase 1's CSVs fully determine — Plotly fences and the appendix table of selected items — computed rather than written by the model |
 | `agents.py` | The actual phase implementations (the "workers" behind each node) |
 | `graph.py` | Wires the five phases into the LangGraph pipeline |
 | `main.py` | CLI entry point: run one subject end-to-end, write the report |

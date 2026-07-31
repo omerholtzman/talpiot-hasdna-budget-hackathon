@@ -1,0 +1,78 @@
+{
+  "subject": "תכנית מחוננים",
+  "model": "gemini-2.5-flash",
+  "seconds": 526.7,
+  "search_plan": {
+    "offices": [
+      "20",
+      "60",
+      "18"
+    ],
+    "functional_classes": [
+      "חינוך"
+    ],
+    "keywords": [
+      "מחונן",
+      "מצוינות",
+      "העשרה",
+      "כישרון",
+      "איתור",
+      "טיפוח",
+      "חינוך מיוחד"
+    ]
+  },
+  "counts": {
+    "domains": 54,
+    "open_domains": 25,
+    "programs": 123,
+    "candidates": 4287,
+    "keyword_hits": 80,
+    "fts_hits": 39,
+    "items_judged": 1753,
+    "selected": 21,
+    "not_in_total": 0,
+    "dropped": 1732,
+    "item_budget_rows": 165,
+    "hierarchy_rows": 49
+  },
+  "domain_split": {
+    "keep": 4,
+    "ambiguous": 21,
+    "drop": 29
+  },
+  "triage_split": {
+    "keep": 1,
+    "ambiguous": 82,
+    "drop": 40
+  },
+  "cost": {
+    "llm_calls": 15,
+    "llm_request_chars": 309067,
+    "sql_queries": 41,
+    "sql_request_chars": 25593,
+    "by_step": {
+      "expand": {
+        "calls": 1,
+        "chars": 6732,
+        "seconds": 10.4
+      },
+      "domains": {
+        "calls": 1,
+        "chars": 4809,
+        "seconds": 22.6
+      },
+      "triage": {
+        "calls": 1,
+        "chars": 12248,
+        "seconds": 92.9
+      },
+      "judge": {
+        "calls": 12,
+        "chars": 285278,
+        "seconds": 881.3
+      }
+    }
+  },
+  "data_errors": 7,
+  "possible_misses": 83
+}

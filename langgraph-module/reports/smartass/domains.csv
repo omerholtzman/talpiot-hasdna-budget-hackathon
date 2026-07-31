@@ -1,0 +1,55 @@
+﻿code,title,office,verdict,reason
+18.01,העברות לרשויות המקומיות,רשויות מקומיות,ambiguous,General transfers to local authorities.
+18.03,מענקים מיועדים לרשויות,רשויות מקומיות,ambiguous,"Earmarked grants, purpose not specified."
+18.04,שירותי דת,רשויות מקומיות,drop,Funds religious services.
+18.11,העברות לרשויות,הרשויות המקומיות,ambiguous,General transfers to local authorities.
+18.12,קרן לצמצום פערים,הרשויות המקומיות,ambiguous,"Fund for reducing gaps, not specific."
+18.90,רזרבות,הרשויות המקומיות,ambiguous,Reserves.
+20.21,יחידות מטה,משרד החינוך,ambiguous,"Headquarters units, general administration."
+20.22,אמרכלות ועובדי משרד,משרד החינוך,ambiguous,General administration and staff.
+20.23,מינהל מורים,משרד החינוך,ambiguous,"Teacher administration, too general."
+20.24,מינהל פדגוגי-כללי,משרד החינוך,ambiguous,General pedagogical administration.
+20.25,חינוך קדם יסודי,משרד החינוך,drop,Funds general pre-primary education.
+20.26,חינוך יסודי,משרד החינוך,drop,Funds general primary education.
+20.27,חינוך על יסודי,משרד החינוך,drop,Funds general post-primary education.
+20.28,חינוך התישבותי,משרד החינוך,drop,Funds general education in settlements.
+20.29,חינוך עצמאי ומוכר,משרד החינוך,drop,Funds general independent and recognized education.
+20.30,הסעות הצטיידות ופיתוח,משרד החינוך,ambiguous,"Transportation, equipment, and development; too general."
+20.31,תרבות,משרד החינוך,drop,Funds cultural activities.
+20.32,רשות הספורט,משרד החינוך,drop,Funds sports activities.
+20.33,טלויזיה חינוכית,משרד החינוך,drop,Funds general educational television.
+20.34,מרכז ההסברה,משרד החינוך התרבות,drop,Funds general information activities.
+20.35,הלכה מחקר ולימוד תורני,משרד החינוך והתרבות,drop,Funds religious studies and research.
+20.37,מנהל הספורט,משרד החינוך,drop,Funds sports administration.
+20.38,העברות למוסדות תורניים,משרד החינוך,drop,Funds religious institutions.
+20.40,מטה המשרד,משרד החינוך,ambiguous,"Ministry headquarters, general administration."
+20.41,חינוך מיוחד,משרד החינוך,keep,Gifted programs are a form of special education.
+20.42,קדם-יסודי,משרד החינוך,drop,Funds general pre-primary education.
+20.43,יסודי וחטיבות-ביניים,משרד החינוך,drop,Funds general primary and junior high education.
+20.44,חטיבה עליונה,משרד החינוך,drop,Funds general senior high education.
+20.45,חינוך התיישבותי,משרד החינוך,drop,Funds general education in settlements.
+20.46,תכניות חינוכיות משלימות,משרד החינוך,keep,Gifted programs are often complementary educational programs.
+20.47,מינהל עובדי הוראה,משרד החינוך,ambiguous,"Teacher administration, too general."
+20.48,שירותי עזר והסעות,משרד החינוך,drop,Funds general auxiliary services and transportation.
+20.49,תמיכות בנושאי יהדות,משרד החינוך,drop,Funds support for Jewish topics.
+20.50,טלויזיה חינוכית,משרד החינוך,drop,Funds general educational television.
+20.51,רזרבות,משרד החינוך,ambiguous,Reserves.
+20.60,יחידות מטה,משרד החינוך,ambiguous,"Headquarters units, general administration."
+20.61,חינוך מיוחד,משרד החינוך,keep,Gifted programs are a form of special education.
+20.62,קדם יסודי,משרד החינוך,drop,Funds general pre-primary education.
+20.63,יסודי וחטיבות ביניים,משרד החינוך,drop,Funds general primary and junior high education.
+20.64,חטיבה עליונה,משרד החינוך,drop,Funds general senior high education.
+20.65,"שירותי עזר, הסעות",משרד החינוך,drop,Funds general auxiliary services and transportation.
+20.66,חינוך התיישבותי,משרד החינוך,drop,Funds general education in settlements.
+20.67,פעולות משלימות לקידום,משרד החינוך,keep,Gifted programs are often complementary activities for advancement.
+20.68,מינהל עובדי הוראה,משרד החינוך,ambiguous,"Teacher administration, too general."
+20.69,תמיכה בנושאי יהדות,משרד החינוך,drop,Funds support for Jewish topics.
+20.70,רזרבות,משרד החינוך,ambiguous,Reserves.
+20.99,חשבון מעבר,משרד החינוך,ambiguous,Clearing account.
+60.02,תכנית פיתוח חינוך,חינוך,ambiguous,"Education development program, potentially includes gifted."
+60.03,הצטידות מבני חינוך,חינוך,drop,Funds general educational building equipment.
+60.04,רזרבה להתייקרויות,חינוך,ambiguous,Reserve for price increases.
+60.06,חידוש מבנים,חינוך,drop,Funds general building renovation.
+60.07,פיתוח מכללות להכשרת,חינוך,drop,Funds general development of training colleges.
+60.08,רזרבה,חינוך,ambiguous,Reserves.
+60.09,רזרבה ליישום מסקנות כח,חינוך,ambiguous,Reserve for implementing committee conclusions.

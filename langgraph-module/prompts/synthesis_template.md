@@ -1,5 +1,5 @@
 # {SUBJECT_HEBREW}
-{Summary of the subject and its significance. Don't add meta-statement like "דף זה נוצר על ידי שימוש ב-MCP" or "דשבורד זה מרכז מידע..."}
+{SUMMARY}
 
 ## מגמה תקציבית לאורך זמן
 {{TREND_CHART}}
@@ -26,26 +26,20 @@
 
 {{SOURCES_CHART}}
 
-### רשימת סעיפי תקציב נבחרים
-{{BUDGET_HIERARCHY_LIST}}
-
 
 ## נושאים נוספים
 
 ### התקשרויות/חוזים
-{CONTRACTS_COMMENTS - How many of them have "פטור ממכרז"?}
-{CONTRACTS_TABLE sorted by descending order of budget}
+{CONTRACTS_COMMENTS}
+{CONTRACTS_TABLE}
 
 ### ספקים
-{SUPPLIERS_TABLE sorted by descending order of budget}
+{SUPPLIERS_TABLE}
 
 ### החלטות ממשלה
-{DECISIONS_TABLE sorted by recency (descending)}
+{DECISIONS_TABLE}
+
+## נספח: סעיפי התקציב הנבחרים
+{{BUDGET_HIERARCHY_LIST}}
 
 [חזרה לעמוד הראשי](../../README.md)
-
----
-title: נתוני תקציב, התקשרויות והחלטות ממשלה בתחום {SUBJECT_HEBREW}
-created: {TODAY}
-updated: {TODAY}
----

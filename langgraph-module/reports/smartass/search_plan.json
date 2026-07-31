@@ -1,0 +1,27 @@
+{
+  "offices": [
+    "20",
+    "60",
+    "18"
+  ],
+  "functional_classes": [
+    "חינוך"
+  ],
+  "keywords": [
+    "מחונן",
+    "מצוינות",
+    "העשרה",
+    "כישרון",
+    "איתור",
+    "טיפוח",
+    "חינוך מיוחד"
+  ],
+  "fts_queries": [
+    "תכנית מחוננים",
+    "איתור וטיפוח מצוינות",
+    "מרכזי העשרה לתלמידים"
+  ],
+  "notes": "Gifted programs are primarily under education, but may sometimes be administratively grouped with broader 'special education' categories or funded through local authorities.",
+  "rejected_offices": [],
+  "whole_word_keywords": []
+}
