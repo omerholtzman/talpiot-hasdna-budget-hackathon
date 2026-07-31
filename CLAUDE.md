@@ -18,7 +18,12 @@ The end product is a markdown file with YAML frontmatter, rendered by a React vi
 
 `talpihackathon/query_optimizer/` is a separate bash workflow (`query_gen.sh` / `query_run.sh`) for compiling NL questions into saved, re-runnable SQL specs in `queries/*.json` — no LLM needed at run time.
 
-**The two Python trees are deliberate duplicates.** `langgraph-module/pipeline.py`, `budget_api.py`, `budget_reference.py`, and `prompts/` are ports of the `main_agent/` originals; `skill_phase1_budget.md` exists in both. When you change logic or prompts in one, mirror it in the other or explicitly note the divergence — the READMEs claim they are kept in sync.
+**The two Python trees are deliberate duplicates.** `langgraph-module/agent_engineering/step1_pipeline.py` and `helpers/prompts/{budget_api,budget_reference}.py` are ports of `main_agent/{pipeline,budget_api,budget_reference}.py`; `skill_phase1_budget.md` exists in both. When you change logic or prompts in one, mirror it in the other or explicitly note the divergence — the READMEs claim they are kept in sync.
+
+Two divergences already exist, so check before assuming a file is shared:
+
+- **The synthesis half has split.** `langgraph-module/prompts/synthesis_template.md` has Plotly charts, a `סעיפים בולטים` section and the `{{TOKEN}}` blocks; `main_agent/instructions/synthesis_template.md` has none of those and different section names (`{BUDGET_TABLE}`, `{SOURCES_LIST}`). `blocks.py` exists only in the LangGraph tree.
+- **The phases are numbered differently.** Synthesis is `final_phase_synthesis` (PHASE5) in `langgraph-module` but **"Step 4"** in `main_agent/agent.py`; hierarchy is phase 4 in the first and phase 5 in the second. "Phase 4" is ambiguous across trees — say which one.
 
 ## Commands
 
@@ -80,14 +85,45 @@ python main.py "בריאות" --slug health    # -> reports/health.md + reports/
 
 ## Architecture: how a topic page gets made
 
-Five phases, fanned out then synthesized (see [langgraph-module/README.md](langgraph-module/README.md) for the graph diagram):
+Five phases, fanned out then synthesized. Node names below are `langgraph-module`'s; see the numbering divergence noted above before mapping them onto `main_agent`.
 
-- **Phase 1 — budget items.** *Not an agent.* `pipeline.py` runs `expand → triage domains → retrieve → triage programs → judge items → materialise → report`. Retrieval, materialisation and the data-quality report are plain SQL and never touch a model, so **no budget figure can be invented**; the LLM only ever classifies (which ministries, domains, programs, items) over bounded, chunked input with a JSON schema on the reply.
-- **Phases 2/3 — contracts, government decisions.** ReAct agents (model + MCP tools), scoped by their prompts, each fed phase 1's digest so they can filter by the budget codes it found.
-- **Phase 4 — hierarchy.** Pure rendering of the CSV phase 1 already wrote.
-- **Final synthesis.** No tools at all — a pure writing/formatting pass over the four phases' output, producing the frontmatter + markdown the viewer consumes.
+```
+START → phase1_budget → ┬→ phase2_contracts ─┐
+                        ├→ phase3_decisions ─┼→ final_synthesis → END
+                        └→ phase4_hierarchy ─┘
+```
 
-Prompts are files, not string literals: `main_agent/instructions/skill_*.md` (system prompts for the agent phases, plus `synthesis_template.md` and `subject_prompt.txt`) and `main_agent/prompts/*.md` (the pipeline's four classification prompts). Editing behaviour usually means editing these, not Python.
+Phase 1 alone first (everything downstream needs its codes), then 2/3/4 concurrently, then synthesis once all three land.
+
+| Phase | LLM? | What it does |
+|---|---|---|
+| 1 · budget | classification only | Finds every level-4 budget line for the subject; writes the CSVs |
+| 2 · contracts | ReAct agent | `contracts_data`: top contracts by volume + supplier totals |
+| 3 · decisions | ReAct agent | Government decisions mentioning the subject |
+| 4 · hierarchy | **none** | Formats `hierarchy.csv` as text |
+| final · synthesis | one call, no tools | Writes the page; four blocks computed in Python |
+
+**Phase 1 is not an agent.** Seven steps, and the split is the point — *the LLM only ever classifies, never counts:*
+
+| Step | How | (scale, from one real run) |
+|---|---|---|
+| 1 expand | LLM | subject → ministries, functional classes, keywords |
+| 2 triage domains | LLM | 139 level-2 domains → 68 kept/ambiguous |
+| 3 retrieve | **SQL** | 8,031 candidate lines under those domains |
+| 4 triage programs | LLM | 380 level-3 programs → 123 |
+| 5 judge items | LLM | 2,339 lines judged → 87 selected |
+| 6 materialise | **SQL** | budgets for the 87 → `selected_items.csv`, `item_budgets.csv` |
+| 7 report | **SQL** | computed `data_errors` + `possible_misses`, then `hierarchy.csv` |
+
+Every LLM step is a schema-constrained one-shot JSON call at temperature 0 over bounded, chunked input — not an agent loop. Steps 3/6/7 never touch a model, so **no budget figure can be invented**; the model's influence is entirely in *which* rows were selected, and that is auditable in `excluded_items.csv`. Judging dominates cost (16 of 21 LLM calls in that run).
+
+Phases 2/3 are the only real ReAct loops (model → MCP tool → model, step-capped); each is fed phase 1's digest so it can filter by the budget codes already found, and a failure is caught per-phase so one dead agent doesn't kill the run.
+
+Hierarchy used to be an agent that queried the tree itself with `code LIKE '24%'` — the wildcard that double-counts a parent with its children. Phase 1 already writes those rows correctly, so in `langgraph-module` it is now pure formatting. **`main_agent` still runs it as an agent** (its "Step 5", turn-capped at 6), so the old wildcard bug is still reachable there.
+
+Final synthesis is split down the middle. The model writes the prose, the contracts/suppliers/decisions tables, the suppliers pie, the frontmatter and all inline linking. **`langgraph-module/agent_engineering/blocks.py` writes the four blocks phase 1's CSVs fully determine** — trend chart, top-10 pie, sources pie, nested item list. The template carries a `{{TOKEN}}` where each goes and `apply_blocks()` substitutes after the call, so the model never transcribes a number or a Plotly fence. It used to, and it silently dropped whole charts (see `langgraph-module/reports/GreenEnergy.md`). If a token goes missing, the block is repaired back under its heading and logged.
+
+Prompts are files, not string literals: `main_agent/instructions/skill_*.md` (system prompts for the agent phases, plus `synthesis_template.md` and `subject_prompt.txt`) and `main_agent/prompts/*.md` (the pipeline's four classification prompts). In `langgraph-module` both kinds live together in `prompts/`, keyed by `PROMPT_FILES` in `config.py`. Editing behaviour usually means editing these, not Python.
 
 A pipeline run directory is the real deliverable — `selected_items.csv` + `item_budgets.csv` are the data, the markdown is a summary of them, and `excluded_items.csv` + `report.json`'s `possible_misses` are the audit trail a reviewer uses to catch false negatives. `run_summary.json` records verdict splits and per-step SQL/LLM cost.
 

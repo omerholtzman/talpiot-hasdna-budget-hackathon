@@ -849,20 +849,27 @@ def build_digest(out_dir: str, subject: str, top_n: int = 25) -> str:
         except (TypeError, ValueError):
             return None
 
+    # Reserves, internal transfers and earmarked revenue are kept in the item list
+    # but left out of every total: step_materialise flagged them precisely because
+    # summing them alongside ordinary lines double-counts the same shekel.
+    counted = {c for c, r in items.items() if r.get("counts_in_total", "yes") != "no"}
+
     latest: Dict[str, Dict] = {}
     per_year: Dict[str, Dict[str, float]] = {}
     for row in budgets:
         year = row.get("year", "")
         code = row.get("code", "")
         alloc, rev, used = num(row.get("amount_allocated")), num(row.get("amount_revised")), num(row.get("amount_used"))
+        prev = latest.get(code)
+        if prev is None or year > prev["year"]:
+            latest[code] = {"year": year, "allocated": alloc, "revised": rev, "used": used}
+        if code not in counted:
+            continue
         bucket = per_year.setdefault(year, {"allocated": 0.0, "revised": 0.0, "used": 0.0, "items": 0})
         bucket["allocated"] += alloc or 0.0
         bucket["revised"] += rev or 0.0
         bucket["used"] += used or 0.0
         bucket["items"] += 1
-        prev = latest.get(code)
-        if prev is None or year > prev["year"]:
-            latest[code] = {"year": year, "allocated": alloc, "revised": rev, "used": used}
 
     years = sorted(per_year)
     offices = sorted({r.get("office", "") for r in items.values() if r.get("office")})
@@ -874,7 +881,9 @@ def build_digest(out_dir: str, subject: str, top_n: int = 25) -> str:
         % (len(items), len(offices), ", ".join(offices)),
         "Coverage: %s-%s." % (years[0], years[-1]) if years else "",
         "",
-        "Aggregate by year (₪, summed over the selected items):",
+        "Aggregate by year (₪, summed over the %d selected items that count "
+        "towards a total; %d reserves/transfers/earmarked-revenue lines excluded):"
+        % (len(counted), len(items) - len(counted)),
         "year | allocated | revised | used | items",
     ]
     for y in years:
