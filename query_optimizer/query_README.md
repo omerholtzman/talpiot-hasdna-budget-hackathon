@@ -14,6 +14,15 @@ about BudgetKey / OpenBudget data into saved, reproducible query specs.
 - `query_run.sh`: runs a saved query spec against `https://next.obudget.org/mcp`.
 - `queries/*.json`: saved query specs.
 
+## Integration with the app
+- Introduced cache layer for faster rerun, saving tokens and reliably reproducing results (during debugging, testing rerunning).
+- Proof of concept in this directory (query_optimizer). See this readme file.
+- App Phase 1 (research) - Still no cache for this layer. Second run on the same input runs the full Phase 1. But for testing purposes can skip it (input .csv directly for later phases). Todo: use the same cache ideas as exist in phases 2,3.
+- Phase 2,3
+  - Active cash, saves SQL queries.
+  - 2 implementations: bash query_gen.sh for terminal/manual testing and python code as part of the app.
+  - Runs them via MCP without agent. 2 implementations: bash query_run.sh for terminal/manual testing and python as part of the app.
+
 ### Python re-implementation
 Both are equivalent:
 ```bash
