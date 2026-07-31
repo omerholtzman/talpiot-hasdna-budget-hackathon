@@ -91,7 +91,8 @@ def today_str() -> str:
     return date.today().isoformat()
 
 
-async def _run_research_phase(phase_name: str, state: WikiState) -> tuple[str, list[str]]:
+async def _run_research_phase(phase_name: str, state: WikiState,
+                              extra_context: str = "") -> tuple[str, list[str]]:
     """
     Shared implementation for phases 2 and 3: build the system prompt,
     attach the MCP tools, run the ReAct loop, and return (result_text, errors).
@@ -115,10 +116,18 @@ async def _run_research_phase(phase_name: str, state: WikiState) -> tuple[str, l
     # Phase 1's findings go in as context: these phases need the budget codes
     # and the ministries to filter the contracts and decisions datasets by, and
     # rediscovering them per phase would be both slower and inconsistent.
+    #
+    # `extra_context` carries the machine-built scope (see step1_pipeline.build_scope).
+    # The digest alone is not enough for that job: it lists only the top 25 items and
+    # then points at a CSV this agent cannot open, so an agent asked to "filter by the
+    # subject's budget codes" has no complete list to filter by and falls back to the
+    # ministry - which is the whole ministry, not the subject.
     user_message = (
         f"Research the subject: {state['subject']}\n\n"
         f"Here are the budget items collected in Phase 1:\n{state['budget_result']}"
     )
+    if extra_context:
+        user_message += f"\n\n{extra_context}"
     _log(label, f"Sending initial message ({len(user_message)} chars, incl. phase 1 digest)")
     try:
         result = await agent.ainvoke(
@@ -176,8 +185,19 @@ async def phase1_budget_node(state: WikiState) -> dict:
 
 
 async def phase2_contracts_node(state: WikiState) -> dict:
-    """LangGraph node: top contracts by volume + supplier totals for the subject."""
-    text, errors = await _run_research_phase(PHASE2, state)
+    """LangGraph node: top contracts by volume + supplier totals for the subject.
+
+    Scoped to Phase 1's own budget codes rather than to a ministry name.
+    contracts_data.budget_code is the same level-4 code selected_items.csv holds, so
+    the link is an exact join - and it matters: office 24 has ~101k contracts in
+    total, against 131 distinct budget codes. A ministry filter returns all of them
+    whatever the subject was.
+    """
+    scope = pipeline.build_scope(state["run_dir"])
+    if not scope:
+        _log(PHASE_LABELS[PHASE2],
+             "Phase 1 selected no items - running unscoped, results will be ministry-wide")
+    text, errors = await _run_research_phase(PHASE2, state, extra_context=scope)
     return {"contracts_result": text, "errors": errors}
 
 

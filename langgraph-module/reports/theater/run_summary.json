@@ -1,0 +1,84 @@
+{
+  "subject": "תיאטרון",
+  "model": "gemini-2.5-flash",
+  "seconds": 604.1,
+  "search_plan": {
+    "offices": [
+      "19",
+      "04",
+      "18",
+      "83",
+      "34",
+      "35",
+      "05",
+      "89"
+    ],
+    "functional_classes": [
+      "מדע, תרבות וספורט"
+    ],
+    "keywords": [
+      "תיאטרון",
+      "הצגות",
+      "במה",
+      "אמנות",
+      "תרבות",
+      "מופעים",
+      "שחקנים",
+      "מחול"
+    ]
+  },
+  "counts": {
+    "domains": 124,
+    "open_domains": 45,
+    "programs": 286,
+    "candidates": 5080,
+    "keyword_hits": 134,
+    "fts_hits": 35,
+    "items_judged": 2457,
+    "selected": 162,
+    "not_in_total": 20,
+    "dropped": 2295,
+    "item_budget_rows": 1550,
+    "hierarchy_rows": 135
+  },
+  "domain_split": {
+    "keep": 2,
+    "ambiguous": 43,
+    "drop": 79
+  },
+  "triage_split": {
+    "keep": 2,
+    "ambiguous": 146,
+    "drop": 138
+  },
+  "cost": {
+    "llm_calls": 21,
+    "llm_request_chars": 431349,
+    "sql_queries": 48,
+    "sql_request_chars": 56654,
+    "by_step": {
+      "expand": {
+        "calls": 1,
+        "chars": 6726,
+        "seconds": 8.8
+      },
+      "domains": {
+        "calls": 1,
+        "chars": 8309,
+        "seconds": 29.6
+      },
+      "triage": {
+        "calls": 2,
+        "chars": 27365,
+        "seconds": 127.1
+      },
+      "judge": {
+        "calls": 17,
+        "chars": 388949,
+        "seconds": 1084.6
+      }
+    }
+  },
+  "data_errors": 76,
+  "possible_misses": 149
+}

@@ -1,0 +1,243 @@
+﻿code,title,office,domain,verdict,reason
+04.01.11,שירותים מרכזיים,משרד ראש הממשלה,תחום פעולה כללי,ambiguous,Generic administrative title; could contain subject spending.
+04.01.12,המינהלה לפרוייקטים,משרד ראש הממשלה,תחום פעולה כללי,ambiguous,Generic administrative title; could contain subject spending.
+04.01.13,ועדת וינוגרד,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific committee, unrelated to solar energy."
+04.01.14,מנהלת השירות האזרחי,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.15,מנהלת השיחות עם,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.16,מטה הסברה לאומי,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.17,העצמת תשתיות מורשת,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.18,ועדת טירקל,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific committee, unrelated to solar energy."
+04.01.19,אמרכלות,משרד ראש הממשלה,תחום פעולה כללי,ambiguous,Generic administrative title; could contain subject spending.
+04.01.20,מערך הגיור,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.21,הוועדה הבינמשרדית,משרד ראש הממשלה,תחום פעולה כללי,ambiguous,Generic inter-ministerial committee; could contain subject spending.
+04.01.22,מטה קיברנטי לאומי,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.31,ארכיון המדינה,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.32,הנצחת נשיאים וראשי,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.39,אמרכלות ארכיון המדינה,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific administrative program, unrelated to solar energy."
+04.01.43,מינהלת מפוני סיני,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.61,מחקרים שונים,משרד ראש הממשלה,תחום פעולה כללי,ambiguous,Generic research program; could contain subject spending.
+04.01.62,השתתפות האפוטרופוס כללי,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.63,מפעלים חינוכיים,משרד ראש הממשלה,תחום פעולה כללי,ambiguous,Generic educational programs; could include energy education.
+04.01.64,השתתפות אפוטרופוס,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.70,השתתפות אפוטרופוס,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.71,מרכז בגין,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.72,מרכז רבין,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.73,מרכז הסברה,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.74,יד לוי אשכול,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.75,היכל הגבורה ים-עכו,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.76,חלקת גדולי האומה,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.77,אתר הנצחה גולני,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.78,הרשות למלחמה בסמים,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.79,"תכנית בש""ן",משרד ראש הממשלה,תחום פעולה כללי,ambiguous,Opaque title; could contain subject spending.
+04.01.80,מורשת משה שרת,משרד  ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.81,אפוטרופוס כללי,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.82,מרכז תרבות עמים לנוער,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.83,מכון העם והמדינה,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.84,מוזיאון בית השומר,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.85,נתיב - הוראת עברית,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.86,שמש לאחוה ודו-קיום,משרד ראש הממשלה,תחום פעולה כללי,drop,"Title uses 'sun' metaphorically, not for energy."
+04.01.87,מעקב אחר אנטישמיות,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.88,מרכז שזר,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.89,בית מדרש ללימודי יהדות,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.90,פעולות בעקבות המצב,משרד ראש הממשלה,תחום פעולה כללי,ambiguous,Generic title; could contain subject spending.
+04.01.91,יד יצחק בן צבי,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.92,משרד ראש הממשלה -,משרד ראש הממשלה,תחום פעולה כללי,ambiguous,Opaque/incomplete title; could contain subject spending.
+04.01.93,יד טבנקין,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.94,קרן מנחם בדר,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.95,מסדר לוחמי ירושלים,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.96,אגודת דור הפלמח,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.97,רעות קרן עזרה,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.98,סיוע נפגעות תקיפה מינית,משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.01.99,"בית מוריה ""זה""ב",משרד ראש הממשלה,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+04.04.01,רזרבה למשרד ראש הממשלה,משרד ראש הממשלה,רזרבה לסעיף ראש הממשלה,ambiguous,Generic reserve; could contain subject spending.
+04.07.01,רזרבה להתיקרויות,משרד ראש הממשלה,רזרבה להתייקרויות,ambiguous,Generic reserve; could contain subject spending.
+04.51.01,מטה המשרד,משרד ראש הממשלה,משרד ראשי,ambiguous,Generic administrative title; could contain subject spending.
+04.51.02,מרכז ההסברה,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.03,מערך הגיור,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.04,תמיכות בארגוני הנצחה,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.05,הרשות לקידום מעמד האשה,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.06,הרשות לפיתוח כלכלי של,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.07,ארכיון המדינה,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.08,מערך הסייבר הלאומי,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.09,הוועדה הבינמשרדית,משרד ראש הממשלה,משרד ראשי,ambiguous,Generic inter-ministerial committee; could contain subject spending.
+04.51.10,פרויקטים והחלטות ממשלה,משרד ראש הממשלה,משרד ראשי,ambiguous,Generic projects and government decisions; could contain subject spending.
+04.51.11,לשכת העיתונות הממשלתית,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.12,המטה להסדרת התיישבות,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.13,מרכז ההסברה,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.14,מטה ישראל דיגיטאלית,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.51.15,מטה התקשוב הממשלתי,משרד ראש הממשלה,משרד ראשי,drop,"Specific program, unrelated to solar energy."
+04.70.01,רזרבה לעמידה במגבלה,משרד ראש הממשלה,רזרבות,ambiguous,Generic reserve; could contain subject spending.
+04.99.99,חשבון מעבר,משרד ראש הממשלה,חשבון מעבר,ambiguous,Generic administrative title; could contain subject spending.
+05.01.01,משרד ראשי,משרד האוצר,תחום פעולה כללי,ambiguous,Generic administrative title; could contain subject spending.
+05.01.02,אמרכלות,משרד האוצר,תחום פעולה כללי,ambiguous,Generic administrative title; could contain subject spending.
+05.01.04,טפול בפצויים אישיים,משרד האוצר,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+05.01.05,גמלאות,משרד האוצר,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+05.01.11,אגף נכסי נפקדים,משרד האוצר,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+05.01.12,לשכת סגן השר יצחק כהן,משרד האוצר,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+05.01.14,יחידת שיפור השירות,משרד האוצר,תחום פעולה כללי,drop,"Specific program, unrelated to solar energy."
+05.02.01,אגף התקציבים,משרד האוצר,שירותי מטה ממשלתיים,ambiguous,Generic administrative title; could contain subject spending.
+05.02.04,אגף החשב הכללי,משרד האוצר,שירותי מטה ממשלתיים,ambiguous,Generic administrative title; could contain subject spending.
+05.02.05,פיקוח על בצוע תקציב,משרד האוצר,שירותי מטה ממשלתיים,ambiguous,Generic administrative title; could contain subject spending.
+05.02.06,ניהול הלוואות המדינה,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.07,רשות התקשוב הממשלתית,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.08,מנהל הדיור הממשלתי,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.09,פיקוח על המשק הממשלתי,משרד האוצר,שירותי מטה ממשלתיים,ambiguous,Generic oversight; could include energy-related aspects.
+05.02.10,מערכות מידע ומיכון,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.11,"אמרכלות חשכ""ל",משרד האוצר,שירותי מטה ממשלתיים,ambiguous,Generic administrative title; could contain subject spending.
+05.02.12,"שירותים כלכליים בארה""ב",משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.13,ממשל זמין,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.14,חברת ענבל,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.15,המשרד בוושינגטון,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.16,ביקורת פנימית,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.17,מנהל הרכש,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.18,רשות החברות הממשלתיות,משרד האוצר,שרותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.31,אגף שכר והסכמי עבודה,משרד האוצר,שירותי מטה ממשלתיים,drop,"Specific program, unrelated to solar energy."
+05.02.33,מעקב לתקציבי פיתוח,משרד האוצר,שירותי מטה ממשלתיים,ambiguous,Generic development budget tracking; could include energy.
+05.03.06,"אגף לקשרים בינ""ל",משרד האוצר,שירותי מטה כלל משקיים,drop,"Specific program, unrelated to solar energy."
+05.03.07,משרד בניו יורק,משרד האוצר,שירותי מטה כלל משקיים,drop,"Specific program, unrelated to solar energy."
+05.03.08,המשרד בלוס אנג'לס,משרד האוצר,שירותי מטה כלל משקיים,drop,"Specific program, unrelated to solar energy."
+05.03.09,המשרד בשיקגו,משרד האוצר,שרותי מטה כלל משקיים,drop,"Specific program, unrelated to solar energy."
+05.03.10,נציגות ב-OECD פריז,משרד האוצר,שירותי מטה כלל משקיים,drop,"Specific program, unrelated to solar energy."
+05.03.11,נציגות בון,משרד האוצר,שירותי מטה כלל משקיים,drop,"Specific program, unrelated to solar energy."
+05.03.12,נציגות לונדון,משרד האוצר,שירותי מטה כלל משקיים,drop,"Specific program, unrelated to solar energy."
+05.03.14,רזרבות,משרד האוצר,שרותי מטה כלל משקיים,ambiguous,Generic reserve; could contain subject spending.
+05.03.15,השתתפויות,משרד האוצר,שרותי מטה כלל משקיים,ambiguous,Generic participation; could include energy-related aspects.
+05.03.16,מינהל הכנסות המדינה,משרד האוצר,שירותי מטה כלל משקיים,drop,"Specific program, unrelated to solar energy."
+05.03.20,אגף שוק ההון ביטוח,משרד האוצר,שירותי מטה כלל משקיים,drop,"Specific program, unrelated to solar energy."
+05.03.21,רזרבה להתייקרויות,משרד האוצר,שירותי מטה כלל משקיים,ambiguous,Generic reserve; could contain subject spending.
+05.03.23,השתתפות משרדי ממשלה,משרד האוצר,שרותי מטה כלל משקיים,ambiguous,Generic participation; could include energy-related aspects.
+05.08.01,רזרבה לפעולות משרד,משרד האוצר,רזרבה לפעולות משרד,ambiguous,Generic reserve; could contain subject spending.
+05.51.01,מטה משרד האוצר,משרד האוצר,משרד האוצר ראשי,ambiguous,Generic administrative title; could contain subject spending.
+05.51.02,אגף התקציבים,משרד האוצר,משרד האוצר ראשי,ambiguous,Generic administrative title; could contain subject spending.
+05.51.04,החשב הכללי,משרד האוצר,משרד האוצר ראשי,ambiguous,Generic administrative title; could contain subject spending.
+05.51.05,"שוק ההון, ביטוח וחסכון",משרד האוצר,משרד האוצר ראשי,drop,"Specific program, unrelated to solar energy."
+05.51.06,שכר והסכמי עבודה,משרד האוצר,משרד האוצר ראשי,drop,"Specific program, unrelated to solar energy."
+05.51.07,"מחקר, כלכלה והכנסות",משרד האוצר,משרד האוצר ראשי,ambiguous,Generic research; could include energy-related aspects.
+05.51.08,"פעולות בחו""ל",משרד האוצר,משרד האוצר ראשי,ambiguous,Generic international activities; could include energy-related aspects.
+05.51.09,הלשכה לפיצויים אישיים,משרד האוצר,משרד האוצר ראשי,drop,"Specific program, unrelated to solar energy."
+05.51.10,התקשוב הממשלתי,משרד האוצר,משרד האוצר ראשי,drop,"Specific program, unrelated to solar energy."
+05.51.11,מנהל הדיור והרכש,משרד האוצר,משרד האוצר ראשי,drop,"Specific program, unrelated to solar energy."
+05.51.12,רשות החברות הממשלתיות,משרד האוצר,משרד האוצר ראשי,drop,"Specific program, unrelated to solar energy."
+05.51.13,מנהל הרכב הממשלתי,משרד האוצר,משרד האוצר ראשי,drop,"Specific program, unrelated to solar energy."
+05.53.01,רזרבה,משרד האוצר,רזרבה למשרד האוצר,ambiguous,Generic reserve; could contain subject spending.
+05.99.99,חשבון מעבר,משרד האוצר,חשבון מעבר,ambiguous,Generic administrative title; could contain subject spending.
+34.01.01,שירותים מרכזיים,משרד האנרגיה והמים,תחום פעולה כללי,ambiguous,Generic administrative title in relevant ministry.
+34.01.02,אמרכלות ופעולות,משרד האנרגיה והמים,תחום פעולה כללי,ambiguous,Generic administrative title in relevant ministry.
+34.02.01,שירותים מרכזיים,משרד התשתיות הלאומיות,מטה משרד התשתיות,ambiguous,Generic administrative title in relevant ministry.
+34.02.02,יחידת רעידות אדמה,משרד האנרגיה והמים,מטה משרד התשתיות,drop,"Specific program, unrelated to solar energy."
+34.02.03,לשכת סגנית השר,משרד התשתיות הלאומיות,מטה משרד התשתיות,drop,"Specific administrative program, unrelated to solar energy."
+34.02.04,תגבור מינהל הדלק,משרד התשתיות הלאומיות,מטה משרד התשתיות,drop,"Focuses on fuel administration, not solar energy."
+34.02.05,תגבור יחידת הנפט,משרד התשתיות הלאומיות,מטה משרד התשתיות,drop,"Focuses on oil, not solar energy."
+34.06.02,יחידת המכרות,משרד האנרגיה והמים,מינהל המחקר למדעי,drop,"Focuses on mining, not solar energy."
+34.06.03,שירותים מרכזיים,משרד האנרגיה והמים,מינהל המחקר למדעי,ambiguous,Generic administrative title in relevant ministry.
+34.06.04,אמרכלות,משרד האנרגיה והמים,מינהל המחקר למדעי,ambiguous,Generic administrative title in relevant ministry.
+34.06.05,ועדת היגוי לבורות ים,משרד האנרגיה והמים,מינהל המחקר למדעי,drop,"Specific program, unrelated to solar energy."
+34.06.06,רזרבה להתייקרויות,משרד האנרגיה והמים,מינהל המחקר למדעי,ambiguous,Generic reserve; could contain subject spending.
+34.11.01,פיתוח אנרגיות חלופיות,משרד האנרגיה והמים,מחקר ופיתוח באנרגיה,keep,"Directly about development of alternative energies, including solar."
+34.12.01,עידוד חסכון באנרגיה,משרד התשתיות הלאומיות,יעול השימוש באנרגיה,ambiguous,Energy saving is broader than specific solar energy.
+34.12.02,רפרנטורה טכנית,משרד התשתיות הלאומיות,יעול השימוש באנרגיה,ambiguous,Generic technical reference in relevant ministry.
+34.12.03,יעילות השימוש באנרגיה,משרד האנרגיה והמים,יעול השימוש באנרגיה,ambiguous,Energy efficiency is broader than specific solar energy.
+34.13.01,יצירת מידע והפצתו,משרד האנרגיה והמים,פעולות מידע,ambiguous,Information dissemination in energy ministry; could include solar.
+34.16.01,מענקים לפיתוח תשתית,משרד התשתיות הלאומיות,פיתוח מערכת החשמל,ambiguous,Infrastructure development in energy ministry; could include solar.
+34.16.02,הערכות לקראת סיום,משרד התשתיות הלאומיות,פיתוח מערכת החשמל,ambiguous,Opaque title in relevant ministry; could contain subject spending.
+34.16.03,הקמת גוף לפיקוח על משק,משרד התשתיות הלאומיות,פיתוח מערכת החשמל,ambiguous,Energy market supervision; could include solar energy.
+34.16.04,פעילות ליישום חוק משק,משרד התשתיות הלאומיות,פיתוח מערכת החשמל,ambiguous,Energy market law implementation; could include solar energy.
+34.17.01,מענקים למוסדות מחקר,משרד האנרגיה והמים,מחקר ופיתוח תשתית,ambiguous,Research grants in energy ministry; could include solar.
+34.17.02,ניטור סייסמי,משרד התשתיות הלאומיות,מחקר ופיתוח תשתית,drop,"Specific program, unrelated to solar energy."
+34.17.03,תשתית מידע לחפושי נפט,משרד האנרגיה והמים,מחקר ופיתוח תשתית,drop,"Focuses on oil exploration, not solar energy."
+34.17.04,פרויקט הגנות ים המלח,משרד התשתיות הלאומיות,מחקר ופיתוח תשתית,drop,"Specific program, unrelated to solar energy."
+34.17.05,רזרבה למחקר,משרד התשתיות הלאומיות,מחקר ופיתוח תשתית,ambiguous,Research reserve in energy ministry; could include solar.
+34.18.01,רזרבה להתייקרויות,משרד האנרגיה והמים,רזרבה להתייקרויות,ambiguous,Generic reserve; could contain subject spending.
+34.30.01,הוצאות שכר,משרד האנרגיה,מטה המשרד,ambiguous,Generic administrative (salaries) in relevant ministry.
+34.30.02,תפעול ופעולות,משרד האנרגיה,מטה המשרד,ambiguous,"פעולות משרד האנרגיה, כותרת כללית"
+34.30.03,יחידות מקצועיות,משרד האנרגיה,מטה המשרד,ambiguous,"יחידות מקצועיות במשרד האנרגיה, כותרת כללית"
+34.30.04,יחידות מקצועיות,משרד האנרגיה והמים,מטה המשרד,ambiguous,"יחידות מקצועיות במשרד האנרגיה, כותרת כללית"
+34.30.05,מנהל הדלק ואוצרות טבע,משרד האנרגיה והמים,מטה המשרד,drop,דלק ואוצרות טבע אינם אנרגיה סולרית
+34.30.06,ייעוץ מקצועי ומחקרים,משרד האנרגיה והמים,מטה המשרד,ambiguous,מחקרים במשרד האנרגיה יכולים לכלול סולרית
+34.32.01,רזרבה להתייקרויות,משרד האנרגיה,רזרבות,ambiguous,"רזרבה במשרד האנרגיה, כותרת כללית"
+34.99.99,חשבון מעבר,משרד האנרגיה,חשבון מעבר,ambiguous,"חשבון מעבר במשרד האנרגיה, כותרת כללית"
+38.02.01,"מענקי מחקר ופיתוח עפ""י",תמיכות בענפי המשק,מחקר ופיתוח תעשייתי,ambiguous,"מענקי מו""פ יכולים לכלול אנרגיה סולרית"
+38.02.02,"מענקים לשלבי מו""פ",תמיכות בענפי המשק,מחקר ופיתוח תעשייתי,ambiguous,"מענקי מו""פ יכולים לכלול אנרגיה סולרית"
+38.02.03,"תשתיות מו""פ ומכוני מחקר",תמיכות בענפי המשק,מחקר ופיתוח תעשייתי,ambiguous,"תשתיות מו""פ יכולות לכלול אנרגיה סולרית"
+38.02.04,"מו""פ בין לאומי",תמיכות בענפי המשק,מחקר ופיתוח תעשייתי,ambiguous,"מו""פ בינלאומי יכול לכלול אנרגיה סולרית"
+38.02.05,בדיקת פרויקטים ומנהלות,תמיכות בענפי המשק,מחקר ופיתוח תעשייתי,ambiguous,"פעולות מנהליות למו""פ, יכול לכלול סולרית"
+38.02.06,תוכניות סיוע אחרות,תמיכות בענפי המשק,מחקר ופיתוח תעשייתי,ambiguous,"תוכניות סיוע למו""פ, יכול לכלול סולרית"
+38.02.15,רזרבה להתיקרויות,תמיכות בענפי המשק,מחקר ופיתוח תעשייתי,ambiguous,"רזרבה למו""פ, יכול לכלול אנרגיה סולרית"
+38.03.01,מענקים לפי חוק,תמיכות בענפי המשק,הטבות לעידוד השקעות הון,drop,"עידוד השקעות הון כללי, לא ספציפי לאנרגיה סולרית"
+38.03.02,הטבות מס - מסלול חלופי,תמיכות בענפי המשק,הטבות לעידוד השקעות הון,drop,"הטבות מס כלליות, לא ספציפי לאנרגיה סולרית"
+38.03.03,ערבות מדינה (תיקון 39),תמיכות בענפי המשק,הטבות לעידוד השקעות הון,drop,"ערבות מדינה כללית, לא ספציפי לאנרגיה סולרית"
+38.03.04,מענק הון,תמיכות בענפי המשק,הטבות לעידוד השקעות הון,drop,"מענק הון כללי, לא ספציפי לאנרגיה סולרית"
+38.03.05,"מענקים להשקעות ביו""ש",תמיכות בענפי המשק,הטבות לעידוד השקעות הון,drop,"השקעות ביו""ש, לא ספציפי לאנרגיה סולרית"
+38.03.06,מענקים תקציביים למפעלים,תמיכות בענפי המשק,הטבות לעידוד השקעות הון,drop,"מענקים למפעלים כלליים, לא ספציפי לאנרגיה סולרית"
+38.03.07,"הטבות להשקעות ביו""ש",תמיכות בענפי המשק,הטבות לעידוד השקעות הון,drop,"הטבות השקעה ביו""ש, לא ספציפי לאנרגיה סולרית"
+38.03.10,רזרבה להתייקרויות,תמיכות בענפי המשק,הטבות לעידוד השקעות הון,drop,"רזרבה להשקעות הון כלליות, לא ספציפי"
+38.04.01,פתוח שווקים ליצוא ידע,תמיכות בענפי המשק,פעולות שונות לפיתוח,drop,"פיתוח שווקים ליצוא ידע כללי, לא ספציפי"
+38.04.04,"תמיכות בשיווק לחו""ל",תמיכות בענפי המשק,פעולות שונות לפיתוח,drop,"תמיכות שיווק לחו""ל כלליות, לא ספציפי"
+38.04.06,מטה לקידום עסקים,תמיכות בענפי המשק,פעולות שונות לפיתוח,drop,"מטה לקידום עסקים כללי, לא ספציפי"
+38.04.08,רשות לשיתוף פעולה,תמיכות בענפי המשק,פעולות שונות לפיתוח,drop,"רשות לשיתוף פעולה כללית, לא ספציפי"
+38.07.01,תמיכה בפעולות גופים,תמיכות בענפי המשק,תמיכות בגופים המקדמים,drop,"תמיכה בגופים כלליים, לא ספציפי לאנרגיה סולרית"
+38.09.01,פעולות בתחום התקינה,תמיכות בענפי המשק,תקינה,ambiguous,תקינה יכולה לכלול תקנים לאנרגיה סולרית
+38.09.02,המעבדה הלאומית לפיזיקה,תמיכות בענפי המשק,תקינה,ambiguous,מעבדת פיזיקה לאומית יכולה לעסוק באנרגיה סולרית
+38.13.01,כלים משלימים לחוק עידוד,תמיכות בענפי המשק,תמיכה בתעשייה,drop,"תמיכה בתעשייה כללית, לא ספציפי לאנרגיה סולרית"
+38.13.02,הכשרת כח אדם,תמיכות בענפי המשק,תמיכה בתעשייה,drop,"הכשרת כוח אדם כללית, לא ספציפי לאנרגיה סולרית"
+38.13.03,טיפול ממוקד,תמיכות בענפי המשק,תמיכה בתעשייה,drop,"טיפול ממוקד בתעשייה כללי, לא ספציפי"
+38.13.04,"נע""מ - אז""ת",תמיכות בענפי המשק,תמיכה בתעשייה,drop,"כותרת לא ברורה, כנראה אזורי תעשייה כלליים"
+38.13.05,תמיכות אחרות,תמיכות בענפי המשק,תמיכה בתעשייה,drop,"תמיכות אחרות בתעשייה כלליות, לא ספציפי"
+38.14.01,הערכות התעשייה לחשיפה,תמיכות בענפי המשק,תקציב להערכות התעשייה,drop,"הערכות תעשייה כלליות, לא ספציפי לאנרגיה סולרית"
+38.17.01,עתודות לתעשייה,תמיכות בענפי המשק,עתודות התעשייה,drop,"עתודות לתעשייה כלליות, לא ספציפי לאנרגיה סולרית"
+38.17.02,עתודות למדען הראשי,תמיכות בענפי המשק,עתודות התעשייה,ambiguous,"עתודות למדען הראשי יכולות לכלול מו""פ סולרי"
+38.17.13,מנהלות אזוריות משותפות,תמיכות בענפי המשק,מנהלות אזוריות משותפות,drop,"מנהלות אזוריות משותפות כלליות, לא ספציפי"
+38.19.01,מכרזי העסקה במפעלים,תמיכות בענפי המשק,הטבות לעידוד השקעות,drop,"מכרזי העסקה במפעלים כלליים, לא ספציפי"
+38.19.02,עתודה לתוכניות תעסוקה,תמיכות בענפי המשק,הטבות לעידוד השקעות,drop,"עתודה לתוכניות תעסוקה כלליות, לא ספציפי"
+38.19.03,מסלול להפחתת פליטות,תמיכות בענפי המשק,הטבות לעידוד השקעות,ambiguous,"הפחתת פליטות קשורה לאנרגיה ירוקה, כולל סולרית"
+38.20.01,רזרבה להתיקרויות,תמיכות בענפי המשק,רזרבות,drop,"רזרבה כללית, לא ספציפי לאנרגיה סולרית"
+38.20.02,רזרבה לתמיכה בתעשיה,תמיכות בענפי המשק,רזרבות,drop,"רזרבה לתמיכה בתעשייה כללית, לא ספציפי"
+38.21.01,השתתפויות,תמיכות בענפי המשק,השתתפויות,drop,"השתתפויות כלליות, לא ספציפי לאנרגיה סולרית"
+38.23.01,רזרבה להוצאות ביטחון,תמיכות בענפי המשק,רזרבות מיוחדות,drop,הוצאות ביטחון אינן קשורות לאנרגיה סולרית
+38.30.01,הפעלת הרשות לחדשנות,כלכלה ותעשייה,המדען הראשי,ambiguous,רשות החדשנות יכולה לתמוך בחדשנות סולרית
+38.30.02,מענקי מחקר ופיתוח,כלכלה ותעשייה,המדען הראשי,ambiguous,"מענקי מו""פ יכולים לכלול אנרגיה סולרית"
+38.30.03,"תשתיות מו""פ",תמיכות בענפי המשק,המדען הראשי,ambiguous,"תשתיות מו""פ יכולות לכלול אנרגיה סולרית"
+38.30.04,"מו""פ בין-לאומי",כלכלה ותעשייה,המדען הראשי,ambiguous,"מו""פ בינלאומי יכול לכלול אנרגיה סולרית"
+38.30.10,רזרבה,כלכלה ותעשייה,המדען הראשי,ambiguous,"רזרבה למדען הראשי, יכול לכלול מו""פ סולרי"
+38.40.01,קידום השקעות ועידוד,כלכלה ותעשייה,עידוד המגזר העסקי,drop,"קידום השקעות כללי, לא ספציפי לאנרגיה סולרית"
+38.40.02,מסלולי תמיכה מינהליים,תמיכות בענפי המשק,עידוד המגזר העסקי,drop,"מסלולי תמיכה מינהליים כלליים, לא ספציפי"
+38.40.03,עסקים קטנים ובינוניים,תמיכות בענפי המשק,עידוד המגזר העסקי,drop,"עסקים קטנים ובינוניים כלליים, לא ספציפי"
+38.40.04,קידום הייצוא ועידוד,כלכלה ותעשייה,עידוד המגזר העסקי,drop,"קידום ייצוא כללי, לא ספציפי לאנרגיה סולרית"
+38.40.09,פעולות כלליות לקידום,כלכלה ותעשייה,עידוד המגזר העסקי,drop,"פעולות קידום כלליות, לא ספציפי לאנרגיה סולרית"
+38.50.01,"תקינה, איכות והסמכה",תמיכות בענפי המשק,תמיכות בגופים ציבוריים,ambiguous,תקינה יכולה לכלול תקנים לאנרגיה סולרית
+38.70.01,שכר,כלכלה ותעשייה,שכר ותפעול המשרד,drop,"שכר כללי, לא ספציפי לאנרגיה סולרית"
+38.70.02,תפעול,כלכלה ותעשייה,שכר ותפעול המשרד,drop,"תפעול כללי, לא ספציפי לאנרגיה סולרית"
+38.80.01,רזרבה,כלכלה ותעשייה,רזרבה,drop,"רזרבה כללית, לא ספציפי לאנרגיה סולרית"
+38.90.01,שכר ופעולות,כלכלה ותעשייה,רשות הרגולציה,drop,"שכר ופעולות רגולציה כלליים, לא ספציפי"
+38.99.99,חשבון מעבר,כלכלה ותעשייה,חשבון מעבר,drop,"חשבון מעבר כללי, לא ספציפי לאנרגיה סולרית"
+76.01.01,רכישת ציוד,תעשיה,פיתוח התעשייה,drop,"רכישת ציוד כללית, לא ספציפי לאנרגיה סולרית"
+76.01.02,השקעה ממשלתית בהון,תעשיה,פיתוח התעשיה,drop,"השקעה ממשלתית בהון כללית, לא ספציפי"
+76.01.05,השקעות במחשוב,תעשיה,פיתוח התעשייה,drop,השקעות במחשוב אינן קשורות לאנרגיה סולרית
+76.01.09,פיתוח אזורי תעשייה,תעשיה,פיתוח התעשייה,drop,"פיתוח אזורי תעשייה כללי, לא ספציפי"
+76.01.10,פיתוח אזורי תעשייה,תעשיה,פיתוח התעשייה,drop,"פיתוח אזורי תעשייה כללי, לא ספציפי"
+76.01.11,התוכנית לחיזוק חיפה,תעשיה,פיתוח התעשייה,drop,"תוכנית לחיזוק חיפה, לא ספציפי לאנרגיה סולרית"
+76.01.15,הלואות לתעשיה,תעשיה,פיתוח התעשיה,drop,"הלוואות לתעשייה כלליות, לא ספציפי לאנרגיה סולרית"
+76.01.18,העברת יחידות המשרד,תעשיה,פיתוח התעשייה,drop,"העברת יחידות משרד כללית, לא ספציפי"
+76.01.21,רזרבה להתייקרויות,תעשיה,פיתוח התעשייה,drop,"רזרבה להתייקרויות כללית, לא ספציפי"
+76.10.01,השקעה בפיתוח תשתיות,תעשייה,השקעה בפיתוח תשתיות,drop,"פיתוח תשתיות תעשייתי כללי, לא ספציפי לאנרגיה"
+76.80.01,רזרבה,תעשייה,רזרבה,drop,"רזרבה כללית לתעשייה, לא ספציפי"
+83.04.01,השקעות שונות,הוצאות פיתוח אחרות,פרוייקטי פיתוח,drop,"השקעות שונות כלליות, לא ספציפי לאנרגיה סולרית"
+83.04.02,פרוייקטים בתכנון,הוצאות פיתוח אחרות,פרוייקטי פיתוח,drop,"פרויקטים בתכנון כלליים, לא ספציפי"
+83.04.03,פיתוח ההתישבות הבדואית,הוצאות פיתוח אחרות,פרוייקטי פיתוח,drop,"פיתוח התיישבות בדואית, לא ספציפי לאנרגיה סולרית"
+83.04.04,פרויקטי תקשורת,הוצאות פיתוח אחרות,פרוייקטי פיתוח,drop,פרויקטי תקשורת אינם קשורים לאנרגיה סולרית
+83.04.05,קרן לצמצום פערים,הוצאות פיתוח אחרות,פרוייקטי פיתוח,drop,"קרן לצמצום פערים כללית, לא ספציפי"
+83.04.06,פרויקטים בשלטון המקומי,הוצאות פיתוח אחרות,פרוייקטי פיתוח,drop,"פרויקטים בשלטון המקומי כלליים, לא ספציפי"
+83.04.07,סיוע לענף הלבידים,הוצאות פיתוח אחרות,השקעות שונות,drop,סיוע לענף הלבידים אינו קשור לאנרגיה סולרית
+83.05.01,"מרכב""ה",הוצאות פיתוח אחרות,השקעות בטכנולוגיות,drop,"כותרת לא ברורה, כנראה מערכת מידע כללית"
+83.05.02,פעולות מיוחדות,הוצאות פיתוח אחרות,השקעות בטכנולוגיות,drop,"פעולות מיוחדות כלליות, לא ספציפי לאנרגיה סולרית"
+83.05.03,ממשל זמין,הוצאות פיתוח אחרות,השקעות בטכנולוגיות,drop,ממשל זמין אינו קשור לאנרגיה סולרית
+83.05.04,פרויקטי מחשוב רוחביים,הוצאות פיתוח אחרות,השקעות בטכנולוגיות,drop,פרויקטי מחשוב אינם קשורים לאנרגיה סולרית
+83.05.05,תקשוב-פרויקטים רוחביים,הוצאות פיתוח אחרות,השקעות בטכנולוגיות,drop,פרויקטי תקשוב אינם קשורים לאנרגיה סולרית
+83.06.01,השקעות בחברות,הוצאות פיתוח אחרות,השקעות בחברות,drop,"השקעות בחברות כלליות, לא ספציפי לאנרגיה סולרית"
+83.06.02,רכבת ישראל,הוצאות פיתוח אחרות,השקעות בחברות,drop,רכבת ישראל אינה קשורה לאנרגיה סולרית
+83.06.03,השקעות בטחוניות,הוצאות פיתוח אחרות,השקעות,drop,השקעות ביטחוניות אינן קשורות לאנרגיה סולרית
+83.06.04,גופים בינלאומיים,הוצאות פיתוח אחרות,השקעות,drop,"גופים בינלאומיים כלליים, לא ספציפי"
+83.06.05,עתודה להסכמים,הוצאות פיתוח אחרות,השקעות,drop,"עתודה להסכמים כללית, לא ספציפי"
+89.04.01,רזרבות להתייקרויות,מפעלי משרד ראש הממשלה,רזרבות להתייקרויות,drop,"רזרבות להתייקרויות כלליות, לא ספציפי"
+89.50.01,רזרבות,מפעלי משרד ראש הממשלה,רזרבה,drop,"רזרבה כללית, לא ספציפי לאנרגיה סולרית"
+89.69.99,חשבון מעבר,"מפעלי משרד ראה""מ והאוצר",חשבון מעבר,drop,"חשבון מעבר כללי, לא ספציפי לאנרגיה סולרית"

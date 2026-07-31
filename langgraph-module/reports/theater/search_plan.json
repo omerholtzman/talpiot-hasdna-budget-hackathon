@@ -1,0 +1,35 @@
+{
+  "offices": [
+    "19",
+    "04",
+    "18",
+    "83",
+    "34",
+    "35",
+    "05",
+    "89"
+  ],
+  "functional_classes": [
+    "מדע, תרבות וספורט"
+  ],
+  "keywords": [
+    "תיאטרון",
+    "הצגות",
+    "במה",
+    "אמנות",
+    "תרבות",
+    "מופעים",
+    "שחקנים",
+    "מחול"
+  ],
+  "fts_queries": [
+    "תקצוב מוסדות תיאטרון",
+    "תמיכה באמנויות הבמה",
+    "פיתוח תשתיות תרבות"
+  ],
+  "notes": "Theater funding often comes from both national and local sources, and can be part of broader cultural or arts initiatives. There is no specific development twin for 'מדע, תרבות וספורט', so general development offices are included.",
+  "rejected_offices": [],
+  "whole_word_keywords": [
+    "במה"
+  ]
+}

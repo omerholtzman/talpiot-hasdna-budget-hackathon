@@ -1,0 +1,85 @@
+{
+  "subject": "אנרגיה סולרית",
+  "model": "gemini-2.5-flash",
+  "seconds": 408.6,
+  "search_plan": {
+    "offices": [
+      "34",
+      "83",
+      "38",
+      "04",
+      "76",
+      "35",
+      "05",
+      "89"
+    ],
+    "functional_classes": [
+      "אנרגיה",
+      "הגנת הסביבה"
+    ],
+    "keywords": [
+      "סולרית",
+      "שמש",
+      "פוטו-וולטאי",
+      "מתחדש",
+      "קולט",
+      "פאנל",
+      "חשמל",
+      "אגירה"
+    ]
+  },
+  "counts": {
+    "domains": 136,
+    "open_domains": 53,
+    "programs": 242,
+    "candidates": 4928,
+    "keyword_hits": 46,
+    "fts_hits": 37,
+    "items_judged": 1481,
+    "selected": 42,
+    "not_in_total": 13,
+    "dropped": 1439,
+    "item_budget_rows": 295,
+    "hierarchy_rows": 127
+  },
+  "domain_split": {
+    "keep": 3,
+    "ambiguous": 50,
+    "drop": 83
+  },
+  "triage_split": {
+    "keep": 1,
+    "ambiguous": 77,
+    "drop": 164
+  },
+  "cost": {
+    "llm_calls": 14,
+    "llm_request_chars": 268079,
+    "sql_queries": 44,
+    "sql_request_chars": 36300,
+    "by_step": {
+      "expand": {
+        "calls": 1,
+        "chars": 6732,
+        "seconds": 9.8
+      },
+      "domains": {
+        "calls": 1,
+        "chars": 8751,
+        "seconds": 38.1
+      },
+      "triage": {
+        "calls": 2,
+        "chars": 24400,
+        "seconds": 98.5
+      },
+      "judge": {
+        "calls": 10,
+        "chars": 228196,
+        "seconds": 554.8
+      }
+    }
+  },
+  "data_errors": 23,
+  "possible_misses": 74
+}

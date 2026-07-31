@@ -80,6 +80,4 @@
 title: נתוני תקציב, התקשרויות והחלטות ממשלה בתחום {SUBJECT_HEBREW}
 created: {TODAY}
 updated: {TODAY}
-model: {MODEL}
-path: reports/{SUBJECT_SLUG}
 ---

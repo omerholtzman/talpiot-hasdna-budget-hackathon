@@ -906,6 +906,65 @@ def build_digest(out_dir: str, subject: str, top_n: int = 25) -> str:
     return "\n".join(l for l in lines if l is not None)
 
 
+# Phase 2 calls the MCP tool directly, with none of budget_api's chunking to save it
+# from the ~2800-char cliff where the server returns zero rows silently. 150 level-4
+# codes render as ~2200 chars of IN-list, which still leaves room for the rest of the
+# query; past that the exact tier is dropped and the program tier leads instead.
+MAX_SCOPE_INLINE = 150
+
+
+def build_scope(out_dir: str) -> str:
+    """Renders Phase 1's selected codes as ready-to-paste SQL filters for Phase 2.
+
+    Contracts join to the budget book on `contracts_data.budget_code`, which carries
+    the same 11-char level-4 code as selected_items.csv - so the two are linkable
+    exactly, and Phase 2 has no reason to guess a ministry name instead.
+
+    It is rendered as three tiers because the exact join is frequently empty and that
+    is real, not a mistake: procurement is only booked against some budget lines. The
+    'gifted youth' run's 87 selected codes have no contracts at all, while the
+    neighbouring programs 04.63.02/03 have ~2000 - so an agent given only tier 1 either
+    reports nothing or, worse, widens to the whole ministry on its own. Handing it a
+    fixed ladder makes the widening a stated step with a known scope instead.
+    """
+    items = read_csv(os.path.join(out_dir, "selected_items.csv"))
+    codes = sorted({r["code"] for r in items if r.get("code")})
+    if not codes:
+        return ""
+
+    programs = sorted({c[:8] for c in codes})
+    domains = sorted({c[:5] for c in codes})
+
+    def in_list(column: str, values: List[str]) -> str:
+        return "%s IN (%s)" % (column, BudgetAPI.sql_list(values))
+
+    tiers = []
+    if len(codes) <= MAX_SCOPE_INLINE:
+        tiers.append(("exact budget items (%d)" % len(codes),
+                      in_list("budget_code", codes)))
+    else:
+        tiers.append(("too many exact codes to inline (%d) - start at the program tier"
+                      % len(codes), None))
+    tiers.append(("containing programs (%d)" % len(programs),
+                  in_list("LEFT(budget_code, 8)", programs)))
+    tiers.append(("containing domains (%d)" % len(domains),
+                  in_list("LEFT(budget_code, 5)", domains)))
+
+    lines = [
+        "SCOPE - the budget lines Phase 1 selected for this subject.",
+        "contracts_data.budget_code uses the same code as these items, so every query "
+        "in this phase MUST carry one of the filters below verbatim. Do not substitute "
+        "a purchasing_ministry filter: the ministry funds far more than this subject.",
+        "Use tier 1; only if it returns no rows, move down one tier and say in your "
+        "output which tier the numbers came from.",
+        "",
+    ]
+    for i, (label, sql) in enumerate(tiers, 1):
+        lines.append("Tier %d - %s:" % (i, label))
+        lines.append("  %s" % sql if sql else "  (skipped)")
+    return "\n".join(lines)
+
+
 def render_hierarchy(out_dir: str, top_n: int = 40) -> str:
     """Renders hierarchy.csv as the Phase 4 section, without a model.
 
