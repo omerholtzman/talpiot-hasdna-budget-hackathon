@@ -1,18 +1,15 @@
----
-title: נתוני תקציב, התקשרויות והחלטות ממשלה בתחום {SUBJECT_HEBREW}
-created: {TODAY}
-updated: {TODAY}
-model: {MODEL}
-path: reports/{SUBJECT_SLUG}
----
+# {SUBJECT_HEBREW}
 
-# נתוני תקציב, התקשרויות והחלטות ממשלה בתחום {SUBJECT_HEBREW}
-
-{SUMMARY}
+{Summary of the subject and its significance}
 
 ## מגמה תקציבית לאורך זמן
 
-{BUDGET_XYCHART_LINES}
+```mermaid
+xychart
+    title התפלגות היקפי התקשרויות לפי ספק (15 המובילים) בשנים {CONTRACTS_YEARS}
+    {MERMAID_XYCHART_DATA}
+```
+ 
 
 ## תכניות פעילות כיום
 
@@ -27,6 +24,7 @@ pie
 ## מקורות תקציב
 
 {BUDGET_HIERARCHY_EXPLANATION}
+
 
 ```mermaid
 graph TD
@@ -52,3 +50,11 @@ graph TD
 {SOURCES_LIST}
 
 [חזרה לעמוד הראשי](../../README.md)
+
+---
+title: נתוני תקציב, התקשרויות והחלטות ממשלה בתחום {SUBJECT_HEBREW}
+created: {TODAY}
+updated: {TODAY}
+model: {MODEL}
+path: reports/{SUBJECT_SLUG}
+---
