@@ -22,10 +22,23 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
 # e.g., use a cheaper/faster model for the research phases.
 MODEL_NAME = os.environ.get("WIKI_HARNESS_MODEL", "claude-sonnet-5")
 
+# --- Google / Gemini ----------------------------------------------------------
+# The model actually used by every phase, including the Phase 1 pipeline's
+# classification steps. Kept here so the ReAct phases and the pipeline cannot
+# drift onto different models — a run summary comparing them would be worthless.
+GEMINI_MODEL = os.environ.get("WIKI_HARNESS_GEMINI_MODEL", "gemini-2.5-flash")
+GOOGLE_PROJECT = os.environ.get("GCP_PROJECT", "qwiklabs-gcp-01-1436437a2cf1")
+GOOGLE_LOCATION = os.environ.get("GCP_REGION", "europe-southwest1")
+
 # --- MCP server ---------------------------------------------------------------
 # This is the one server all three research phases talk to. Only one URL
 # to change if the endpoint ever moves.
 MCP_URL = os.environ.get("WIKI_HARNESS_MCP_URL", "https://next.obudget.org/mcp")
+
+# How long a single MCP tool call may take. The server drops its own connection
+# at 60 seconds, so anything past that is the client having lost the response
+# rather than the query still running; the margin covers paging retries.
+MCP_CALL_TIMEOUT = int(os.environ.get("WIKI_HARNESS_MCP_TIMEOUT", "180"))
 
 # --- Paths ----------------------------------------------------------------------
 PROJECT_ROOT = Path(__file__).resolve().parent

@@ -6,15 +6,15 @@ updates to it — nodes never mutate the state object they're given
 in-place; LangGraph merges whatever they return into the shared state.
 
 Why `errors` needs an `Annotated[..., operator.add]` reducer, but the
-three `*_result` fields don't:
+`*_result` fields don't:
 
-    Phases 1, 2 and 3 run CONCURRENTLY (see graph.py). If two of them
+    Phases 2, 3 and 4 run CONCURRENTLY (see graph.py). If two of them
     finished in the same "superstep" and both tried to write to the same
     plain field, LangGraph wouldn't know whether to keep the first
     value, the second, or raise an error — so it raises one, by design.
-    That's fine for `budget_result` / `contracts_result` /
-    `decisions_result`, because only ONE node ever writes to each of
-    those keys. But `errors` is a key that phase 1, 2, AND 3 might all
+    That's fine for `contracts_result` / `decisions_result` /
+    `hierarchy_result`, because only ONE node ever writes to each of
+    those keys. But `errors` is a key that phases 2, 3 AND 4 might all
     want to append to at once. The `operator.add` reducer tells
     LangGraph "when multiple nodes write to this key in the same step,
     concatenate the lists" — turning a potential crash into the
@@ -30,6 +30,7 @@ class WikiState(TypedDict):
     subject_slug: str     # filesystem/URL-safe slug, e.g. "health"
     today: str            # ISO date (YYYY-MM-DD), injected into every prompt
     model: str            # model name recorded in the report's frontmatter
+    run_dir: str          # directory phase 1 writes its CSVs into; phase 4 reads them back
 
     # --- filled in by phases 1-3 (run in parallel, one writer each) ---
     budget_result: str

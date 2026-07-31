@@ -1,54 +1,44 @@
 """
-The actual "workers" behind each of the four LangGraph nodes.
+The actual "workers" behind each of the five LangGraph nodes.
 
-Phases 1-3 are classic ReAct-style tool-calling agents: each is handed a
-system prompt (loaded from prompts/skill_phase*.md) plus the MCP tools,
-and loops model -> tool call -> model until it produces a final answer.
-LangGraph's prebuilt `create_react_agent` implements that loop for us, so
-this module stays focused on *wiring things together*, not on
+Phase 1 is NOT an agent. It is a deterministic pipeline (pipeline.py):
+plain SQL for retrieval and aggregation, with the model used only to
+classify — which ministries, which programs, which lines. Every budget
+figure it produces comes from the database, so none can be invented, and
+its recall is bounded by the query rather than by a turn budget. It runs
+in a worker thread and writes its output as CSVs into `state["run_dir"]`;
+what flows on through the graph is a short digest of those files.
+
+Phases 2 and 3 are classic ReAct-style tool-calling agents: each is
+handed a system prompt (loaded from prompts/skill_phase*.md) plus the MCP
+tools, and loops model -> tool call -> model until it produces a final
+answer. LangGraph's prebuilt `create_react_agent` implements that loop
+for us, so this module stays focused on *wiring things together*, not on
 re-implementing an agent loop from scratch.
 
-Phase 4 is deliberately simpler: its skill file says "No database tools
-are available in this phase" — so it's just one call to the model with
-the three research results pasted in as context, no tool loop at all.
+Phase 4 (hierarchy) is deterministic too: the pipeline already wrote
+hierarchy.csv correctly, so the node just renders it.
+
+Final synthesis is one call to the model with the four research results
+pasted in as context, no tool loop at all — matching its skill file's
+"no database tools in this phase".
 """
-from datetime import date, datetime
+import asyncio
+from datetime import date
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 from langgraph.prebuilt import create_react_agent
 
-from config import AGENT_MAX_STEPS
-from constants import PHASE1, PHASE2, PHASE3, PHASE4, PHASE5, TEMPLATE
-
-from mcp_tools import get_mcp_tools
+import pipeline
+from config import AGENT_MAX_STEPS, GEMINI_MODEL, GOOGLE_LOCATION, GOOGLE_PROJECT
+from constants import (PHASE1, PHASE2, PHASE3, PHASE4, PHASE5, PHASE_LABELS,
+                       TEMPLATE)
+from llm_json import JSONLLM
+from logs import log as _log, truncate as _truncate
+from mcp_tools import SyncMCPBridge, get_mcp_tools
 from prompt_loader import load_prompt
 from state import WikiState
-
-
-# --- Verbose stage logging ---------------------------------------------------------
-# Phases 1-4 run concurrently, so every log line is tagged with a phase label
-# to keep the interleaved output readable. This is plain stdout logging (not
-# the `logging` module) to keep the change minimal and dependency-free.
-
-PHASE_LABELS = {
-    PHASE1: "Phase 1: Budget",
-    PHASE2: "Phase 2: Contracts",
-    PHASE3: "Phase 3: Decisions",
-    PHASE4: "Phase 4: Hierarchy",
-}
-
-
-def _log(label: str, message: str) -> None:
-    timestamp = datetime.now().strftime("%H:%M:%S")
-    print(f"[{timestamp}] [{label}] {message}", flush=True)
-
-
-def _truncate(text: str, limit: int = 500) -> str:
-    text = str(text)
-    if len(text) <= limit:
-        return text
-    return f"{text[:limit]}... [truncated, {len(text)} chars total]"
 
 
 def _log_agent_transcript(label: str, messages: list) -> None:
@@ -78,11 +68,11 @@ def _log_agent_transcript(label: str, messages: list) -> None:
 
 
 def _llm() -> ChatGoogleGenerativeAI:
-    """One shared factory for the Claude client, so model/key config lives in one place."""
+    """One shared factory for the chat client, so model/key config lives in one place."""
     return ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",   # Vertex model IDs often use an @date suffix, e.g. claude-haiku-4-5@20251001
-        project="qwiklabs-gcp-01-1436437a2cf1",
-        location="europe-southwest1",              # Claude's Vertex region, not necessarily your default GCP region
+        model=GEMINI_MODEL,
+        project=GOOGLE_PROJECT,
+        location=GOOGLE_LOCATION,
     )
 
 def today_str() -> str:
@@ -92,15 +82,15 @@ def today_str() -> str:
 
 async def _run_research_phase(phase_name: str, state: WikiState) -> tuple[str, list[str]]:
     """
-    Shared implementation for phases 1-3: build the system prompt, attach
-    the MCP tools, run the ReAct loop, and return (result_text, errors).
+    Shared implementation for phases 2 and 3: build the system prompt,
+    attach the MCP tools, run the ReAct loop, and return (result_text, errors).
 
     Any failure (bad SQL, a tool erroring out, the model giving up, etc.)
     is caught HERE rather than allowed to crash the whole pipeline. That
-    matters because phases 1, 2, and 3 run concurrently: a failure in the
-    "contracts" phase shouldn't take down the "budget" and "decisions"
+    matters because phases 2, 3 and 4 run concurrently: a failure in the
+    "contracts" phase shouldn't take down the "decisions" and "hierarchy"
     phases too. A failed phase becomes a short placeholder string instead,
-    and phase 4 (synthesis) will simply note that section had no data.
+    and the synthesis phase will simply note that section had no data.
     """
     label = PHASE_LABELS.get(phase_name, phase_name)
     _log(label, f"Starting - subject: '{state['subject']}'")
@@ -111,8 +101,14 @@ async def _run_research_phase(phase_name: str, state: WikiState) -> tuple[str, l
 
     agent = create_react_agent(_llm(), tools=tools, prompt=system_prompt)
 
-    user_message = f"Research the subject: {state['subject']}"
-    _log(label, f"Sending initial message: {user_message}")
+    # Phase 1's findings go in as context: these phases need the budget codes
+    # and the ministries to filter the contracts and decisions datasets by, and
+    # rediscovering them per phase would be both slower and inconsistent.
+    user_message = (
+        f"Research the subject: {state['subject']}\n\n"
+        f"Here are the budget items collected in Phase 1:\n{state['budget_result']}"
+    )
+    _log(label, f"Sending initial message ({len(user_message)} chars, incl. phase 1 digest)")
     try:
         result = await agent.ainvoke(
             {"messages": [{"role": "user", "content": user_message}]},
@@ -133,9 +129,37 @@ async def _run_research_phase(phase_name: str, state: WikiState) -> tuple[str, l
 # partial-state-update dict LangGraph expects back from a node.
 
 async def phase1_budget_node(state: WikiState) -> dict:
-    """LangGraph node: aggregate state budget data (amount_allocated/revised/used by year)."""
-    text, errors = await _run_research_phase(PHASE1, state)
-    return {"budget_result": text, "errors": errors}
+    """LangGraph node: find every budget item for the subject, deterministically.
+
+    Runs pipeline.run_pipeline in a worker thread — it is synchronous code
+    that fans its own model calls out over a thread pool, and the SQL it
+    issues reaches the MCP server through SyncMCPBridge, which posts each
+    call back to this event loop. What lands in the state is the digest;
+    the full item list and its per-year budgets stay in `run_dir` as CSVs.
+    """
+    label = PHASE_LABELS[PHASE1]
+    subject, run_dir = state["subject"], state["run_dir"]
+    _log(label, f"Starting - subject: '{subject}' (deterministic pipeline, not an agent)")
+    _log(label, f"Writing CSVs to {run_dir}")
+
+    tools = await get_mcp_tools()
+    bridge = SyncMCPBridge(tools, asyncio.get_running_loop())
+    provider = JSONLLM()
+
+    try:
+        summary = await asyncio.to_thread(
+            pipeline.run_pipeline, subject, run_dir, provider, bridge
+        )
+        digest = await asyncio.to_thread(pipeline.build_digest, run_dir, subject)
+    except Exception as exc:  # noqa: BLE001 - a failed phase 1 must not kill the run
+        _log(label, f"FAILED: {exc}")
+        placeholder = f"_No budget data could be retrieved for this subject ({exc})._"
+        return {"budget_result": placeholder, "errors": [f"{PHASE1} failed: {exc}"]}
+
+    counts = summary.get("counts", {})
+    _log(label, f"Done - {counts.get('selected', 0)} item(s) selected, "
+                f"{counts.get('dropped', 0)} dropped; digest is {len(digest)} chars")
+    return {"budget_result": digest, "errors": []}
 
 
 async def phase2_contracts_node(state: WikiState) -> dict:
@@ -151,9 +175,24 @@ async def phase3_decisions_node(state: WikiState) -> dict:
 
 
 async def phase4_hierarchy_node(state: WikiState) -> dict:
-    """LangGraph node: ..."""
-    text, errors = await _run_research_phase(PHASE4, state)
-    return {"hierarchy_result": text, "errors": errors}
+    """LangGraph node: the ministries' level 1-3 budget tree, for the flow diagram.
+
+    No model and no tools. The old skill file had an agent query this itself
+    with `code LIKE '24%'`, which mixes budget levels and double-counts a
+    ministry with all of its children — the server flags it as a mistake.
+    Phase 1's pipeline has already written the same rows correctly to
+    hierarchy.csv, so this only formats them.
+    """
+    label = PHASE_LABELS[PHASE4]
+    _log(label, "Starting - rendering hierarchy.csv from the phase 1 run")
+    try:
+        text = pipeline.render_hierarchy(state["run_dir"])
+    except Exception as exc:  # noqa: BLE001 - consistent with the other phases
+        _log(label, f"FAILED: {exc}")
+        return {"hierarchy_result": f"_No hierarchy data ({exc})._",
+                "errors": [f"{PHASE4} failed: {exc}"]}
+    _log(label, f"Done - produced {len(text)} chars")
+    return {"hierarchy_result": text, "errors": []}
 
 
 async def final_phase_synthesis_node(state: WikiState) -> dict:

@@ -7,11 +7,11 @@ final synthesis phase. Built on **LangGraph**.
 ## Why LangGraph (and not, say, Prefect)
 
 Both would work. LangGraph was chosen here because the pipeline is
-fundamentally an **agentic fan-out / fan-in**: three tool-calling LLM
-agents that don't depend on each other, feeding into one LLM that
-depends on all three. That's exactly the shape LangGraph's `StateGraph`
-is built for, and its prebuilt `create_react_agent` gives us the
-model → tool-call → model loop for free.
+fundamentally a **fan-out / fan-in**: three research phases that don't
+depend on each other, feeding into one LLM that depends on all three.
+That's exactly the shape LangGraph's `StateGraph` is built for, and its
+prebuilt `create_react_agent` gives us the model → tool-call → model loop
+for free where a phase still needs one.
 
 Prefect (or Airflow, Dagster, etc.) would be a better fit if you later
 need things LangGraph doesn't focus on: cron scheduling, a run-history
@@ -24,24 +24,59 @@ would carry over almost as-is as plain async functions.
 ## Architecture
 
 ```
-              ┌──────────────────┐
-        ┌────►│ phase1_budget    ├────┐
-        │     └──────────────────┘    │
-  START ├────►┌──────────────────┐    ▼
-        │     │ phase2_contracts ├──► phase4_synthesis ──► END
-        │     └──────────────────┘    ▲
-        └────►┌──────────────────┐    │
-              │ phase3_decisions ├────┘
-              └──────────────────┘
+                              ┌──────────────────┐
+                         ┌───►│ phase2_contracts ├───┐
+                         │    └──────────────────┘   │
+  ┌───────────────┐      │    ┌──────────────────┐   ▼
+  │ phase1_budget ├──────┼───►│ phase3_decisions ├──►│ final_synthesis ├─► END
+  └───────────────┘      │    └──────────────────┘   ▲
+                         │    ┌──────────────────┐   │
+                         └───►│ phase4_hierarchy ├───┘
+                              └──────────────────┘
 ```
 
-Phases 1–3 each run a ReAct-style agent (Claude + the three MCP tools)
-scoped by its own system prompt (`prompts/skill_phase*.md`, copied
-verbatim from the original skill files you shared). They have no
-dependency on each other, so LangGraph runs them concurrently. Phase 4
-has no tools at all — per its skill file, it's a pure writing/formatting
-task over the text the first three phases produced — and only runs once
-all three finish.
+**Phase 1 is not an agent.** Finding every budget item for a subject is a
+recall problem, and a ReAct loop is a bad fit for it: the agent pays for
+every row it has ever fetched on every subsequent turn, so it is pushed
+toward sampling rather than enumerating, and any figure it retypes into
+its answer can be wrong. `pipeline.py` replaces that loop with a
+deterministic sequence:
+
+```
+expand → triage domains → retrieve → triage programs → judge items → materialise → report
+```
+
+Retrieval, materialisation and the data-quality report are plain SQL and
+never touch a model, so **no budget figure can be invented**. The model
+is used only to classify — which ministries, which of their domains,
+which programs, which individual lines — over bounded, chunked input with
+a JSON schema constraining the reply. Ported from
+`talpihackathon/main_agent/pipeline.py`; keep the two in sync.
+
+Phases 2 and 3 are still ReAct-style agents (the model + the MCP tools)
+scoped by their own system prompts, and both receive Phase 1's digest so
+they can filter their datasets by the budget codes it found. Phase 4 just
+renders the hierarchy CSV the pipeline already wrote. Final synthesis has
+no tools at all — per its skill file, it's a pure writing/formatting task
+over what the four phases produced — and only runs once all three of its
+predecessors finish.
+
+## Output
+
+`python main.py "אנרגיה ירוקה" --slug energy` writes:
+
+| Path | What it is |
+|---|---|
+| `reports/energy.md` | the finished Hebrew dashboard |
+| `reports/energy/selected_items.csv` | every level-4 item judged on-subject, with `counts_in_total` |
+| `reports/energy/item_budgets.csv` | one row per item per year: allocated / revised / used |
+| `reports/energy/hierarchy.csv` | levels 1–3 of the funding ministries, latest year |
+| `reports/energy/candidates.csv`, `programs.csv`, `domains.csv`, `excluded_items.csv` | the audit trail: everything considered, and why each verdict fell as it did |
+| `reports/energy/report.json` | computed `data_errors` and `possible_misses` |
+| `reports/energy/run_summary.json` | counts, verdict splits, SQL/LLM cost per step |
+
+The CSVs are the data; the markdown is a summary of them. `excluded_items.csv`
+plus `possible_misses` are what a reviewer uses to catch false negatives.
 
 ## File map
 
@@ -49,12 +84,22 @@ all three finish.
 |---|---|
 | `config.py` | All environment-dependent settings (API key, model name, MCP URL, limits) |
 | `state.py` | The `WikiState` TypedDict that flows through the graph |
-| `prompt_loader.py` | Reads `prompts/*.md` and fills in `{TODAY}` / `{MODEL}` |
-| `mcp_tools.py` | Connects to the obudget MCP server, exposes its tools to LangChain |
+| `prompt_loader.py` | Reads `prompts/*.md` and fills in `{TODAY}` / `{MODEL}` / the pipeline's fields |
+| `mcp_tools.py` | Connects to the obudget MCP server; exposes its tools to LangChain, and to the pipeline's synchronous code via `SyncMCPBridge` |
+| `budget_api.py` | Paging, warning-aware SQL layer over the MCP — the model-free half of phase 1 |
+| `budget_reference.py` | Checked-in office list, functional classes, ordinary↔development pairs |
+| `pipeline.py` | The deterministic phase-1 pipeline, plus the digest and hierarchy renderers |
+| `llm_json.py` | Schema-constrained one-shot JSON calls, for the pipeline's classification steps |
 | `agents.py` | The actual phase implementations (the "workers" behind each node) |
-| `graph.py` | Wires the four phases into the LangGraph pipeline |
+| `graph.py` | Wires the five phases into the LangGraph pipeline |
 | `main.py` | CLI entry point: run one subject end-to-end, write the report |
-| `prompts/` | The four skill files, used as system prompts (edit these to change phase behavior) |
+| `prompts/` | Skill files (system prompts for phases 2/3/synthesis) and the pipeline's four classification prompts |
+
+`prompts/skill_phase1_budget.md` and `skill_phase4_hierarchy.md` are no
+longer wired into the graph — those phases stopped being agents. The
+phase-1 file is kept because it is still the best description of the
+dataset and its traps, and it stays in sync with
+`talpihackathon/main_agent/instructions/skill_phase1_budget.md`.
 
 ## Setup
 
@@ -71,7 +116,8 @@ cp .env.example .env   # then fill in ANTHROPIC_API_KEY
 python main.py "בריאות" --slug health
 ```
 
-This writes `reports/health.md`.
+This writes `reports/health.md` and the phase-1 data files under
+`reports/health/` (see [Output](#output)).
 
 ## Things to double-check before your first real run
 
@@ -89,18 +135,33 @@ one-line fix, both called out in comments where they occur:
    `langgraph` versions (`prompt=`, `state_modifier=`,
    `messages_modifier=`). If you hit a `TypeError` on that call, check
    your installed version's signature.
+3. **Native JSON schemas** (`llm_json.py`) — the first classification
+   call asks `ChatGoogleGenerativeAI` to constrain its reply with
+   `generation_config={"response_mime_type", "response_schema"}`. Not
+   every version of `langchain-google-genai` accepts that; if yours
+   doesn't, the `TypeError` is caught and every later call falls back to
+   asking for JSON in the prompt and parsing tolerantly. Worth confirming
+   which path a real run took — the constrained one removes a whole class
+   of truncated/fenced-reply failures.
 
 ## Extending
 
 - **Add a phase**: write `prompts/skill_phaseN_thing.md`, add it to
-  `_PROMPT_FILES` in `prompt_loader.py`, add a `phaseN_thing_node` in
+  `PROMPT_FILES` in `constants.py`, add a `phaseN_thing_node` in
   `agents.py`, wire it into `graph.py`'s fan-out/fan-in. Remember: if two
   concurrent nodes might ever write to the same `WikiState` key, that key
   needs an `Annotated[..., operator.add]`-style reducer (see `errors` in
   `state.py` for why).
 - **Batch over many subjects**: wrap `main.run(subject, slug)` in a loop
   (or a Prefect flow, if you migrate) — each call is fully self-contained.
-- **Swap models per phase**: `agents.py`'s `_llm()` currently uses one
-  model for everything; give the research phases and the synthesis phase
-  their own `ChatAnthropic(...)` instances if you want e.g. a cheaper
-  model for data-fetching and a stronger one for the final write-up.
+- **Swap models per phase**: `agents.py`'s `_llm()` and `llm_json.py`'s
+  `JSONLLM` both read `GEMINI_MODEL` from `config.py`, so every phase
+  currently shares one model. Give the research phases and the synthesis
+  phase their own instances if you want e.g. a cheaper model for
+  data-fetching and a stronger one for the final write-up — but note that
+  `run_summary.json` records one model name per run, so a mixed run's
+  cost numbers stop being comparable.
+- **Tune phase-1 recall vs. cost**: `CHUNK_ITEMS`, `MAX_PROGRAMS_PER_CALL`
+  and `MAX_PARALLEL_CALLS` at the top of `pipeline.py`. The comments there
+  record what was measured, including why a truncated judging reply is the
+  failure mode to watch for.
