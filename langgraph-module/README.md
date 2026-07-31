@@ -61,6 +61,12 @@ no tools at all — per its skill file, it's a pure writing/formatting task
 over what the four phases produced — and only runs once all three of its
 predecessors finish.
 
+Before a Phase 2/3 ReAct loop starts, the runner now checks for a matching
+saved query spec in `../query_optimizer/queries`. A cache hit runs through
+`agent_engineering.query_run` with no model. On a cache miss, the old ReAct
+path runs once, then its successful `DatasetDBQuery` calls are saved as a
+query spec for the next run.
+
 Synthesis does not write the charts. Four blocks of the template — the
 trend chart, the top-10 pie, the sources pie and the nested item list —
 are fully determined by phase 1's CSVs, so `blocks.py` computes them and
@@ -99,6 +105,7 @@ plus `possible_misses` are what a reviewer uses to catch false negatives.
 | `mcp_tools.py` | Connects to the obudget MCP server; exposes its tools to LangChain, and to the pipeline's synchronous code via `SyncMCPBridge` |
 | `budget_api.py` | Paging, warning-aware SQL layer over the MCP — the model-free half of phase 1 |
 | `query_run.py` | Runs saved `query_optimizer` JSON query specs through MCP without a model |
+| `research_query_cache.py` | Phase 2/3 saved-query cache: check spec, save ReAct SQL calls, run via `query_run.py` |
 | `budget_reference.py` | Checked-in office list, functional classes, ordinary↔development pairs |
 | `pipeline.py` | The deterministic phase-1 pipeline, plus the digest and hierarchy renderers |
 | `llm_json.py` | Schema-constrained one-shot JSON calls, for the pipeline's classification steps |

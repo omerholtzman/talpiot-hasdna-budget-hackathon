@@ -10,7 +10,11 @@ import os
 from pathlib import Path
 
 
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+except ModuleNotFoundError:
+    def load_dotenv() -> None:
+        return None
 
 load_dotenv()  # picks up a local .env file if one exists (see .env.example)
 
@@ -44,6 +48,22 @@ MCP_CALL_TIMEOUT = int(os.environ.get("WIKI_HARNESS_MCP_TIMEOUT", "180"))
 PROJECT_ROOT = Path(__file__).resolve().parent
 PROMPTS_DIR = PROJECT_ROOT / "prompts"
 OUTPUT_DIR = PROJECT_ROOT / "reports"
+QUERY_OPTIMIZER_DIR = Path(
+    os.environ.get("WIKI_HARNESS_QUERY_OPTIMIZER_DIR", PROJECT_ROOT.parent / "query_optimizer")
+)
+QUERY_CACHE_DIR = Path(
+    os.environ.get("WIKI_HARNESS_QUERY_CACHE_DIR", QUERY_OPTIMIZER_DIR / "queries")
+)
+
+
+def env_flag(name: str, default: bool) -> bool:
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.strip().lower() not in {"0", "false", "no", "off", ""}
+
+
+QUERY_RESEARCH_CACHE_ENABLED = env_flag("WIKI_HARNESS_QUERY_RESEARCH_CACHE", True)
 
 # --- Safety limits --------------------------------------------------------------
 # Each research-phase agent (phases 1-3) runs a model -> tool-call -> model

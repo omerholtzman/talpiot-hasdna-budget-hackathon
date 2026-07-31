@@ -35,6 +35,7 @@ from config import (AGENT_MAX_STEPS, GEMINI_MODEL, GOOGLE_PROJECT, GOOGLE_LOCATI
                     PHASE1, PHASE2, PHASE3, PHASE4, PHASE5, TEMPLATE, PHASE_LABELS)
 
 import agent_engineering.step1_pipeline as pipeline
+from agent_engineering import research_query_cache
 from agent_engineering import blocks
 from agent_engineering.llm_json import JSONLLM
 from agent_engineering.mcp_tools import SyncMCPBridge, get_mcp_tools
@@ -120,11 +121,6 @@ async def _run_research_phase(phase_name: str, state: WikiState,
     _log(label, f"Starting - subject: '{state['subject']}'")
 
     system_prompt = load_prompt(phase_name, TODAY=state["today"])
-    tools = await get_mcp_tools()
-    _log(label, f"Loaded {len(tools)} MCP tool(s): {', '.join(t.name for t in tools)}")
-
-    agent = create_react_agent(_llm(), tools=tools, prompt=system_prompt)
-
     # Phase 1's findings go in as context: these phases need the budget codes
     # and the ministries to filter the contracts and decisions datasets by, and
     # rediscovering them per phase would be both slower and inconsistent.
@@ -140,6 +136,27 @@ async def _run_research_phase(phase_name: str, state: WikiState,
     )
     if extra_context:
         user_message += f"\n\n{extra_context}"
+
+    cache_result = await asyncio.to_thread(
+        research_query_cache.run_cached,
+        phase_name=phase_name,
+        phase_label=label,
+        subject=state["subject"],
+        subject_slug=state["subject_slug"],
+        today=state["today"],
+        system_prompt=system_prompt,
+        user_message=user_message,
+    )
+    for message in cache_result.messages:
+        _log(label, message)
+    if cache_result.text is not None:
+        _log(label, f"Done via saved query cache - produced {len(cache_result.text)} chars")
+        return cache_result.text, []
+
+    tools = await get_mcp_tools()
+    _log(label, f"Loaded {len(tools)} MCP tool(s): {', '.join(t.name for t in tools)}")
+
+    agent = create_react_agent(_llm(), tools=tools, prompt=system_prompt)
     _log(label, f"Sending initial message ({len(user_message)} chars, incl. phase 1 digest)")
     try:
         result = await agent.ainvoke(
@@ -148,6 +165,20 @@ async def _run_research_phase(phase_name: str, state: WikiState,
         )
         _log_agent_transcript(label, result["messages"])
         final_text = result["messages"][-1].content
+        cache_messages = await asyncio.to_thread(
+            research_query_cache.save_from_react_transcript,
+            phase_name=phase_name,
+            phase_label=label,
+            subject=state["subject"],
+            subject_slug=state["subject_slug"],
+            today=state["today"],
+            system_prompt=system_prompt,
+            user_message=user_message,
+            messages=result["messages"],
+            final_text=final_text,
+        )
+        for message in cache_messages:
+            _log(label, message)
         _log(label, f"Done - produced {len(final_text)} chars")
         return final_text, []
     except Exception as exc:  # noqa: BLE001 - deliberately broad: any phase may fail independently
