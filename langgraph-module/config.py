@@ -9,6 +9,7 @@ hardcode a value in three different places.
 import os
 from pathlib import Path
 
+
 from dotenv import load_dotenv
 
 load_dotenv()  # picks up a local .env file if one exists (see .env.example)

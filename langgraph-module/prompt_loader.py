@@ -8,18 +8,12 @@ human-editable markdown — a non-engineer can tweak a phase's instructions
 (e.g. change the row limit, add a new column) without touching any Python.
 """
 from pathlib import Path
-
 from config import PROMPTS_DIR
+from constants import PROMPT_FILES
 
 # Maps a short phase name (used everywhere else in the codebase) to its
 # markdown file on disk. Add a row here if you add a new phase.
-_PROMPT_FILES = {
-    "phase1_budget": "skill_phase1_budget.md",
-    "phase2_contracts": "skill_phase2_contracts.md",
-    "phase3_decisions": "skill_phase3_decisions.md",
-    "phase4_hierarchy": "skill_phase4_hierarchy.md",
-    "final_phase_synthesis": "skill_phase_final_synthesis.md",
-}
+
 
 
 def load_prompt(phase: str, **placeholders: str) -> str:
@@ -32,10 +26,10 @@ def load_prompt(phase: str, **placeholders: str) -> str:
     `{"type": "web_search"}`-style snippets), and .format() would choke on
     those, mistaking them for format fields we didn't provide.
     """
-    if phase not in _PROMPT_FILES:
-        raise ValueError(f"Unknown phase '{phase}'. Known phases: {list(_PROMPT_FILES)}")
+    if phase not in PROMPT_FILES:
+        raise ValueError(f"Unknown phase '{phase}'. Known phases: {list(PROMPT_FILES)}")
 
-    text = (Path(PROMPTS_DIR) / _PROMPT_FILES[phase]).read_text(encoding="utf-8")
+    text = (Path(PROMPTS_DIR) / PROMPT_FILES[phase]).read_text(encoding="utf-8")
     for key, value in placeholders.items():
         text = text.replace("{" + key + "}", value)
     return text

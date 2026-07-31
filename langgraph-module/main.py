@@ -46,8 +46,14 @@ async def run(subject: str, slug: str) -> str:
         "errors": [],
     }
 
+    print(f"=== Starting pipeline for subject '{subject}' (slug: {slug}) ===")
+    print("Stages: Phase 1 (Budget), Phase 2 (Contracts), Phase 3 (Decisions), "
+          "Phase 4 (Hierarchy) run in parallel -> Final Synthesis")
+
     app = build_graph()
     final_state = await app.ainvoke(initial_state)
+
+    print("=== All stages complete ===")
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     output_path = OUTPUT_DIR / f"{slug}.md"

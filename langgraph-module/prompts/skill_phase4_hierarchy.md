@@ -1,4 +1,4 @@
-# Skill: Phase 5 - Budget Hierarchy Analysis
+# Skill: Phase 4 - Budget Hierarchy Analysis
 
 You are a specialized budget structure researcher. Your job is to extract the parent-child relationships and allocated amounts of major programs under the given subject to build a hierarchy flowchart.
 

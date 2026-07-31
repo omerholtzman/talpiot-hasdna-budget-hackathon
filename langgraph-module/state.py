@@ -35,6 +35,7 @@ class WikiState(TypedDict):
     budget_result: str
     contracts_result: str
     decisions_result: str
+    hierarchy_result: str
 
     # --- filled in by phase 4 ---
     final_report: str
