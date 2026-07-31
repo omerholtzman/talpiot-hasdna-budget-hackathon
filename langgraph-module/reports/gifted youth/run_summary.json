@@ -1,0 +1,85 @@
+{
+  "subject": "נוער מחונן",
+  "model": "gemini-2.5-flash",
+  "seconds": 734.9,
+  "search_plan": {
+    "offices": [
+      "20",
+      "60",
+      "19",
+      "21",
+      "04",
+      "05",
+      "89"
+    ],
+    "functional_classes": [
+      "חינוך",
+      "מדע, תרבות וספורט",
+      "השכלה גבוהה"
+    ],
+    "keywords": [
+      "מחונן",
+      "מצטיין",
+      "כישרון",
+      "העשרה",
+      "מצוינות",
+      "אולימפיאדה",
+      "מדעים",
+      "נוער"
+    ]
+  },
+  "counts": {
+    "domains": 139,
+    "open_domains": 68,
+    "programs": 380,
+    "candidates": 8031,
+    "keyword_hits": 177,
+    "fts_hits": 29,
+    "items_judged": 2339,
+    "selected": 87,
+    "not_in_total": 27,
+    "dropped": 2252,
+    "item_budget_rows": 539,
+    "hierarchy_rows": 135
+  },
+  "domain_split": {
+    "keep": 12,
+    "ambiguous": 56,
+    "drop": 71
+  },
+  "triage_split": {
+    "keep": 2,
+    "ambiguous": 121,
+    "drop": 257
+  },
+  "cost": {
+    "llm_calls": 21,
+    "llm_request_chars": 418249,
+    "sql_queries": 56,
+    "sql_request_chars": 56667,
+    "by_step": {
+      "expand": {
+        "calls": 1,
+        "chars": 6729,
+        "seconds": 10.8
+      },
+      "domains": {
+        "calls": 1,
+        "chars": 8545,
+        "seconds": 47.4
+      },
+      "triage": {
+        "calls": 3,
+        "chars": 37459,
+        "seconds": 202.7
+      },
+      "judge": {
+        "calls": 16,
+        "chars": 365516,
+        "seconds": 1175.9
+      }
+    }
+  },
+  "data_errors": 21,
+  "possible_misses": 115
+}

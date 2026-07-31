@@ -23,14 +23,14 @@ every phase to finish" bookkeeping required on our end.
 """
 from langgraph.graph import END, START, StateGraph
 
-from agents import (
+from agent_engineering.agents import (
     phase1_budget_node,
     phase2_contracts_node,
     phase3_decisions_node,
     phase4_hierarchy_node,
     final_phase_synthesis_node,
 )
-from state import WikiState
+from agent_engineering.state import WikiState
 
 
 def build_graph():

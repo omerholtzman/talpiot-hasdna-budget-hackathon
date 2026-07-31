@@ -17,10 +17,10 @@ files are the data.
 import argparse
 import asyncio
 
-from agents import today_str
+from agent_engineering.agents import today_str
 from config import MODEL_NAME, OUTPUT_DIR
-from graph import build_graph
-from state import WikiState
+from agent_engineering.graph import build_graph
+from agent_engineering.state import WikiState
 
 
 def parse_args() -> argparse.Namespace:

@@ -8,8 +8,7 @@ human-editable markdown — a non-engineer can tweak a phase's instructions
 (e.g. change the row limit, add a new column) without touching any Python.
 """
 from pathlib import Path
-from config import PROMPTS_DIR
-from constants import PROMPT_FILES
+from config import PROMPTS_DIR, PROMPT_FILES
 
 # Maps a short phase name (used everywhere else in the codebase) to its
 # markdown file on disk. Add a row here if you add a new phase.

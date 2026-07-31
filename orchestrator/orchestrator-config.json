@@ -1,0 +1,9 @@
+{
+  "health": [
+    {"subject": "בריאות", "slug": "health"},
+    {"subject": "רפואת נשים", "slug": "gynecology"}
+  ],
+  "education": [
+    {"subject": "חינוך", "slug": "education"}
+  ]
+}

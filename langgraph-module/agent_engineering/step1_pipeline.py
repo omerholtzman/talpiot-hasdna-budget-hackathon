@@ -13,7 +13,7 @@ This is ordinary synchronous code, called from the async phase-1 node via
 model calls through a JSONLLM (llm_json.py); neither the graph nor the event loop
 appears anywhere below.
 
-Ported from talpihackathon/main_agent/pipeline.py — keep the two in sync.
+Ported from talpihackathon/main_agent/step1_pipeline.py — keep the two in sync.
 """
 
 import json
@@ -24,13 +24,13 @@ from concurrent import futures
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-import budget_reference as ref
-from budget_api import (EXACT_MATCH_MAX_CHARS, BudgetAPI, QueryError, read_csv,
-                        write_csv)
-from constants import (EXPAND, JUDGE_ITEMS, PHASE1, PHASE_LABELS,
-                       TRIAGE_DOMAINS, TRIAGE_PROGRAMS)
-from logs import log
-from prompt_loader import load_prompt
+import helpers.prompts.budget_reference as ref
+from helpers.prompts.budget_api import (EXACT_MATCH_MAX_CHARS, BudgetAPI, QueryError,
+                                        read_csv, write_csv)
+from config import (EXPAND, JUDGE_ITEMS, PHASE1, PHASE_LABELS,
+                    TRIAGE_DOMAINS, TRIAGE_PROGRAMS)
+from helpers.prompts.logs import log
+from agent_engineering.prompt_loader import load_prompt
 
 _LABEL = PHASE_LABELS[PHASE1]
 
@@ -174,6 +174,16 @@ def step_expand(provider, subject: str, cost: Cost) -> Dict[str, Any]:
     t0 = time.time()
     result = provider.generate_json(prompt, EXPAND_SCHEMA)
     cost.record("expand", provider, time.time() - t0)
+
+    # EXPAND_SCHEMA is an object with several array properties, so unlike the
+    # verdict schemas there's no single array to fall back to if the model
+    # returns the wrong shape - just fail this step clearly instead of crashing
+    # on an unguarded .get() below.
+    if not isinstance(result, dict):
+        raise QueryError(
+            "expand step got a malformed response (expected an object, got %s)"
+            % type(result).__name__
+        )
 
     # The model may only choose from the closed sets; anything else is dropped.
     offices = ref.valid_offices([str(o).strip() for o in result.get("offices", [])])
@@ -438,8 +448,25 @@ def _judge_batch(provider, prompt_key: str, subject: str,
         except Exception as e:
             return i, {}, ["%s chunk %d failed: %s" % (step, i, str(e)[:160])]
         cost.record(step, provider, time.time() - t0)
+
+        # The schema asks for {"verdicts": [...]}, but schema-constrained generation
+        # is not 100% reliable - a model (especially once the native-schema call fails
+        # and generate_json falls back to a text instruction) occasionally emits the
+        # array directly instead of wrapping it. Tolerate that shape rather than
+        # crashing the whole run on an unguarded .get(); anything else is a genuine
+        # per-chunk failure, handled the same way an exception from generate_json is.
+        if isinstance(result, list):
+            verdict_list = result
+        elif isinstance(result, dict):
+            verdict_list = result.get("verdicts", [])
+        else:
+            return i, {}, ["%s chunk %d failed: unexpected response type %s"
+                           % (step, i, type(result).__name__)]
+
         out: Dict[str, Dict] = {}
-        for v in result.get("verdicts", []):
+        for v in verdict_list:
+            if not isinstance(v, dict):
+                continue
             code = str(v.get("code", "")).strip()
             if code:
                 out[code] = {"verdict": v.get("verdict"), "reason": v.get("reason", "")}
@@ -687,6 +714,7 @@ def run_pipeline(subject: str, out_dir: str, provider, mcp_client,
     domain_verdicts = step_domains(provider, subject, plan, domains, cost, max_parallel)
     open_domains = sorted(c for c, v in domain_verdicts.items()
                           if v["verdict"] in ("keep", "ambiguous"))
+
     write_csv([{**d,
                 "verdict": domain_verdicts.get(d["code"], {}).get("verdict", ""),
                 "reason": domain_verdicts.get(d["code"], {}).get("reason", "")}
