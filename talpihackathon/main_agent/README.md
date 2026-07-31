@@ -50,11 +50,14 @@ to yield accurate data.
 
 ```
 talpihackathon/main_agent/
-├── agent.py            # CLI entrypoint and main agent loop
-├── mcp_client.py       # Lightweight MCP client
-├── llm_providers.py    # Interface and client adapters for Gemini & Claude
-├── requirements.txt    # Python package dependencies
-└── README.md           # This documentation
+├── agent.py                    # CLI entrypoint and main agent loop (single subject)
+├── orchestrator.py             # Batch/cron runner: runs agent.py per subject in orchestrator-config.json
+├── orchestrator-config.json    # category -> [subjects] to run
+├── orchestrator-state.json     # generated: per-subject run history (not committed)
+├── mcp_client.py                # Lightweight MCP client
+├── llm_providers.py             # Interface and client adapters for Gemini & Claude
+├── requirements.txt             # Python package dependencies
+└── README.md                    # This documentation
 ```
 
 ---
@@ -212,6 +215,85 @@ coordinates the remote LLM and the local tool execution:
        answer to the user and breaks out of the loop.
 6. **Connection teardown:** Cleanly closes background SSE stream threads and
    terminates.
+
+---
+
+## Orchestrator (Batch / Cron Runner)
+
+`orchestrator.py` runs `agent.py` once per subject listed in `orchestrator-config.json`,
+grouped by category, and writes each result under `structured_report/{category}/{subject}/`
+instead of `agent.py`'s default `output_examples/` layout. It's built to run unattended
+(e.g. from a cron job or scheduled task) — subjects run **sequentially**, one `agent.py`
+subprocess at a time.
+
+### 1. Configure subjects
+
+Edit `orchestrator-config.json` — each entry is a category mapped to a list of subjects,
+passed verbatim as `--subject` to `agent.py`:
+
+```json
+{
+  "healthcare": ["periphery-healthcare", "center-healthcare"],
+  "education": ["excellence-periphery", "excellence-center"]
+}
+```
+
+### 2. Run it
+
+```bash
+cd talpihackathon/main_agent
+./venv/bin/python orchestrator.py --provider vertex
+```
+
+This processes every subject in `orchestrator-config.json` one at a time.
+
+- **Preview the run plan without launching anything:**
+  ```bash
+  ./venv/bin/python orchestrator.py --dry-run
+  ```
+- **Run only one category:**
+  ```bash
+  ./venv/bin/python orchestrator.py --category healthcare
+  ```
+- **Run a single subject** (requires `--category` to disambiguate):
+  ```bash
+  ./venv/bin/python orchestrator.py --category healthcare --subject center-healthcare
+  ```
+- **Override provider / model / MCP URL** (passed through to every `agent.py` call):
+  ```bash
+  ./venv/bin/python orchestrator.py --provider gemini --model gemini-3.5-pro
+  ```
+- **Custom config file, output location, or per-subject timeout** (seconds, default 1200):
+  ```bash
+  ./venv/bin/python orchestrator.py --config ./my-config.json --output-root ../structured_report --timeout 900
+  ```
+
+### 3. What it produces
+
+```
+talpihackathon/structured_report/
+└── healthcare/
+    ├── center-healthcare/
+    │   ├── center-healthcare.md   # agent.py's final report
+    │   ├── trace.json             # full execution trace (written by agent.py)
+    │   └── run.log                # captured agent.py stdout/stderr for this run
+    └── periphery-healthcare/...
+```
+
+Once a category's subjects finish, the orchestrator injects a **"דוחות קשורים" (related
+reports)** section into each `.md` file, linking it to its siblings in the same category
+(link text pulled from each report's frontmatter `title`). Re-running updates this section
+in place rather than duplicating it.
+
+`orchestrator-state.json` accumulates a status record per subject (`success` / `failed` /
+`timeout` / `error`, timestamp, output/log paths) across runs, so you can audit what a
+scheduled run actually did.
+
+### Exit codes (for cron)
+
+Exits `0` only if every subject in the run succeeded, and `1` otherwise (including when no
+subjects matched `--category`/`--subject` filters) — so a cron wrapper can alert on a
+non-zero exit code without parsing output.
 
 ---
 

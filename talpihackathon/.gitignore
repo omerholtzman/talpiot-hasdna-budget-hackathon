@@ -37,4 +37,5 @@ public/api/
 __pycache__/
 *.pyc
 main_agent/venv/
+main_agent/orchestrator-state.json
 .env
