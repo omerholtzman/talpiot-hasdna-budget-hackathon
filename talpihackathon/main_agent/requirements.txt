@@ -1,4 +1,0 @@
-requests>=2.31.0
-google-auth>=2.20.0
-colorama>=0.4.6
-python-bidi>=0.4.2

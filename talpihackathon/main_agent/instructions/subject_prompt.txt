@@ -1,1 +1,0 @@
-generate a comprehensive markdown dashboard matching the frontmatter and body schema for the subject: {SUBJECT}
