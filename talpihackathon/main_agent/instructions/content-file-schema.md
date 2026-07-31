@@ -49,20 +49,23 @@ information.
 
 ### 2.1 Graphs
 
-Use fenced ` ```mermaid ` blocks for any data with a natural visual shape —
-distributions, trends over time, or process flow. Rendered client-side as SVG;
-diagram source must be valid Mermaid syntax (no HTML injection — the viewer
-renders with `securityLevel: 'strict'`, so `click`/script bindings are
-stripped).
+Use fenced ` ```plotly ` blocks for any data with a natural visual shape —
+distributions, trends over time, rankings. Each block is a single JSON
+object (`data` + `layout`, standard Plotly.js shape) rendered client-side via
+`Plotly.newPlot`. Full contract, worked examples, and the renderer-side
+`newPlot` call: `langgraph-module/PLOTLY_BLOCK_SPEC.md`.
 
-Guidance on which diagram type to reach for:
+Guidance on which trace type to reach for:
 
-| Data shape                              | Mermaid diagram   |
+| Data shape                              | Plotly trace type |
 | ---------------------------------------- | ------------------ |
-| Share of a total across categories       | `pie`              |
-| Trend across time (multiple series)      | `xychart-beta` or a Markdown table (Mermaid has no native multi-series line chart — prefer a table for exact figures, a chart only for the shape of the trend) |
-| Process / pipeline / data flow           | `flowchart`        |
-| Sequence of events between actors        | `sequenceDiagram`  |
+| Share of a total across categories, or a rolled-up breakdown | `pie`  |
+| Trend across time (multiple series)      | `scatter` (`mode: "lines+markers"`) — unlike Mermaid, one JSON block can hold any number of series, so prefer the chart over a table when it's a real trend |
+| Ranked comparison across many categories | `bar`              |
+
+Text values inside a `​```plotly` block are plain JSON strings — escape an
+embedded `"` as `\"`; there's no other label sanitization needed. Amounts are
+bare JSON numerals (no `₪`, no thousands separators).
 
 Every chart's numbers must also appear in an adjacent Markdown table when
 precision matters (see `q1-metrics.md`, `tipat-chalav.md`) — the diagram
@@ -149,8 +152,8 @@ path: <free-form/tag>
 
 | ... |
 
-​```mermaid
-pie title ...
+​```plotly
+{ "data": [ { "type": "pie", "labels": [...], "values": [...] } ], "layout": { "title": "..." } }
 ​```
 
 ## Sources
