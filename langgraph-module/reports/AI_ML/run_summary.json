@@ -1,0 +1,86 @@
+{
+  "subject": "בינה מלאכותית",
+  "model": "gemini-2.5-flash",
+  "seconds": 725.9,
+  "search_plan": {
+    "offices": [
+      "38",
+      "76",
+      "19",
+      "21",
+      "04",
+      "05",
+      "89"
+    ],
+    "functional_classes": [
+      "כלכלה ותעשיה",
+      "מדע, תרבות וספורט",
+      "השכלה גבוהה"
+    ],
+    "keywords": [
+      "בינה מלאכותית",
+      "מלאכותית",
+      "למידת מכונה",
+      "למידת עמוקה",
+      "אלגוריתם",
+      "רובוטיקה",
+      "עיבוד שפה",
+      "ראיה ממוחשבת",
+      "חדשנות"
+    ]
+  },
+  "counts": {
+    "domains": 127,
+    "open_domains": 65,
+    "programs": 332,
+    "candidates": 5291,
+    "keyword_hits": 16,
+    "fts_hits": 28,
+    "items_judged": 2846,
+    "selected": 331,
+    "not_in_total": 88,
+    "dropped": 2515,
+    "item_budget_rows": 2362,
+    "hierarchy_rows": 115
+  },
+  "domain_split": {
+    "keep": 7,
+    "ambiguous": 58,
+    "drop": 62
+  },
+  "triage_split": {
+    "keep": 11,
+    "ambiguous": 174,
+    "drop": 147
+  },
+  "cost": {
+    "llm_calls": 24,
+    "llm_request_chars": 490133,
+    "sql_queries": 62,
+    "sql_request_chars": 90624,
+    "by_step": {
+      "expand": {
+        "calls": 1,
+        "chars": 6732,
+        "seconds": 12.3
+      },
+      "domains": {
+        "calls": 1,
+        "chars": 8234,
+        "seconds": 45.9
+      },
+      "triage": {
+        "calls": 3,
+        "chars": 34472,
+        "seconds": 155.3
+      },
+      "judge": {
+        "calls": 19,
+        "chars": 440695,
+        "seconds": 1074.9
+      }
+    }
+  },
+  "data_errors": 102,
+  "possible_misses": 159
+}

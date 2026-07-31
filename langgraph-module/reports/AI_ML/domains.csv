@@ -1,0 +1,128 @@
+﻿code,title,office,verdict,reason
+04.01,תחום פעולה כללי,משרד ראש הממשלה,ambiguous,generic administrative container
+04.02,ראשות הממשלה,משרד ראש הממשלה,ambiguous,generic administrative container
+04.03,סטטיסטיקה ממלכתית,משרד ראש הממשלה,drop,about state statistics
+04.04,רזרבה לסעיף ראש הממשלה,משרד ראש הממשלה,ambiguous,reserve fund
+04.05,לשכת העיתונות הממשלתית,משרד ראש הממשלה,drop,about government press office
+04.06,השלמת טיפול במפוני,משרד ראש הממשלה,drop,about evacuee treatment
+04.07,רזרבה להתייקרויות,משרד ראש הממשלה,ambiguous,reserve fund
+04.08,שירותי דת,משרד ראש הממשלה,drop,about religious services
+04.09,רבנות ראשית,משרד ראש הממשלה,drop,about chief rabbinate
+04.10,נציבות שירות המדינה,משרד ראש הממשלה,drop,about civil service administration
+04.12,רשות החברות הממשלתיות,משרד ראש הממשלה,drop,about government companies oversight
+04.15,נתיב,משרד ראש הממשלה,drop,about Nativ liaison bureau
+04.16,נציבות שירות המדינה,משרד ראש הממשלה,drop,about civil service administration
+04.20,השר לשיתוף פעולה,משרד ראש הממשלה,ambiguous,"minister's office, generic"
+04.21,המשרד לפיתוח הנגב,משרד ראש הממשלה,drop,about Negev regional development
+04.22,תוכנית לחיזוק הצפון,משרד ראש הממשלה,drop,about Northern region development
+04.23,המשרד לשיתוף פעולה,משרד ראש הממשלה,ambiguous,"minister's office, generic"
+04.51,משרד ראשי,משרד ראש הממשלה,ambiguous,generic administrative container
+04.52,משרדי ממשלה ולשכות שרים,משרד ראש הממשלה,ambiguous,generic administrative container
+04.53,סטטיסטיקה ממלכתית,משרד ראש הממשלה,drop,about state statistics
+04.54,הרבנות הראשית לישראל,משרד ראש הממשלה,drop,about chief rabbinate
+04.55,נציבות שירות המדינה,משרד ראש הממשלה,drop,about civil service administration
+04.56,המשרד לשיתוף פעולה,משרד ראש הממשלה,ambiguous,"minister's office, generic"
+04.57,המשרד לשוויון חברתי,משרד ראש הממשלה,drop,about social equality
+04.59,לשכת הקשר נתיב,משרד ראש הממשלה,drop,about Nativ liaison bureau
+04.60,מנהלת השירות האזרחי,משרד ראש הממשלה,drop,about civil service administration
+04.61,החטיבה להתיישבות,משרד ראש הממשלה,drop,about settlement activities
+04.62,המשרד לשירותי הדת,משרד ראש הממשלה,drop,about religious services
+04.63,המשרד לפיתוח הנגב,משרד ראש הממשלה,drop,about Negev regional development
+04.64,הרשות לפיתוח המגזר,משרד ראש הממשלה,drop,about sector development
+04.70,רזרבות,משרד ראש הממשלה,ambiguous,reserve fund
+04.99,חשבון מעבר,משרד ראש הממשלה,ambiguous,clearing account
+05.01,תחום פעולה כללי,משרד האוצר,ambiguous,generic administrative container
+05.02,שירותי מטה ממשלתיים,משרד האוצר,ambiguous,generic administrative container
+05.03,שירותי מטה כלל משקיים,משרד האוצר,ambiguous,generic administrative container
+05.04,בצוע פקודת מס הכנסה,משרד האוצר,drop,about income tax collection
+05.05,"אגף המכס והמע""מ",משרד האוצר,drop,about customs and VAT
+05.06,שירותי עזר למשרדי ממשלה,משרד האוצר,ambiguous,generic administrative container
+05.07,נציבות שירות המדינה,משרד האוצר,drop,about civil service administration
+05.08,רזרבה לפעולות משרד,משרד האוצר,ambiguous,reserve fund
+05.09,רשות החברות הממשלתיות,משרד האוצר,drop,about government companies oversight
+05.10,שירות עיבודים ממוכנים,משרד האוצר,ambiguous,could involve AI or traditional IT
+05.20,רשות המסים בישראל,משרד האוצר,drop,about tax authority operations
+05.51,משרד האוצר ראשי,משרד האוצר,ambiguous,generic administrative container
+05.52,רשות המיסים,משרד האוצר,drop,about tax authority operations
+05.53,רזרבה למשרד האוצר,משרד האוצר,ambiguous,reserve fund
+05.90,כיסוי גירעון המדפיס,משרד האוצר,drop,about covering printer's deficit
+05.99,חשבון מעבר,משרד האוצר,ambiguous,clearing account
+19.01,מינהל ושירותים כלליים,"משרד המדע והחלל, התרבות",ambiguous,generic administrative container
+19.02,קידום קשרים בינלאומיים,"משרד המדע, התרבות",ambiguous,could involve international scientific cooperation
+19.03,מחקרים ופרוייקטים,"משרד המדע, התרבות",keep,"funds research and projects, potentially AI"
+19.04,מינהל מדע,"משרד המדע והחלל, התרבות",ambiguous,"science administration, could include AI"
+19.05,תשתיות מדעיות,"משרד המדע, התרבות",keep,"funds scientific infrastructure, relevant for AI"
+19.06,התוכנית לחיזוק הצפון,"משרד המדע, התרבות",drop,about Northern region development
+19.07,רזרבה,"משרד המדע והחלל, התרבות",ambiguous,reserve fund
+19.21,רשות העתיקות,"משרד המדע והחלל, התרבות",drop,about antiquities preservation
+19.22,אמרכלות ועובדי משרד,"משרד המדע, התרבות",ambiguous,generic administrative container
+19.31,תרבות,"משרד המדע והחלל, התרבות",drop,about cultural activities
+19.32,רשות הספורט,"משרד המדע, התרבות",drop,about sports activities
+19.37,מינהל הספורט,"משרד המדע והחלל, התרבות",drop,about sports administration
+19.40,משרד המדע,"מדע, תרבות וספורט",ambiguous,generic administrative container
+19.41,מטה המשרדים,"מדע, תרבות וספורט",ambiguous,generic administrative container
+19.42,מינהל התרבות,"מדע, תרבות וספורט",drop,about culture administration
+19.43,מינהל הספורט,"מדע, תרבות וספורט",drop,about sports administration
+19.44,רזרבות פיסקאליות,"מדע, תרבות וספורט",ambiguous,reserve fund
+19.99,חשבוןמעבר,"מדע, תרבות וספורט",ambiguous,clearing account
+21.01,תחום פעולה כללי,השכלה גבוהה,ambiguous,generic administrative container
+21.02,השתתפות בתקציב המוסדות,השכלה גבוהה,keep,"funds higher education institutions, including AI"
+21.03,השתתפות בפעולות,השכלה גבוהה,ambiguous,generic administrative container
+21.04,פעולות עם משרדים,השכלה גבוהה,ambiguous,generic administrative container
+21.05,רזרבה להתייקרויות,השכלה גבוהה,ambiguous,reserve fund
+21.06,פיתוח מוסדות להשכלה,השכלה גבוהה,keep,"funds higher education development, including AI"
+21.10,מטה,ההשכלה הגבוהה,ambiguous,generic administrative container
+21.11,השכלה גבוהה,ההשכלה הגבוהה,ambiguous,core higher education activities
+21.12,רזרבה,ההשכלה הגבוהה,ambiguous,reserve fund
+38.01,פתוח שוקים ליצוא,תמיכות בענפי המשק,drop,about export market development
+38.02,מחקר ופיתוח תעשייתי,תמיכות בענפי המשק,keep,"funds industrial research and development, including AI"
+38.03,הטבות לעידוד השקעות הון,תמיכות בענפי המשק,drop,about capital investment incentives
+38.04,פעולות שונות לפיתוח,תמיכות בענפי המשק,ambiguous,generic development activities
+38.05,ביטוח סיכוני סחר חוץ,תמיכות בענפי המשק,drop,about foreign trade risk insurance
+38.07,תמיכות בגופים המקדמים,תמיכות בענפי המשק,ambiguous,generic support for promoting bodies
+38.08,פעולות מנהל סחר חוץ,תמיכות בענפי המשק,drop,about foreign trade administration
+38.09,תקינה,תמיכות בענפי המשק,ambiguous,could include AI standardization
+38.10,ה.מ. חזוק הצפון והדרום,תמיכות בענפי המשק,drop,about regional development
+38.11,עידוד הסרט,תמיכות בענפי המשק,drop,about film industry support
+38.12,עידוד עסקים קטנים,תמיכות בענפי המשק,drop,about small business support
+38.13,תמיכה בתעשייה,תמיכות בענפי המשק,ambiguous,general support for industry
+38.14,תקציב להערכות התעשייה,תמיכות בענפי המשק,ambiguous,generic industry assessments
+38.15,מימוש ערבויות שלא,תמיכות בענפי המשק,drop,about financial guarantees
+38.16,צרכנות,תמיכות בענפי המשק,drop,about consumer protection
+38.17,עתודות התעשייה,תמיכות בענפי המשק,ambiguous,generic industrial reserves
+38.18,אפוטרופוס כללי,תמיכות בענפי המשק,drop,about public guardianship
+38.19,הטבות לעידוד השקעות,תמיכות בענפי המשק,drop,about capital investment incentives
+38.20,רזרבות,תמיכות בענפי המשק,ambiguous,reserve fund
+38.21,השתתפויות,תמיכות בענפי המשק,ambiguous,generic participations
+38.22,תמיכה בנגב,תמיכות בענפי המשק,drop,about Negev regional support
+38.23,רזרבות מיוחדות,תמיכות בענפי המשק,ambiguous,reserve fund
+38.30,המדען הראשי,כלכלה ותעשייה,keep,"funds R&D, including AI"
+38.40,עידוד המגזר העסקי,כלכלה ותעשייה,ambiguous,generic business sector encouragement
+38.50,תמיכות בגופים ציבוריים,תמיכות בענפי המשק,ambiguous,generic support for public bodies
+38.60,מלאי חירום,תמיכות בענפי המשק,drop,about emergency stock management
+38.70,שכר ותפעול המשרד,כלכלה ותעשייה,ambiguous,generic administrative container
+38.80,רזרבה,כלכלה ותעשייה,ambiguous,reserve fund
+38.90,רשות הרגולציה,כלכלה ותעשייה,ambiguous,could involve AI regulation
+38.99,חשבון מעבר,כלכלה ותעשייה,ambiguous,clearing account
+76.01,פיתוח התעשייה,תעשיה,ambiguous,general industrial development
+76.02,מפעלים במצוקה,תעשיה,drop,about supporting distressed factories
+76.03,רזרבה להוצאות ביטחון,תעשיה,drop,about security expenses reserve
+76.04,תכנית הדרום,תעשיה,drop,about Southern region development
+76.10,השקעה בפיתוח תשתיות,תעשייה,keep,"funds infrastructure development, relevant for AI"
+76.80,רזרבה,תעשייה,ambiguous,reserve fund
+89.01,המדפיס הממשלתי,"מפעלי משרד ראה""מ והאוצר",drop,about government printing services
+89.02,לשכת הפרסום הממשלתית,"מפעלי משרד ראה""מ והאוצר",drop,about government advertising
+89.03,המדפיס הממשלתי,מפעלי משרד ראש הממשלה,drop,about government printing services
+89.04,רזרבות להתייקרויות,מפעלי משרד ראש הממשלה,ambiguous,reserve fund
+89.10,לשכת פרסום ממשלתית,מפעלי משרד ראש הממשלה,drop,about government advertising
+89.50,רזרבה,מפעלי משרד ראש הממשלה,ambiguous,reserve fund
+89.69,חשבון מעבר,"מפעלי משרד ראה""מ והאוצר",ambiguous,clearing account
+89.72,מכירות,מפעלי משרד ראש הממשלה,ambiguous,generic income category
+89.73,הגדלת מלאי מורשה,מפעלי משרד ראש הממשלה,drop,about increasing authorized stock
+89.74,הכנסות מריבית,מפעלי משרד ראש הממשלה,drop,about interest income
+89.75,הכנסות שונות,מפעלי משרד ראש הממשלה,ambiguous,generic income category
+89.76,סגירת חייבים,מפעלי משרד ראש הממשלה,drop,about closing debtor accounts
+89.80,הון חוזר,מפעלי משרד ראש הממשלה,drop,about working capital management
+89.89,הכנסות המדפיס,"מפעלי משרד ראה""מ והאוצר",drop,about government printer income
+89.90,הכנסות לשכת הפרסום,"מפעלי משרד ראה""מ והאוצר",drop,about advertising agency income
+89.99,כיסוי גירעון המדפיס,"מפעלי משרד ראה""מ והאוצר",drop,about covering printer's deficit
