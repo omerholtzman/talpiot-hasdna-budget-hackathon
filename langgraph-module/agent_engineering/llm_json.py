@@ -5,7 +5,7 @@ The ReAct phases talk to the model through LangChain's chat interface, which is
 built around a message history and tool calls. The Phase 1 pipeline needs the
 opposite: a single stateless call whose answer is a JSON value matching a fixed
 schema — one verdict per input row, no prose, no tool loop. This module is that
-call, wrapped so pipeline.py can stay provider-agnostic (`provider.generate_json`).
+call, wrapped so step1_pipeline.py can stay provider-agnostic (`provider.generate_json`).
 
 Why constrain the response rather than ask for JSON in the prompt: it removes
 the whole class of output-format failures (fences, a leading sentence, a

@@ -87,12 +87,39 @@ class SyncMCPBridge:
         future = asyncio.run_coroutine_threadsafe(tool.ainvoke(arguments), self._loop)
         result = future.result(timeout=MCP_CALL_TIMEOUT)
 
-        # langchain-mcp-adapters returns the text content by default, but a tool
-        # declared with response_format="content_and_artifact" yields a
-        # (content, artifact) tuple. Callers parse JSON out of a string, so
-        # normalise both shapes here rather than in every caller.
-        if isinstance(result, tuple):
-            result = result[0]
-        if isinstance(result, str):
-            return result
-        return json.dumps(result, ensure_ascii=False)
+        return _as_text(result)
+
+
+def _as_text(result) -> str:
+    """Reduce whatever ainvoke() handed back to the tool's own text payload.
+
+    Callers parse JSON out of this string, so every wrapper the adapter may add has
+    to come off first. Three shapes show up in practice:
+
+      * a plain str - already the payload;
+      * a (content, artifact) tuple, from a tool declared with
+        response_format="content_and_artifact";
+      * a list of MCP content blocks, [{"type": "text", "text": "..."}, ...] -
+        this is what the installed langchain-mcp-adapters actually returns for
+        DatasetDBQuery, and it is the shape that matters: json.dumps-ing it
+        produced a JSON *array*, so budget_api.query's data.get("warnings")
+        blew up with "'list' object has no attribute 'get'" on the very first
+        SQL call of the pipeline.
+
+    A server may split one payload across several text blocks, so they are
+    concatenated rather than indexed - taking [0] would truncate the JSON.
+    """
+    if isinstance(result, tuple):
+        result = result[0]
+    if isinstance(result, str):
+        return result
+    if isinstance(result, dict) and isinstance(result.get("text"), str):
+        return result["text"]
+    if isinstance(result, list):
+        texts = [b["text"] for b in result
+                 if isinstance(b, dict) and isinstance(b.get("text"), str)]
+        if texts:
+            return "".join(texts)
+        if all(isinstance(b, str) for b in result):
+            return "".join(result)
+    return json.dumps(result, ensure_ascii=False)

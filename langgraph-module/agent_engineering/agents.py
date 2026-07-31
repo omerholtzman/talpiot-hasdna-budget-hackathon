@@ -1,7 +1,7 @@
 """
 The actual "workers" behind each of the five LangGraph nodes.
 
-Phase 1 is NOT an agent. It is a deterministic pipeline (pipeline.py):
+Phase 1 is NOT an agent. It is a deterministic pipeline (step1_pipeline.py):
 plain SQL for retrieval and aggregation, with the model used only to
 classify — which ministries, which programs, which lines. Every budget
 figure it produces comes from the database, so none can be invented, and
@@ -24,21 +24,32 @@ pasted in as context, no tool loop at all — matching its skill file's
 "no database tools in this phase".
 """
 import asyncio
-from datetime import date
+from datetime import date, datetime
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 from langgraph.prebuilt import create_react_agent
 
-import pipeline
-from config import AGENT_MAX_STEPS, GEMINI_MODEL, GOOGLE_LOCATION, GOOGLE_PROJECT
-from constants import (PHASE1, PHASE2, PHASE3, PHASE4, PHASE5, PHASE_LABELS,
-                       TEMPLATE)
-from llm_json import JSONLLM
-from logs import log as _log, truncate as _truncate
-from mcp_tools import SyncMCPBridge, get_mcp_tools
-from prompt_loader import load_prompt
-from state import WikiState
+from config import (AGENT_MAX_STEPS, GEMINI_MODEL, GOOGLE_PROJECT, GOOGLE_LOCATION,
+                    PHASE1, PHASE2, PHASE3, PHASE4, PHASE5, TEMPLATE, PHASE_LABELS)
+
+import agent_engineering.step1_pipeline as pipeline
+from agent_engineering.llm_json import JSONLLM
+from agent_engineering.mcp_tools import SyncMCPBridge, get_mcp_tools
+from agent_engineering.prompt_loader import load_prompt
+from agent_engineering.state import WikiState
+
+
+def _log(label: str, message: str) -> None:
+    timestamp = datetime.now().strftime("%H:%M:%S")
+    print(f"[{timestamp}] [{label}] {message}", flush=True)
+
+
+def _truncate(text: str, limit: int = 500) -> str:
+    text = str(text)
+    if len(text) <= limit:
+        return text
+    return f"{text[:limit]}... [truncated, {len(text)} chars total]"
 
 
 def _log_agent_transcript(label: str, messages: list) -> None:
@@ -68,11 +79,11 @@ def _log_agent_transcript(label: str, messages: list) -> None:
 
 
 def _llm() -> ChatGoogleGenerativeAI:
-    """One shared factory for the chat client, so model/key config lives in one place."""
+    """One shared factory for the Claude client, so model/key config lives in one place."""
     return ChatGoogleGenerativeAI(
-        model=GEMINI_MODEL,
+        model=GEMINI_MODEL,   # Vertex model IDs often use an @date suffix, e.g. claude-haiku-4-5@20251001
         project=GOOGLE_PROJECT,
-        location=GOOGLE_LOCATION,
+        location=GOOGLE_LOCATION,              # Claude's Vertex region, not necessarily your default GCP region
     )
 
 def today_str() -> str:
@@ -131,7 +142,7 @@ async def _run_research_phase(phase_name: str, state: WikiState) -> tuple[str, l
 async def phase1_budget_node(state: WikiState) -> dict:
     """LangGraph node: find every budget item for the subject, deterministically.
 
-    Runs pipeline.run_pipeline in a worker thread — it is synchronous code
+    Runs step1_pipeline.run_pipeline in a worker thread — it is synchronous code
     that fans its own model calls out over a thread pool, and the SQL it
     issues reaches the MCP server through SyncMCPBridge, which posts each
     call back to this event loop. What lands in the state is the digest;
@@ -156,7 +167,9 @@ async def phase1_budget_node(state: WikiState) -> dict:
         placeholder = f"_No budget data could be retrieved for this subject ({exc})._"
         return {"budget_result": placeholder, "errors": [f"{PHASE1} failed: {exc}"]}
 
+    print("type(summary)", type(summary))
     counts = summary.get("counts", {})
+    print("type(counts)", type(counts))
     _log(label, f"Done - {counts.get('selected', 0)} item(s) selected, "
                 f"{counts.get('dropped', 0)} dropped; digest is {len(digest)} chars")
     return {"budget_result": digest, "errors": []}

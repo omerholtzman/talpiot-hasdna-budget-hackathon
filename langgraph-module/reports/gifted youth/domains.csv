@@ -1,0 +1,140 @@
+﻿code,title,office,verdict,reason
+04.01,תחום פעולה כללי,משרד ראש הממשלה,ambiguous,Generic administrative activities
+04.02,ראשות הממשלה,משרד ראש הממשלה,ambiguous,General Prime Minister's Office activities
+04.03,סטטיסטיקה ממלכתית,משרד ראש הממשלה,drop,State statistics collection
+04.04,רזרבה לסעיף ראש הממשלה,משרד ראש הממשלה,ambiguous,Reserve for Prime Minister's Office
+04.05,לשכת העיתונות הממשלתית,משרד ראש הממשלה,drop,Government press and media relations
+04.06,השלמת טיפול במפוני,משרד ראש הממשלה,drop,Support for evacuees
+04.07,רזרבה להתייקרויות,משרד ראש הממשלה,ambiguous,Reserve for price increases
+04.08,שירותי דת,משרד ראש הממשלה,drop,Religious services
+04.09,רבנות ראשית,משרד ראש הממשלה,drop,Chief Rabbinate activities
+04.10,נציבות שירות המדינה,משרד ראש הממשלה,drop,Civil service administration
+04.12,רשות החברות הממשלתיות,משרד ראש הממשלה,drop,Oversight of government companies
+04.15,נתיב,משרד ראש הממשלה,drop,Liaison with former Soviet Union Jews
+04.16,נציבות שירות המדינה,משרד ראש הממשלה,drop,Civil service administration
+04.20,השר לשיתוף פעולה,משרד ראש הממשלה,drop,Ministerial office for cooperation
+04.21,המשרד לפיתוח הנגב,משרד ראש הממשלה,drop,Regional development of the Negev
+04.22,תוכנית לחיזוק הצפון,משרד ראש הממשלה,drop,Regional development of the North
+04.23,המשרד לשיתוף פעולה,משרד ראש הממשלה,drop,Ministerial office for cooperation
+04.51,משרד ראשי,משרד ראש הממשלה,ambiguous,Main office activities
+04.52,משרדי ממשלה ולשכות שרים,משרד ראש הממשלה,ambiguous,Government offices and ministerial bureaus
+04.53,סטטיסטיקה ממלכתית,משרד ראש הממשלה,drop,State statistics collection
+04.54,הרבנות הראשית לישראל,משרד ראש הממשלה,drop,Chief Rabbinate activities
+04.55,נציבות שירות המדינה,משרד ראש הממשלה,drop,Civil service administration
+04.56,המשרד לשיתוף פעולה,משרד ראש הממשלה,drop,Ministerial office for cooperation
+04.57,המשרד לשוויון חברתי,משרד ראש הממשלה,ambiguous,Social equality programs might include gifted youth
+04.59,לשכת הקשר נתיב,משרד ראש הממשלה,drop,Liaison with former Soviet Union Jews
+04.60,מנהלת השירות האזרחי,משרד ראש הממשלה,drop,Civil service administration
+04.61,החטיבה להתיישבות,משרד ראש הממשלה,drop,Settlement development and support
+04.62,המשרד לשירותי הדת,משרד ראש הממשלה,drop,Religious services
+04.63,המשרד לפיתוח הנגב,משרד ראש הממשלה,drop,Regional development of the Negev
+04.64,הרשות לפיתוח המגזר,משרד ראש הממשלה,ambiguous,Sector development might include gifted youth programs
+04.70,רזרבות,משרד ראש הממשלה,ambiguous,General reserves
+04.99,חשבון מעבר,משרד ראש הממשלה,ambiguous,Clearing account
+05.01,תחום פעולה כללי,משרד האוצר,ambiguous,Generic administrative activities
+05.02,שירותי מטה ממשלתיים,משרד האוצר,ambiguous,Government staff services
+05.03,שירותי מטה כלל משקיים,משרד האוצר,ambiguous,Economy-wide staff services
+05.04,בצוע פקודת מס הכנסה,משרד האוצר,drop,Income tax administration
+05.05,"אגף המכס והמע""מ",משרד האוצר,drop,Customs and VAT administration
+05.06,שירותי עזר למשרדי ממשלה,משרד האוצר,ambiguous,Auxiliary services for government ministries
+05.07,נציבות שירות המדינה,משרד האוצר,drop,Civil service administration
+05.08,רזרבה לפעולות משרד,משרד האוצר,ambiguous,Reserve for ministry activities
+05.09,רשות החברות הממשלתיות,משרד האוצר,drop,Oversight of government companies
+05.10,שירות עיבודים ממוכנים,משרד האוצר,drop,Automated data processing services
+05.20,רשות המסים בישראל,משרד האוצר,drop,Tax authority operations
+05.51,משרד האוצר ראשי,משרד האוצר,ambiguous,Main Ministry of Finance activities
+05.52,רשות המיסים,משרד האוצר,drop,Tax authority operations
+05.53,רזרבה למשרד האוצר,משרד האוצר,ambiguous,Reserve for Ministry of Finance
+05.90,כיסוי גירעון המדפיס,משרד האוצר,drop,Covering government printer deficit
+05.99,חשבון מעבר,משרד האוצר,ambiguous,Clearing account
+19.01,מינהל ושירותים כלליים,"משרד המדע והחלל, התרבות",ambiguous,General administration and services
+19.02,קידום קשרים בינלאומיים,"משרד המדע, התרבות",ambiguous,International relations might include gifted youth
+19.03,מחקרים ופרוייקטים,"משרד המדע, התרבות",keep,Funding research and projects for talented individuals
+19.04,מינהל מדע,"משרד המדע והחלל, התרבות",keep,"Science administration, potentially including gifted programs"
+19.05,תשתיות מדעיות,"משרד המדע, התרבות",keep,Developing scientific infrastructure for talented individuals
+19.06,התוכנית לחיזוק הצפון,"משרד המדע, התרבות",drop,Regional development of the North
+19.07,רזרבה,"משרד המדע והחלל, התרבות",ambiguous,General reserve
+19.21,רשות העתיקות,"משרד המדע והחלל, התרבות",drop,Antiquities preservation and research
+19.22,אמרכלות ועובדי משרד,"משרד המדע, התרבות",ambiguous,General management and ministry staff
+19.31,תרבות,"משרד המדע והחלל, התרבות",drop,General cultural activities
+19.32,רשות הספורט,"משרד המדע, התרבות",drop,Sports promotion and regulation
+19.37,מינהל הספורט,"משרד המדע והחלל, התרבות",drop,Sports administration
+19.40,משרד המדע,"מדע, תרבות וספורט",ambiguous,General science ministry activities
+19.41,מטה המשרדים,"מדע, תרבות וספורט",ambiguous,Ministry headquarters activities
+19.42,מינהל התרבות,"מדע, תרבות וספורט",drop,Culture administration
+19.43,מינהל הספורט,"מדע, תרבות וספורט",drop,Sports administration
+19.44,רזרבות פיסקאליות,"מדע, תרבות וספורט",ambiguous,Fiscal reserves
+19.99,חשבוןמעבר,"מדע, תרבות וספורט",ambiguous,Clearing account
+20.21,יחידות מטה,משרד החינוך,ambiguous,Staff units activities
+20.22,אמרכלות ועובדי משרד,משרד החינוך,ambiguous,General management and ministry staff
+20.23,מינהל מורים,משרד החינוך,ambiguous,Teacher administration might include gifted education
+20.24,מינהל פדגוגי-כללי,משרד החינוך,keep,"General pedagogical administration, including gifted education"
+20.25,חינוך קדם יסודי,משרד החינוך,drop,General pre-primary education
+20.26,חינוך יסודי,משרד החינוך,drop,General primary education
+20.27,חינוך על יסודי,משרד החינוך,drop,General post-primary education
+20.28,חינוך התישבותי,משרד החינוך,drop,General education in settlements
+20.29,חינוך עצמאי ומוכר,משרד החינוך,drop,General independent and recognized education
+20.30,הסעות הצטיידות ופיתוח,משרד החינוך,ambiguous,General educational support services
+20.31,תרבות,משרד החינוך,drop,General cultural activities
+20.32,רשות הספורט,משרד החינוך,drop,Sports promotion and regulation
+20.33,טלויזיה חינוכית,משרד החינוך,ambiguous,Educational television might include gifted content
+20.34,מרכז ההסברה,משרד החינוך התרבות,drop,Government information services
+20.35,הלכה מחקר ולימוד תורני,משרד החינוך והתרבות,drop,Religious law and Torah study
+20.37,מנהל הספורט,משרד החינוך,drop,Sports administration
+20.38,העברות למוסדות תורניים,משרד החינוך,drop,Funding for Torah institutions
+20.40,מטה המשרד,משרד החינוך,ambiguous,Ministry headquarters activities
+20.41,חינוך מיוחד,משרד החינוך,keep,Special education often includes gifted programs
+20.42,קדם-יסודי,משרד החינוך,drop,General pre-primary education
+20.43,יסודי וחטיבות-ביניים,משרד החינוך,drop,General primary and junior high education
+20.44,חטיבה עליונה,משרד החינוך,drop,General senior high education
+20.45,חינוך התיישבותי,משרד החינוך,drop,General education in settlements
+20.46,תכניות חינוכיות משלימות,משרד החינוך,keep,Complementary educational programs often include gifted
+20.47,מינהל עובדי הוראה,משרד החינוך,ambiguous,Teacher administration might include gifted education
+20.48,שירותי עזר והסעות,משרד החינוך,ambiguous,General educational support services
+20.49,תמיכות בנושאי יהדות,משרד החינוך,drop,Support for Jewish religious topics
+20.50,טלויזיה חינוכית,משרד החינוך,ambiguous,Educational television might include gifted content
+20.51,רזרבות,משרד החינוך,ambiguous,General reserves
+20.60,יחידות מטה,משרד החינוך,ambiguous,Staff units activities
+20.61,חינוך מיוחד,משרד החינוך,keep,Special education often includes gifted programs
+20.62,קדם יסודי,משרד החינוך,drop,General pre-primary education
+20.63,יסודי וחטיבות ביניים,משרד החינוך,drop,General primary and junior high education
+20.64,חטיבה עליונה,משרד החינוך,drop,General senior high education
+20.65,"שירותי עזר, הסעות",משרד החינוך,ambiguous,General educational support services
+20.66,חינוך התיישבותי,משרד החינוך,drop,General education in settlements
+20.67,פעולות משלימות לקידום,משרד החינוך,keep,Complementary activities for educational advancement
+20.68,מינהל עובדי הוראה,משרד החינוך,ambiguous,Teacher administration might include gifted education
+20.69,תמיכה בנושאי יהדות,משרד החינוך,drop,Support for Jewish religious topics
+20.70,רזרבות,משרד החינוך,ambiguous,General reserves
+20.99,חשבון מעבר,משרד החינוך,ambiguous,Clearing account
+21.01,תחום פעולה כללי,השכלה גבוהה,ambiguous,Generic administrative activities
+21.02,השתתפות בתקציב המוסדות,השכלה גבוהה,keep,"Funding higher education institutions, including gifted programs"
+21.03,השתתפות בפעולות,השכלה גבוהה,ambiguous,"Higher education activities, potentially for gifted"
+21.04,פעולות עם משרדים,השכלה גבוהה,ambiguous,"Inter-ministerial activities, potentially for gifted"
+21.05,רזרבה להתייקרויות,השכלה גבוהה,ambiguous,Reserve for price increases
+21.06,פיתוח מוסדות להשכלה,השכלה גבוהה,keep,"Developing higher education institutions, including gifted programs"
+21.10,מטה,ההשכלה הגבוהה,ambiguous,Headquarters activities
+21.11,השכלה גבוהה,ההשכלה הגבוהה,keep,General higher education activities
+21.12,רזרבה,ההשכלה הגבוהה,ambiguous,General reserve
+60.02,תכנית פיתוח חינוך,חינוך,keep,"Education development programs, including gifted"
+60.03,הצטידות מבני חינוך,חינוך,ambiguous,Equipping educational buildings
+60.04,רזרבה להתייקרויות,חינוך,ambiguous,Reserve for price increases
+60.06,חידוש מבנים,חינוך,ambiguous,Renovation of educational buildings
+60.07,פיתוח מכללות להכשרת,חינוך,ambiguous,"Developing colleges, potentially for gifted education"
+60.08,רזרבה,חינוך,ambiguous,General reserve
+60.09,רזרבה ליישום מסקנות כח,חינוך,ambiguous,Reserve for implementing task force conclusions
+89.01,המדפיס הממשלתי,"מפעלי משרד ראה""מ והאוצר",drop,Government printing services
+89.02,לשכת הפרסום הממשלתית,"מפעלי משרד ראה""מ והאוצר",drop,Government advertising services
+89.03,המדפיס הממשלתי,מפעלי משרד ראש הממשלה,drop,Government printing services
+89.04,רזרבות להתייקרויות,מפעלי משרד ראש הממשלה,ambiguous,Reserves for price increases
+89.10,לשכת פרסום ממשלתית,מפעלי משרד ראש הממשלה,drop,Government advertising services
+89.50,רזרבה,מפעלי משרד ראש הממשלה,ambiguous,General reserve
+89.69,חשבון מעבר,"מפעלי משרד ראה""מ והאוצר",ambiguous,Clearing account
+89.72,מכירות,מפעלי משרד ראש הממשלה,drop,Sales activities
+89.73,הגדלת מלאי מורשה,מפעלי משרד ראש הממשלה,drop,Inventory management
+89.74,הכנסות מריבית,מפעלי משרד ראש הממשלה,drop,Interest income
+89.75,הכנסות שונות,מפעלי משרד ראש הממשלה,drop,Miscellaneous income
+89.76,סגירת חייבים,מפעלי משרד ראש הממשלה,drop,Debt collection
+89.80,הון חוזר,מפעלי משרד ראש הממשלה,drop,Working capital management
+89.89,הכנסות המדפיס,"מפעלי משרד ראה""מ והאוצר",drop,Government printer income
+89.90,הכנסות לשכת הפרסום,"מפעלי משרד ראה""מ והאוצר",drop,Government advertising agency income
+89.99,כיסוי גירעון המדפיס,"מפעלי משרד ראה""מ והאוצר",drop,Covering government printer deficit

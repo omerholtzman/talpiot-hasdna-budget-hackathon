@@ -50,3 +50,42 @@ OUTPUT_DIR = PROJECT_ROOT / "reports"
 # loop. This caps how many of those round trips a single phase can take
 # before LangGraph gives up on it, so one bad SQL query can't loop forever.
 AGENT_MAX_STEPS = int(os.environ.get("WIKI_HARNESS_MAX_STEPS", "12"))
+
+# --- Phase identifiers & prompt files --------------------------------------------
+PHASE1 = "phase_1"
+PHASE2 = "phase_2"
+PHASE3 = "phase_3"
+PHASE4 = "phase_4"
+PHASE5 = "final_phase"
+TEMPLATE = "template"
+
+# The Phase 1 pipeline's four classification prompts. Unlike the skill files
+# above, these are not system prompts for an agent: each is a complete one-shot
+# request whose answer is a JSON verdict list. See agent_engineering/step1_pipeline.py.
+EXPAND = "expand"
+TRIAGE_DOMAINS = "triage_domains"
+TRIAGE_PROGRAMS = "triage_programs"
+JUDGE_ITEMS = "judge_items"
+
+PROMPT_FILES = {
+    PHASE1: "skill_phase1a_main.md",
+    PHASE2: "skill_phase2_contracts.md",
+    PHASE3: "skill_phase3_decisions.md",
+    PHASE4: "skill_phase4_hierarchy.md",
+    PHASE5: "skill_phase_final_synthesis.md",
+    TEMPLATE: "synthesis_template.md",
+    EXPAND: "skill_phase1b_expand_terms.md",
+    TRIAGE_DOMAINS: "skill_phase1c_triage_domains.md",
+    TRIAGE_PROGRAMS: "skill_phase1d_triage_programs.md",
+    JUDGE_ITEMS: "skill_phase1e_judge_items.md",
+}
+
+# Phases 2-4 run concurrently, so every log line is tagged with one of these to
+# keep the interleaved output readable. Lives here rather than in agents.py so
+# that step1_pipeline.py can label its own output without importing agents.
+PHASE_LABELS = {
+    PHASE1: "Phase 1: Budget",
+    PHASE2: "Phase 2: Contracts",
+    PHASE3: "Phase 3: Decisions",
+    PHASE4: "Phase 4: Hierarchy",
+}
