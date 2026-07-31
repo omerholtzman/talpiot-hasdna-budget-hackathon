@@ -1,37 +1,15 @@
 # {SUBJECT_HEBREW}
-
 {Summary of the subject and its significance. Don't add meta-statement like "דף זה נוצר על ידי שימוש ב-MCP" or "דשבורד זה מרכז מידע..."}
 
 ## מגמה תקציבית לאורך זמן
-
-```plotly
-{
-  "data": [ {PLOTLY_TREND_TRACES} ],
-  "layout": {
-    "title": "מגמה תקציבית לאורך השנים",
-    "xaxis": { "title": "שנה", "type": "category" },
-    "yaxis": { "title": "תקציב ב-₪", "rangemode": "tozero", "separatethousands": true }
-  }
-}
-```
+{{TREND_CHART}}
 
 ## תכניות פעילות כיום
-
 ### סעיפים בולטים
 10 הסעיפים הגדולים בנושא בתקציב הנוכחי:
-```plotly
-{
-  "data": [
-    { "type": "pie", "textinfo": "label+percent",
-      "labels": [ {PLOTLY_PIE_LABELS} ],
-      "values": [ {PLOTLY_PIE_VALUES} ] }
-  ],
-  "layout": { "title": "סעיפי התקציב הגדולים ביותר (top 10)" }
-}
-```
+{{TOP_ITEMS_CHART}}
 
 ### התפלגות היקפי התקשרויות לפי ספק (15 הספקים המובילים) בשנים {CONTRACTS_YEARS}
-
 ```plotly
 {
   "data": [
@@ -44,22 +22,12 @@
 ```
 
 ## מקורות תקציב
-
 {BUDGET_HIERARCHY_EXPLANATION}
 
-```plotly
-{
-  "data": [
-    { "type": "pie", "textinfo": "label+percent",
-      "labels": [ {PLOTLY_SOURCES_LABELS} ],
-      "values": [ {PLOTLY_SOURCES_VALUES} ] }
-  ],
-  "layout": { "title": "מקורות תקציב" }
-}
-```
+{{SOURCES_CHART}}
 
 ### רשימת סעיפי תקציב נבחרים
-{BUDGET_HIERARCHY_LIST - Including links to the specific items}
+{{BUDGET_HIERARCHY_LIST}}
 
 
 ## נושאים נוספים

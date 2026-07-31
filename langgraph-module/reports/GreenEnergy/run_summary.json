@@ -1,0 +1,87 @@
+{
+  "subject": "אנרגייה ירוקה",
+  "model": "gemini-2.5-flash",
+  "seconds": 564.3,
+  "search_plan": {
+    "offices": [
+      "34",
+      "83",
+      "26",
+      "38",
+      "04",
+      "76",
+      "35",
+      "05",
+      "89"
+    ],
+    "functional_classes": [
+      "אנרגיה",
+      "הגנת הסביבה"
+    ],
+    "keywords": [
+      "מתחדש",
+      "סולארי",
+      "פוטו-וולטאי",
+      "רוח",
+      "הידרו",
+      "ביו-גז",
+      "התייעלות",
+      "שימור",
+      "אגירה"
+    ]
+  },
+  "counts": {
+    "domains": 153,
+    "open_domains": 66,
+    "programs": 275,
+    "candidates": 4551,
+    "keyword_hits": 35,
+    "fts_hits": 35,
+    "items_judged": 2003,
+    "selected": 98,
+    "not_in_total": 15,
+    "dropped": 1905,
+    "item_budget_rows": 643,
+    "hierarchy_rows": 143
+  },
+  "domain_split": {
+    "keep": 6,
+    "ambiguous": 60,
+    "drop": 87
+  },
+  "triage_split": {
+    "keep": 4,
+    "ambiguous": 131,
+    "drop": 140
+  },
+  "cost": {
+    "llm_calls": 19,
+    "llm_request_chars": 371391,
+    "sql_queries": 44,
+    "sql_request_chars": 44876,
+    "by_step": {
+      "expand": {
+        "calls": 1,
+        "chars": 6732,
+        "seconds": 5.8
+      },
+      "domains": {
+        "calls": 2,
+        "chars": 12204,
+        "seconds": 44.4
+      },
+      "triage": {
+        "calls": 2,
+        "chars": 26733,
+        "seconds": 132.5
+      },
+      "judge": {
+        "calls": 14,
+        "chars": 325722,
+        "seconds": 912.0
+      }
+    }
+  },
+  "data_errors": 38,
+  "possible_misses": 121
+}

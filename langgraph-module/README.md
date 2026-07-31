@@ -61,6 +61,17 @@ no tools at all — per its skill file, it's a pure writing/formatting task
 over what the four phases produced — and only runs once all three of its
 predecessors finish.
 
+Synthesis does not write the charts. Four blocks of the template — the
+trend chart, the top-10 pie, the sources pie and the nested item list —
+are fully determined by phase 1's CSVs, so `blocks.py` computes them and
+substitutes them into the model's reply afterwards; the template carries
+a `{{TOKEN}}` where each one goes. The model writes prose and the
+phase 2/3 tables, which are the parts that actually need judgement.
+Asking it for the charts too meant re-typed numbers at best and, in
+`reports/GreenEnergy.md`, whole sections replaced by "לא נמצא מידע"
+while the items sat in `selected_items.csv`. If the model drops a token
+anyway, `apply_blocks` puts the block back under its heading and logs it.
+
 ## Output
 
 `python main.py "אנרגיה ירוקה" --slug energy` writes:
@@ -90,6 +101,7 @@ plus `possible_misses` are what a reviewer uses to catch false negatives.
 | `budget_reference.py` | Checked-in office list, functional classes, ordinary↔development pairs |
 | `pipeline.py` | The deterministic phase-1 pipeline, plus the digest and hierarchy renderers |
 | `llm_json.py` | Schema-constrained one-shot JSON calls, for the pipeline's classification steps |
+| `blocks.py` | The template blocks phase 1's CSVs fully determine — Plotly fences and the nested item list — computed rather than written by the model |
 | `agents.py` | The actual phase implementations (the "workers" behind each node) |
 | `graph.py` | Wires the five phases into the LangGraph pipeline |
 | `main.py` | CLI entry point: run one subject end-to-end, write the report |

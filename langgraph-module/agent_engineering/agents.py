@@ -24,6 +24,7 @@ pasted in as context, no tool loop at all — matching its skill file's
 "no database tools in this phase".
 """
 import asyncio
+import logging
 from datetime import date, datetime
 
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -34,10 +35,21 @@ from config import (AGENT_MAX_STEPS, GEMINI_MODEL, GOOGLE_PROJECT, GOOGLE_LOCATI
                     PHASE1, PHASE2, PHASE3, PHASE4, PHASE5, TEMPLATE, PHASE_LABELS)
 
 import agent_engineering.step1_pipeline as pipeline
+from agent_engineering import blocks
 from agent_engineering.llm_json import JSONLLM
 from agent_engineering.mcp_tools import SyncMCPBridge, get_mcp_tools
 from agent_engineering.prompt_loader import load_prompt
 from agent_engineering.state import WikiState
+
+# Phases 2/3 hand the MCP tools' raw JSON schemas (which set additionalProperties,
+# per the MCP spec) to create_react_agent. langchain_google_genai's tool-schema
+# converter logs a warning for every schema keyword Gemini's function-calling
+# format doesn't support, which is nearly every call since the key is simply
+# unsupported and gets dropped -- not an error. See llm_json.py's
+# sanitize_gemini_schema for the same limitation on the response_schema side.
+logging.getLogger("langchain_google_genai._function_utils").addFilter(
+    lambda record: "is not supported in schema, ignoring" not in record.getMessage()
+)
 
 
 def _log(label: str, message: str) -> None:
@@ -235,12 +247,20 @@ async def final_phase_synthesis_node(state: WikiState) -> dict:
     Runs only once phase1/2/3 have all completed — see graph.py for how
     the fan-in is wired. No tools are attached here, matching the skill
     file's explicit "no database tools in this phase" instruction.
+
+    The model writes the prose and the phase 2/3 tables only. The four blocks
+    that phase 1's CSVs fully determine — the trend chart, the top-10 pie, the
+    sources pie and the nested item list — are computed in blocks.py and
+    substituted into the reply afterwards; the model just carries their
+    `{{TOKEN}}` through. See blocks.py for why that is worth the indirection.
     """
     label = "Final Synthesis"
     _log(label, f"Starting - subject: '{state['subject']}'")
 
     system_prompt = load_prompt(PHASE5, TODAY=state["today"], MODEL=state["model"])
-    template = load_prompt(TEMPLATE)
+    # The template's own frontmatter carries {TODAY}/{MODEL} too; without these the
+    # model is left to guess them, and it has shipped a literal "model: {MODEL}".
+    template = load_prompt(TEMPLATE, TODAY=state["today"], MODEL=state["model"])
 
     combined_data = (
         f"## Budget data (Phase 1)\n{state['budget_result']}\n\n"
@@ -266,5 +286,15 @@ async def final_phase_synthesis_node(state: WikiState) -> dict:
             {"role": "user", "content": user_message},
         ]
     )
-    _log(label, f"Done - produced {len(response.content)} chars")
-    return {"final_report": response.content}
+    _log(label, f"Model produced {len(response.content)} chars")
+
+    computed = blocks.deterministic_blocks(state["run_dir"], state["subject"])
+    report, unplaced = blocks.apply_blocks(response.content, computed)
+    if unplaced:
+        # The block itself is fine; the model deleted both its token and the
+        # heading it lived under, so there is nowhere to put it back. Worth a
+        # loud line — the section is simply missing from the page.
+        _log(label, f"WARNING: no place found in the reply for: {', '.join(unplaced)}")
+    _log(label, f"Done - {len(computed)} computed block(s) substituted, "
+                f"{len(report)} chars")
+    return {"final_report": report}

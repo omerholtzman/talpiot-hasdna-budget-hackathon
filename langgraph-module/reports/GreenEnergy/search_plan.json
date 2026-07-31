@@ -1,0 +1,38 @@
+{
+  "offices": [
+    "34",
+    "83",
+    "26",
+    "38",
+    "04",
+    "76",
+    "35",
+    "05",
+    "89"
+  ],
+  "functional_classes": [
+    "אנרגיה",
+    "הגנת הסביבה"
+  ],
+  "keywords": [
+    "מתחדש",
+    "סולארי",
+    "פוטו-וולטאי",
+    "רוח",
+    "הידרו",
+    "ביו-גז",
+    "התייעלות",
+    "שימור",
+    "אגירה"
+  ],
+  "fts_queries": [
+    "אנרגיה מתחדשת",
+    "התייעלות אנרגטית",
+    "פיתוח אנרגיה ירוקה"
+  ],
+  "notes": "The term 'green energy' encompasses both renewable energy sources and energy efficiency measures, often with an environmental protection goal.",
+  "rejected_offices": [],
+  "whole_word_keywords": [
+    "רוח"
+  ]
+}

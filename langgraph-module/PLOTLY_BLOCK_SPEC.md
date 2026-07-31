@@ -68,6 +68,15 @@ required for this change. (Trace types like `sankey`, `treemap`, and
 hierarchy visual instead of the flattened pie described below, that's the
 trigger to switch to the full `plotly-2.26.1.min.js`.)
 
+## Who writes each block
+
+Three of the four fences a dashboard contains are emitted by
+`agent_engineering/blocks.py` from phase 1's CSVs — the trend chart, the
+top-10 items pie and the budget-sources pie. Their JSON is produced by
+`json.dumps`, so escaping and bare numerals are guaranteed rather than
+requested. Only the top-15 suppliers pie is still written by the synthesis
+model, because its data comes from phase 2's agent rather than from a file.
+
 ## Chart types used by the generator
 
 ### 1. Trend over time — `scatter`
